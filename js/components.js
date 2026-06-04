@@ -245,6 +245,17 @@ class MioProductCard extends HTMLElement {
                 }
             });
         }
+
+        const productCard = this.querySelector('.product-card');
+        if (productCard) {
+            productCard.addEventListener('click', (e) => {
+                // If the click is on a button (wishlist, slider arrow, add-to-cart) or a link inside it, do nothing.
+                // Otherwise, redirect to product_page.html
+                if (!e.target.closest('button') && !e.target.closest('a')) {
+                    window.location.href = 'product_page.html';
+                }
+            });
+        }
     }
 }
 customElements.define('mio-product-card', MioProductCard);
