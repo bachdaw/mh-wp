@@ -10,7 +10,7 @@ class MioNavbar extends HTMLElement {
             </div>
         </div>
         <div class="nav-center">
-            <a href="stronga_glowna.html">
+            <a href="index.html">
                 <img src="img/icons/logo-miohome.svg" alt="Miohome" class="nav-logo-img">
             </a>
         </div>
