@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototyp - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <mio-navbar></mio-navbar>
+
+    <header class="hero">
+        <div class="hero-content animate-up">
+            <h1 class="hero-title">Mistrzowskie Rzemiosło<br>Twój Unikalny Styl</h1>
+            <a href="#" class="hero-btn">Kolekcje</a>
+        </div>
+    </header>
+
+    <section class="info-bar">
+        <div class="info-item animate-up">
+            <div class="info-title">Darmowe dostawy na terenie Polski</div>
+            <div class="info-subtitle">Meble produkowane w polsce</div>
+            <div class="info-subtitle">Kupujesz bezpośrednio od producenta</div>
+        </div>
+        <div class="info-item animate-up">
+            <div class="info-title" >Skontaktuj się z nami</div>
+            <div class="info-subtitle">Pon. - pt. 09:00 - 16:00</div>
+            <div class="info-subtitle" style="text-decoration: underline;">+48 123 456 789</div>
+            <div class="info-subtitle" style="text-decoration: underline;">export@stoltap.pl</div>
+        </div>
+        <div class="info-item animate-up">
+            <div class="info-title">Zamów próbki materiałów</div>
+            <div class="info-subtitle" style="text-decoration: underline;">Sprawdź i Zamów tutaj</div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <a href="#" class="cat-box animate-up">
+            <img src="img/sofy_preview.jpg" alt="Sofy">
+            <div class="cat-text">
+                <div class="cat-title">Sofy</div>
+                <!-- <div class="cat-link">Zobacz więcej</div> -->
+            </div>
+        </a>
+        <a href="#" class="cat-box animate-up">
+            <img src="img/fotele_preview.jpg" alt="Fotele">
+            <div class="cat-text">
+                <div class="cat-title">Fotele</div>
+                <!-- <div class="cat-link">Zobacz więcej</div> -->
+            </div>
+        </a>
+        <a href="#" class="cat-box animate-up">
+            <img src="img/krzesla_preview.jpg" alt="Krzesła">
+            <div class="cat-text">
+                <div class="cat-title">Krzesła</div>
+                <!-- <div class="cat-link">Zobacz więcej</div> -->
+            </div>
+        </a>
+        <a href="#" class="cat-box animate-up">
+            <img src="img/lozka_preview.png" alt="Łóżka">
+            <div class="cat-text">
+                <div class="cat-title">Łóżka</div> 
+                <!-- <div class="cat-link">Zobacz więcej</div> -->
+            </div>
+        </a>
+        <a href="#" class="cat-box animate-up">
+            <img src="img/dywany_preview.jpg" alt="Dywany">
+            <div class="cat-text">
+                <div class="cat-title">Dywany</div>
+                <!-- <div class="cat-link">Zobacz więcej</div> -->
+            </div>
+        </a>
+        <a href="#" class="cat-box animate-up">
+            <img src="img/pufy_preview.jpg" alt="Pufy">
+            <div class="cat-text">
+                <div class="cat-title">Pufy</div>
+                <!-- <div class="cat-link">Zobacz więcej</div> -->
+            </div>
+        </a>
+    </section>
+
+    <section class="products-section">
+        <div class="section-header animate-up">
+            <h2 class="section-title">Wybrane produkty</h2>
+            <a href="listing.html" class="see-all">Zobacz wszystkie</a>
+        </div>
+        
+        <mio-product-carousel class="animate-up">
+            <mio-product-card title="Sofa 3-osobowa Cezar" desc="Luksusowa, czteroosobowa sofa Chesterfield, tapicerowana brązową skórą z głębokim pikowaniem i eleganckimi ćwiekami" price="5 990,00 zł" price-prefix="od" badges='[{"text":"Bestseller", "class":"bestseller"}]' images='["img/product-img/chesterclub_preview_v2.jpg", "img/product-img/cezar_preview_przod.png", "img/product-img/cezar_preview_tyl.png"]'></mio-product-card>
+            <mio-product-card title="Sofa 2-osobowa Barry" desc="Nowoczesna kanapa stanowi stylowe połączenie materiałów. Teksturowane, rdzawobrązowe obicie." price="4 990,00 zł" price-prefix="od" badges='[{"text":"Bestseller", "class":"bestseller"}]' images='["img/product-img/barry_preview.png", "img/product-img/barry_preview_przod.png", "img/product-img/barry_preview_tyl.png", "img/product-img/barry_closeup.png"]'></mio-product-card>
+            <mio-product-card title="Fotel Biber" desc="Elegancki fotel obrotowy o rzeźbiarskiej formie, w całości pokryty miękką tkaniną typu boucle w kolorze musztardowym." price="1 590,00 zł" price-prefix="od" badges='[{"text":"Gotowe w 48h", "class":"fast-delivery"}, {"text":"SALE", "class":"sale"}]' images='["img/product-img/biber_preview.png"]'></mio-product-card>
+            <mio-product-card title="Pufa Midel" desc="Nowoczesna pufa o obłym kształcie, wykończona strukturalną tkaniną w odcieniach szarości." price="1 099,00 zł" price-prefix="od" images='["img/product-img/pufa_preview.png"]'></mio-product-card>
+            <mio-product-card title="Łóżko Onyx" desc="Stylowe łóżko o obłych kształtach, w całości obite teksturowaną tkaniną w głębokim, rdzawym kolorze." price="3 499 zł" price-prefix="od" images='["img/product-img/lozko_preview.png"]'></mio-product-card>
+            <mio-product-card title="Sofa Chesterclub Patchwork" desc="Welurowa sofa z funkcją spania, idealna do nowoczesnych wnętrz." price="4 990 zł" price-prefix="od" images='["img/product-img/chesterclub_tweed_preview.png"]'></mio-product-card>
+            <mio-product-card title="Sofa Cezar 3-osobowa" desc="Welurowa sofa z funkcją spania, idealna do nowoczesnych wnętrz." price="5 990 zł" price-prefix="od" images='["img/product-img/rubi_preview.png"]'></mio-product-card>
+        </mio-product-carousel>
+    </section>
+
+    <section class="middle-banner animate-up">
+        <div class="banner-text">
+            Meble od producenta
+            <a href="#" class="hero-btn">Kolekcje</a>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-text animate-up">
+            <h2 class="section-heading">O nas</h2>
+            <p>Jesteśmy polskim producentem mebli, który tworzy unikalne projekty z myślą o najwyższym komforcie i designie. Nasza produkcja opiera się na starannym doborze materiałów, rzemieślniczej precyzji i wieloletnim doświadczeniu.</p>
+            <p>Każdy mebel jest wynikiem pasji do tworzenia pięknych i funkcjonalnych przestrzeni. Oferujemy szerokie możliwości personalizacji, dzięki czemu nasze sofy i fotele idealnie wpasują się w Twój styl.</p>
+            <a href="about.html" class="btn-outline">Kim jesteśmy</a>
+        </div>
+        <div class="about-image animate-up"></div>
+    </section>
+
+    <section class="coop-section">
+        <div class="coop-image animate-up"></div>
+        <div class="coop-text animate-up">
+            <h2 class="section-heading">Współpraca</h2>
+            <p>Zapraszamy do współpracy architektów, projektantów wnętrz oraz salony meblowe. Gwarantujemy profesjonalne doradztwo, dostęp do modeli 3D, dedykowane warunki handlowe oraz szeroki wybór próbników tkanin.</p>
+            <p>Tworzymy meble, które odpowiadają na potrzeby najbardziej wymagających klientów. Jeśli szukasz rzetelnego partnera i polskiego producenta z możliwością modyfikacji wymiarów - zapraszamy do kontaktu.</p>
+            <div class="coop-buttons">
+                <a href="#" class="btn-light">Strefa architekta</a>
+                <a href="#" class="btn-light">Oferta B2B</a>
+            </div>
+        </div>
+    </section>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+</body>
+</html>
+
+

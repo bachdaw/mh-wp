@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karuzela Produktowa - Twój Kod Kafla</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent-color: #c9a67a;
+            --background-color: #ffffff; 
+            --main-text-color: #333;
+            --secondary-text-color: #666;
+            --heading-text-color: #1a1a1a;
+            --border-color: #eae8e3;
+            
+            --sale-color: #a85a5a;
+            --fast-delivery-color: #3b9c3b;
+            --heart-active-color: #d9534f; /* Kolor obramówki serca */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- LAYOUT KARUZELI --- */
+        .carousel-section {
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+        }
+
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 40px;
+            padding: 0 40px; 
+        }
+
+        .carousel-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--heading-text-color);
+            margin: 0;
+        }
+
+        .carousel-header a {
+            font-size: 13px;
+            color: var(--secondary-text-color);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .carousel-header a:hover {
+            color: var(--heading-text-color);
+        }
+
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Główne strzałki karuzeli */
+        .carousel-arrow {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .carousel-arrow:hover {
+            color: var(--heading-text-color);
+            transform: scale(1.1);
+        }
+
+        .carousel-arrow.prev-slide {
+            left: 0;
+        }
+
+        .carousel-arrow.next-slide {
+            right: 0;
+        }
+
+        /* Ścieżka (track) dla kafli */
+        .carousel-track-wrapper {
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 0; 
+            margin: 0 40px; 
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+
+        .carousel-track-wrapper::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        /* --- STYLE KAFLA (Z DOSTARCZONEGO KODU) --- */
+        .product-card {
+            background-color: #ffffff;
+            width: 320px; /* Ustalona szerokość na potrzeby karuzeli */
+            flex-shrink: 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Usunięto hover zgodnie z Twoim kodem, lub odkomentuj jeśli chcesz
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        } */
+
+        .product-image-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .gallery-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .gallery-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .badges-container {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .badge {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border-radius: 2px;
+            color: #ffffff;
+            width: fit-content;
+        }
+
+        .badge.bestseller { background-color: var(--accent-color); }
+        .badge.fast-delivery { background-color: var(--fast-delivery-color); }
+        .badge.sale { background-color: var(--sale-color); }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #b3b3b3; 
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.2s ease, color 0.2s ease;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wishlist-btn:hover {
+            transform: scale(1.15); 
+            color: var(--heart-active-color); 
+        }
+
+        .wishlist-btn.active {
+            color: var(--heart-active-color); 
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            color: #b3b3b3;
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+
+        .slider-arrow:hover {
+            transform: translateY(-50%) scale(1.2); 
+            color: #3d3d3d;
+        }
+
+        .slider-arrow.prev { left: 5px; }
+        .slider-arrow.next { right: 5px; }
+
+        .product-image-wrapper:hover .slider-arrow {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-family: 'Poppins', serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--heading-text-color);
+            margin: 0 0 10px 0;
+        }
+
+        .product-desc {
+            font-size: 13px;
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .price-section {
+            margin-top: auto;
+        }
+
+        .current-price {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            color: var(--heading-text-color);
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .price-prefix {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--secondary-text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="carousel-section">
+        <header class="carousel-header">
+            <h2>Wybrane produkty</h2>
+            <a href="#">Zobacz więcej</a>
+        </header>
+
+        <div class="carousel-container">
+            <button class="carousel-arrow prev-slide" id="scrollLeft" aria-label="Przewiń w lewo">
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+
+            <div class="carousel-track-wrapper" id="mainCarousel">
+                <div class="carousel-track">
+                    
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            
+                            <div class="badges-container">
+                                <div class="badge bestseller">Bestseller</div>
+                                </div>
+
+                            <button class="wishlist-btn" aria-label="Dodaj do ulubionych">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+
+                            <div class="gallery-track">
+                                <img src="img/chesterclub_preview_v2.jpg" alt="Sofa wypoczynkowa - front">
+                                <img src="img/cezar_preview_przod.png" alt="Sofa wypoczynkowa - detal">
+                                <img src="img/cezar_preview_tyl.png" alt="Sofa wypoczynkowa - aranżacja">
+                            </div>
+
+                            <button class="slider-arrow prev" aria-label="Poprzednie zdjęcie">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-arrow next" aria-label="Następne zdjęcie">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+
+                            </div>
+
+                        <div class="product-info">
+                            <h3 class="product-title">Sofa Cezar 2-osobowa</h3>
+                            <p class="product-desc">
+                                Minimalistyczna sofa tapicerowana włoską skórą anilinową. Głębokie siedziska i dębowe nóżki gwarantują najwyższy komfort.
+                            </p>
+
+                            <div class="price-section">
+                                <p class="current-price"><span class="price-prefix">Od</span> 6 850 zł</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <div class="badges-container">
+                            </div>
+                            <button class="wishlist-btn" aria-label="Dodaj do ulubionych">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <div class="gallery-track">
+                                <img src="img/cezar_preview_przod.png" alt="Fotel - przód">
+                                <img src="img/cezar_preview_tyl.png" alt="Fotel - tył">
+                            </div>
+                            <button class="slider-arrow prev" aria-label="Poprzednie zdjęcie"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow next" aria-label="Następne zdjęcie"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Fotel Cezar</h3>
+                            <p class="product-desc">Klasyczny, głęboki fotel klubowy wykonany z brązowej, starzonej skóry anilinowej.</p>
+                            <div class="price-section">
+                                <p class="current-price"><span class="price-prefix">Od</span> 3 499 zł</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <button class="wishlist-btn" aria-label="Dodaj do ulubionych">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <div class="gallery-track">
+                                <img src="img/chesterclub_preview_v2.jpg" alt="Sofa">
+                            </div>
+                            <button class="slider-arrow prev" aria-label="Poprzednie zdjęcie"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow next" aria-label="Następne zdjęcie"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Sofa Barry 3-osobowa</h3>
+                            <p class="product-desc">Elegancki mebel w stylu skandynawskim, wykonany z najwyższej jakości tkaniny strukturalnej.</p>
+                            <div class="price-section">
+                                <p class="current-price"><span class="price-prefix">Od</span> 4 999 zł</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <button class="wishlist-btn" aria-label="Dodaj do ulubionych">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <div class="gallery-track">
+                                <img src="img/cezar_preview_tyl.png" alt="Dywan">
+                            </div>
+                            <button class="slider-arrow prev" aria-label="Poprzednie zdjęcie"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow next" aria-label="Następne zdjęcie"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Dywan Swivel 200x300</h3>
+                            <p class="product-desc">Wyjątkowy dywan łączący tradycyjną, teksturowaną tkaninę z eleganckimi wykończeniami.</p>
+                            <div class="price-section">
+                                <p class="current-price"><span class="price-prefix">Od</span> 5 499 zł</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <button class="wishlist-btn" aria-label="Dodaj do ulubionych">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <div class="gallery-track">
+                                <img src="img/chesterclub_preview_v2.jpg" alt="Pufa">
+                            </div>
+                            <button class="slider-arrow prev" aria-label="Poprzednie zdjęcie"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow next" aria-label="Następne zdjęcie"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Pufa Chesterclub</h3>
+                            <p class="product-desc">Idealne dopełnienie do sofy Chesterclub.</p>
+                            <div class="price-section">
+                                <p class="current-price"><span class="price-prefix">Od</span> 1 250 zł</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+            
+            <button class="carousel-arrow next-slide" id="scrollRight" aria-label="Przewiń w prawo">
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <script>
+        // ----------------------------------------------------
+        // 1. Logika przewijania głównej karuzeli (na boki)
+        // ----------------------------------------------------
+        const mainCarousel = document.getElementById('mainCarousel');
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+
+        // Przewijanie o szerokość kafelka + odstęp (gap)
+        const scrollAmount = 340; 
+
+        scrollLeftBtn.addEventListener('click', () => {
+            mainCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        scrollRightBtn.addEventListener('click', () => {
+            mainCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        // ----------------------------------------------------
+        // 2. Niezależna logika dla KAŻDEGO kafelka (Slider zdjęć i Serce)
+        // ----------------------------------------------------
+        const productCards = document.querySelectorAll('.product-card');
+
+        productCards.forEach(card => {
+            
+            // A. Logika wewnętrznej galerii (Slider zdjęć kafelka)
+            const track = card.querySelector('.gallery-track');
+            const btnPrev = card.querySelector('.slider-arrow.prev');
+            const btnNext = card.querySelector('.slider-arrow.next');
+            const images = track.querySelectorAll('img');
+            
+            let currentIndex = 0;
+            const maxIndex = images.length - 1;
+
+            const updateGallery = () => {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            };
+
+            if (btnNext && btnPrev) {
+                btnNext.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    if (currentIndex < maxIndex) {
+                        currentIndex++;
+                        updateGallery();
+                    }
+                });
+
+                btnPrev.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateGallery();
+                    }
+                });
+            }
+
+            // B. Logika Serduszka (Ulubione)
+            const wishlistBtn = card.querySelector('.wishlist-btn');
+            if (wishlistBtn) {
+                wishlistBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    wishlistBtn.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

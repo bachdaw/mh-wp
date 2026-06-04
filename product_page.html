@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofa Cezar - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="product-page">
+
+    <mio-navbar></mio-navbar>
+
+    <main class="product-page-main">
+        <div class="breadcrumbs">
+            <a href="#">Sklep</a> > <a href="#">Sofy</a> > <a href="#">Sofy</a> > Sofa Cezar 3os
+        </div>
+
+        <section class="product-top">
+            <div class="product-gallery animate-up">
+                <div class="desktop-gallery">
+                    <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar" class="product-main-image">
+                    <div class="product-thumbnails">
+                        <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar">
+                        <img src="img/product-img/cezar_preview_tyl.png" alt="Sofa Cezar tył">
+                        <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Detale">
+                    </div>
+                    <button class="btn-see-more-photos" id="btnSeeMorePhotos">ZOBACZ WIĘCEJ ZDJĘĆ</button>
+                </div>
+                <div class="mobile-gallery">
+                    <div class="m-gallery-scroll" id="mGalleryScroll">
+                        <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar">
+                        <img src="img/product-img/cezar_preview_tyl.png" alt="Sofa Cezar tył">
+                        <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Detale">
+                    </div>
+                    <div class="m-gallery-controls">
+                        <button class="m-gallery-arrow prev" id="mGalleryPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="m-gallery-indicator">
+                            <div class="m-gallery-bar" id="mGalleryBar"></div>
+                        </div>
+                        <button class="m-gallery-arrow next" id="mGalleryNext"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-details animate-up">
+                <h1>Cezar</h1>
+                <div class="product-subtitle">
+                    Sofa Cezar 3-osobowa w skórze lub tkaninie. <a href="#details">Zobacz szczegóły</a>
+                </div>
+
+                <div class="variant-selector">
+                    <div class="variant-selector-header" id="variantSelectorHeader">
+                        <div class="variant-info">
+                            <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar 3-osobowa">
+                            <span>Sofa Cezar 3-osobowa</span>
+                        </div>
+                        <div class="variant-hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="config-title">TKANINA</div>
+                    <div class="config-options">
+                        <div class="config-option color-box-wrap active">
+                            <div class="color-box" style="background-color: #a39580;"></div>
+                            <span>Fino 24</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-color: #635f5d;"></div>
+                            <span>Fino 30</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-color: #9c8e7e;"></div>
+                            <span>Fino 26</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-color: #4a4746;"></div>
+                            <span>Fino 28</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-color: #485440;"></div>
+                            <span>Fino 34</span>
+                        </div>
+                        <div class="config-option add-more-btn" id="openFabricDrawerBtn">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>120</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="config-title">WYBARWIENIA DREWNA</div>
+                    <div class="config-options">
+                        <div class="config-option color-box-wrap active">
+                             <div class="color-box" style="background-image: url('img/wood/whitewashed.jpg'); background-color: #d8c2aa;"></div>
+                            <span>White</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-image: url('img/wood/natural.jpg'); background-color: #d8c2aa;"></div>
+                            <span>Natural</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-image: url('img/wood/latte.jpg'); background-color: #c09e7c;"></div>
+                            <span>Latte</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-image: url('img/wood/smoke.jpg'); background-color: #987859;"></div>
+                            <span>Smoke</span>
+                        </div>
+                        <div class="config-option color-box-wrap">
+                            <div class="color-box" style="background-image: url('img/wood/walnut.jpg'); background-color: #987859;"></div>
+                            <span>Walnut</span>
+                        </div>
+                        <div class="config-option add-more-btn" id="openWoodDrawerBtn">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="config-title">KOLOR KÓŁEK</div>
+                    <div class="config-options">
+                        <div class="config-option active">
+                            <img src="img/wheels/7E2A9789.jpg" alt="Złote">
+                            <span>Złote</span>
+                        </div>
+                        <div class="config-option">
+                            <img src="img/wheels/7E2A9787.jpg" alt="Czarne">
+                            <span>Czarne</span>
+                        </div>
+                        <div class="config-option">
+                            <img src="img/wheels/7E2A9785.jpg" alt="Srebrne">
+                            <span>Srebrne</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="config-title">KOLOR NITÓW</div>
+                    <div class="config-options">
+                        <div class="config-option active">
+                            <img src="img/nity/gold-scaled.jpg" alt="Złote">
+                            <span>Złote</span>
+                        </div>
+                        <div class="config-option">
+                            <img src="img/nity/black-silver-scaled.jpg" alt="Czarne">
+                            <span>Czarne</span>
+                        </div>
+                        <div class="config-option">
+                            <img src="img/nity/silver-scaled.jpg" alt="Srebrne">
+                            <span>Srebrne</span>
+                        </div>
+                        <div class="config-option">
+                            <img src="img/nity/baroc-scaled.jpg" alt="Brązowe">
+                            <span>Brązowe</span>
+                        </div>
+                        <div class="config-option">
+                            <img src="img/nity/baroc-scaled.jpg" alt="Miedziane">
+                            <span>Miedziane</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-price-section">
+                    <div class="product-price"><span id="mainPriceValue">4 999,00</span> zł <span class="price-info">Z VAT, DOSTAWA GRATIS</span></div>
+                </div>
+
+                <div class="add-to-cart-row">
+                    <input type="number" class="qty-input" value="1" min="1">
+                    <button class="btn-add-cart">DODAJ DO KOSZYKA</button>
+                    <button class="btn-wishlist"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div class="klarna-info">
+                    Kup za <span id="klarnaPriceValue">4 999,00</span> zł. Płać od <span id="klarnaInstallmentValue">150,00</span> zł/mc z <strong>Klarna</strong>. <a href="#" style="text-decoration:underline;">Więcej</a>
+                </div>
+
+                <div class="delivery-info">
+                    <div class="delivery-info-item">
+                        <img src="img/icons/truck.svg" alt="Dostawa">
+                        <div>Produkty wysyłamy za <strong>darmo</strong>. Termin dostawy: <strong><span style="color:#318037;">15 maja - 7 czerwca</span></strong></div>
+                    </div>
+                    <div class="delivery-info-item">
+                        <img src="img/icons/shield.svg" alt="Bezpieczne zakupy">
+                        <div>Bezpieczne zakupy. Każdy produkt podlega <strong>14-dniowej gwarancji zwrotu</strong>.</div>
+                    </div>
+                    <div class="delivery-info-item">
+                        <img src="img/icons/payment.svg" alt="Wiele metod płatności">
+                        <div>Wiele metod płatności, w tym odroczone. <strong>Przelew, Blik, Klarna</strong></div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <i class="fa-regular fa-comments"></i>
+                    <div class="contact-box-text">
+                        <h4>Masz pytania? Skontaktuj się z nami!</h4>
+                        <p>+48 123 456 789 | kontakt@miohome.pl<br>Nasza infolinia jest czynna w dni robocze 08:00 - 16:00</p>
+                    </div>
+                </div>
+
+                <a href="#" class="contact-box sample-box" style="text-decoration: none; color: inherit; cursor: pointer; transition: 0.2s;">
+                    <i class="fa-solid fa-swatchbook"></i>
+                    <div class="contact-box-text">
+                        <h4>Zamów próbki materiałów <i class="fa-solid fa-chevron-right" style="font-size: 9px; margin-left: 3px;"></i></h4>
+                        <p>Nie jesteś pewien wyboru? Zamów bezpłatne próbki tkanin do domu i dopasuj kolor w swoim wnętrzu.</p>
+                    </div>
+                </a>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">Wszystkie koszty <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Koszt dostawy wynosi 0 zł na terenie całej Polski przy płatności z góry. Przesyłka pobraniowa wiąże się z dodatkową opłatą.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Warunki gwarancji <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Oferujemy 2 lata gwarancji na wady fabryczne i konstrukcyjne.</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="more-about animate-up" id="details">
+            <div class="more-about-left">
+                <h2>Więcej o produkcie</h2>
+                <p>Sofa Cezar to kwintesencja designu i doskonałej jakości rzemiosła. Każdy detal został stworzony z myślą o tych, którzy cenią sobie elegancję i ponadczasowy styl.</p>
+                <p>Oparcie i podłokietniki są subtelnie pikowane, tworząc harmonijną całość. Zastosowanie wysokiej jakości pianki HR w siedziskach gwarantuje nie tylko komfort, ale również trwałość na lata.</p>
+                <p>Niezwykłe nogi z naturalnego drewna w połączeniu z mosiężnymi kółkami nadają meblowi niepowtarzalny charakter. To idealny wybór do salonu w stylu klasycznym, glamour lub nowojorskim.</p>
+                <p>Jakość, na którą zasługujesz. Postaw na sprawdzone rozwiązania, zaufaj naszemu doświadczeniu i ciesz się wyjątkowym wnętrzem w swoim domu.</p>
+            </div>
+            <div class="more-about-right">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">Wymiary <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            Szerokość: 220 cm<br>Głębokość: 95 cm<br>Wysokość: 78 cm<br>Wysokość siedziska: 45 cm<br>Głębokość siedziska: 60 cm
+                            <div class="product-dimensions-img">
+                                <img src="img/product-img/chesterclub_dimensions.png" alt="Wymiary mebla">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Charakterystyka <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Styl klasyczny Chesterfield. Głębokie pikowanie, wyprofilowane podłokietniki, ozdobne nity i kółka mosiężne.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Materiały <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Stelaż z drewna sosnowego i sklejki. Pianka wysokoelastyczna HR, sprężyny faliste. Obicie według konfiguracji.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Rozpakowanie i montaż <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Mebel nie wymaga montażu. Dostarczany jest w całości, odpowiednio zabezpieczony na czas transportu.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Konserwacja i gwarancja <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Zalecamy delikatne odkurzanie i stosowanie preparatów dedykowanych do wybranej tkaniny/skóry. Gwarancja 24 miesiące.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Opakowanie <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">Folia bąbelkowa, karton zabezpieczający narożniki, folia stretch. Wymiary paczki: 225 x 100 x 85 cm.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="collection-section animate-up">
+            <div class="collection-left">
+                <div class="collection-subtitle">KOLEKCJA</div>
+                <div class="collection-title">Cezar</div>
+                <div class="collection-desc">
+                    Kolekcja Cezar to klasyka gatunku, elegancja w każdym calu i bezkompromisowa jakość. Te meble stworzono z myślą o najbardziej wymagających użytkownikach, którzy szukają we wnętrzu czegoś więcej.<br><br>
+                    Siedziska wzbogacone sprężynami falistymi zapewniają wyjątkowy komfort. Oparcie i podłokietniki, bogato zdobione głębokim pikowaniem typu Chesterfield, dodają wnętrzu luksusowego charakteru.
+                </div>
+                
+                <div class="collection-products">
+                    <div class="collection-product">
+                        <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Leżanka Cezar">
+                        <div class="collection-product-title">LEŻANKA CEZAR</div>
+                    </div>
+                    <div class="collection-product">
+                        <img src="img/product-img/pufa_preview.png" alt="Pufa Cezar">
+                        <div class="collection-product-title">PUFA CEZAR</div>
+                    </div>
+                </div>
+                
+                <button class="btn-discover">ODKRYJ</button>
+            </div>
+            <div class="collection-right">
+                <img src="img/chesterclub.jpg" alt="Kolekcja Cezar wnętrze">
+            </div>
+        </section>
+
+        <section class="recommended-section animate-up">
+            <div class="recommended-tabs">
+                <div class="recommended-tab active">ZOBACZ RÓWNIEŻ</div>
+                <!-- <div class="recommended-tab">DO KOMPLETU</div> -->
+            </div>
+            
+            <mio-product-carousel>
+            <mio-product-card title="Sofa 3-osobowa Cezar" desc="Luksusowa, czteroosobowa sofa Chesterfield, tapicerowana brązową skórą z głębokim pikowaniem i eleganckimi ćwiekami" price="5 990,00 zł" price-prefix="od" badges='[{"text":"Bestseller", "class":"bestseller"}]' images='["img/product-img/chesterclub_preview_v2.jpg", "img/product-img/cezar_preview_przod.png", "img/product-img/cezar_preview_tyl.png"]'></mio-product-card>
+            <mio-product-card title="Sofa 2-osobowa Barry" desc="Nowoczesna kanapa stanowi stylowe połączenie materiałów. Teksturowane, rdzawobrązowe obicie." price="4 990,00 zł" price-prefix="od" badges='[{"text":"Bestseller", "class":"bestseller"}]' images='["img/product-img/barry_preview.png", "img/product-img/barry_preview_przod.png", "img/product-img/barry_preview_tyl.png", "img/product-img/barry_closeup.png"]'></mio-product-card>
+            <mio-product-card title="Fotel Biber" desc="Elegancki fotel obrotowy o rzeźbiarskiej formie, w całości pokryty miękką tkaniną typu boucle w kolorze musztardowym." price="1 590,00 zł" price-prefix="od" badges='[{"text":"Gotowe w 48h", "class":"fast-delivery"}, {"text":"SALE", "class":"sale"}]' images='["img/product-img/biber_preview.png"]'></mio-product-card>
+            <mio-product-card title="Pufa Midel" desc="Nowoczesna pufa o obłym kształcie, wykończona strukturalną tkaniną w odcieniach szarości." price="1 099,00 zł" price-prefix="od" images='["img/product-img/pufa_preview.png"]'></mio-product-card>
+            <mio-product-card title="Łóżko Onyx" desc="Stylowe łóżko o obłych kształtach, w całości obite teksturowaną tkaniną w głębokim, rdzawym kolorze." price="3 499 zł" price-prefix="od" images='["img/product-img/lozko_preview.png"]'></mio-product-card>
+            <mio-product-card title="Sofa Chesterclub Patchwork" desc="Welurowa sofa z funkcją spania, idealna do nowoczesnych wnętrz." price="4 990 zł" price-prefix="od" images='["img/product-img/chesterclub_tweed_preview.png"]'></mio-product-card>
+            <mio-product-card title="Sofa Cezar 3-osobowa" desc="Welurowa sofa z funkcją spania, idealna do nowoczesnych wnętrz." price="5 990 zł" price-prefix="od" images='["img/product-img/rubi_preview.png"]'></mio-product-card>
+            </mio-product-carousel>
+        </section>
+
+        <!-- Sticky Add to Cart -->
+        <div class="sticky-cart-bar" id="stickyCartBar">
+            <div class="sticky-cart-left">
+                <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar">
+                <div class="sticky-cart-info">
+                    <span class="sticky-cart-title">Cezar</span>
+                    <span class="sticky-cart-price" id="stickyPriceValue">4 999,00 zł</span>
+                </div>
+                <div class="sticky-cart-config-visuals" id="stickyCartConfigVisuals">
+                    <!-- JS populates images/color boxes here -->
+                </div>
+            </div>
+            <div class="sticky-cart-right">
+                <button class="btn-wishlist" style="width: 45px; height: 45px; border-radius: 0; margin-right: 15px;"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-add-cart" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">DODAJ DO KOSZYKA</button>
+            </div>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-content">
+                <i class="fa-solid fa-angle-left lightbox-prev"></i>
+                <img id="lightbox-img" src="" alt="Powiększenie">
+                <i class="fa-solid fa-angle-right lightbox-next"></i>
+            </div>
+            <div class="lightbox-thumbnails">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <mio-footer></mio-footer>
+
+    <!-- Wood Drawer -->
+    <div class="fabric-drawer-overlay" id="woodDrawerOverlay"></div>
+    <div class="fabric-drawer" id="woodDrawer">
+        <div class="fabric-drawer-header">
+            <span class="fd-title">WYBARWIENIE DREWNA</span>
+            <i class="fa-solid fa-xmark fd-close" id="woodDrawerClose"></i>
+        </div>
+        <div class="fabric-drawer-content" style="padding: 0 40px 40px 40px;">
+            <div class="simple-drawer-grid">
+                <div class="sd-option" data-name="White" data-img="img/wood/whitewashed.jpg">
+                    <img src="img/wood/whitewashed.jpg" alt="White">
+                    <span>WHITEWASHED</span>
+                </div>
+                <div class="sd-option" data-name="Latte" data-img="img/wood/latte.jpg">
+                    <img src="img/wood/latte.jpg" alt="Latte">
+                    <span>LATTE</span>
+                </div>
+                <div class="sd-option" data-name="Grey Oil" data-img="img/wood/greyoil.jpg">
+                    <img src="img/wood/greyoil.jpg" alt="Grey Oil">
+                    <span>GREY OIL</span>
+                </div>
+                <div class="sd-option" data-name="Natural" data-img="img/wood/natural.jpg">
+                    <img src="img/wood/natural.jpg" alt="Natural">
+                    <span>NATURAL</span>
+                </div>
+                <div class="sd-option" data-name="Smoke" data-img="img/wood/smoke.jpg">
+                    <img src="img/wood/smoke.jpg" alt="Smoke">
+                    <span>SMOKE</span>
+                </div>
+                <div class="sd-option" data-name="Antic Rubio Oil" data-img="img/wood/antirubiooil.jpg">
+                    <img src="img/wood/anticrubiooil.jpg" alt="Antic Rubio Oil">
+                    <span>ANTIC RUBIO OIL</span>
+                </div>
+                <div class="sd-option" data-name="Walnut" data-img="img/wood/walnut.jpg">
+                    <img src="img/wood/walnut.jpg" alt="Walnut">
+                    <span>WALNUT</span>
+                </div>
+                <div class="sd-option" data-name="Chocolate" data-img="img/wood/chocolate.jpg">
+                    <img src="img/wood/chocolate.jpg" alt="Chocolate">
+                    <span>CHOCOLATE</span>
+                </div>
+                <div class="sd-option" data-name="Black" data-img="img/product-img/wood_3.jpg">
+                    <div class="color-box-placeholder" style="background-color: #000; width: 100%; aspect-ratio: 4/3; margin-bottom: 15px;"></div>
+                    <span>BLACK</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Variant Drawer -->
+    <div class="fabric-drawer-overlay" id="variantDrawerOverlay"></div>
+    <div class="fabric-drawer" id="variantDrawer">
+        <div class="fabric-drawer-header">
+            <span class="fd-title">WARIANT MODELU</span>
+            <i class="fa-solid fa-xmark fd-close" id="variantDrawerClose"></i>
+        </div>
+        <div class="fabric-drawer-content" style="padding: 0 40px 40px 40px;">
+            <div class="simple-drawer-grid">
+                <div class="sd-option variant-option-drawer active" data-name="Sofa Cezar 3-osobowa" data-img="img/product-img/cezar_preview_przod.png">
+                    <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar 3-osobowa">
+                    <span>Sofa Cezar 3-osobowa</span>
+                </div>
+                <div class="sd-option variant-option-drawer" data-name="Sofa Cezar 2-osobowa" data-img="img/product-img/cezar_mini_preview.png">
+                    <img src="img/product-img/cezar_mini_preview.png" alt="Sofa Cezar 2-osobowa">
+                    <span>Sofa Cezar 2-osobowa</span>
+                </div>
+                <div class="sd-option variant-option-drawer" data-name="Fotel Cezar" data-img="img/product-img/baltimore_preview_v2.jpg">
+                    <img src="img/product-img/baltimore_preview_v2.jpg" alt="Fotel Cezar">
+                    <span>Fotel Cezar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fabric Drawer -->
+    <div class="fabric-drawer-overlay" id="fabricDrawerOverlay"></div>
+    <div class="fabric-drawer" id="fabricDrawer">
+        <div class="fabric-drawer-header">
+            <span class="fd-title">TKANINA</span>
+            <i class="fa-solid fa-xmark fd-close" id="fabricDrawerClose"></i>
+        </div>
+        <div class="fabric-drawer-subheader" id="openFiltersBtn">
+            <i class="fa-solid fa-sliders"></i> FILTRUJ KOLEKCJE
+        </div>
+        <div class="fabric-drawer-content">
+            <!-- Collection: ARIZONA -->
+            <div class="fabric-collection">
+                <div class="fc-header">
+                    <div class="fc-title-row">
+                        <span class="fc-name">ARIZONA</span>
+                        <span class="fc-separator">|</span>
+                        <span class="fc-type">TKANINA</span>
+                        <span class="fc-separator">|</span>
+                        <span class="fc-price">+ 1 399 zł</span>
+                    </div>
+                    <div class="fc-expand">
+                        <span class="fc-expand-text">Rozwiń 5 opcji</span>
+                        <i class="fa-solid fa-chevron-right fc-icon"></i>
+                    </div>
+                </div>
+                <div class="fc-desc">
+                    Arizona oferuje wyjątkową wytrzymałość dzięki strukturalnemu splotowi. Jego miękkie w dotyku włókna zapewniają wyjątkową fakturę, a odcienie nadają wymiar wszystkim przestrzeniom.
+                </div>
+                <div class="fc-badges">
+                    <span>PLAMOODPORNOŚĆ</span>
+                    <span>ODDYCHAJĄCA</span>
+                </div>
+                <div class="fc-options-grid">
+                    <div class="fc-option" data-name="Arizona Green" data-price="+ 1 399 zł" data-img="img/materials/MTK000ZF22.avif">
+                        <img src="img/materials/MTK000ZF22.avif" alt="Arizona Green">
+                        <span>ARIZONA GREEN</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Black" data-price="+ 1 399 zł" data-img="img/materials/MTK0232.avif">
+                        <img src="img/materials/MTK0232.avif" alt="Arizona Black">
+                        <span>ARIZONA BLACK</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Gray" data-price="+ 1 399 zł" data-img="img/materials/MTK0354.avif">
+                        <img src="img/materials/MTK0354.avif" alt="Arizona Gray">
+                        <span>ARIZONA GRAY</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Mustard" data-price="+ 1 399 zł" data-img="img/materials/MTK0355.avif">
+                        <img src="img/materials/MTK0355.avif" alt="Arizona Mustard">
+                        <span>ARIZONA MUSTARD</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Dark Blue" data-price="+ 1 399 zł" data-img="img/materials/MTK0357.avif">
+                        <img src="img/materials/MTK0357.avif" alt="Arizona Dark Blue">
+                        <span>ARIZONA DARK BLUE</span>
+                    </div>
+                </div>
+                <div class="fc-banner">
+                    <img src="img/materials/MTK000ZF22.avif" alt="Arizona Banner">
+                </div>
+            </div>
+
+            <!-- Collection: ARTICO -->
+            <div class="fabric-collection">
+                <div class="fc-header">
+                    <div class="fc-title-row">
+                        <span class="fc-name">ARTICO</span>
+                        <span class="fc-separator">|</span>
+                        <span class="fc-type">BOUCLE</span>
+                        <span class="fc-separator">|</span>
+                        <span class="fc-price">+ 122 zł</span>
+                    </div>
+                    <div class="fc-expand">
+                        <span class="fc-expand-text">Rozwiń 3 opcje</span>
+                        <i class="fa-solid fa-chevron-right fc-icon"></i>
+                    </div>
+                </div>
+                <div class="fc-desc">
+                    Artico oferuje wyjątkową wytrzymałość dzięki strukturalnemu splotowi. Jego miękkie w dotyku włókna zapewniają wyjątkową fakturę, a odcienie nadają wymiar wszystkim przestrzeniom.
+                </div>
+                <div class="fc-options-grid">
+                    <div class="fc-option" data-name="Artico Light" data-price="+ 122 zł" data-img="img/materials/MTK0381.avif">
+                        <img src="img/materials/MTK0381.avif" alt="Artico Light">
+                        <span>ARTICO LIGHT</span>
+                    </div>
+                    <div class="fc-option" data-name="Artico Beige" data-price="+ 122 zł" data-img="img/materials/MTKA000VO10.avif">
+                        <img src="img/materials/MTKA000VO10.avif" alt="Artico Beige">
+                        <span>ARTICO BEIGE</span>
+                    </div>
+                    <div class="fc-option" data-name="Artico Material" data-price="+ 122 zł" data-img="img/materials/material.avif">
+                        <img src="img/materials/material.avif" alt="Artico Material">
+                        <span>ARTICO MATERIAL</span>
+                    </div>
+                </div>
+                <div class="fc-banner">
+                    <img src="img/materials/MTK0381.avif" alt="Artico Banner">
+                </div>
+            </div>
+
+            <div class="fabric-collection">
+                <div class="fc-header">
+                    <div class="fc-title-row">
+                        <span class="fc-name">LEO</span>
+                        <span class="fc-separator">|</span>
+                        <span class="fc-type">SKÓRA NATURALNA</span>
+                        <span class="fc-separator">|</span>
+                        <span class="fc-price">+ 1 699 zł</span>
+                    </div>
+                    <div class="fc-expand">
+                        <span class="fc-expand-text">Rozwiń 5 opcji</span>
+                        <i class="fa-solid fa-chevron-right fc-icon"></i>
+                    </div>
+                </div>
+                <div class="fc-desc">
+                    Leo oferuje wyjątkową wytrzymałość dzięki strukturalnemu splotowi. Jego miękkie w dotyku włókna zapewniają wyjątkową fakturę, a odcienie nadają wymiar wszystkim przestrzeniom.
+                </div>
+                <div class="fc-badges">
+                    <span>PLAMOODPORNOŚĆ</span>
+                </div>
+                <div class="fc-options-grid">
+                    <div class="fc-option" data-name="Arizona Green" data-price="+ 1 399 zł" data-img="img/materials/MTK000ZF22.avif">
+                        <img src="img/materials/MTK000ZF22.avif" alt="Arizona Green">
+                        <span>ARIZONA GREEN</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Black" data-price="+ 1 399 zł" data-img="img/materials/MTK0232.avif">
+                        <img src="img/materials/MTK0232.avif" alt="Arizona Black">
+                        <span>ARIZONA BLACK</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Gray" data-price="+ 1 399 zł" data-img="img/materials/MTK0354.avif">
+                        <img src="img/materials/MTK0354.avif" alt="Arizona Gray">
+                        <span>ARIZONA GRAY</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Mustard" data-price="+ 1 399 zł" data-img="img/materials/MTK0355.avif">
+                        <img src="img/materials/MTK0355.avif" alt="Arizona Mustard">
+                        <span>ARIZONA MUSTARD</span>
+                    </div>
+                    <div class="fc-option" data-name="Arizona Dark Blue" data-price="+ 1 399 zł" data-img="img/materials/MTK0357.avif">
+                        <img src="img/materials/MTK0357.avif" alt="Arizona Dark Blue">
+                        <span>ARIZONA DARK BLUE</span>
+                    </div>
+                </div>
+                <div class="fc-banner">
+                    <img src="img/materials/MTK000ZF22.avif" alt="Arizona Banner">
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter View Panel -->
+        <div class="fabric-filter-view" id="fabricFilterView">
+            <div class="ff-header" id="closeFiltersBtn">
+                <i class="fa-solid fa-chevron-left"></i> Filtry
+            </div>
+            <div class="ff-content">
+                <div class="ff-accordion-item active">
+                    <div class="ff-accordion-header">
+                        Sortuj według
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="ff-accordion-body">
+                        <label class="ff-radio">
+                            <input type="radio" name="sort" checked>
+                            <span class="radio-mark"></span>
+                            Cena: najniższa
+                        </label>
+                        <label class="ff-radio">
+                            <input type="radio" name="sort">
+                            <span class="radio-mark"></span>
+                            Cena: najwyższa
+                        </label>
+                        <label class="ff-radio">
+                            <input type="radio" name="sort">
+                            <span class="radio-mark"></span>
+                            Parametr
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="ff-accordion-item active">
+                    <div class="ff-accordion-header">
+                        Typ materiału
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="ff-accordion-body">
+                        <label class="ff-checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkbox-mark"></span>
+                            Skóra
+                        </label>
+                        <label class="ff-checkbox">
+                            <input type="checkbox">
+                            <span class="checkbox-mark"></span>
+                            Welur
+                        </label>
+                        <label class="ff-checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkbox-mark"></span>
+                            Tkanina
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="ff-accordion-item">
+                    <div class="ff-accordion-header">
+                        Funkcje materiału
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="ff-accordion-body">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ff-footer">
+                <button class="btn-ff-reset">RESETUJ FILTRY</button>
+                <button class="btn-ff-apply" id="applyFiltersBtn">ZOBACZ WYNIKI (33)</button>
+            </div>
+        </div>
+
+    <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obsługa akordeonów
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const content = item.querySelector('.accordion-content');
+                    
+                    item.classList.toggle('active');
+                    if (item.classList.contains('active')) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+
+            // Obsługa wishlist btn na stronie produktu
+            const wishlistBtns = document.querySelectorAll('.btn-wishlist');
+            wishlistBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                    const i = this.querySelector('i');
+                    if(this.classList.contains('active')) {
+                        i.classList.remove('fa-regular');
+                        i.classList.add('fa-solid');
+                    } else {
+                        i.classList.remove('fa-regular');
+                    }
+                });
+            });
+
+            // Opcje konfiguratora
+            const configSections = document.querySelectorAll('.config-section');
+            
+            // Logika nowych szuflad
+            const variantHeader = document.getElementById('variantSelectorHeader');
+            const variantDrawerOverlay = document.getElementById('variantDrawerOverlay');
+            const variantDrawer = document.getElementById('variantDrawer');
+            const variantDrawerClose = document.getElementById('variantDrawerClose');
+
+            function closeVariantDrawer() {
+                if(variantDrawerOverlay) variantDrawerOverlay.classList.remove('active');
+                if(variantDrawer) variantDrawer.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (variantHeader && variantDrawer) {
+                variantHeader.addEventListener('click', () => {
+                    variantDrawerOverlay.classList.add('active');
+                    variantDrawer.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                if (variantDrawerClose) variantDrawerClose.addEventListener('click', closeVariantDrawer);
+                if (variantDrawerOverlay) variantDrawerOverlay.addEventListener('click', closeVariantDrawer);
+            }
+
+            const openWoodDrawerBtn = document.getElementById('openWoodDrawerBtn');
+            const woodDrawerOverlay = document.getElementById('woodDrawerOverlay');
+            const woodDrawer = document.getElementById('woodDrawer');
+            const woodDrawerClose = document.getElementById('woodDrawerClose');
+
+            function closeWoodDrawer() {
+                if(woodDrawerOverlay) woodDrawerOverlay.classList.remove('active');
+                if(woodDrawer) woodDrawer.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (openWoodDrawerBtn && woodDrawer) {
+                openWoodDrawerBtn.addEventListener('click', () => {
+                    woodDrawerOverlay.classList.add('active');
+                    woodDrawer.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                if (woodDrawerClose) woodDrawerClose.addEventListener('click', closeWoodDrawer);
+                if (woodDrawerOverlay) woodDrawerOverlay.addEventListener('click', closeWoodDrawer);
+            }
+
+            // Obsluga klikniec opcji w szufladach
+            const woodOptions = document.querySelectorAll('#woodDrawer .sd-option');
+            woodOptions.forEach(opt => {
+                opt.addEventListener('click', function() {
+                    woodOptions.forEach(s => s.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const name = this.getAttribute('data-name');
+                    const imgUrl = this.getAttribute('data-img');
+                    
+                    const openWoodBtn = document.getElementById('openWoodDrawerBtn');
+                    if (openWoodBtn) {
+                        const woodOptionsContainer = openWoodBtn.parentElement;
+                        const activeWood = woodOptionsContainer.querySelector('.config-option.active');
+                        if (activeWood) {
+                            const colorBox = activeWood.querySelector('.color-box');
+                            const span = activeWood.querySelector('span');
+                            
+                            if (colorBox) {
+                                if (imgUrl) {
+                                    colorBox.style.backgroundImage = `url('${imgUrl}')`;
+                                    colorBox.style.backgroundColor = 'transparent';
+                                } else {
+                                    colorBox.style.backgroundImage = 'none';
+                                    colorBox.style.backgroundColor = '#000';
+                                }
+                            }
+                            if (span) span.textContent = name;
+                        }
+                    }
+                    
+                    closeWoodDrawer();
+                });
+            });
+
+            const variantOptions = document.querySelectorAll('#variantDrawer .sd-option');
+            variantOptions.forEach(opt => {
+                opt.addEventListener('click', function() {
+                    variantOptions.forEach(s => s.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const name = this.getAttribute('data-name');
+                    const img = this.getAttribute('data-img');
+                    
+                    const vInfoImg = document.querySelector('.variant-info img');
+                    const vInfoSpan = document.querySelector('.variant-info span');
+                    if(vInfoImg) vInfoImg.src = img;
+                    if(vInfoSpan) vInfoSpan.textContent = name;
+                    
+                    closeVariantDrawer();
+                });
+            });
+            
+            function updateStickyConfig() {
+                const visualsContainer = document.getElementById('stickyCartConfigVisuals');
+                if (!visualsContainer) return;
+                
+                visualsContainer.innerHTML = '';
+                
+                const activeOptions = document.querySelectorAll('.config-section .config-option.active');
+                activeOptions.forEach(opt => {
+                    let visualEl = opt.querySelector('.color-box') || opt.querySelector('img') || opt.querySelector('.variant-text');
+                    if (visualEl) {
+                        let itemContainer = document.createElement('div');
+                        itemContainer.className = 'sticky-cart-visual-container';
+
+                        let wrapper = document.createElement('div');
+                        wrapper.className = 'sticky-cart-visual-item';
+                        
+                        if (visualEl.classList.contains('variant-text')) {
+                            wrapper.innerHTML = `<span style="font-size:9px; font-family:'Montserrat', sans-serif; font-weight:600; text-align:center; display:block; line-height:1;">${visualEl.textContent.substring(0, 4)}</span>`;
+                        } else {
+                            let clone = visualEl.cloneNode(true);
+                            wrapper.appendChild(clone);
+                        }
+                        
+                        itemContainer.appendChild(wrapper);
+
+                        let nameSpan = opt.querySelector('span:not(.variant-text)');
+                        if (nameSpan) {
+                            let label = document.createElement('span');
+                            label.className = 'sticky-cart-visual-label';
+                            label.textContent = nameSpan.textContent.trim();
+                            itemContainer.appendChild(label);
+                        } else if (visualEl.classList.contains('variant-text')) {
+                            let label = document.createElement('span');
+                            label.className = 'sticky-cart-visual-label';
+                            label.textContent = "Wariant";
+                            itemContainer.appendChild(label);
+                        }
+                        
+                        visualsContainer.appendChild(itemContainer);
+                    }
+                });
+            }
+
+            // Kalkulacja ceny
+            function updatePrice() {
+                const basePrice = 4999.00;
+                let totalModifier = 0;
+                
+                const activeOptions = document.querySelectorAll('.config-section .config-option.active');
+                activeOptions.forEach(opt => {
+                    const mod = parseInt(opt.getAttribute('data-price-modifier'));
+                    if (!isNaN(mod)) {
+                        totalModifier += mod;
+                    }
+                });
+                
+                const finalPrice = basePrice + totalModifier;
+                
+                // Format to 2 decimal places with comma and space separator
+                const formatPrice = (price) => {
+                    return price.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                };
+                
+                const mainPriceEl = document.getElementById('mainPriceValue');
+                if (mainPriceEl) mainPriceEl.textContent = formatPrice(finalPrice);
+                
+                const klarnaPriceEl = document.getElementById('klarnaPriceValue');
+                if (klarnaPriceEl) klarnaPriceEl.textContent = formatPrice(finalPrice);
+                
+                const klarnaInstallEl = document.getElementById('klarnaInstallmentValue');
+                if (klarnaInstallEl) klarnaInstallEl.textContent = formatPrice(finalPrice / 33.326);
+                
+                const stickyPriceEl = document.getElementById('stickyPriceValue');
+                if (stickyPriceEl) stickyPriceEl.textContent = formatPrice(finalPrice) + ' zł';
+            }
+
+            // Konfigurator: Opcje standardowe
+            const configOptions = document.querySelectorAll('.config-option:not(.add-more-btn)');
+            configOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const parent = this.closest('.config-options');
+                    // Ignoruj jeśli element należy do innego systemu (np. warianty to mogą być a tagi)
+                    if (this.classList.contains('active')) return;
+                    
+                    const siblings = parent.querySelectorAll('.config-option');
+                    siblings.forEach(sib => sib.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Aktualizacja Sticky Bar i ceny
+                    updateStickyConfig();
+                    updatePrice();
+                });
+            });
+
+            // Fabric Drawer Logic
+            const openDrawerBtn = document.getElementById('openFabricDrawerBtn');
+            const drawerOverlay = document.getElementById('fabricDrawerOverlay');
+            const fabricDrawer = document.getElementById('fabricDrawer');
+            const drawerClose = document.getElementById('fabricDrawerClose');
+
+            function openDrawer() {
+                drawerOverlay.classList.add('active');
+                fabricDrawer.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawerOverlay.classList.remove('active');
+                fabricDrawer.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // Zwiń panel filtrów po zamknięciu szuflady
+                const fabricFilterView = document.getElementById('fabricFilterView');
+                if (fabricFilterView) fabricFilterView.classList.remove('active');
+            }
+
+            if (openDrawerBtn) openDrawerBtn.addEventListener('click', openDrawer);
+            if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+            if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+            // Filtry Drawer Logic
+            const openFiltersBtn = document.getElementById('openFiltersBtn');
+            const closeFiltersBtn = document.getElementById('closeFiltersBtn');
+            const fabricFilterView = document.getElementById('fabricFilterView');
+            const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+
+            if (openFiltersBtn && fabricFilterView) {
+                openFiltersBtn.addEventListener('click', () => {
+                    fabricFilterView.classList.add('active');
+                });
+            }
+
+            if (closeFiltersBtn && fabricFilterView) {
+                closeFiltersBtn.addEventListener('click', () => {
+                    fabricFilterView.classList.remove('active');
+                });
+            }
+            
+            if (applyFiltersBtn && fabricFilterView) {
+                applyFiltersBtn.addEventListener('click', () => {
+                    fabricFilterView.classList.remove('active');
+                });
+            }
+
+            // Accordion collections in Filter View
+            const ffAccordionHeaders = document.querySelectorAll('.ff-accordion-header');
+            ffAccordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Accordion collections in Drawer
+            const fabricCollections = document.querySelectorAll('.fabric-collection');
+            fabricCollections.forEach(collection => {
+                const header = collection.querySelector('.fc-header');
+                header.addEventListener('click', () => {
+                    collection.classList.toggle('active');
+                });
+            });
+
+            // Wybór tkaniny z Drawera
+            const drawerFabricOptions = document.querySelectorAll('.fc-option');
+            const mainFabricConfigOptions = document.querySelector('.config-section:nth-of-type(2) .config-options'); // TKANINA section
+            
+            drawerFabricOptions.forEach(opt => {
+                opt.addEventListener('click', function() {
+                    const name = this.getAttribute('data-name');
+                    const imgUrl = this.getAttribute('data-img');
+                    const priceStr = this.getAttribute('data-price');
+                    
+                    let priceMod = 0;
+                    if (priceStr) {
+                        const cleaned = priceStr.replace(/[^\d]/g, '');
+                        if (cleaned) priceMod = parseInt(cleaned, 10);
+                    }
+                    
+                    // Znajdź sekcję TKANINA w głównym widoku
+                    const fabricSectionTitle = Array.from(document.querySelectorAll('.config-title')).find(el => el.textContent === 'TKANINA');
+                    if (fabricSectionTitle) {
+                        const fabricConfigContainer = fabricSectionTitle.nextElementSibling;
+                        
+                        // Znajdź aktywny wariant tkaniny (ten, który użytkownik obecnie ma zaznaczony)
+                        let targetOption = fabricConfigContainer.querySelector('.config-option.active');
+                        if (!targetOption) {
+                            targetOption = fabricConfigContainer.querySelector('.config-option:not(.add-more-btn)');
+                        }
+                        
+                        // Odznacz wszystkie opcje w tej sekcji
+                        const siblings = fabricConfigContainer.querySelectorAll('.config-option:not(.add-more-btn)');
+                        siblings.forEach(sib => sib.classList.remove('active'));
+
+                        if (targetOption) {
+                            targetOption.classList.add('active');
+                            targetOption.setAttribute('data-price-modifier', priceMod);
+                            let modText = priceMod > 0 ? `+ ${priceMod} zł` : `+ 0 zł`;
+                            targetOption.innerHTML = `
+                                <div class="color-box" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center; border: 1px solid #ddd;"></div>
+                                <span>${name}</span>
+                                <span class="config-price-mod">${modText}</span>
+                            `;
+                        }
+                    }
+                    
+                    updateStickyConfig();
+                    updatePrice();
+                    closeDrawer();
+                });
+            });
+
+            // Wstrzyknięcie etykiet z wpływem na cenę do istniejących wariantów
+            function injectPriceModifiers() {
+                const allOptions = document.querySelectorAll('.config-option:not(.add-more-btn)');
+                allOptions.forEach(opt => {
+                    if(!opt.querySelector('.config-price-mod')) {
+                        let mod = parseInt(opt.getAttribute('data-price-modifier')) || 0;
+                        let modText = mod > 0 ? `+ ${mod} zł` : `+ 0 zł`;
+                        let modSpan = document.createElement('span');
+                        modSpan.className = 'config-price-mod';
+                        modSpan.textContent = modText;
+                        opt.appendChild(modSpan);
+                    }
+                });
+            }
+
+            // Inicjalizacja na starcie
+            injectPriceModifiers();
+            updateStickyConfig();
+            updatePrice();
+
+            // Responsywne kafelki konfiguratora
+            function updateConfigLayout() {
+                if(configSections.length === 0) return;
+                
+                const containerWidth = configSections[0].querySelector('.config-options').clientWidth;
+                
+                let columns = Math.floor((containerWidth + 10) / 80);
+                if (columns < 3) columns = 3;
+                if (columns > 6) columns = 6;
+
+                configSections.forEach(section => {
+                    const optionsContainer = section.querySelector('.config-options');
+                    const options = Array.from(optionsContainer.querySelectorAll('.config-option:not(.add-more-btn)'));
+                    let addMoreBtn = optionsContainer.querySelector('.add-more-btn');
+                    
+                    optionsContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+                    
+                    if (addMoreBtn) {
+                        let maxVisible = columns - 1;
+                        let hiddenCount = 0;
+                        
+                        let baseExtra = parseInt(addMoreBtn.dataset.baseCount);
+                        if (isNaN(baseExtra)) {
+                            baseExtra = parseInt(addMoreBtn.querySelector('span').textContent);
+                            addMoreBtn.dataset.baseCount = baseExtra;
+                        }
+                        
+                        options.forEach((opt, index) => {
+                            if (index < maxVisible) {
+                                opt.style.display = 'flex';
+                            } else {
+                                opt.style.display = 'none';
+                                hiddenCount++;
+                            }
+                        });
+                        
+                        addMoreBtn.querySelector('span').textContent = baseExtra + hiddenCount;
+                    }
+                });
+            }
+
+            window.addEventListener('resize', updateConfigLayout);
+            setTimeout(updateConfigLayout, 50);
+
+            // Mobile Gallery Scroll
+            const mScroll = document.getElementById('mGalleryScroll');
+            const mBar = document.getElementById('mGalleryBar');
+            const mPrev = document.getElementById('mGalleryPrev');
+            const mNext = document.getElementById('mGalleryNext');
+            if (mScroll && mBar) {
+                // Set initial bar width based on number of items
+                const itemLength = mScroll.querySelectorAll('img').length;
+                if (itemLength > 0) {
+                    mBar.style.width = `${100 / itemLength}%`;
+                }
+
+                mScroll.addEventListener('scroll', () => {
+                    const scrollPercentage = mScroll.scrollLeft / (mScroll.scrollWidth - mScroll.clientWidth);
+                    const maxTranslate = (itemLength - 1) * 100;
+                    mBar.style.transform = `translateX(${scrollPercentage * maxTranslate}%)`;
+                });
+
+                if (mPrev && mNext) {
+                    mNext.addEventListener('click', () => {
+                        mScroll.scrollBy({ left: mScroll.clientWidth, behavior: 'smooth' });
+                    });
+                    mPrev.addEventListener('click', () => {
+                        mScroll.scrollBy({ left: -mScroll.clientWidth, behavior: 'smooth' });
+                    });
+                }
+            }
+
+            // Desktop Gallery Lightbox & Swap
+            const mainImg = document.querySelector('.product-main-image');
+            const desktopThumbnails = document.querySelectorAll('.product-thumbnails img');
+            const mobileImages = document.querySelectorAll('.m-gallery-scroll img');
+            
+            let allThumbnails = Array.from(desktopThumbnails);
+            if (allThumbnails.length === 0) {
+                allThumbnails = Array.from(mobileImages);
+            }
+            const uniqueSources = Array.from(allThumbnails).map(img => img.src);
+            
+            desktopThumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    let index = uniqueSources.indexOf(this.src);
+                    if (index === -1) index = 0;
+                    openLightbox(index);
+                });
+                thumb.style.cursor = 'zoom-in';
+            });
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxThumbnailsContainer = document.querySelector('.lightbox-thumbnails');
+            const btnSeeMorePhotos = document.getElementById('btnSeeMorePhotos');
+            
+            let currentLightboxIndex = 0;
+
+            if (lightbox && uniqueSources.length > 0) {
+                uniqueSources.forEach((src, index) => {
+                    let img = document.createElement('img');
+                    img.src = src;
+                    img.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openLightbox(index);
+                    });
+                    lightboxThumbnailsContainer.appendChild(img);
+                });
+
+                const lightboxThumbs = lightboxThumbnailsContainer.querySelectorAll('img');
+
+                function openLightbox(index) {
+                    currentLightboxIndex = index;
+                    lightboxImg.src = uniqueSources[index];
+                    lightbox.classList.add('active');
+                    updateLightboxThumbs();
+                }
+
+                function closeLightbox() {
+                    lightbox.classList.remove('active');
+                }
+
+                function updateLightboxThumbs() {
+                    lightboxThumbs.forEach((thumb, index) => {
+                        if(index === currentLightboxIndex) {
+                            thumb.classList.add('active');
+                        } else {
+                            thumb.classList.remove('active');
+                        }
+                    });
+                }
+
+                function nextImage(e) {
+                    if (e) e.stopPropagation();
+                    currentLightboxIndex = (currentLightboxIndex + 1) % uniqueSources.length;
+                    openLightbox(currentLightboxIndex);
+                }
+
+                function prevImage(e) {
+                    if (e) e.stopPropagation();
+                    currentLightboxIndex = (currentLightboxIndex - 1 + uniqueSources.length) % uniqueSources.length;
+                    openLightbox(currentLightboxIndex);
+                }
+
+                if (mainImg) {
+                    mainImg.addEventListener('click', () => {
+                        let index = uniqueSources.indexOf(mainImg.src);
+                        if (index === -1) index = 0;
+                        openLightbox(index);
+                    });
+                    mainImg.style.cursor = 'zoom-in';
+                }
+                
+                if (btnSeeMorePhotos) {
+                    btnSeeMorePhotos.addEventListener('click', () => {
+                        openLightbox(0);
+                    });
+                }
+                
+                mobileImages.forEach(img => {
+                    img.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        let index = uniqueSources.indexOf(this.src);
+                        if (index === -1) index = 0;
+                        openLightbox(index);
+                    });
+                    img.style.cursor = 'zoom-in';
+                });
+
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightboxNext.addEventListener('click', nextImage);
+                lightboxPrev.addEventListener('click', prevImage);
+                
+                lightbox.addEventListener('click', (e) => {
+                    if(e.target === lightbox || e.target === document.querySelector('.lightbox-content')) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            // Sticky Add To Cart
+            const stickyBar = document.getElementById('stickyCartBar');
+            const mainAddToCartRow = document.querySelector('.add-to-cart-row');
+            const footerElement = document.querySelector('mio-footer');
+
+            if (stickyBar && mainAddToCartRow) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            stickyBar.classList.remove('visible');
+                        } else {
+                            if (entry.boundingClientRect.top < 0) {
+                                stickyBar.classList.add('visible');
+                            } else {
+                                stickyBar.classList.remove('visible');
+                            }
+                        }
+                    });
+                }, { threshold: 0 });
+
+                observer.observe(mainAddToCartRow);
+            }
+            
+            if (stickyBar && footerElement) {
+                const footerObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            stickyBar.style.opacity = '0';
+                            stickyBar.style.pointerEvents = 'none';
+                        } else {
+                            stickyBar.style.opacity = '1';
+                            stickyBar.style.pointerEvents = 'all';
+                        }
+                    });
+                }, { rootMargin: '0px' });
+                
+                footerObserver.observe(footerElement);
+            }
+        });
+    </script>
+</body>
+</html>
