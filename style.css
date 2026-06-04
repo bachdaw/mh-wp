@@ -910,7 +910,7 @@
     letter-spacing: 0.5px;
 }
 
-@media (max-width: 850px) and (hover: none) and (pointer: coarse) {
+@media (max-width: 850px) {
     .product-card .add-to-cart-btn {
         display: none !important;
     }
