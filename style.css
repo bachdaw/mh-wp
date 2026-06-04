@@ -697,6 +697,16 @@
             mio-product-carousel { order: 2; width: 100%; }
             .see-all { order: 3; text-align: center; margin-top: 25px; width: 100%; display: block; align-self: center; }
 
+            /* Karuzela produktowa - wersja mobilna (scroll dotykowy) */
+            .carousel-track-wrapper { overflow-x: auto; margin: 0; padding: 10px 20px; scroll-snap-type: x mandatory; }
+            .carousel-track { gap: 15px; }
+            .carousel-arrow { display: none; } /* Ukrywamy strzałki przewijania głównej karuzeli na mobile */
+            
+            /* Kafel produktu - wersja mobilna */
+            .product-card { width: 280px; scroll-snap-align: center; }
+            .slider-arrow { display: none; } /* Ukrywamy strzałki przewijania zdjęć na mobile, zostaje swipe */
+
+
             /* Footer na mweb - podział i newsletter na całą szerokość */
             .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .footer-grid > div:nth-child(5) { display: none; } /* Ukrywamy puste pole */
