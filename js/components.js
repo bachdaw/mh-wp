@@ -806,8 +806,9 @@ window.showWishlistNotification = function(productName, isAdded = true, authRequ
 
     const notification = document.createElement('div');
     notification.style.cssText = `
-        background: #fff;
-        border: 1px solid #eee;
+        background: #111;
+        color: #fff;
+        border: 1px solid #333;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         padding: 15px 20px;
         display: flex;
@@ -823,17 +824,17 @@ window.showWishlistNotification = function(productName, isAdded = true, authRequ
     let messageHtml = '';
     if (authRequired) {
         messageHtml = `<div>Zaloguj się, aby dodać produkt do ulubionych.</div>
-           <a href="login.html" style="text-decoration: underline; color: #000; font-weight: 600; white-space: nowrap;">Zaloguj się</a>`;
+           <a href="login.html" style="text-decoration: underline; color: #fff; font-weight: 600; white-space: nowrap;">Zaloguj się</a>`;
     } else {
         messageHtml = isAdded 
-            ? `<div><span style="font-weight: 600; color: #000;">${productName}</span> dodano do ulubionych.</div>
-               <a href="account.html#ulubione" style="text-decoration: underline; color: #000; font-weight: 600; white-space: nowrap;">Sprawdź listę</a>`
-            : `<div><span style="font-weight: 600; color: #000;">${productName}</span> usunięto z ulubionych.</div>`;
+            ? `<div><span style="font-weight: 600; color: #fff;">${productName}</span> dodano do ulubionych.</div>
+               <a href="account.html#ulubione" style="text-decoration: underline; color: #fff; font-weight: 600; white-space: nowrap;">Sprawdź listę</a>`
+            : `<div><span style="font-weight: 600; color: #fff;">${productName}</span> usunięto z ulubionych.</div>`;
     }
 
     notification.innerHTML = `
         ${messageHtml}
-        <button style="border: none; background: none; cursor: pointer; font-size: 16px; color: #999; margin-left: 5px;">&times;</button>
+        <button style="border: none; background: none; cursor: pointer; font-size: 16px; color: #aaa; margin-left: 5px;">&times;</button>
     `;
 
     container.appendChild(notification);
