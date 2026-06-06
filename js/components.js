@@ -861,3 +861,96 @@ window.showWishlistNotification = function(productName, isAdded = true, authRequ
 
     timeout = setTimeout(closeNotification, 4000);
 };
+
+// --- SYMULACJA DODANIA DO KOSZYKA ---
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-to-cart-btn, .btn-add-cart, .mobile-favorite-cart-btn');
+    if (btn && btn.textContent.toLowerCase().includes('dodaj do koszyka')) {
+        e.preventDefault();
+        
+        const cartDrawer = document.querySelector('mio-cart-drawer');
+        if (!cartDrawer) return;
+
+        let cartItemsContainer = cartDrawer.querySelector('.cart-items');
+        
+        if (!cartItemsContainer) {
+            const wasLogged = localStorage.getItem('mock_is_logged_in');
+            localStorage.setItem('mock_is_logged_in', 'true');
+            cartDrawer.render();
+            if (wasLogged !== null) localStorage.setItem('mock_is_logged_in', wasLogged);
+            else localStorage.removeItem('mock_is_logged_in');
+
+            cartDrawer.querySelectorAll('.cart-item').forEach(item => item.remove());
+            const summarySpan = cartDrawer.querySelector('.cart-footer span:nth-child(2)');
+            if(summarySpan) summarySpan.textContent = '8 900 zł';
+            
+            cartItemsContainer = cartDrawer.querySelector('.cart-items');
+        } else {
+            const summarySpan = cartDrawer.querySelector('.cart-footer span:nth-child(2)');
+            if(summarySpan) {
+                let currentTotal = parseInt(summarySpan.textContent.replace(/\s+/g, '')) || 0;
+                summarySpan.textContent = (currentTotal + 8900).toLocaleString('pl-PL').replace(',', ' ') + ' zł';
+            }
+        }
+
+        if (cartItemsContainer) {
+            const testItemHTML = `
+                <div class="cart-item new-cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee; background: rgba(230, 240, 230, 0.4); transition: background 1s;">
+                    <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Sofa Testowa" style="width: 90px; height: 90px; object-fit: cover;">
+                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <h4 style="margin: 0; font-size: 13px;">Sofa Testowa - Konfiguracja A</h4>
+                                <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">8 900 zł</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <img src="img/materials/MTK0381.avif" alt="Welur" style="width: 12px; height: 12px; object-fit: cover;">
+                                    <span>Obicie: Welur (Niebieski)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                                    <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #f3c36c, #a88235);"></div>
+                                    <span>Nóżki: Złoty metal</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                            <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">-</button>
+                                <input type="text" value="1" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                            </div>
+                            <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;">Usuń</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            cartItemsContainer.insertAdjacentHTML('afterbegin', testItemHTML);
+            
+            window.dispatchEvent(new Event('open-cart'));
+            
+            setTimeout(() => {
+                const scrollContainer = cartDrawer.querySelector('.cart-drawer-content');
+                const newItem = cartItemsContainer.firstElementChild;
+                if (scrollContainer && newItem) {
+                    newItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    setTimeout(() => {
+                        newItem.style.background = 'transparent';
+                    }, 800);
+                }
+            }, 300);
+
+            const badges = document.querySelectorAll('.cart-badge');
+            const realCount = cartItemsContainer.querySelectorAll('.cart-item').length;
+            
+            badges.forEach(badge => {
+                badge.style.display = 'block';
+                badge.textContent = realCount;
+                badge.style.transition = 'transform 0.2s ease-out';
+                badge.style.transform = 'scale(1.5)';
+                setTimeout(() => { badge.style.transform = 'scale(1)'; }, 200);
+            });
+        }
+    }
+});
