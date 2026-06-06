@@ -667,13 +667,27 @@
             wishlistBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
+                    const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+                    if (!isLogged) {
+                        if (typeof showWishlistNotification === 'function') {
+                            showWishlistNotification('', false, true);
+                        }
+                        return;
+                    }
                     this.classList.toggle('active');
                     const i = this.querySelector('i');
                     if(this.classList.contains('active')) {
                         i.classList.remove('fa-regular');
                         i.classList.add('fa-solid');
+                        if (typeof showWishlistNotification === 'function') {
+                            showWishlistNotification("Cezar", true); // Domyślny tytuł dla strony produktu
+                        }
                     } else {
-                        i.classList.remove('fa-regular');
+                        i.classList.remove('fa-solid');
+                        i.classList.add('fa-regular');
+                        if (typeof showWishlistNotification === 'function') {
+                            showWishlistNotification("Cezar", false);
+                        }
                     }
                 });
             });

@@ -23,8 +23,11 @@ class MioNavbar extends HTMLElement {
             <div class="nav-icons">
                 <img src="img/icons/search.svg" alt="Szukaj" class="nav-icon-svg mobile-search-icon">
                 <a href="#" class="user-nav-link"><img src="img/icons/User.svg" alt="User" class="nav-icon-svg"></a>
-                <img src="img/icons/heart.svg" alt="Heart" class="nav-icon-svg">
-                <img src="img/icons/shopping-cart.svg" alt="Cart" class="nav-icon-svg">
+                <a href="account.html#ulubione" class="heart-nav-link" style="display: flex; align-items: center;"><img src="img/icons/heart.svg" alt="Heart" class="nav-icon-svg"></a>
+                <div class="cart-icon-wrapper" style="position: relative; cursor: pointer; display: flex; align-items: center;">
+                    <img src="img/icons/shopping-cart.svg" alt="Cart" class="nav-icon-svg cart-nav-icon">
+                    <span class="cart-badge" style="display: none; position: absolute; top: -6px; right: -8px; background: #000; color: #fff; font-size: 9px; width: 14px; height: 14px; border-radius: 50%; text-align: center; line-height: 14px; font-weight: 700;">5</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -44,14 +47,21 @@ class MioNavbar extends HTMLElement {
             userLinks.forEach(link => {
                 link.href = isLogged ? 'account.html' : 'login.html';
             });
+            const heartLink = this.querySelector('.heart-nav-link');
+            if (heartLink) {
+                heartLink.href = isLogged ? 'account.html#ulubione' : 'login.html';
+            }
+            const cartBadge = this.querySelector('.cart-badge');
+            if (cartBadge) {
+                cartBadge.style.display = isLogged ? 'block' : 'none';
+            }
         };
         updateAuthLink();
         window.addEventListener('auth-mock-changed', updateAuthLink);
 
-        const cartIcons = this.querySelectorAll('img[alt="Cart"]');
-        cartIcons.forEach(icon => {
-            icon.style.cursor = 'pointer';
-            icon.addEventListener('click', (e) => {
+        const cartWrappers = this.querySelectorAll('.cart-icon-wrapper');
+        cartWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.dispatchEvent(new Event('open-cart'));
             });
@@ -251,14 +261,27 @@ class MioProductCard extends HTMLElement {
         if (wishlistBtn) {
             wishlistBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+                if (!isLogged) {
+                    if (typeof showWishlistNotification === 'function') {
+                        showWishlistNotification('', false, true);
+                    }
+                    return;
+                }
                 wishlistBtn.classList.toggle('active');
                 const i = wishlistBtn.querySelector('i');
                 if(wishlistBtn.classList.contains('active')) {
                     i.classList.remove('fa-regular');
                     i.classList.add('fa-solid');
+                    if(typeof showWishlistNotification === 'function') {
+                        showWishlistNotification(title, true);
+                    }
                 } else {
                     i.classList.remove('fa-solid');
                     i.classList.add('fa-regular');
+                    if(typeof showWishlistNotification === 'function') {
+                        showWishlistNotification(title, false);
+                    }
                 }
             });
         }
@@ -763,3 +786,77 @@ if (document.readyState === 'loading') {
 } else {
     document.body.appendChild(document.createElement('mio-cart-drawer'));
 }
+
+window.showWishlistNotification = function(productName, isAdded = true, authRequired = false) {
+    let container = document.getElementById('wishlist-notification-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'wishlist-notification-container';
+        container.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        `;
+        document.body.appendChild(container);
+    }
+
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        background: #fff;
+        border: 1px solid #eee;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+    `;
+    
+    let messageHtml = '';
+    if (authRequired) {
+        messageHtml = `<div>Zaloguj się, aby dodać produkt do ulubionych.</div>
+           <a href="login.html" style="text-decoration: underline; color: #000; font-weight: 600; white-space: nowrap;">Zaloguj się</a>`;
+    } else {
+        messageHtml = isAdded 
+            ? `<div><span style="font-weight: 600; color: #000;">${productName}</span> dodano do ulubionych.</div>
+               <a href="account.html#ulubione" style="text-decoration: underline; color: #000; font-weight: 600; white-space: nowrap;">Sprawdź listę</a>`
+            : `<div><span style="font-weight: 600; color: #000;">${productName}</span> usunięto z ulubionych.</div>`;
+    }
+
+    notification.innerHTML = `
+        ${messageHtml}
+        <button style="border: none; background: none; cursor: pointer; font-size: 16px; color: #999; margin-left: 5px;">&times;</button>
+    `;
+
+    container.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateY(0)';
+        notification.style.opacity = '1';
+    }, 10);
+
+    const closeBtn = notification.querySelector('button');
+    let timeout;
+    
+    const closeNotification = () => {
+        notification.style.transform = 'translateY(100%)';
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 300);
+    };
+
+    closeBtn.addEventListener('click', () => {
+        clearTimeout(timeout);
+        closeNotification();
+    });
+
+    timeout = setTimeout(closeNotification, 4000);
+};

@@ -509,7 +509,31 @@
             if (wishlistBtn) {
                 wishlistBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+                    if (!isLogged) {
+                        if (typeof showWishlistNotification === 'function') {
+                            showWishlistNotification('', false, true);
+                        }
+                        return;
+                    }
                     wishlistBtn.classList.toggle('active');
+                    const i = wishlistBtn.querySelector('i');
+                    const titleEl = card.querySelector('.product-title');
+                    const title = titleEl ? titleEl.textContent : "Produkt";
+                    
+                    if(wishlistBtn.classList.contains('active')) {
+                        i.classList.remove('fa-regular');
+                        i.classList.add('fa-solid');
+                        if (typeof showWishlistNotification === 'function') {
+                            showWishlistNotification(title, true);
+                        }
+                    } else {
+                        i.classList.remove('fa-solid');
+                        i.classList.add('fa-regular');
+                        if (typeof showWishlistNotification === 'function') {
+                            showWishlistNotification(title, false);
+                        }
+                    }
                 });
             }
         });

@@ -397,13 +397,32 @@
             }
         });
 
-        // Uproszczona logika dla serduszka
+        // Uproszczona logika
         const wishlistBtn = document.getElementById('wishlistBtn');
-
         wishlistBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Przełączanie klasy .active nadaje odpowiedni kolor obramówce
+            const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+            if (!isLogged) {
+                if (typeof showWishlistNotification === 'function') {
+                    showWishlistNotification('', false, true);
+                }
+                return;
+            }
             wishlistBtn.classList.toggle('active');
+            const icon = wishlistBtn.querySelector('i');
+            if(wishlistBtn.classList.contains('active')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+                if (typeof showWishlistNotification === 'function') {
+                    showWishlistNotification("Fotel Biber", true);
+                }
+            } else {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+                if (typeof showWishlistNotification === 'function') {
+                    showWishlistNotification("Fotel Biber", false);
+                }
+            }
         });
     </script>
 </body>

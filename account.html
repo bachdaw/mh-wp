@@ -294,6 +294,13 @@
             // Add active class to the clicked nav item
             element.parentElement.classList.add('active');
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.location.hash === '#ulubione' || window.location.search.includes('tab=ulubione')) {
+                const favTabLink = document.querySelector('.account-nav a[onclick*="ulubione"]');
+                if(favTabLink) favTabLink.click();
+            }
+        });
     </script>
 </body>
 </html>
