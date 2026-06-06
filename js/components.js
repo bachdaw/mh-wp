@@ -47,6 +47,15 @@ class MioNavbar extends HTMLElement {
         };
         updateAuthLink();
         window.addEventListener('auth-mock-changed', updateAuthLink);
+
+        const cartIcons = this.querySelectorAll('img[alt="Cart"]');
+        cartIcons.forEach(icon => {
+            icon.style.cursor = 'pointer';
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.dispatchEvent(new Event('open-cart'));
+            });
+        });
     }
 }
 customElements.define('mio-navbar', MioNavbar);
@@ -362,4 +371,306 @@ if (document.readyState === 'loading') {
     });
 } else {
     document.body.appendChild(document.createElement('mio-auth-mock'));
+}
+
+class MioCartDrawer extends HTMLElement {
+    connectedCallback() {
+        this.render();
+        window.addEventListener('auth-mock-changed', () => this.render());
+        window.addEventListener('open-cart', () => this.open());
+    }
+
+    render() {
+        const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+        
+        let bodyHtml = '';
+        if (!isLogged) {
+            bodyHtml = `
+                <div style="padding: 60px 40px; text-align: center; color: #666; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+                    <i class="fa-solid fa-basket-shopping" style="font-size: 48px; margin-bottom: 20px; color: #ddd;"></i>
+                    <p style="font-size: 14px; margin-bottom: 30px;">Twój koszyk jest pusty.</p>
+                    <button onclick="document.querySelector('mio-cart-drawer').close(); window.location.href='listing.html'" style="padding: 12px 25px; background: #000; color: #fff; border: none; text-transform: uppercase; font-size: 11px; font-weight: 500; letter-spacing: 1px; cursor: pointer; transition: 0.3s;">Przejdź do produktów</button>
+                </div>
+            `;
+        } else {
+            bodyHtml = `
+                <div class="cart-items" style="padding: 0 40px;">
+                    <!-- Produkt 1 -->
+                    <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
+                        <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Sofa Cezar" style="width: 90px; height: 90px; object-fit: cover;">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <h4 style="margin: 0; font-size: 13px;">Sofa Cezar 2-osobowa Patchwork Harris Tweed</h4>
+                                    <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">16 850 zł</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Obicie: Skóra (Koniakowy Brąz)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                                        <img src="img/wood/black.jpg" alt="Dąb czarny" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Nóżki: Dąb czarny</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">-</button>
+                                    <input type="text" value="1" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                                </div>
+                                <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;">Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Produkt 2 -->
+                    <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
+                        <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Lounge" style="width: 90px; height: 90px; object-fit: cover;">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <h4 style="margin: 0; font-size: 13px;">Sofa Lounge 3-osobowa</h4>
+                                    <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">4 200 zł</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <img src="img/materials/MTK0354.avif" alt="Welur" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Obicie: Welur (Butelkowa zieleń)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                                        <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #f3c36c, #a88235);"></div>
+                                        <span>Nóżki: Złoty metal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">-</button>
+                                    <input type="text" value="1" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                                </div>
+                                <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;">Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Produkt 3 -->
+                    <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
+                        <img src="img/product-img/barry_preview.png" alt="Fotel Uszak" style="width: 90px; height: 90px; object-fit: cover;">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <h4 style="margin: 0; font-size: 13px;">Fotel Classic Uszak</h4>
+                                    <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">1 890 zł</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <img src="img/materials/material.avif" alt="Tkanina" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Obicie: Tkanina (Szary melanż)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                                        <img src="img/wood/natural.jpg" alt="Buk" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Nóżki: Buk naturalny</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">-</button>
+                                    <input type="text" value="1" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                                </div>
+                                <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;">Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Produkt 4 -->
+                    <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
+                        <img src="img/product-img/biber_preview.png" alt="Pufa" style="width: 90px; height: 90px; object-fit: cover;">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <h4 style="margin: 0; font-size: 13px;">Pufa Chesterfield</h4>
+                                    <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">950 zł</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <img src="img/materials/MTK000ZF22.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Obicie: Skóra (Czarna)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                                        <div style="width: 12px; height: 12px; background-color: #333;"></div>
+                                        <span>Nóżki: Brak (ślizgacze)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">-</button>
+                                    <input type="text" value="2" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                                </div>
+                                <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;">Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Produkt 5 -->
+                    <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
+                        <img src="img/product-img/pufa_preview.png" alt="Sofa Modern" style="width: 90px; height: 90px; object-fit: cover;">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <h4 style="margin: 0; font-size: 13px;">Sofa Modern 3-osobowa</h4>
+                                    <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">5 400 zł</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Obicie: Skóra (Biała)</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                                        <div style="width: 12px; height: 12px; background-color: #eee;"></div>
+                                        <span>Nóżki: Srebrny metal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">-</button>
+                                    <input type="text" value="1" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                                </div>
+                                <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;">Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Akcesoria / Carousel -->
+                <div class="cart-accessories" style="padding: 30px 40px 10px 40px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4 style="font-size: 14px; margin: 0;">Dobierz akcesoria</h4>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="acc-prev" style="border: none; background: #f5f5f5; width: 24px; height: 24px; cursor: pointer; transition: 0.3s; border-radius: 0;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f5f5f5'"><i class="fa-solid fa-chevron-left" style="font-size: 10px;"></i></button>
+                            <button class="acc-next" style="border: none; background: #f5f5f5; width: 24px; height: 24px; cursor: pointer; transition: 0.3s; border-radius: 0;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f5f5f5'"><i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></button>
+                        </div>
+                    </div>
+                    <div class="acc-track" style="display: flex; overflow-x: auto; gap: 15px; padding-bottom: 20px; scrollbar-width: none; scroll-behavior: smooth;">
+                        <style>.acc-track::-webkit-scrollbar { display: none; }</style>
+                        <!-- Akcesorium 1 -->
+                        <div style="min-width: 260px; border: 1px solid #eee; padding: 15px; display: flex; gap: 15px;">
+                            <img src="img/prod_1.jpg" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 style="font-size: 12px; font-weight: 600; margin: 0;">Zestaw czyszczący</h4>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                    <span style="font-size: 13px; font-weight: 600;">120 zł</span>
+                                    <button style="padding: 6px 15px; background: #fff; border: 1px solid #000; color: #000; font-size: 9px; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#000'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#000';">Dodaj</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Akcesorium 2 -->
+                        <div style="min-width: 260px; border: 1px solid #eee; padding: 15px; display: flex; gap: 15px;">
+                            <img src="img/prod_4.jpg" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 style="font-size: 12px; font-weight: 600; margin: 0;">Poduszka dekoracyjna</h4>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                    <span style="font-size: 13px; font-weight: 600;">180 zł</span>
+                                    <button style="padding: 6px 15px; background: #fff; border: 1px solid #000; color: #000; font-size: 9px; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#000'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#000';">Dodaj</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Akcesorium 3 -->
+                        <div style="min-width: 260px; border: 1px solid #eee; padding: 15px; display: flex; gap: 15px;">
+                            <img src="img/prod_6.jpg" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 style="font-size: 12px; font-weight: 600; margin: 0;">Koc wełniany</h4>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                    <span style="font-size: 13px; font-weight: 600;">350 zł</span>
+                                    <button style="padding: 6px 15px; background: #fff; border: 1px solid #000; color: #000; font-size: 9px; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#000'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#000';">Dodaj</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Akcesorium 4 -->
+                        <div style="min-width: 260px; border: 1px solid #eee; padding: 15px; display: flex; gap: 15px;">
+                            <img src="img/prod_9.jpg" style="width: 70px; height: 70px; object-fit: cover;">
+                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 style="font-size: 12px; font-weight: 600; margin: 0;">Impregnat do skór</h4>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                    <span style="font-size: 13px; font-weight: 600;">90 zł</span>
+                                    <button style="padding: 6px 15px; background: #fff; border: 1px solid #000; color: #000; font-size: 9px; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#000'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#000';">Dodaj</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding: 30px 40px; background: #fafafa; border-top: 1px solid #eee; margin-top: auto; position: sticky; bottom: 0;">
+                    <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; margin-bottom: 20px;">
+                        <span>Suma częściowa:</span>
+                        <span>20 240 zł</span>
+                    </div>
+                    <button style="width: 100%; background: #000; color: #fff; padding: 16px; border: none; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#000'">Przejdź do kasy</button>
+                    <div style="text-align: center; margin-top: 15px; font-size: 10px; color: #666;">
+                        Darmowa dostawa dla zamówień powyżej 15 000 zł
+                    </div>
+                </div>
+            `;
+        }
+
+        this.innerHTML = `
+            <div class="cart-drawer-overlay"></div>
+            <div class="cart-drawer">
+                <div class="cart-drawer-header">
+                    <span class="cd-title">Twój koszyk</span>
+                    <span class="cd-close">&times;</span>
+                </div>
+                <div class="cart-drawer-content">
+                    ${bodyHtml}
+                </div>
+            </div>
+        `;
+
+        const closeBtn = this.querySelector('.cd-close');
+        if(closeBtn) closeBtn.addEventListener('click', () => this.close());
+        const overlay = this.querySelector('.cart-drawer-overlay');
+        if(overlay) overlay.addEventListener('click', () => this.close());
+
+        const accTrack = this.querySelector('.acc-track');
+        const accPrev = this.querySelector('.acc-prev');
+        const accNext = this.querySelector('.acc-next');
+
+        if (accTrack && accPrev && accNext) {
+            accPrev.addEventListener('click', (e) => {
+                e.preventDefault();
+                accTrack.scrollBy({ left: -275, behavior: 'smooth' });
+            });
+            accNext.addEventListener('click', (e) => {
+                e.preventDefault();
+                accTrack.scrollBy({ left: 275, behavior: 'smooth' });
+            });
+        }
+    }
+
+    open() {
+        this.querySelector('.cart-drawer-overlay').classList.add('active');
+        this.querySelector('.cart-drawer').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.querySelector('.cart-drawer-overlay').classList.remove('active');
+        this.querySelector('.cart-drawer').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+customElements.define('mio-cart-drawer', MioCartDrawer);
+
+// Auto-inject cart drawer
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.appendChild(document.createElement('mio-cart-drawer'));
+    });
+} else {
+    document.body.appendChild(document.createElement('mio-cart-drawer'));
 }
