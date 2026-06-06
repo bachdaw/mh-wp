@@ -606,11 +606,22 @@ class MioCartDrawer extends HTMLElement {
                 </div>
 
                 <div style="padding: 30px 40px; background: #fafafa; border-top: 1px solid #eee; margin-top: auto; position: sticky; bottom: 0;">
-                    <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; margin-bottom: 20px;">
-                        <span>Suma częściowa:</span>
+                    <style>
+                        .cart-checkout-btn {
+                            width: 100%; background: #000; color: #fff; padding: 16px; border: none; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.2s;
+                        }
+                        .cart-checkout-btn:hover { background: var(--accent-color); }
+                        .cart-checkout-btn:active { background: var(--accent-color) !important; }
+                    </style>
+                    <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; margin-bottom: 8px;">
+                        <span>Suma (z VAT):</span>
                         <span>20 240 zł</span>
                     </div>
-                    <button style="width: 100%; background: #000; color: #fff; padding: 16px; border: none; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#000'">Przejdź do kasy</button>
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; color: #666; margin-bottom: 20px; align-items: center;">
+                        <span style="display: flex; align-items: center;"><img src="img/icons/truck.svg" alt="Dostawa" style="width: 14px; height: 14px; margin-right: 6px; filter: brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(1637%) hue-rotate(189deg) brightness(97%) contrast(85%);">Przewidywana dostawa:</span>
+                        <span>14 - 26 czerwca</span>
+                    </div>
+                    <button class="cart-checkout-btn">Przejdź do kasy</button>
                     <div style="text-align: center; margin-top: 15px; font-size: 10px; color: #666;">
                         Darmowa dostawa dla zamówień powyżej 15 000 zł
                     </div>
