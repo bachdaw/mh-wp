@@ -61,7 +61,7 @@ class MioFooter extends HTMLElement {
                 <h4>O nas</h4>
                 <ul>
                     <li><a href="#">Firma</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
                     <li><a href="#">Media</a></li>
                 </ul>
             </div>

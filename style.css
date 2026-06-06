@@ -2858,7 +2858,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    border-radius: 4px;
+    border-radius: 0;
 }
 
 .contact-page .contact-box i {
@@ -2884,7 +2884,7 @@
 
 .contact-map {
     width: 100%;
-    border-radius: 4px;
+    border-radius: 0;
     overflow: hidden;
     margin-top: 10px;
 }
@@ -2894,8 +2894,8 @@
     background-color: #fff;
     padding: 40px;
     border: 1px solid #eee;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .form-group {
@@ -2926,11 +2926,11 @@
     width: 100%;
     padding: 14px 15px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 0;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     color: var(--heading-text-color);
-    background-color: #f9f9f9;
+    background-color: #fff;
     outline: none;
     transition: 0.3s;
 }
@@ -2984,7 +2984,7 @@
     letter-spacing: 1px;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 4px;
+    border-radius: 0;
     margin-top: 10px;
 }
 
@@ -3010,7 +3010,7 @@
 
 .faq-item {
     border: 1px solid #eee;
-    border-radius: 4px;
+    border-radius: 0;
     background: #fff;
     overflow: hidden;
 }
@@ -3079,7 +3079,7 @@
         padding: 25px;
     }
     .faq-section {
-        padding: 0;
+        padding: 0 20px;
     }
 }
 
@@ -3153,7 +3153,7 @@
 .samples-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 4px;
+    border-radius: 0;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
