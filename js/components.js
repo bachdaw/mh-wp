@@ -49,11 +49,10 @@ class MioFooter extends HTMLElement {
         <div class="footer-top">
             <img src="img/icons/logo-miohome.svg" alt="Miohome" class="footer-logo">
             <div class="footer-social">
-                <span>Follow us:</span>
+                <span>Obserwuj nas:</span>
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
         

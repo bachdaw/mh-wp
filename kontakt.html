@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="contact-page">
+
+    <mio-navbar></mio-navbar>
+
+    <header class="about-hero">
+        <div class="about-hero-content animate-up">
+            <h1 class="about-hero-title">Kontakt</h1>
+            <p class="about-hero-subtitle">Jesteśmy tu dla Ciebie. Skontaktuj się z nami, aby porozmawiać o Twoich wnętrzach.</p>
+        </div>
+    </header>
+
+    <main class="contact-main">
+        <section class="contact-grid-section">
+            <div class="contact-info-col animate-up">
+                <h2 class="section-heading" style="margin-bottom: 20px;">Odwiedź nasz showroom</h2>
+                <p style="margin-bottom: 30px; color: var(--secondary-text-color);">Nasi eksperci z przyjemnością pomogą Ci w doborze odpowiednich tkanin i modeli. Poczuj jakość naszych mebli na żywo.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-box">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="contact-box-text">
+                            <h4>Showroom Miohome</h4>
+                            <p>ul. Przykładowa 12<br>00-000 Warszawa</p>
+                        </div>
+                    </div>
+                    <div class="contact-box">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="contact-box-text">
+                            <h4>Telefon</h4>
+                            <p>+48 123 456 789</p>
+                        </div>
+                    </div>
+                    <div class="contact-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div class="contact-box-text">
+                            <h4>E-mail</h4>
+                            <p>kontakt@miohome.pl</p>
+                        </div>
+                    </div>
+                    <div class="contact-box">
+                        <i class="fa-solid fa-clock"></i>
+                        <div class="contact-box-text">
+                            <h4>Godziny otwarcia</h4>
+                            <p>Pon - Pt: 10:00 - 18:00<br>Sob: 10:00 - 14:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156388.3543852086!2d20.921113063575973!3d52.233065320875276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669a869f01%3A0x72f0be2a88ead3fc!2sWarszawa!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <div class="contact-form-col animate-up">
+                <div class="form-wrapper">
+                    <h2 class="section-heading" style="margin-bottom: 20px;">Napisz do nas</h2>
+                    <p style="margin-bottom: 20px; font-size: 13px; color: var(--secondary-text-color);">Wybierz temat rozmowy, abyśmy mogli skierować Twoją wiadomość do odpowiedniego działu.</p>
+                    
+                    <div class="form-group">
+                        <label for="client-type" class="form-label">Kim jesteś?</label>
+                        <select id="client-type" class="form-select">
+                            <option value="retail">Klient detaliczny</option>
+                            <option value="b2b">Klient B2B / Firma</option>
+                            <option value="architect">Architekt / Projektant wnętrz</option>
+                        </select>
+                    </div>
+
+                    <form id="contactForm" class="contact-form">
+                        <!-- Pola wspólne -->
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="name" class="form-label">Imię i nazwisko *</label>
+                                <input type="text" id="name" class="form-input" required>
+                            </div>
+                            <div class="form-group half">
+                                <label for="phone" class="form-label">Telefon</label>
+                                <input type="tel" id="phone" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adres e-mail *</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+
+                        <!-- Dynamiczne pole dla B2B i Architektów -->
+                        <div class="form-group dynamic-field" id="companyField" style="display: none;">
+                            <label for="company" class="form-label">Nazwa firmy / NIP *</label>
+                            <input type="text" id="company" class="form-input">
+                        </div>
+                        <div class="form-group dynamic-field" id="portfolioField" style="display: none;">
+                            <label for="portfolio" class="form-label">Link do portfolio / strony WWW</label>
+                            <input type="url" id="portfolio" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Wiadomość *</label>
+                            <textarea id="message" class="form-input form-textarea" rows="5" required placeholder="W czym możemy pomóc?"></textarea>
+                        </div>
+
+                        <div class="form-group form-checkbox">
+                            <input type="checkbox" id="consent" required>
+                            <label for="consent">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu udzielenia odpowiedzi na zapytanie kontaktowe zgodnie z polityką prywatności.</label>
+                        </div>
+
+                        <button type="submit" class="btn-dark form-submit">Wyślij wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <!-- Free Samples Section -->
+        <section class="free-samples-section animate-up">
+            <div class="samples-content">
+                <h2 class="section-heading">Zamów bezpłatne próbki tkanin</h2>
+                <p>Nie jesteś pewien koloru lub faktury? Chcesz zobaczyć, jak materiał zachowa się w świetle Twojego wnętrza? Zamów darmowe próbki naszych tkanin i przekonaj się o ich najwyższej jakości.</p>
+                <div class="samples-highlight">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span><strong>Próbki są całkowicie bezpłatne.</strong> Pokrywasz jedynie koszt przesyłki kurierskiej.</span>
+                </div>
+                <a href="#contactForm" class="btn-dark samples-btn">Zamów próbki</a>
+            </div>
+            <div class="samples-image">
+                <img src="img/wzorniki.png" alt="Darmowe próbki materiałów Miohome">
+            </div>
+        </section>
+        <!-- FAQ Section -->
+        <section class="faq-section animate-up">
+            <div class="section-header center">
+                <h2 class="section-title">Często zadawane pytania</h2>
+                <p style="font-size: 13px; color: var(--secondary-text-color); max-width: 600px; margin: 15px auto 0;">Masz wątpliwości? Przygotowaliśmy zestawienie odpowiedzi na najczęściej pojawiające się pytania.</p>
+            </div>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Jaki jest standardowy czas realizacji zamówienia?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Wszystkie nasze meble produkowane są na indywidualne zamówienie w naszej polskiej fabryce. Standardowy czas realizacji wynosi od 4 do 8 tygodni, w zależności od wybranego modelu oraz tkaniny.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Czy wysyłacie darmowe próbki tkanin?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Tak, chętnie prześlemy bezpłatne próbki wybranych tkanin, abyś mógł sprawdzić ich teksturę i kolor w domowym świetle. Skontaktuj się z nami przez formularz, wymieniając nazwy interesujących Cię materiałów.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Czy mogę spersonalizować wymiary mebla?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Jako producent mamy pełną kontrolę nad procesem powstawania mebli. Zmiana wymiarów jest możliwa w większości naszych modeli za dodatkową opłatą. Prosimy o kontakt w celu uzyskania indywidualnej wyceny.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Jakie są koszty i formy dostawy?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dostawa realizowana jest przez nasz własny transport firmowy lub sprawdzonych przewoźników specjalizujących się w transporcie mebli. Koszt dostawy zależy od wielkości zamówienia oraz miejsca docelowego i jest wyliczany w koszyku. Oferujemy również opcję wniesienia.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Jak wyglądają warunki współpracy dla architektów?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dla architektów wnętrz i projektantów przygotowaliśmy dedykowany program partnerski oferujący atrakcyjny system prowizyjny, dostęp do brył 3D oraz bezpłatne wzorniki. Wybierz z formularza opcję "Architekt", a prześlemy Ci wszystkie szczegóły.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media Section (copied from about.html) -->
+        <section class="social-section animate-up">
+            <div class="social-content">
+                <h2 class="section-heading">Obserwuj nas na Instagramie</h2>
+                <p>Zainspiruj się naszymi najnowszymi realizacjami i bądź na bieżąco z nowościami. Dołącz do społeczności Miohome i stwórz z nami swoje wymarzone wnętrze.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i> @miohome_pl</a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i> Miohome</a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-pinterest"></i> Miohome</a>
+                </div>
+            </div>
+            <div class="social-images">
+                <div class="social-img-wrap img-1">
+                    <img src="img/fotele_preview.jpg" alt="Instagram 1">
+                </div>
+                <div class="social-img-wrap img-2">
+                    <img src="img/pufy_preview.jpg" alt="Instagram 2">
+                </div>
+                <div class="social-img-wrap img-3">
+                    <img src="img/krzesla_preview.jpg" alt="Instagram 3">
+                </div>
+            </div>
+        </section>
+
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+    <script>
+        // Form dynamic logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const clientTypeSelect = document.getElementById('client-type');
+            const companyField = document.getElementById('companyField');
+            const companyInput = document.getElementById('company');
+            const portfolioField = document.getElementById('portfolioField');
+            const messageField = document.getElementById('message');
+
+            clientTypeSelect.addEventListener('change', (e) => {
+                const type = e.target.value;
+                
+                // Reset fields
+                companyField.style.display = 'none';
+                portfolioField.style.display = 'none';
+                companyInput.required = false;
+                
+                if (type === 'retail') {
+                    messageField.placeholder = "W czym możemy pomóc?";
+                } else if (type === 'b2b') {
+                    companyField.style.display = 'block';
+                    companyInput.required = true;
+                    messageField.placeholder = "Opisz krótko profil swojej firmy oraz czego dotyczy zapytanie (np. inwestycja hotelowa, biuro).";
+                } else if (type === 'architect') {
+                    companyField.style.display = 'block';
+                    portfolioField.style.display = 'block';
+                    companyInput.required = true; // Nazwa pracowni
+                    messageField.placeholder = "Opisz krótko swój projekt lub napisz, czy jesteś zainteresowany dłuższą współpracą.";
+                }
+            });
+
+            // FAQ Accordion logic
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentNode;
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items (optional, but good for UX)
+                    document.querySelectorAll('.faq-item').forEach(faqItem => {
+                        faqItem.classList.remove('active');
+                        faqItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        const answer = question.nextElementSibling;
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
