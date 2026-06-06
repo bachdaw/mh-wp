@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Konto - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="listing-page account-page">
+
+    <mio-navbar></mio-navbar>
+
+    <main class="account-main">
+        <div class="account-header animate-up">
+            <div>
+                <h1 class="account-title">Moje konto</h1>
+                <p class="account-subtitle">Witaj, Jan Kowalski!</p>
+            </div>
+            <div class="account-actions">
+                <a href="#" class="logout-link" onclick="logoutMock(event)">Wyloguj się</a>
+                <a href="#" class="logout-all-link" onclick="logoutMock(event)">Wyloguj ze wszystkich urządzeń</a>
+            </div>
+        </div>
+
+        <div class="account-layout animate-up">
+            <aside class="account-sidebar">
+                <ul class="account-nav">
+                    <li class="active"><a href="#"><i class="fa-solid fa-box"></i> Zamówienia</a></li>
+                    <li><a href="#"><i class="fa-regular fa-heart"></i> Ulubione</a></li>
+                    <li><a href="#"><i class="fa-regular fa-address-book"></i> Adresy</a></li>
+                    <li><a href="#"><i class="fa-regular fa-user"></i> Dane konta</a></li>
+                </ul>
+            </aside>
+
+            <section class="account-content">
+                <h2 class="content-title">Ostatnie zamówienia</h2>
+                <div class="orders-list">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">Zamówienie #10045</span>
+                            <span class="order-status completed">Zrealizowane</span>
+                        </div>
+                        <div class="order-body">
+                            <p>Data złożenia: 15.05.2026</p>
+                            <p>Suma: 5 990,00 zł</p>
+                            <a href="#" class="order-details-link">Zobacz szczegóły</a>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">Zamówienie #10021</span>
+                            <span class="order-status delivered">Dostarczone</span>
+                        </div>
+                        <div class="order-body">
+                            <p>Data złożenia: 02.04.2026</p>
+                            <p>Suma: 1 590,00 zł</p>
+                            <a href="#" class="order-details-link">Zobacz szczegóły</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+    <script>
+        function logoutMock(e) {
+            e.preventDefault();
+            localStorage.setItem('mock_is_logged_in', 'false');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

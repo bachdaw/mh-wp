@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="listing-page auth-page">
+
+    <mio-navbar></mio-navbar>
+
+    <main class="auth-main">
+        <div class="auth-container animate-up">
+            <h1 class="auth-title">Załóż konto</h1>
+            <p class="auth-subtitle">Dołącz do nas i zyskaj dostęp do ekskluzywnych ofert oraz historii zamówień.</p>
+            
+            <form class="auth-form" onsubmit="event.preventDefault(); window.location.href='login.html';">
+                <div class="form-group">
+                    <label>Typ konta</label>
+                    <div class="account-type-options" style="display: flex; gap: 15px; font-size: 12px; margin-top: 5px;">
+                        <label style="display: flex; align-items: center; gap: 5px; text-transform: none;"><input type="radio" name="accountType" value="individual" checked onchange="toggleB2BFields()"> Klient indywidualny</label>
+                        <label style="display: flex; align-items: center; gap: 5px; text-transform: none;"><input type="radio" name="accountType" value="b2b" onchange="toggleB2BFields()"> B2B</label>
+                        <label style="display: flex; align-items: center; gap: 5px; text-transform: none;"><input type="radio" name="accountType" value="architect" onchange="toggleB2BFields()"> Architekt</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Imię i nazwisko</label>
+                    <input type="text" id="name" placeholder="Wpisz imię i nazwisko" required>
+                </div>
+                <div id="b2b-fields" style="display: none; flex-direction: column; gap: 20px;">
+                    <div class="form-group">
+                        <label for="company">Nazwa firmy</label>
+                        <input type="text" id="company" placeholder="Wpisz nazwę firmy">
+                    </div>
+                    <div class="form-group">
+                        <label for="nip">NIP</label>
+                        <input type="text" id="nip" placeholder="Wpisz NIP">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adres e-mail</label>
+                    <input type="email" id="email" placeholder="Wpisz adres e-mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <input type="password" id="password" placeholder="Wpisz hasło" required>
+                </div>
+                <div class="form-group">
+                    <label class="newsletter-checkbox">
+                        <input type="checkbox" required>
+                        <span>Akceptuję regulamin sklepu oraz politykę prywatności.</span>
+                    </label>
+                </div>
+                <button type="submit" class="auth-submit-btn">Zarejestruj się</button>
+            </form>
+            
+            <script>
+                function toggleB2BFields() {
+                    const type = document.querySelector('input[name="accountType"]:checked').value;
+                    const b2bFields = document.getElementById('b2b-fields');
+                    const companyInput = document.getElementById('company');
+                    const nipInput = document.getElementById('nip');
+                    
+                    if (type === 'b2b' || type === 'architect') {
+                        b2bFields.style.display = 'flex';
+                        companyInput.required = true;
+                        nipInput.required = true;
+                    } else {
+                        b2bFields.style.display = 'none';
+                        companyInput.required = false;
+                        nipInput.required = false;
+                    }
+                }
+            </script>
+            
+            <div class="auth-switch">
+                Masz już konto? <a href="login.html">Zaloguj się</a>
+            </div>
+        </div>
+    </main>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+</body>
+</html>

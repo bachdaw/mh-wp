@@ -22,7 +22,7 @@ class MioNavbar extends HTMLElement {
             </ul>
             <div class="nav-icons">
                 <img src="img/icons/search.svg" alt="Szukaj" class="nav-icon-svg mobile-search-icon">
-                <img src="img/icons/User.svg" alt="User" class="nav-icon-svg">
+                <a href="#" class="user-nav-link"><img src="img/icons/User.svg" alt="User" class="nav-icon-svg"></a>
                 <img src="img/icons/heart.svg" alt="Heart" class="nav-icon-svg">
                 <img src="img/icons/shopping-cart.svg" alt="Cart" class="nav-icon-svg">
             </div>
@@ -38,6 +38,15 @@ class MioNavbar extends HTMLElement {
                 navbar.classList.remove('scrolled');
             }
         });
+        const userLinks = this.querySelectorAll('.user-nav-link');
+        const updateAuthLink = () => {
+            const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+            userLinks.forEach(link => {
+                link.href = isLogged ? 'account.html' : 'login.html';
+            });
+        };
+        updateAuthLink();
+        window.addEventListener('auth-mock-changed', updateAuthLink);
     }
 }
 customElements.define('mio-navbar', MioNavbar);
@@ -319,4 +328,38 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initObserver);
 } else {
     initObserver();
+}
+
+class MioAuthMock extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+            <div class="auth-mock-widget">
+                <span class="auth-mock-label">Tryb:</span>
+                <select class="auth-mock-select">
+                    <option value="false">Gość</option>
+                    <option value="true">Zalogowany</option>
+                </select>
+            </div>
+        `;
+
+        const select = this.querySelector('.auth-mock-select');
+        select.value = localStorage.getItem('mock_is_logged_in') === 'true' ? 'true' : 'false';
+
+        select.addEventListener('change', (e) => {
+            localStorage.setItem('mock_is_logged_in', e.target.value);
+            window.dispatchEvent(new Event('auth-mock-changed'));
+            // Optionally reload to update UI immediately on standard pages
+            window.location.reload();
+        });
+    }
+}
+customElements.define('mio-auth-mock', MioAuthMock);
+
+// Auto-inject mock widget
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.appendChild(document.createElement('mio-auth-mock'));
+    });
+} else {
+    document.body.appendChild(document.createElement('mio-auth-mock'));
 }

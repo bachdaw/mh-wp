@@ -1,4 +1,4 @@
-        :root {
+﻿        :root {
             --accent-color: #c9a67a;
             --background-color: #ffffff;
             --text-main: #333333;
@@ -3162,5 +3162,337 @@
         flex-direction: column-reverse;
         padding: 40px 20px;
         gap: 30px;
+    }
+}
+
+/* --- WIDŻET MOCK AUTORYZACJI --- */
+.auth-mock-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+}
+.auth-mock-label {
+    font-weight: 500;
+    color: #333;
+}
+.auth-mock-select {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* --- STRONY LOGOWANIA / REJESTRACJI --- */
+.auth-main {
+    padding: 140px 40px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 300px);
+}
+.auth-container {
+    background: #fff;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+.auth-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--heading-text-color);
+}
+.auth-subtitle {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-group label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #333;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    outline: none;
+    transition: 0.3s;
+}
+.form-group input:focus {
+    border-color: #000;
+}
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+.forgot-password {
+    font-size: 11px;
+    color: var(--text-light);
+    text-decoration: underline;
+    transition: 0.3s;
+}
+.forgot-password:hover {
+    color: #000;
+}
+.auth-submit-btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+.auth-submit-btn:hover {
+    background-color: var(--accent-color);
+}
+.auth-switch {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--secondary-text-color);
+}
+.auth-switch a {
+    color: #000;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+/* --- KONTO UŻYTKOWNIKA --- */
+.account-main {
+    padding: 140px 40px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.account-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.account-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.logout-link, .logout-all-link {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+.logout-link {
+    border: 1px solid #ddd;
+    color: var(--text-main);
+}
+.logout-link:hover {
+    border-color: #000;
+    color: #000;
+}
+.logout-all-link {
+    background-color: #f5f5f5;
+    color: #d9534f;
+    border: 1px solid transparent;
+}
+.logout-all-link:hover {
+    background-color: #fee;
+    color: #c9302c;
+}
+.account-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: var(--heading-text-color);
+}
+.account-subtitle {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+}
+.account-layout {
+    display: flex;
+    gap: 60px;
+}
+.account-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+.account-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.account-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.account-nav li a i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+.account-nav li.active a,
+.account-nav li a:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    font-weight: 500;
+}
+.account-content {
+    flex-grow: 1;
+}
+.content-title {
+    font-family: 'Poppins', serif;
+    font-size: 20px;
+    margin-bottom: 25px;
+    color: var(--heading-text-color);
+}
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.order-card {
+    border: 1px solid #eee;
+    padding: 20px;
+    background: #fff;
+    transition: 0.3s;
+}
+.order-card:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f9f9f9;
+}
+.order-number {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+}
+.order-status {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+.order-status.completed {
+    background-color: #e6f4ea;
+    color: #1e8e3e;
+}
+.order-status.delivered {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+}
+.order-body {
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    line-height: 1.6;
+}
+.order-body p {
+    margin-bottom: 5px;
+}
+.order-details-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #000;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+@media (max-width: 850px) {
+    .auth-main {
+        padding: 100px 20px 40px;
+    }
+    .auth-container {
+        padding: 30px 20px;
+    }
+    .account-main {
+        padding: 100px 20px 40px;
+    }
+    .account-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .account-sidebar {
+        width: 100%;
+    }
+    .account-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .account-nav::-webkit-scrollbar {
+        display: none;
+    }
+    .account-nav li a {
+        white-space: nowrap;
+    }
+    .auth-mock-widget {
+        bottom: 10px;
+        right: 10px;
+        padding: 6px 10px;
     }
 }

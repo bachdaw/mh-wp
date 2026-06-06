@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="listing-page auth-page">
+
+    <mio-navbar></mio-navbar>
+
+    <main class="auth-main">
+        <div class="auth-container animate-up">
+            <h1 class="auth-title">Zaloguj się</h1>
+            <p class="auth-subtitle">Witaj ponownie! Wpisz swoje dane, aby uzyskać dostęp do konta.</p>
+            
+            <form class="auth-form" onsubmit="event.preventDefault(); window.location.href='account.html';">
+                <div class="form-group">
+                    <label for="email">Adres e-mail</label>
+                    <input type="email" id="email" placeholder="Wpisz adres e-mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <input type="password" id="password" placeholder="Wpisz hasło" required>
+                </div>
+                <div class="form-actions">
+                    <a href="#" class="forgot-password">Zapomniałeś hasła?</a>
+                </div>
+                <button type="submit" class="auth-submit-btn">Zaloguj się</button>
+            </form>
+            
+            <div class="auth-switch">
+                Nie masz jeszcze konta? <a href="register.html">Zarejestruj się</a>
+            </div>
+        </div>
+    </main>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+</body>
+</html>
