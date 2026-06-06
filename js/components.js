@@ -384,6 +384,9 @@ class MioCartDrawer extends HTMLElement {
         const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
         
         let bodyHtml = '';
+        let footerHtml = '';
+        let sheetHtml = '';
+        
         if (!isLogged) {
             bodyHtml = `
                 <div style="padding: 60px 40px; text-align: center; color: #666; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
@@ -394,7 +397,7 @@ class MioCartDrawer extends HTMLElement {
             `;
         } else {
             bodyHtml = `
-                <div class="cart-items" style="padding: 0 40px;">
+                <div class="cart-items" style="padding: 0 40px; flex-shrink: 0;">
                     <!-- Produkt 1 -->
                     <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
                         <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Sofa Cezar" style="width: 90px; height: 90px; object-fit: cover;">
@@ -546,9 +549,8 @@ class MioCartDrawer extends HTMLElement {
                         </div>
                     </div>
                 </div>
-
-                <!-- Akcesoria / Carousel -->
-                <div class="cart-accessories" style="padding: 30px 40px 10px 40px;">
+                 <!-- Akcesoria / Carousel -->
+                <div class="cart-accessories" style="padding: 30px 40px 10px 40px; max-width: 100%; box-sizing: border-box; overflow: hidden; flex-shrink: 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                         <h4 style="font-size: 14px; margin: 0;">Dobierz akcesoria</h4>
                         <div style="display: flex; gap: 10px;">
@@ -604,26 +606,79 @@ class MioCartDrawer extends HTMLElement {
                         </div>
                     </div>
                 </div>
-
-                <div style="padding: 30px 40px; background: #fafafa; border-top: 1px solid #eee; margin-top: auto; position: sticky; bottom: 0;">
+            `;
+            
+            footerHtml = `
+                <div class="cart-footer" style="padding: 30px 40px; background: #fafafa; border-top: 1px solid #eee; width: 100%; box-sizing: border-box;">
                     <style>
                         .cart-checkout-btn {
                             width: 100%; background: #000; color: #fff; padding: 16px; border: none; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.2s;
                         }
                         .cart-checkout-btn:hover { background: var(--accent-color); }
                         .cart-checkout-btn:active { background: var(--accent-color) !important; }
+                        
+                        .delivery-date-link {
+                            text-decoration: underline;
+                            text-underline-offset: 3px;
+                            cursor: pointer;
+                            transition: color 0.2s;
+                        }
+                        .delivery-date-link:hover {
+                            color: #000;
+                        }
+                        
+                        .delivery-sheet-overlay {
+                            position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+                        }
+                        .delivery-sheet-overlay.active {
+                            opacity: 1; pointer-events: auto;
+                        }
+                        
+                        .delivery-sheet {
+                            position: absolute; bottom: 0; left: 0; width: 100%; height: 75%; background: #fff; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 101; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;
+                        }
+                        .delivery-sheet.active {
+                            transform: translateY(0);
+                        }
                     </style>
                     <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; margin-bottom: 8px;">
-                        <span>Suma (z VAT):</span>
+                        <span>Suma częściowa:</span>
                         <span>20 240 zł</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; color: #666; margin-bottom: 20px; align-items: center;">
                         <span style="display: flex; align-items: center;"><img src="img/icons/truck.svg" alt="Dostawa" style="width: 14px; height: 14px; margin-right: 6px; filter: brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(1637%) hue-rotate(189deg) brightness(97%) contrast(85%);">Przewidywana dostawa:</span>
-                        <span>14 - 26 czerwca</span>
+                        <span class="delivery-date-link">14 - 26 czerwca</span>
                     </div>
                     <button class="cart-checkout-btn">Przejdź do kasy</button>
                     <div style="text-align: center; margin-top: 15px; font-size: 10px; color: #666;">
                         Darmowa dostawa dla zamówień powyżej 15 000 zł
+                    </div>
+                </div>
+            `;
+            
+            sheetHtml = `
+                <!-- Delivery Info Sheet -->
+                <div class="delivery-sheet-overlay"></div>
+                <div class="delivery-sheet">
+                    <div style="padding: 25px 40px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="margin: 0; font-size: 18px; font-weight: 700;">Dostawa Mebli</h4>
+                        <button class="close-delivery-sheet" style="border: none; background: none; font-size: 30px; cursor: pointer; line-height: 1; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">&times;</button>
+                    </div>
+                    <div style="padding: 30px 40px; overflow-y: auto; font-size: 13px; line-height: 1.8; color: var(--secondary-text-color);">
+                        <h5 style="margin: 0 0 15px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 1px;">Jak estymujemy datę?</h5>
+                        <p style="margin-bottom: 25px;">Każdy z naszych mebli tworzony jest na indywidualne zamówienie w polskiej manufakturze. Czas dostawy od 14 do 26 czerwca uwzględnia proces produkcji wybranego modelu w spersonalizowanej tkaninie, dokładną kontrolę jakości (QC) oraz czas potrzebny na bezpieczny transport naszą dedykowaną flotą pojazdów.</p>
+                        
+                        <h5 style="margin: 0 0 15px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 1px;">Co po zamówieniu?</h5>
+                        <ul style="padding-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 10px;">
+                            <li><strong style="color: #000;">Potwierdzenie:</strong> Natychmiast po złożeniu i opłaceniu zamówienia, otrzymasz e-mail z podsumowaniem konfiguracji.</li>
+                            <li><strong style="color: #000;">Status produkcji:</strong> Będziemy Cię informować o kluczowych etapach (np. rozpoczęcie szycia pokrowca, montaż na stelażu).</li>
+                            <li><strong style="color: #000;">Kontakt przed dostawą:</strong> Na kilka dni przed planowanym transportem, nasz Dział Logistyki skontaktuje się z Tobą telefonicznie, aby umówić dogodny termin oraz dwugodzinne okno czasowe doręczenia.</li>
+                        </ul>
+                        
+                        <div style="background: #f9f9f9; padding: 20px; border-left: 3px solid var(--accent-color);">
+                            <strong style="color: #000; display: block; margin-bottom: 5px;">Wniesienie i montaż gratis</strong>
+                            Nasz dwuosobowy zespół dostawców wniesie mebel do wskazanego pomieszczenia, rozpakuje go, poskręca (np. zamontuje nóżki) i zabierze ze sobą wszelkie zbędne opakowania oraz kartony.
+                        </div>
                     </div>
                 </div>
             `;
@@ -636,9 +691,11 @@ class MioCartDrawer extends HTMLElement {
                     <span class="cd-title">Twój koszyk</span>
                     <span class="cd-close">&times;</span>
                 </div>
-                <div class="cart-drawer-content">
+                <div class="cart-drawer-content" style="flex: 1; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; width: 100%; min-height: 0;">
                     ${bodyHtml}
                 </div>
+                ${footerHtml}
+                ${sheetHtml}
             </div>
         `;
 
@@ -660,6 +717,27 @@ class MioCartDrawer extends HTMLElement {
                 e.preventDefault();
                 accTrack.scrollBy({ left: 275, behavior: 'smooth' });
             });
+        }
+        
+        // Delivery Sheet Logic
+        const delLink = this.querySelector('.delivery-date-link');
+        const delSheet = this.querySelector('.delivery-sheet');
+        const delSheetOverlay = this.querySelector('.delivery-sheet-overlay');
+        const delSheetClose = this.querySelector('.close-delivery-sheet');
+        
+        if (delLink && delSheet && delSheetOverlay && delSheetClose) {
+            delLink.addEventListener('click', () => {
+                delSheet.classList.add('active');
+                delSheetOverlay.classList.add('active');
+            });
+            
+            const closeSheet = () => {
+                delSheet.classList.remove('active');
+                delSheetOverlay.classList.remove('active');
+            };
+            
+            delSheetClose.addEventListener('click', closeSheet);
+            delSheetOverlay.addEventListener('click', closeSheet);
         }
     }
 
