@@ -70,8 +70,34 @@
 
                 <!-- ULUBIONE -->
                 <div id="tab-ulubione" class="tab-pane" style="display: none;">
-                    <h2 class="content-title">Twoje ulubione produkty</h2>
-                    <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
+                    <div class="wishlist-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                        <h2 class="content-title" style="margin-bottom: 0;">Twoje ulubione produkty</h2>
+                    </div>
+
+                    <div class="wishlist-tabs-container" style="border-bottom: 1px solid #eee; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; overflow-x: auto;">
+                        <ul class="wishlist-tabs" style="list-style: none; padding: 0; margin: 0; display: flex; gap: 30px;">
+                            <li class="active" onclick="switchWishlist('default', this)" style="padding-bottom: 15px; border-bottom: 2px solid #000; font-weight: 500; font-size: 13px; cursor: pointer; transition: 0.3s; white-space: nowrap;">Domyślna <span style="color: #999; font-weight: 400;">(4)</span></li>
+                            <li onclick="switchWishlist('salon', this)" style="padding-bottom: 15px; border-bottom: 2px solid transparent; color: #666; font-size: 13px; cursor: pointer; transition: 0.3s; white-space: nowrap;">Do salonu <span style="color: #999; font-weight: 400;">(2)</span></li>
+                        </ul>
+                        <button class="add-new-list-btn" onclick="addNewWishlist()" style="background: none; border: none; font-size: 12px; font-weight: 500; color: #000; cursor: pointer; display: flex; align-items: center; gap: 5px; padding-bottom: 15px; white-space: nowrap;">
+                            <i class="fa-solid fa-plus"></i> Nowa lista
+                        </button>
+                    </div>
+
+                    <div class="wishlist-list-actions" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <h3 class="wishlist-current-title" style="font-size: 18px; margin: 0; font-family: 'Playfair Display', serif; padding: 2px 5px; margin-left: -5px; border-bottom: 1px solid transparent; transition: 0.3s; word-break: break-word;">Domyślna</h3>
+                            <button class="wishlist-edit-btn" onclick="editWishlistName()" title="Edytuj nazwę" style="background: none; border: none; font-size: 12px; color: #999; cursor: pointer; transition: 0.2s; flex-shrink: 0;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#999'"><i class="fa-solid fa-pen"></i></button>
+                        </div>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <button class="wishlist-add-to-cart-btn" onclick="addListToCart(this)" style="background: none; border: none; font-size: 11px; text-transform: uppercase; color: #666; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.2s; white-space: nowrap;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'"><i class="fa-solid fa-cart-plus"></i> Do koszyka</button>
+                            <button class="wishlist-share-btn" onclick="copyWishlistLink(this)" style="background: none; border: none; font-size: 11px; text-transform: uppercase; color: #666; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.2s; white-space: nowrap;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'"><i class="fa-solid fa-share-nodes"></i> Udostępnij listę</button>
+                            <button class="wishlist-delete-btn" onclick="deleteWishlist()" style="background: none; border: none; font-size: 11px; text-transform: uppercase; color: #d9534f; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.2s; white-space: nowrap;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'"><i class="fa-solid fa-trash"></i> Usuń listę</button>
+                        </div>
+                    </div>
+
+                    <!-- Siatka Domyślna -->
+                    <div class="products-grid wishlist-grid" id="wishlist-grid-default" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
                         
                         <!-- Produkt 1 -->
                         <article class="product-card" style="width: 100%;">
@@ -97,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="price-section" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px;">
-                                    <p class="current-price" style="font-size: 15px;">6 850 zł</p>
+                                    <p class="current-price" style="font-size: 15px;">16 850 zł</p>
                                     <a href="#" style="font-size: 10px; text-decoration: underline; color: #d9534f; text-transform: uppercase; font-weight: 500;">Usuń z listy</a>
                                 </div>
                                 <button class="mobile-favorite-cart-btn">Dodaj do koszyka</button>
@@ -192,10 +218,6 @@
                                         <div style="width: 16px; height: 16px; background-color: #333; border-radius: 0;"></div>
                                         <span>Nóżki: Brak (ślizgacze)</span>
                                     </div>
-                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
-                                        <div style="width: 16px; height: 16px; background-color: #333; border-radius: 0;"></div>
-                                        <span>Nóżki: Brak (ślizgacze)</span>
-                                    </div>
                                 </div>
                                 <div class="price-section" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px;">
                                     <p class="current-price" style="font-size: 15px;">950 zł</p>
@@ -204,7 +226,65 @@
                                 <button class="mobile-favorite-cart-btn">Dodaj do koszyka</button>
                             </div>
                         </article>
+                    </div>
+
+                    <!-- Siatka Salon -->
+                    <div class="products-grid wishlist-grid" id="wishlist-grid-salon" style="display: none; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
                         
+                        <!-- Produkt Salon 1 -->
+                        <article class="product-card" style="width: 100%;">
+                            <div class="product-image-wrapper">
+                                <button class="wishlist-btn active" aria-label="Zaznaczone jako ulubione">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                                <div class="gallery-track">
+                                    <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Sofa Cezar">
+                                </div>
+                                <button class="add-to-cart-btn">DODAJ DO KOSZYKA</button>
+                            </div>
+                            <div class="product-info" style="padding: 15px;">
+                                <h3 class="product-title" style="font-size: 14px;">Sofa Cezar 3-osobowa</h3>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); margin-bottom: 10px; line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                                        <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 16px; height: 16px; object-fit: cover; border-radius: 0;">
+                                        <span>Obicie: Skóra (Koniakowy Brąz)</span>
+                                    </div>
+                                </div>
+                                <div class="price-section" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px;">
+                                    <p class="current-price" style="font-size: 15px;">18 900 zł</p>
+                                    <a href="#" style="font-size: 10px; text-decoration: underline; color: #d9534f; text-transform: uppercase; font-weight: 500;">Usuń z listy</a>
+                                </div>
+                                <button class="mobile-favorite-cart-btn">Dodaj do koszyka</button>
+                            </div>
+                        </article>
+
+                        <!-- Produkt Salon 2 -->
+                        <article class="product-card" style="width: 100%;">
+                            <div class="product-image-wrapper">
+                                <button class="wishlist-btn active" aria-label="Zaznaczone jako ulubione">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                                <div class="gallery-track">
+                                    <img src="img/product-img/pufa_preview.png" alt="Stolik">
+                                </div>
+                                <button class="add-to-cart-btn">DODAJ DO KOSZYKA</button>
+                            </div>
+                            <div class="product-info" style="padding: 15px;">
+                                <h3 class="product-title" style="font-size: 14px;">Sofa Modern 3-osobowa</h3>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); margin-bottom: 10px; line-height: 1.5;">
+                                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                                        <div style="width: 16px; height: 16px; background-color: #eee; border-radius: 0;"></div>
+                                        <span>Skóra ekologiczna Biała</span>
+                                    </div>
+                                </div>
+                                <div class="price-section" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px;">
+                                    <p class="current-price" style="font-size: 15px;">5 400 zł</p>
+                                    <a href="#" style="font-size: 10px; text-decoration: underline; color: #d9534f; text-transform: uppercase; font-weight: 500;">Usuń z listy</a>
+                                </div>
+                                <button class="mobile-favorite-cart-btn">Dodaj do koszyka</button>
+                            </div>
+                        </article>
+
                     </div>
                 </div>
 
@@ -301,6 +381,141 @@
                 if(favTabLink) favTabLink.click();
             }
         });
+
+        // Obsługa nowych list ulubionych
+        function switchWishlist(listId, element) {
+            // Zmiana stylów zakładek
+            const tabs = element.parentElement.querySelectorAll('li');
+            tabs.forEach(tab => {
+                tab.style.borderBottomColor = 'transparent';
+                tab.style.color = '#666';
+                tab.style.fontWeight = '400';
+            });
+            element.style.borderBottomColor = '#000';
+            element.style.color = '#000';
+            element.style.fontWeight = '500';
+
+            // Zmiana tytułu aktualnej listy
+            const listName = element.childNodes[0].textContent.trim();
+            document.querySelector('.wishlist-current-title').textContent = listName;
+
+            // Zmiana widoczności siatki
+            document.querySelectorAll('.wishlist-grid').forEach(grid => grid.style.display = 'none');
+            const targetGrid = document.getElementById('wishlist-grid-' + listId);
+            if (targetGrid) targetGrid.style.display = 'grid';
+        }
+
+        function editWishlistName() {
+            const titleEl = document.querySelector('.wishlist-current-title');
+            titleEl.setAttribute('contenteditable', 'true');
+            titleEl.style.borderBottomColor = '#000';
+            titleEl.style.outline = 'none';
+            titleEl.focus();
+            
+            // Zaznaczenie całego tekstu
+            const range = document.createRange();
+            range.selectNodeContents(titleEl);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            
+            const saveEdit = function(e) {
+                if (e.type === 'blur' || (e.type === 'keydown' && e.key === 'Enter')) {
+                    if(e.type === 'keydown') e.preventDefault();
+                    titleEl.removeAttribute('contenteditable');
+                    titleEl.style.borderBottomColor = 'transparent';
+                    titleEl.removeEventListener('blur', saveEdit);
+                    titleEl.removeEventListener('keydown', saveEdit);
+                    
+                    let newName = titleEl.textContent.trim();
+                    if (newName === '') {
+                        newName = 'Moja lista';
+                        titleEl.textContent = newName;
+                    }
+                    
+                    // Aktualizacja nazwy w aktywnej zakładce
+                    const activeTab = document.querySelector('.wishlist-tabs li[style*="border-bottom-color: rgb(0, 0, 0)"]');
+                    if (!activeTab) {
+                        const fallbackTab = document.querySelector('.wishlist-tabs li.active');
+                        if(fallbackTab) {
+                            const countSpan = fallbackTab.querySelector('span');
+                            fallbackTab.innerHTML = newName + ' ' + (countSpan ? countSpan.outerHTML : '');
+                        }
+                    } else {
+                        const countSpan = activeTab.querySelector('span');
+                        activeTab.innerHTML = newName + ' ' + (countSpan ? countSpan.outerHTML : '');
+                    }
+                }
+            };
+            
+            titleEl.addEventListener('blur', saveEdit);
+            titleEl.addEventListener('keydown', saveEdit);
+        }
+
+        function copyWishlistLink(btn) {
+            const titleEl = document.querySelector('.wishlist-current-title');
+            const slug = titleEl.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            const baseUrl = window.location.origin + window.location.pathname.replace('account.html', 'shared_list.html');
+            const link = baseUrl + '?id=' + slug;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(link).then(() => {
+                    const originalHtml = btn.innerHTML;
+                    btn.innerHTML = '<i class="fa-solid fa-check" style="color: #166534;"></i> Skopiowano link';
+                    setTimeout(() => {
+                        btn.innerHTML = originalHtml;
+                    }, 2000);
+                }).catch(err => {
+                    prompt('Skopiuj ten link ręcznie:', link);
+                });
+            } else {
+                prompt('Skopiuj ten link ręcznie:', link);
+            }
+        }
+
+        function addListToCart(btn) {
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check" style="color: #166534;"></i> Dodano do koszyka';
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                window.dispatchEvent(new Event('open-cart'));
+            }, 1500);
+        }
+
+        function deleteWishlist() {
+            const titleEl = document.querySelector('.wishlist-current-title');
+            if (confirm(`Czy na pewno chcesz usunąć listę "${titleEl.textContent}"?`)) {
+                alert('Lista została usunięta.');
+                // W prawdziwym systemie nastąpiłoby tutaj przeładowanie do innej listy
+                const firstTab = document.querySelector('.wishlist-tabs li');
+                if(firstTab) firstTab.click();
+            }
+        }
+
+        function addNewWishlist() {
+            const newName = prompt('Podaj nazwę nowej listy:');
+            if (newName && newName.trim() !== '') {
+                // Dodajemy nową zakładkę (pustą listę)
+                const ul = document.querySelector('.wishlist-tabs');
+                const newId = 'list-' + Date.now();
+                const li = document.createElement('li');
+                li.onclick = function() { switchWishlist(newId, this); };
+                li.style.cssText = 'padding-bottom: 15px; border-bottom: 2px solid transparent; color: #666; font-size: 13px; cursor: pointer; transition: 0.3s; white-space: nowrap;';
+                li.innerHTML = `${newName.trim()} <span style="color: #999; font-weight: 400;">(0)</span>`;
+                ul.appendChild(li);
+
+                // Dodajemy pusty kontener na produkty
+                const gridContainer = document.createElement('div');
+                gridContainer.className = 'products-grid wishlist-grid';
+                gridContainer.id = 'wishlist-grid-' + newId;
+                gridContainer.style.cssText = 'display: none; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;';
+                gridContainer.innerHTML = '<p style="grid-column: 1/-1; color: #666; font-size: 13px;">Ta lista jest pusta.</p>';
+                
+                document.querySelector('#tab-ulubione').appendChild(gridContainer);
+                
+                li.click();
+            }
+        }
     </script>
 </body>
 </html>

@@ -268,20 +268,20 @@ class MioProductCard extends HTMLElement {
                     }
                     return;
                 }
-                wishlistBtn.classList.toggle('active');
-                const i = wishlistBtn.querySelector('i');
                 if(wishlistBtn.classList.contains('active')) {
-                    i.classList.remove('fa-regular');
-                    i.classList.add('fa-solid');
-                    if(typeof showWishlistNotification === 'function') {
-                        showWishlistNotification(title, true);
+                    wishlistBtn.classList.remove('active');
+                    const i = wishlistBtn.querySelector('i');
+                    if (i) {
+                        i.classList.remove('fa-solid');
+                        i.classList.add('fa-regular');
                     }
-                } else {
-                    i.classList.remove('fa-solid');
-                    i.classList.add('fa-regular');
                     if(typeof showWishlistNotification === 'function') {
                         showWishlistNotification(title, false);
                     }
+                } else {
+                    window.dispatchEvent(new CustomEvent('open-wishlist-modal', { 
+                        detail: { btn: wishlistBtn, title: title } 
+                    }));
                 }
             });
         }
@@ -954,3 +954,112 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+class MioWishlistModal extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+            <div class="wishlist-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99999; align-items: center; justify-content: center; opacity: 0; transition: 0.3s;">
+                <div class="wishlist-modal-box" style="background: #fff; padding: 30px; width: 90%; max-width: 400px; border-radius: 0; transform: translateY(20px); transition: 0.3s; position: relative;">
+                    <button class="wishlist-modal-close" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999; transition: 0.2s;"><i class="fa-solid fa-xmark"></i></button>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin-top: 0; margin-bottom: 20px;">Dodaj do listy</h3>
+                    
+                    <style>
+                        .wishlist-modal-card { border: 1px solid #ddd; padding: 12px 15px; cursor: pointer; transition: 0.3s; font-size: 13px; font-weight: 500; color: #666; display: block; text-align: left; }
+                        .wishlist-modal-card input { display: none; }
+                        .wishlist-modal-card:hover { border-color: #999; }
+                        .wishlist-modal-card:has(input:checked) { border-color: #000; background: #000; color: #fff; }
+                        
+                        .wishlist-lists::-webkit-scrollbar { width: 4px; }
+                        .wishlist-lists::-webkit-scrollbar-track { background: #f1f1f1; }
+                        .wishlist-lists::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+                        .wishlist-lists::-webkit-scrollbar-thumb:hover { background: #999; }
+                    </style>
+                    <div class="wishlist-lists" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; max-height: 180px; overflow-y: auto; padding-right: 5px;">
+                        <label class="wishlist-modal-card">
+                            <input type="radio" name="wishlist_select" value="Domyślna" checked> Domyślna
+                        </label>
+                        <label class="wishlist-modal-card">
+                            <input type="radio" name="wishlist_select" value="Do salonu"> Do salonu
+                        </label>
+                        <label class="wishlist-modal-card">
+                            <input type="radio" name="wishlist_select" value="Inspiracje sypialnia"> Inspiracje sypialnia
+                        </label>
+                    </div>
+                    
+                    <div style="border-top: 1px solid #eee; padding-top: 20px; margin-bottom: 25px;">
+                        <div style="font-size: 13px; font-weight: 500; margin-bottom: 10px;">Utwórz nową listę</div>
+                        <input type="text" id="new-list-name" placeholder="Nazwa nowej listy" style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; font-family: inherit; font-size: 13px; outline: none; border-radius: 0; transition: border-color 0.3s;" onfocus="this.style.borderColor='#000'" onblur="this.style.borderColor='#ddd'">
+                    </div>
+                    
+                    <button class="btn-primary wishlist-save-btn" style="width: 100%; padding: 15px; border: none; background: #000; color: #fff; text-transform: uppercase; font-size: 11px; font-weight: 500; letter-spacing: 1px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#000'">Zapisz</button>
+                </div>
+            </div>
+        `;
+
+        this.overlay = this.querySelector('.wishlist-modal-overlay');
+        this.box = this.querySelector('.wishlist-modal-box');
+        
+        this.querySelector('.wishlist-modal-close').addEventListener('click', () => this.close());
+        this.querySelector('.wishlist-modal-close').addEventListener('mouseover', function() { this.style.color = '#000'; });
+        this.querySelector('.wishlist-modal-close').addEventListener('mouseout', function() { this.style.color = '#999'; });
+
+        const listInput = this.querySelector('#new-list-name');
+        const listRadios = this.querySelectorAll('input[name="wishlist_select"]');
+        
+        listInput.addEventListener('focus', () => {
+            listRadios.forEach(r => r.checked = false);
+        });
+
+        this.querySelector('.wishlist-save-btn').addEventListener('click', () => {
+            const input = this.querySelector('#new-list-name');
+            const newName = input.value.trim();
+            const listName = newName ? newName : (this.querySelector('input[name="wishlist_select"]:checked') ? this.querySelector('input[name="wishlist_select"]:checked').value : 'Domyślna');
+            
+            if (this.currentHeartBtn) {
+                this.currentHeartBtn.classList.add('active');
+                const i = this.currentHeartBtn.querySelector('i');
+                if (i) {
+                    i.classList.remove('fa-regular');
+                    i.classList.add('fa-solid');
+                }
+            }
+            if (typeof showWishlistNotification === 'function') {
+                showWishlistNotification(this.currentTitle || 'Produkt', true);
+            }
+            this.close();
+        });
+
+        window.addEventListener('open-wishlist-modal', (e) => this.open(e.detail.btn, e.detail.title));
+    }
+
+    open(btn, title) {
+        this.currentHeartBtn = btn;
+        this.currentTitle = title;
+        this.overlay.style.display = 'flex';
+        this.querySelector('#new-list-name').value = '';
+        const listRadios = this.querySelectorAll('input[name="wishlist_select"]');
+        if(listRadios.length > 0) listRadios[0].checked = true;
+        
+        setTimeout(() => {
+            this.overlay.style.opacity = '1';
+            this.box.style.transform = 'translateY(0)';
+        }, 10);
+    }
+
+    close() {
+        this.overlay.style.opacity = '0';
+        this.box.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            this.overlay.style.display = 'none';
+        }, 300);
+    }
+}
+customElements.define('mio-wishlist-modal', MioWishlistModal);
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.appendChild(document.createElement('mio-wishlist-modal'));
+    });
+} else {
+    document.body.appendChild(document.createElement('mio-wishlist-modal'));
+}
