@@ -672,7 +672,7 @@ class MioCartDrawer extends HTMLElement {
                         <span style="display: flex; align-items: center;"><img src="img/icons/truck.svg" alt="Dostawa" style="width: 14px; height: 14px; margin-right: 6px; filter: brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(1637%) hue-rotate(189deg) brightness(97%) contrast(85%);">Przewidywana dostawa:</span>
                         <span class="delivery-date-link">14 - 26 czerwca</span>
                     </div>
-                    <button class="cart-checkout-btn">Przejdź do kasy</button>
+                    <button class="cart-checkout-btn" onclick="window.location.href='checkout.html'">Przejdź do kasy</button>
                     <div style="text-align: center; margin-top: 15px; font-size: 10px; color: #666;">
                         Darmowa dostawa dla zamówień powyżej 15 000 zł
                     </div>
