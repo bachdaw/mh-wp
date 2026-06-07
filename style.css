@@ -2078,8 +2078,14 @@
 }
 .fc-banner img {
     width: 100%;
-    height: 160px;
+    height: 260px;
     object-fit: cover;
+}
+
+@media (max-width: 850px) {
+    .fc-banner img {
+        height: 160px;
+    }
 }
 
 .fc-options-grid {
@@ -2101,8 +2107,10 @@
     cursor: pointer;
     transition: 0.2s;
 }
-.fc-option:hover {
+.fc-option:hover, .fc-option.active {
     border-color: #1a1a1a;
+    border-width: 2px;
+    padding: 4px;
 }
 .fc-option img {
     width: 100%;
@@ -3615,17 +3623,17 @@
 .checkout-section-header span { font-size: 12px; color: var(--text-light); }
 .checkout-section-header a { text-decoration: underline; color: #000; font-weight: 500; }
 
-.form-group { position: relative; margin-bottom: 20px; }
-.form-row { display: flex; gap: 20px; }
-.form-row .half { flex: 1; }
-.form-input { width: 100%; padding: 20px 15px 10px 15px !important; border: 1px solid #ddd; border-radius: 0; font-family: inherit; font-size: 14px; outline: none; background: #fff; transition: border-color 0.3s; }
-.form-input:focus { border-color: #000; }
-.form-label { position: absolute; left: 15px; top: 16px; font-size: 13px; color: #999; pointer-events: none; transition: 0.2s ease all; }
-.form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label { top: 6px; font-size: 10px; color: #666; }
-.form-hint { display: block; margin-top: 5px; font-size: 10px; color: #999; }
+.checkout-container .form-group { position: relative; margin-bottom: 20px; }
+.checkout-container .form-row { display: flex; gap: 20px; }
+.checkout-container .form-row .half { flex: 1; }
+.checkout-container .form-input { width: 100%; padding: 20px 15px 10px 15px !important; border: 1px solid #ddd; border-radius: 0; font-family: inherit; font-size: 14px; outline: none; background: #fff; transition: border-color 0.3s; }
+.checkout-container .form-input:focus { border-color: #000; }
+.checkout-container .form-label { position: absolute; left: 15px; top: 16px; font-size: 13px; color: #999; pointer-events: none; transition: 0.2s ease all; }
+.checkout-container .form-input:focus ~ .form-label, .checkout-container .form-input:not(:placeholder-shown) ~ .form-label { top: 6px; font-size: 10px; color: #666; }
+.checkout-container .form-hint { display: block; margin-top: 5px; font-size: 10px; color: #999; }
 
-.checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: #666; margin-top: 10px; }
-.checkbox-group input { margin-top: 3px; accent-color: #000; }
+.checkout-container .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: #666; margin-top: 10px; }
+.checkout-container .checkbox-group input { margin-top: 3px; accent-color: #000; }
 
 /* Invoice Type Selector */
 .invoice-type-card { border: 1px solid #ddd; border-radius: 0; cursor: pointer; text-align: center; position: relative; transition: 0.3s; height: 50px; display: block; }
@@ -3711,4 +3719,25 @@
     .checkout-actions { flex-direction: column-reverse; gap: 20px; }
     .btn-primary { width: 100%; }
     .success-container { padding: 120px 20px 60px 20px; }
+}
+
+/* --- SAMPLES PAGE RESPONSIVENESS --- */
+.samples-main { padding-top: 100px; }
+.samples-breadcrumbs, .samples-layout { padding: 0 40px; }
+.samples-header { padding: 0 40px; margin-bottom: 60px; }
+.samples-layout { display: flex; gap: 40px; align-items: flex-start; margin-bottom: 120px; }
+.samples-filters { width: 280px; flex-shrink: 0; background: #fff; border: 1px solid #eee; padding: 25px; }
+.samples-content { flex: 1; min-width: 0; }
+.samples-help-section { padding: 60px 40px; }
+.samples-contact-box { background: #fff; border: 1px solid #eee; padding: 30px 20px; width: 250px; display: flex; flex-direction: column; align-items: center; gap: 10px; border-radius: 0; transition: transform 0.3s; }
+.samples-contact-box:hover { transform: translateY(-5px); border-color: #1a1a1a; }
+
+@media (max-width: 850px) {
+    .samples-breadcrumbs, .samples-layout { padding: 0 20px; }
+    .samples-header { padding: 0 20px; margin-bottom: 40px; }
+    .samples-layout { flex-direction: column; gap: 20px; margin-bottom: 60px; }
+    .samples-filters { width: 100%; }
+    .fc-options-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; }
+    .samples-help-section { padding: 40px 20px; margin-bottom: 40px !important; }
+    .samples-contact-box { width: 100%; max-width: 300px; padding: 20px; }
 }

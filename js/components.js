@@ -419,8 +419,39 @@ class MioCartDrawer extends HTMLElement {
                 </div>
             `;
         } else {
+            const samplesAdded = localStorage.getItem('mock_samples_added') === 'true';
+            const samplesNames = localStorage.getItem('mock_samples_names') || 'Różne próbki';
+            let samplesHtml = '';
+            if (samplesAdded) {
+                samplesHtml = `
+                    <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
+                        <img src="img/wzorniki.png" alt="Próbki" style="width: 90px; height: 90px; object-fit: cover;">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <h4 style="margin: 0; font-size: 13px;">Zestaw bezpłatnych próbek materiałów</h4>
+                                    <span style="font-weight: 600; font-size: 14px; white-space: nowrap; margin-left: 10px;">0 zł</span>
+                                </div>
+                                <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
+                                    Wybrane: ${samplesNames}
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <div class="qty-selector" style="display: flex; border: 1px solid #ddd; width: fit-content;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;" onclick="localStorage.removeItem('mock_samples_added'); localStorage.removeItem('mock_samples_names'); document.querySelector('mio-cart-drawer').render();">-</button>
+                                    <input type="text" value="1" readonly style="width: 25px; text-align: center; border: none; font-family: inherit; font-size: 12px; color: #000; padding: 0;">
+                                    <button style="border: none; background: none; padding: 4px 10px; cursor: pointer; color: #666;">+</button>
+                                </div>
+                                <button style="background: none; border: none; font-size: 10px; text-transform: uppercase; color: #d9534f; text-decoration: underline; cursor: pointer; padding: 0;" onclick="localStorage.removeItem('mock_samples_added'); localStorage.removeItem('mock_samples_names'); document.querySelector('mio-cart-drawer').render();">Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             bodyHtml = `
                 <div class="cart-items" style="padding: 0 40px; flex-shrink: 0;">
+                    ${samplesHtml}
                     <!-- Produkt 1 -->
                     <div class="cart-item" style="display: flex; gap: 20px; padding: 25px 0; border-bottom: 1px solid #eee;">
                         <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Sofa Cezar" style="width: 90px; height: 90px; object-fit: cover;">
