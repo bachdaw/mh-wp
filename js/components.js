@@ -1,12 +1,44 @@
+const searchSuggestionsHTML = `
+<div class="search-suggestions" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; min-width: 350px; background: #fff; z-index: 100; border-bottom: 1px solid #eee; padding: 15px 30px; box-sizing: border-box; box-shadow: 0 10px 15px rgba(0,0,0,0.05); text-align: left; color: #000; font-family: 'Montserrat', sans-serif;">
+    <h4 style="font-size: 10px; text-transform: uppercase; color: #888; margin-bottom: 10px; letter-spacing: 1px; font-weight: 600; margin-top: 0;">Sugerowane kategorie</h4>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <a href="listing.html" style="font-size: 11px; padding: 6px 12px; background: #f5f5f5; color: #000; text-decoration: none; border-radius: 4px; font-weight: 500;">Sofy 3-osobowe</a>
+        <a href="listing.html" style="font-size: 11px; padding: 6px 12px; background: #f5f5f5; color: #000; text-decoration: none; border-radius: 4px; font-weight: 500;">Sofy rozkładane</a>
+        <a href="listing.html" style="font-size: 11px; padding: 6px 12px; background: #f5f5f5; color: #000; text-decoration: none; border-radius: 4px; font-weight: 500;">Fotele uszaki</a>
+    </div>
+
+    <h4 style="font-size: 10px; text-transform: uppercase; color: #888; margin-bottom: 15px; letter-spacing: 1px; font-weight: 600;">Sugerowane produkty</h4>
+    
+    <a href="product_page.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none; margin-bottom: 15px;">
+        <img src="img/product-img/chesterclub_preview_v2.jpg" style="width: 40px; height: 40px; object-fit: cover;">
+        <div>
+            <div style="font-size: 13px; font-weight: 600; color: #000;">Sofa Cezar 3-osobowa</div>
+            <div style="font-size: 11px; color: #666;">od 5 990 zł</div>
+        </div>
+    </a>
+    
+    <a href="product_page.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none; margin-bottom: 15px;">
+        <img src="img/product-img/barry_preview.png" style="width: 40px; height: 40px; object-fit: cover;">
+        <div>
+            <div style="font-size: 13px; font-weight: 600; color: #000;">Sofa 2-osobowa Barry</div>
+            <div style="font-size: 11px; color: #666;">od 4 990 zł</div>
+        </div>
+    </a>
+    
+    <a href="listing.html" style="font-size: 12px; font-weight: 600; color: #b58b4c; text-decoration: underline;">Zobacz wszystkie wyniki</a>
+</div>
+`;
+
 class MioNavbar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
     <nav class="navbar" id="navbar">
         <div class="nav-left">
             <img src="img/icons/burger.svg" alt="Menu" class="nav-icon-svg burger-icon">
-            <div class="search-container">
+            <div class="search-container" style="position: relative;">
                 <img src="img/icons/search.svg" alt="Szukaj" class="nav-icon-svg">
-                <input type="text" placeholder="Czego szukasz?">
+                <input type="text" class="desktop-search-input" placeholder="Czego szukasz?">
+                ${searchSuggestionsHTML}
             </div>
         </div>
         <div class="nav-center">
@@ -66,6 +98,51 @@ class MioNavbar extends HTMLElement {
                 window.dispatchEvent(new Event('open-cart'));
             });
         });
+
+        const burgerIcon = this.querySelector('.burger-icon');
+        if (burgerIcon) {
+            burgerIcon.style.cursor = 'pointer';
+            burgerIcon.addEventListener('click', () => {
+                window.dispatchEvent(new Event('open-menu'));
+            });
+        }
+
+        const mobileSearchIcon = this.querySelector('.mobile-search-icon');
+        if (mobileSearchIcon) {
+            mobileSearchIcon.style.cursor = 'pointer';
+            mobileSearchIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.dispatchEvent(new Event('open-search-drawer'));
+            });
+        }
+
+        const setupSearch = (inputSelector, suggestionsContainerSelector) => {
+            const input = this.querySelector(inputSelector);
+            // The suggestion container is a sibling of the input in desktop, or next to the wrapper in mobile
+            // It's easier to find it globally within the component's parent wrapper if needed, 
+            // but for simplicity we can just search next to the input's parent.
+            if (!input) return;
+            const container = input.closest('.search-container') || input.closest('.mobile-search-bar');
+            if (!container) return;
+            const suggestions = container.querySelector('.search-suggestions');
+            if (suggestions) {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length > 2) {
+                        suggestions.style.display = 'block';
+                    } else {
+                        suggestions.style.display = 'none';
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && e.target.value.trim().length > 0) {
+                        window.location.href = 'listing.html';
+                    }
+                });
+            }
+        };
+
+        setupSearch('.desktop-search-input');
+        setupSearch('.mobile-search-input');
     }
 }
 customElements.define('mio-navbar', MioNavbar);
@@ -1094,3 +1171,208 @@ if (document.readyState === 'loading') {
 } else {
     document.body.appendChild(document.createElement('mio-wishlist-modal'));
 }
+
+class MioMenuDrawer extends HTMLElement {
+    connectedCallback() {
+        this.render();
+        window.addEventListener('auth-mock-changed', () => this.render());
+        window.addEventListener('open-menu', () => this.open());
+    }
+
+    render() {
+        const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+        
+        const authLinks = isLogged ? `
+            <a href="account.html" class="menu-sub-link">Moje konto</a>
+            <a href="account.html#zamowienia" class="menu-sub-link">Zamówienia</a>
+            <a href="account.html#ulubione" class="menu-sub-link">Ulubione</a>
+            <a href="#" class="menu-sub-link" onclick="localStorage.setItem('mock_is_logged_in', 'false'); window.dispatchEvent(new Event('auth-mock-changed')); return false;">Wyloguj się</a>
+        ` : `
+            <a href="login.html" class="menu-sub-link">Zaloguj się</a>
+            <a href="register.html" class="menu-sub-link">Zarejestruj się</a>
+        `;
+
+        this.innerHTML = `
+            <div class="menu-drawer-overlay"></div>
+            <div class="menu-drawer">
+                <div class="menu-drawer-header">
+                    <img src="img/icons/logo-miohome.svg" alt="Miohome" style="height: 24px;">
+                    <span class="md-close">&times;</span>
+                </div>
+                <div class="menu-drawer-content">
+                    <div class="menu-search-wrapper" style="position: relative;">
+                        <div class="menu-search">
+                            <img src="img/icons/search.svg" alt="Szukaj">
+                            <input type="text" class="menu-search-input" placeholder="Czego szukasz?">
+                        </div>
+                        ${searchSuggestionsHTML}
+                    </div>
+                    
+                    <div class="menu-main-links">
+                        <a href="listing.html" class="menu-link">Sofy</a>
+                        <a href="listing.html" class="menu-link">Fotele</a>
+                        <a href="listing.html" class="menu-link">Krzesła</a>
+                        <a href="listing.html" class="menu-link">Łóżka</a>
+                        <a href="listing.html" class="menu-link">Dywany</a>
+                        <a href="listing.html" class="menu-link">Pufy</a>
+                        <a href="listing.html" class="menu-link" style="color: #b58b4c;">Wyprzedaż</a>
+                    </div>
+                    
+                    <div class="menu-secondary-links">
+                        <a href="kontakt.html" class="menu-sub-link">Kontakt</a>
+                        <a href="about.html" class="menu-sub-link">O nas</a>
+                        <a href="samples.html" class="menu-sub-link">Darmowe próbki</a>
+                    </div>
+                    
+                    <div class="menu-auth-links">
+                        <h4 style="font-size: 11px; text-transform: uppercase; color: #888; margin-bottom: 10px; letter-spacing: 1px;">Twoje konto</h4>
+                        ${authLinks}
+                    </div>
+                    
+                    <div class="menu-footer-links">
+                        <div class="language-selector">
+                            <span>Język:</span>
+                            <select style="border: none; background: transparent; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer;">
+                                <option value="pl">Polski</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const closeBtn = this.querySelector('.md-close');
+        if(closeBtn) closeBtn.addEventListener('click', () => this.close());
+        const overlay = this.querySelector('.menu-drawer-overlay');
+        if(overlay) overlay.addEventListener('click', () => this.close());
+        
+        const searchInput = this.querySelector('.menu-search-input');
+        const searchSuggestions = this.querySelector('.search-suggestions');
+        
+        if (searchInput && searchSuggestions) {
+            searchInput.addEventListener('input', (e) => {
+                if (e.target.value.length > 2) {
+                    searchSuggestions.style.display = 'block';
+                } else {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && e.target.value.trim().length > 0) {
+                    window.location.href = 'listing.html';
+                }
+            });
+        }
+    }
+
+    open() {
+        this.querySelector('.menu-drawer-overlay').classList.add('active');
+        this.querySelector('.menu-drawer').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.querySelector('.menu-drawer-overlay').classList.remove('active');
+        this.querySelector('.menu-drawer').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+customElements.define('mio-menu-drawer', MioMenuDrawer);
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.appendChild(document.createElement('mio-menu-drawer'));
+    });
+} else {
+    document.body.appendChild(document.createElement('mio-menu-drawer'));
+}
+
+class MioSearchDrawer extends HTMLElement {
+    connectedCallback() {
+        this.render();
+        window.addEventListener('open-search-drawer', () => this.open());
+    }
+
+    render() {
+        this.innerHTML = `
+            <div class="search-drawer-overlay"></div>
+            <div class="search-drawer">
+                <div class="search-drawer-header">
+                    <div class="search-drawer-input-wrapper">
+                        <img src="img/icons/search.svg" alt="Szukaj">
+                        <input type="text" class="drawer-search-input" placeholder="Czego szukasz?">
+                    </div>
+                    <span class="sd-close">&times;</span>
+                </div>
+                <div class="search-drawer-content" style="position: relative;">
+                    <div class="search-empty-state" style="padding: 40px 20px; text-align: center; color: #888; font-size: 14px; font-family: 'Montserrat', sans-serif;">
+                        Wpisz czego szukasz...
+                    </div>
+                    <div class="drawer-search-suggestions-container" style="display: none;">
+                        ${searchSuggestionsHTML.replace('position: absolute;', 'position: relative;').replace('box-shadow: 0 10px 15px rgba(0,0,0,0.05);', 'box-shadow: none; border-bottom: none;')}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const closeBtn = this.querySelector('.sd-close');
+        if(closeBtn) closeBtn.addEventListener('click', () => this.close());
+        const overlay = this.querySelector('.search-drawer-overlay');
+        if(overlay) overlay.addEventListener('click', () => this.close());
+
+        const searchInput = this.querySelector('.drawer-search-input');
+        const emptyState = this.querySelector('.search-empty-state');
+        const suggestionsContainer = this.querySelector('.drawer-search-suggestions-container');
+
+        if (searchInput && emptyState && suggestionsContainer) {
+            const innerSuggestions = suggestionsContainer.querySelector('.search-suggestions');
+            if (innerSuggestions) {
+                innerSuggestions.style.display = 'block';
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                if (e.target.value.length > 2) {
+                    emptyState.style.display = 'none';
+                    suggestionsContainer.style.display = 'block';
+                } else {
+                    emptyState.style.display = 'block';
+                    suggestionsContainer.style.display = 'none';
+                }
+            });
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && e.target.value.trim().length > 0) {
+                    window.location.href = 'listing.html';
+                }
+            });
+        }
+    }
+
+    open() {
+        this.querySelector('.search-drawer-overlay').classList.add('active');
+        this.querySelector('.search-drawer').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        const input = this.querySelector('.drawer-search-input');
+        if (input) {
+            input.value = '';
+            input.dispatchEvent(new Event('input'));
+            setTimeout(() => input.focus(), 100);
+        }
+    }
+
+    close() {
+        this.querySelector('.search-drawer-overlay').classList.remove('active');
+        this.querySelector('.search-drawer').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+customElements.define('mio-search-drawer', MioSearchDrawer);
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.appendChild(document.createElement('mio-search-drawer'));
+    });
+} else {
+    document.body.appendChild(document.createElement('mio-search-drawer'));
+}
+
