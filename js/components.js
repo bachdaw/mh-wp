@@ -16,7 +16,7 @@ class MioNavbar extends HTMLElement {
         </div>
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="#">Nowości</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
                 <li><a href="listing.html">Produkty</a></li>
                 <li><a href="#">Współpraca</a></li>
             </ul>

@@ -390,8 +390,8 @@
 
         /* --- MIDDLE BANNER --- */
         .middle-banner {
-            height: 800px;
-            background: url('img/hero_section.jpg') center/cover no-repeat;
+            height: 720px;
+            background: url('img/hero_section.jpg') center bottom/cover no-repeat;
             display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; position: relative;
         }
         .middle-banner::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); }
