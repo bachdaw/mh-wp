@@ -50,7 +50,7 @@ class MioNavbar extends HTMLElement {
             <ul class="nav-links">
                 <li><a href="kontakt.html">Kontakt</a></li>
                 <li><a href="listing.html">Produkty</a></li>
-                <li><a href="#">Współpraca</a></li>
+                <li><a href="wspolpraca.html">Współpraca</a></li>
             </ul>
             <div class="nav-icons">
                 <img src="img/icons/search.svg" alt="Szukaj" class="nav-icon-svg mobile-search-icon">
@@ -193,8 +193,8 @@ class MioFooter extends HTMLElement {
             <div class="footer-col">
                 <h4>Współpraca</h4>
                 <ul>
-                    <li><a href="#">Architekci</a></li>
-                    <li><a href="#">Partnerzy biznesowi</a></li>
+                    <li><a href="wspolpraca.html#architect">Architekci</a></li>
+                    <li><a href="wspolpraca.html#b2b">Partnerzy biznesowi</a></li>
                 </ul>
             </div>
             <!-- Pusta kolumna zamiast 'Blog', aby Newsletter nie zmienił pozycji -->

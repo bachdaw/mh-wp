@@ -4022,3 +4022,93 @@
         box-shadow: 5px 0 20px rgba(0,0,0,0.1);
     }
 }
+
+/* --- WSPÓŁPRACA PAGE --- */
+.coop-page .about-hero {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/fotele_preview.jpg');
+}
+
+.coop-main {
+    padding-bottom: 80px;
+    background: #fff;
+}
+
+.coop-cards-section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.coop-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.coop-info-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.coop-info-card .value-icon {
+    margin-bottom: 5px;
+}
+
+.coop-info-card .value-title {
+    margin-bottom: 15px;
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.coop-info-card .value-desc {
+    margin-bottom: 30px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+}
+
+.coop-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 40px auto;
+    display: inline-block;
+    text-align: left;
+}
+
+.coop-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.coop-benefits li i {
+    color: var(--accent-color);
+    font-size: 16px;
+}
+
+.coop-form-section {
+    background: #f9f9f9;
+    padding-top: 0;
+}
+
+@media (max-width: 850px) {
+    .coop-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .coop-cards-section {
+        padding: 40px 20px;
+        margin-top: 0;
+    }
+    .coop-info-card {
+        padding: 40px 20px;
+    }
+}
+

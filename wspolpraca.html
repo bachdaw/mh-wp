@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Współpraca - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="coop-page">
+
+    <mio-navbar></mio-navbar>
+
+    <header class="about-hero coop-hero">
+        <div class="about-hero-content animate-up">
+            <h1 class="about-hero-title">Stwórzmy to razem</h1>
+            <p class="about-hero-subtitle">Wyjątkowe wnętrza wymagają wyjątkowego partnerstwa. Poznaj nasze formy współpracy.</p>
+        </div>
+    </header>
+
+    <main class="coop-main">
+        <section class="contact-grid-section animate-up" style="max-width: 1200px; margin: 0 auto; padding: 80px 40px; gap: 80px; align-items: stretch;">
+            <!-- LEWA KOLUMNA: Kafle -->
+            <div class="coop-cards-col" style="display: flex; flex-direction: column;">
+                <div class="coop-cards-grid" style="flex: 1; justify-content: space-between;">
+                    <!-- B2B Card -->
+                    <div class="coop-info-card value-item" id="b2b-info">
+                        <div class="value-eyebrow">Współpraca Biznesowa</div>
+                        <div class="icon-wrapper">
+                            <i class="fa-regular fa-building value-icon"></i>
+                        </div>
+                        <h3 class="value-title">Klienci B2B</h3>
+                        <p class="value-desc">Kompleksowe wyposażenie inwestycji, hoteli i biur. Oferujemy dedykowane warunki handlowe, niezawodną jakość oraz terminowość realizacji nawet największych zamówień.</p>
+                        <ul class="coop-benefits">
+                            <li><i class="fa-solid fa-check"></i> Atrakcyjne progi rabatowe</li>
+                            <li><i class="fa-solid fa-check"></i> Priorytetowa realizacja zamówień</li>
+                            <li><i class="fa-solid fa-check"></i> Możliwość modyfikacji wymiarów</li>
+                            <li><i class="fa-solid fa-check"></i> Dedykowany opiekun klienta</li>
+                        </ul>
+                        <button class="btn-primary scroll-to-form" data-type="b2b">Zostań partnerem B2B</button>
+                    </div>
+
+                    <!-- Architect Card -->
+                    <div class="coop-info-card value-item" id="architect-info" style="margin-top: 40px;">
+                        <div class="value-eyebrow">Program Partnerski</div>
+                        <div class="icon-wrapper">
+                            <i class="fa-regular fa-object-group value-icon"></i>
+                        </div>
+                        <h3 class="value-title">Architekci Wnętrz</h3>
+                        <p class="value-desc">Wsparcie na każdym etapie projektu. Zapewniamy dostęp do wysokiej jakości modeli 3D, próbników tkanin oraz bardzo atrakcyjny, przejrzysty system prowizyjny.</p>
+                        <ul class="coop-benefits">
+                            <li><i class="fa-solid fa-check"></i> Transparentny system prowizyjny</li>
+                            <li><i class="fa-solid fa-check"></i> Baza modeli 3D wysokiej jakości</li>
+                            <li><i class="fa-solid fa-check"></i> Darmowe wzorniki tkanin</li>
+                            <li><i class="fa-solid fa-check"></i> Promocja na naszych kanałach</li>
+                        </ul>
+                        <button class="btn-primary scroll-to-form" data-type="architect">Dołącz do Strefy Architekta</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRAWA KOLUMNA: Formularz -->
+            <div class="contact-form-col" id="form-section" style="background: #fff; padding: 50px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: 100%; box-sizing: border-box;">
+                <div class="form-wrapper" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                    <h2 class="section-heading center" style="margin-bottom: 20px;">Nawiąż współpracę</h2>
+                    <p class="center" style="margin-bottom: 40px; font-size: 13px; color: var(--secondary-text-color);">Wypełnij poniższy formularz, a nasz doradca skontaktuje się z Tobą w ciągu 24 godzin z gotową propozycją.</p>
+                    
+                    <div class="form-group">
+                        <label for="coop-type" class="form-label">Rodzaj współpracy</label>
+                        <select id="coop-type" class="form-select">
+                            <option value="architect">Architekt / Projektant wnętrz</option>
+                            <option value="b2b">Klient B2B / Inwestor</option>
+                        </select>
+                    </div>
+
+                    <form id="coopForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="name" class="form-label">Imię i nazwisko *</label>
+                                <input type="text" id="name" class="form-input" required>
+                            </div>
+                            <div class="form-group half">
+                                <label for="phone" class="form-label">Telefon</label>
+                                <input type="tel" id="phone" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adres e-mail *</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group" id="companyField">
+                            <label for="company" id="companyLabel" class="form-label">Nazwa firmy / Pracowni *</label>
+                            <input type="text" id="company" class="form-input" required>
+                        </div>
+
+                        <div class="form-row" id="extraFields">
+                            <div class="form-group half" id="nipField">
+                                <label for="nip" class="form-label">NIP (opcjonalnie)</label>
+                                <input type="text" id="nip" class="form-input">
+                            </div>
+                            <div class="form-group half" id="portfolioField">
+                                <label for="portfolio" class="form-label">Link do portfolio / WWW</label>
+                                <input type="url" id="portfolio" class="form-input" placeholder="https://">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Krótki opis działalności lub projektu *</label>
+                            <textarea id="message" class="form-input form-textarea" rows="4" required placeholder="Opisz krótko czym się zajmujesz lub jaki projekt obecnie realizujesz."></textarea>
+                        </div>
+
+                        <div class="form-group form-checkbox">
+                            <input type="checkbox" id="consent" required>
+                            <label for="consent">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu nawiązania współpracy, zgodnie z polityką prywatności.</label>
+                        </div>
+
+                        <button type="submit" class="form-submit" style="margin-top: 10px;">Wyślij zgłoszenie</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria: Zajrzyj za kulisy -->
+        <section class="production-gallery-section" style="padding-top: 0;">
+            <div class="section-header center animate-up">
+                <h2 class="section-title">Zajrzyj za kulisy</h2>
+                <p style="font-size: 13px; color: var(--secondary-text-color); max-width: 600px; margin: 15px auto 0;">Proces tworzenia naszych mebli to połączenie zaawansowanego parku maszynowego z rzemieślniczą precyzją. Zobacz, jak powstaje jakość.</p>
+            </div>
+            <div class="gallery-mosaic">
+                <div class="mosaic-item item-1 animate-up">
+                    <img src="img/prod_5.jpg" alt="Produkcja 1">
+                </div>
+                <div class="mosaic-item item-2 animate-up">
+                    <img src="img/prod_7.jpg" alt="Produkcja 2">
+                </div>
+                <div class="mosaic-item item-3 animate-up">
+                    <img src="img/daniel.jpg" alt="Produkcja 3">
+                </div>
+                <div class="mosaic-item item-4 animate-up">
+                    <img src="img/prod_8.jpg" alt="Produkcja 4">
+                </div>
+                <div class="mosaic-item item-5 animate-up">
+                    <img src="img/prod_9.jpg" alt="Produkcja 5">
+                </div>
+                <div class="mosaic-item item-6 animate-up">
+                    <img src="img/prod_6.jpg" alt="Produkcja 6">
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section animate-up">
+            <div class="social-content">
+                <h2 class="section-heading">Obserwuj nas na Instagramie</h2>
+                <p>Zainspiruj się naszymi najnowszymi realizacjami i bądź na bieżąco z nowościami. Dołącz do społeczności Miohome i stwórz z nami swoje wymarzone wnętrze.</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i> @miohome_pl</a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i> Miohome</a>
+                    <a href="#" class="social-btn"><i class="fa-brands fa-pinterest"></i> Miohome</a>
+                </div>
+            </div>
+            <div class="social-images">
+                <div class="social-img-wrap img-1">
+                    <img src="img/fotele_preview.jpg" alt="Instagram 1">
+                </div>
+                <div class="social-img-wrap img-2">
+                    <img src="img/pufy_preview.jpg" alt="Instagram 2">
+                </div>
+                <div class="social-img-wrap img-3">
+                    <img src="img/krzesla_preview.jpg" alt="Instagram 3">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const coopTypeSelect = document.getElementById('coop-type');
+            const companyLabel = document.getElementById('companyLabel');
+            const nipField = document.getElementById('nipField');
+            const portfolioField = document.getElementById('portfolioField');
+            const messageField = document.getElementById('message');
+
+            const updateForm = (type) => {
+                if (type === 'architect') {
+                    companyLabel.textContent = 'Nazwa pracowni *';
+                    nipField.style.display = 'block';
+                    portfolioField.style.display = 'block';
+                    messageField.placeholder = "Opisz krótko swój projekt lub napisz, czy jesteś zainteresowany dłuższą współpracą.";
+                } else if (type === 'b2b') {
+                    companyLabel.textContent = 'Nazwa firmy / Inwestycji *';
+                    nipField.style.display = 'block';
+                    portfolioField.style.display = 'none'; // Portfolio less relevant for generic B2B
+                    messageField.placeholder = "Opisz krótko profil swojej firmy oraz czego dotyczy zapytanie (np. inwestycja hotelowa, biuro).";
+                }
+            };
+
+            // Set initial state from hash if present
+            const setFromHash = () => {
+                const hash = window.location.hash;
+                if (hash === '#b2b') {
+                    coopTypeSelect.value = 'b2b';
+                    updateForm('b2b');
+                    // Scroll down a bit to cards if needed, or straight to form
+                } else if (hash === '#architect') {
+                    coopTypeSelect.value = 'architect';
+                    updateForm('architect');
+                } else {
+                    updateForm(coopTypeSelect.value);
+                }
+            };
+
+            setFromHash();
+
+            window.addEventListener('hashchange', setFromHash);
+
+            coopTypeSelect.addEventListener('change', (e) => {
+                updateForm(e.target.value);
+            });
+
+            // Handle scroll buttons
+            const scrollBtns = document.querySelectorAll('.scroll-to-form');
+            scrollBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const type = btn.getAttribute('data-type');
+                    coopTypeSelect.value = type;
+                    updateForm(type);
+                    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Prevent default form submission
+            document.getElementById('coopForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Dziękujemy za zgłoszenie. Skontaktujemy się z Tobą wkrótce!');
+            });
+        });
+    </script>
+</body>
+</html>
