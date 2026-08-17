@@ -251,7 +251,12 @@ class MioProductCard extends HTMLElement {
         const title = this.getAttribute('title') || 'Nazwa produktu';
         const desc = this.getAttribute('desc') || 'Krótki opis produktu...';
         const price = this.getAttribute('price') || '0 zł';
+        const oldPrice = this.getAttribute('old-price') || '';
+        const omnibusPrice = this.getAttribute('omnibus-price') || '';
         const pricePrefix = this.getAttribute('price-prefix') || '';
+        const customBadge = this.getAttribute('custom-badge');
+        const link = this.getAttribute('link') || 'product_page.html';
+        const isPromo = oldPrice.length > 0;
         
         let badgesHtml = '';
         try {
@@ -266,6 +271,39 @@ class MioProductCard extends HTMLElement {
             imagesCount = images.length;
             imagesHtml = images.map(img => `<img src="${img}" alt="${title}">`).join('');
         } catch(e) {}
+
+        let priceSectionHtml = '';
+        if (isPromo) {
+            let disc = this.getAttribute('discount') || '';
+            if (!disc) {
+                const p1 = parseFloat(price.replace(/[^\d]/g, ''));
+                const p2 = parseFloat(oldPrice.replace(/[^\d]/g, ''));
+                if (!isNaN(p1) && !isNaN(p2) && p2 > p1) {
+                    const percent = Math.round(((p2 - p1) / p2) * 100);
+                    disc = `-${percent}%`;
+                }
+            }
+            const discountHtml = disc ? `<span class="card-discount-tag">${disc}</span>` : '';
+
+            priceSectionHtml = `
+                <div class="price-section">
+                    <div class="card-price-row">
+                        <p class="current-price promo"><span class="price-prefix">${pricePrefix}</span> ${price}</p>
+                        <span class="old-price">${oldPrice}</span>
+                        ${discountHtml}
+                    </div>
+                    ${omnibusPrice ? `<span class="card-omnibus-info">Najniższa cena z 30 dni: ${omnibusPrice}</span>` : ''}
+                    <p class="mobile-customizable-label">PERSONALIZOWANY</p>
+                </div>
+            `;
+        } else {
+            priceSectionHtml = `
+                <div class="price-section">
+                    <p class="current-price"><span class="price-prefix">${pricePrefix}</span> ${price}</p>
+                    <p class="mobile-customizable-label">PERSONALIZOWANY</p>
+                </div>
+            `;
+        }
 
         this.innerHTML = `
         <article class="product-card">
@@ -286,15 +324,12 @@ class MioProductCard extends HTMLElement {
                 <button class="slider-arrow next" aria-label="Następne zdjęcie">
                     <i class="fas fa-chevron-right"></i>
                 </button>
-                <button class="add-to-cart-btn"><a href="product_page.html">KONFIGURUJ</a></button>
+                <button class="add-to-cart-btn"><a href="${link}">KONFIGURUJ</a></button>
             </div>
             <div class="product-info">
                 <h3 class="product-title">${title}</h3>
                 <p class="product-desc">${desc}</p>
-                <div class="price-section">
-                    <p class="current-price"><span class="price-prefix">${pricePrefix}</span> ${price}</p>
-                    <p class="mobile-customizable-label">PERSONALIZOWANY</p>
-                </div>
+                ${priceSectionHtml}
             </div>
         </article>
         `;

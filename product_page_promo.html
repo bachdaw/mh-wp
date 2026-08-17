@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sofa Cezar - miohome</title>
+    <title>Sofa Cezar (Wersja Promocyjna) - miohome</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,11 +16,11 @@
 
     <div class="prototype-variant-switcher">
         <div class="switcher-title">
-            <i class="fa-solid fa-layer-group"></i> <strong>Prototyp:</strong> Strona Produktowa (Wersja Standardowa - regularna)
+            <i class="fa-solid fa-tag"></i> <strong>Prototyp:</strong> Strona Produktowa (Wersja Promocyjna - zniżka + Omnibus)
         </div>
         <div class="switcher-links">
-            <a href="product_page.html" class="switcher-btn active"><i class="fa-solid fa-check"></i> 1. Standardowa (bez zniżki)</a>
-            <a href="product_page_promo.html" class="switcher-btn"><i class="fa-solid fa-tag"></i> 2. Promocyjna (Omnibus)</a>
+            <a href="product_page.html" class="switcher-btn"><i class="fa-solid fa-couch"></i> 1. Standardowa (bez zniżki)</a>
+            <a href="product_page_promo.html" class="switcher-btn active"><i class="fa-solid fa-check"></i> 2. Promocyjna (Omnibus)</a>
         </div>
     </div>
 
@@ -183,9 +183,17 @@
                     </div>
                 </div>
 
-                <div class="product-price-section">
+                <div class="product-price-section is-promo">
                     <div class="price-configuration-label">Cena wybranej konfiguracji</div>
-                    <div class="product-price"><span id="mainPriceValue">4 999,00</span> zł <span class="price-info">Z VAT</span></div>
+                    <div class="product-price promo">
+                        <span class="current-price-val promo"><span id="mainPriceValue">4 999,00</span> zł</span>
+                        <span class="old-price-val"><span id="oldPriceValue">5 899,00</span> zł</span>
+                        <span class="promo-discount-badge">-15%</span>
+                        <span class="price-info">Z VAT</span>
+                    </div>
+                    <div class="omnibus-info">
+                        <span>Najniższa cena z ostatnich 30 dni przed obniżką: <strong id="omnibusPriceValue">5 499,00 zł</strong></span>
+                    </div>
                 </div>
 
                 <div class="add-to-cart-row">
@@ -324,7 +332,6 @@
         <section class="recommended-section">
             <div class="recommended-tabs">
                 <div class="recommended-tab active">ZOBACZ RÓWNIEŻ</div>
-                <!-- <div class="recommended-tab">DO KOMPLETU</div> -->
             </div>
             
             <mio-product-carousel>
@@ -338,13 +345,16 @@
             </mio-product-carousel>
         </section>
 
-        <!-- Sticky Add to Cart -->
+        <!-- Sticky Add to Cart (Promotional) -->
         <div class="sticky-cart-bar" id="stickyCartBar">
             <div class="sticky-cart-left">
                 <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Cezar">
                 <div class="sticky-cart-info">
                     <span class="sticky-cart-title">Cezar</span>
-                    <span class="sticky-cart-price" id="stickyPriceValue">4 999,00 zł</span>
+                    <div class="sticky-cart-price promo" id="stickyPriceValue">
+                        <span class="sticky-promo-val" id="stickyPromoVal">4 999,00 zł</span>
+                        <span class="sticky-old-val" id="stickyOldVal">5 899,00 zł</span>
+                    </div>
                 </div>
                 <div class="sticky-cart-config-visuals" id="stickyCartConfigVisuals">
                     <!-- JS populates images/color boxes here -->
@@ -543,6 +553,7 @@
                 </div>
             </div>
 
+            <!-- Collection: LEO -->
             <div class="fabric-collection">
                 <div class="fc-header">
                     <div class="fc-title-row">
@@ -589,79 +600,78 @@
                     <img src="img/materials/MTK000ZF22.avif" alt="Arizona Banner">
                 </div>
             </div>
-            </div>
         </div>
     </div>
 
     <!-- Filter View Panel -->
-        <div class="fabric-filter-view" id="fabricFilterView">
-            <div class="ff-header" id="closeFiltersBtn">
-                <i class="fa-solid fa-chevron-left"></i> Filtry
-            </div>
-            <div class="ff-content">
-                <div class="ff-accordion-item active">
-                    <div class="ff-accordion-header">
-                        Sortuj według
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="ff-accordion-body">
-                        <label class="ff-radio">
-                            <input type="radio" name="sort" checked>
-                            <span class="radio-mark"></span>
-                            Cena: najniższa
-                        </label>
-                        <label class="ff-radio">
-                            <input type="radio" name="sort">
-                            <span class="radio-mark"></span>
-                            Cena: najwyższa
-                        </label>
-                        <label class="ff-radio">
-                            <input type="radio" name="sort">
-                            <span class="radio-mark"></span>
-                            Parametr
-                        </label>
-                    </div>
+    <div class="fabric-filter-view" id="fabricFilterView">
+        <div class="ff-header" id="closeFiltersBtn">
+            <i class="fa-solid fa-chevron-left"></i> Filtry
+        </div>
+        <div class="ff-content">
+            <div class="ff-accordion-item active">
+                <div class="ff-accordion-header">
+                    Sortuj według
+                    <i class="fa-solid fa-chevron-right"></i>
                 </div>
-                
-                <div class="ff-accordion-item active">
-                    <div class="ff-accordion-header">
-                        Typ materiału
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="ff-accordion-body">
-                        <label class="ff-checkbox">
-                            <input type="checkbox" checked>
-                            <span class="checkbox-mark"></span>
-                            Skóra
-                        </label>
-                        <label class="ff-checkbox">
-                            <input type="checkbox">
-                            <span class="checkbox-mark"></span>
-                            Welur
-                        </label>
-                        <label class="ff-checkbox">
-                            <input type="checkbox" checked>
-                            <span class="checkbox-mark"></span>
-                            Tkanina
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="ff-accordion-item">
-                    <div class="ff-accordion-header">
-                        Funkcje materiału
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="ff-accordion-body">
-                    </div>
+                <div class="ff-accordion-body">
+                    <label class="ff-radio">
+                        <input type="radio" name="sort" checked>
+                        <span class="radio-mark"></span>
+                        Cena: najniższa
+                    </label>
+                    <label class="ff-radio">
+                        <input type="radio" name="sort">
+                        <span class="radio-mark"></span>
+                        Cena: najwyższa
+                    </label>
+                    <label class="ff-radio">
+                        <input type="radio" name="sort">
+                        <span class="radio-mark"></span>
+                        Parametr
+                    </label>
                 </div>
             </div>
             
-            <div class="ff-footer">
-                <button class="btn-ff-reset">RESETUJ FILTRY</button>
-                <button class="btn-ff-apply" id="applyFiltersBtn">ZOBACZ WYNIKI (33)</button>
+            <div class="ff-accordion-item active">
+                <div class="ff-accordion-header">
+                    Typ materiału
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="ff-accordion-body">
+                    <label class="ff-checkbox">
+                        <input type="checkbox" checked>
+                        <span class="checkbox-mark"></span>
+                        Skóra
+                    </label>
+                    <label class="ff-checkbox">
+                        <input type="checkbox">
+                        <span class="checkbox-mark"></span>
+                        Welur
+                    </label>
+                    <label class="ff-checkbox">
+                        <input type="checkbox" checked>
+                        <span class="checkbox-mark"></span>
+                        Tkanina
+                    </label>
+                </div>
+            </div>
+            
+            <div class="ff-accordion-item">
+                <div class="ff-accordion-header">
+                    Funkcje materiału
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="ff-accordion-body">
+                </div>
             </div>
         </div>
+        
+        <div class="ff-footer">
+            <button class="btn-ff-reset">RESETUJ FILTRY</button>
+            <button class="btn-ff-apply" id="applyFiltersBtn">ZOBACZ WYNIKI (33)</button>
+        </div>
+    </div>
 
     <script src="js/components.js"></script>
     <script>
@@ -700,7 +710,7 @@
                         i.classList.remove('fa-regular');
                         i.classList.add('fa-solid');
                         if (typeof showWishlistNotification === 'function') {
-                            showWishlistNotification("Cezar", true); // Domyślny tytuł dla strony produktu
+                            showWishlistNotification("Cezar", true);
                         }
                     } else {
                         i.classList.remove('fa-solid');
@@ -854,9 +864,11 @@
                 });
             }
 
-            // Kalkulacja ceny
+            // Kalkulacja ceny promocyjnej z uwzględnieniem dyrektywy Omnibus
             function updatePrice() {
-                const basePrice = 4999.00;
+                const basePromoPrice = 4999.00;
+                const baseOldPrice = 5899.00;
+                const baseOmnibusPrice = 5499.00;
                 let totalModifier = 0;
                 
                 const activeOptions = document.querySelectorAll('.config-section .config-option.active');
@@ -867,7 +879,9 @@
                     }
                 });
                 
-                const finalPrice = basePrice + totalModifier;
+                const finalPromoPrice = basePromoPrice + totalModifier;
+                const finalOldPrice = baseOldPrice + totalModifier;
+                const finalOmnibusPrice = baseOmnibusPrice + totalModifier;
                 
                 // Format to 2 decimal places with comma and space separator
                 const formatPrice = (price) => {
@@ -875,16 +889,25 @@
                 };
                 
                 const mainPriceEl = document.getElementById('mainPriceValue');
-                if (mainPriceEl) mainPriceEl.textContent = formatPrice(finalPrice);
+                if (mainPriceEl) mainPriceEl.textContent = formatPrice(finalPromoPrice);
+
+                const oldPriceEl = document.getElementById('oldPriceValue');
+                if (oldPriceEl) oldPriceEl.textContent = formatPrice(finalOldPrice);
+
+                const omnibusPriceEl = document.getElementById('omnibusPriceValue');
+                if (omnibusPriceEl) omnibusPriceEl.textContent = formatPrice(finalOmnibusPrice) + ' zł';
                 
                 const klarnaPriceEl = document.getElementById('klarnaPriceValue');
-                if (klarnaPriceEl) klarnaPriceEl.textContent = formatPrice(finalPrice);
+                if (klarnaPriceEl) klarnaPriceEl.textContent = formatPrice(finalPromoPrice);
                 
                 const klarnaInstallEl = document.getElementById('klarnaInstallmentValue');
-                if (klarnaInstallEl) klarnaInstallEl.textContent = formatPrice(finalPrice / 33.326);
+                if (klarnaInstallEl) klarnaInstallEl.textContent = formatPrice(finalPromoPrice / 33.326);
                 
-                const stickyPriceEl = document.getElementById('stickyPriceValue');
-                if (stickyPriceEl) stickyPriceEl.textContent = formatPrice(finalPrice) + ' zł';
+                const stickyPromoEl = document.getElementById('stickyPromoVal');
+                if (stickyPromoEl) stickyPromoEl.textContent = formatPrice(finalPromoPrice) + ' zł';
+
+                const stickyOldEl = document.getElementById('stickyOldVal');
+                if (stickyOldEl) stickyOldEl.textContent = formatPrice(finalOldPrice) + ' zł';
             }
 
             // Konfigurator: Opcje standardowe
@@ -892,14 +915,12 @@
             configOptions.forEach(option => {
                 option.addEventListener('click', function() {
                     const parent = this.closest('.config-options');
-                    // Ignoruj jeśli element należy do innego systemu (np. warianty to mogą być a tagi)
                     if (this.classList.contains('active')) return;
                     
                     const siblings = parent.querySelectorAll('.config-option');
                     siblings.forEach(sib => sib.classList.remove('active'));
                     this.classList.add('active');
 
-                    // Aktualizacja Sticky Bar i ceny
                     updateStickyConfig();
                     updatePrice();
                 });
@@ -922,7 +943,6 @@
                 fabricDrawer.classList.remove('active');
                 document.body.style.overflow = '';
                 
-                // Zwiń panel filtrów po zamknięciu szuflady
                 const fabricFilterView = document.getElementById('fabricFilterView');
                 if (fabricFilterView) fabricFilterView.classList.remove('active');
             }
@@ -975,7 +995,6 @@
 
             // Wybór tkaniny z Drawera
             const drawerFabricOptions = document.querySelectorAll('.fc-option');
-            const mainFabricConfigOptions = document.querySelector('.config-section:nth-of-type(2) .config-options'); // TKANINA section
             
             drawerFabricOptions.forEach(opt => {
                 opt.addEventListener('click', function() {
@@ -989,18 +1008,15 @@
                         if (cleaned) priceMod = parseInt(cleaned, 10);
                     }
                     
-                    // Znajdź sekcję TKANINA w głównym widoku
                     const fabricSectionTitle = Array.from(document.querySelectorAll('.config-title')).find(el => el.textContent === 'TKANINA');
                     if (fabricSectionTitle) {
                         const fabricConfigContainer = fabricSectionTitle.nextElementSibling;
                         
-                        // Znajdź aktywny wariant tkaniny (ten, który użytkownik obecnie ma zaznaczony)
                         let targetOption = fabricConfigContainer.querySelector('.config-option.active');
                         if (!targetOption) {
                             targetOption = fabricConfigContainer.querySelector('.config-option:not(.add-more-btn)');
                         }
                         
-                        // Odznacz wszystkie opcje w tej sekcji
                         const siblings = fabricConfigContainer.querySelectorAll('.config-option:not(.add-more-btn)');
                         siblings.forEach(sib => sib.classList.remove('active'));
 
@@ -1092,7 +1108,6 @@
             const mPrev = document.getElementById('mGalleryPrev');
             const mNext = document.getElementById('mGalleryNext');
             if (mScroll && mBar) {
-                // Set initial bar width based on number of items
                 const itemLength = mScroll.querySelectorAll('img').length;
                 if (itemLength > 0) {
                     mBar.style.width = `${100 / itemLength}%`;
