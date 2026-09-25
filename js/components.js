@@ -778,10 +778,15 @@ class MioCartDrawer extends HTMLElement {
                 <div class="cart-footer" style="padding: 30px 40px; background: #fafafa; border-top: 1px solid #eee; width: 100%; box-sizing: border-box;">
                     <style>
                         .cart-checkout-btn {
-                            width: 100%; background: #000; color: #fff; padding: 16px; border: none; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.2s;
+                            width: 100%; background: #000; color: #fff; padding: 16px; border: 1px solid #000; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.2s;
                         }
-                        .cart-checkout-btn:hover { background: var(--accent-color); }
+                        .cart-checkout-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
                         .cart-checkout-btn:active { background: var(--accent-color) !important; }
+                        
+                        .cart-view-btn {
+                            width: 100%; background: transparent; color: #000; padding: 14px; border: 1px solid #000; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-size: 12px; font-family: inherit; cursor: pointer; transition: 0.2s;
+                        }
+                        .cart-view-btn:hover { background: #000; color: #fff; }
                         
                         .delivery-date-link {
                             text-decoration: underline;
@@ -812,12 +817,12 @@ class MioCartDrawer extends HTMLElement {
                         <span>20 240 zł</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; color: #666; margin-bottom: 20px; align-items: center;">
-                        <span style="display: flex; align-items: center;"><img src="img/icons/truck.svg" alt="Dostawa" style="width: 14px; height: 14px; margin-right: 6px; filter: brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(1637%) hue-rotate(189deg) brightness(97%) contrast(85%);">Przewidywana dostawa:</span>
-                        <span class="delivery-date-link">14 - 26 czerwca</span>
+                        <span style="display: flex; align-items: center;"><img src="img/icons/truck.svg" alt="Dostawa" style="width: 14px; height: 14px; margin-right: 6px; filter: brightness(0) saturate(100%) invert(40%) sepia(0%) saturate(1637%) hue-rotate(189deg) brightness(97%) contrast(85%);">Szacowany termin realizacji:</span>
+                        <span class="delivery-date-link">4 - 6 tyg.</span>
                     </div>
-                    <button class="cart-checkout-btn" onclick="window.location.href='checkout.html'">Przejdź do kasy</button>
-                    <div style="text-align: center; margin-top: 15px; font-size: 10px; color: #666;">
-                        Darmowa dostawa dla zamówień powyżej 15 000 zł
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button class="cart-checkout-btn" onclick="window.location.href='checkout.html'">Przejdź do kasy</button>
+                        <button class="cart-view-btn" onclick="window.location.href='cart.html'">Zobacz koszyk</button>
                     </div>
                 </div>
             `;
@@ -827,23 +832,39 @@ class MioCartDrawer extends HTMLElement {
                 <div class="delivery-sheet-overlay"></div>
                 <div class="delivery-sheet">
                     <div style="padding: 25px 40px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                        <h4 style="margin: 0; font-size: 18px; font-weight: 700;">Dostawa Mebli</h4>
+                        <h4 style="margin: 0; font-size: 18px; font-weight: 700;">Dostawa i usługi dodatkowe</h4>
                         <button class="close-delivery-sheet" style="border: none; background: none; font-size: 30px; cursor: pointer; line-height: 1; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">&times;</button>
                     </div>
-                    <div style="padding: 30px 40px; overflow-y: auto; font-size: 13px; line-height: 1.8; color: var(--secondary-text-color);">
-                        <h5 style="margin: 0 0 15px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 1px;">Jak estymujemy datę?</h5>
-                        <p style="margin-bottom: 25px;">Każdy z naszych mebli tworzony jest na indywidualne zamówienie w polskiej manufakturze. Standardowy czas realizacji zamówienia wynosi od 4 do 6 tygodni i obejmuje precyzyjny proces produkcji wybranego modelu w spersonalizowanej tkaninie oraz rygorystyczną kontrolę jakości (QC).</p>
+                    <div style="padding: 30px 40px; overflow-y: auto; font-size: 13px; line-height: 1.8; color: var(--secondary-text-color); display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <h5 style="margin: 0 0 10px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Jak estymujemy czas realizacji?</h5>
+                            <p style="margin: 0 0 20px 0;">Każdy z naszych mebli tworzony jest na indywidualne zamówienie w polskiej manufakturze. Standardowy czas realizacji zamówienia wynosi od 4 do 6 tygodni i obejmuje precyzyjny proces produkcji wybranego modelu w spersonalizowanej tkaninie oraz rygorystyczną kontrolę jakości (QC).</p>
+
+                            <h5 style="margin: 0 0 10px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Co dzieje się po złożeniu zamówienia?</h5>
+                            <ul style="padding-left: 20px; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                                <li><strong style="color: #000;">Potwierdzenie:</strong> Zaraz po złożeniu i opłaceniu zamówienia otrzymasz e-mail z podsumowaniem wybranej konfiguracji.</li>
+                                <li><strong style="color: #000;">Status realizacji:</strong> Po podaniu numeru kontaktowego będziemy na bieżąco informować Cię o postępach – otrzymasz powiadomienie, gdy zamówienie trafi do produkcji oraz gdy zostanie ukończone i przekazane do wysyłki.</li>
+                                <li><strong style="color: #000;">Kontakt z przewoźnikiem:</strong> Gdy mebel wyruszy w drogę, firma transportowa prześle Ci informację o szacowanej dacie doręczenia. Będziesz mieć możliwość śledzenia statusu przesyłki oraz dogodnego ustalenia dokładnego terminu odbioru.</li>
+                            </ul>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid #eee; margin: 5px 0;">
+
+                        <p style="margin: 0; color: #333;">Wszystkie zamówienia dostarczamy za pośrednictwem profesjonalnych, sprawdzonych przewoźników. Standardowa dostawa realizowana jest przez zaprzyjaźnioną firmę kurierską wyspecjalizowaną w bezpiecznym transporcie mebli.</p>
                         
-                        <h5 style="margin: 0 0 15px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 1px;">Co po zamówieniu?</h5>
-                        <ul style="padding-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 10px;">
-                            <li><strong style="color: #000;">Potwierdzenie:</strong> Natychmiast po złożeniu i opłaceniu zamówienia, otrzymasz e-mail z podsumowaniem konfiguracji.</li>
-                            <li><strong style="color: #000;">Status realizacji:</strong> Po podaniu numeru kontaktowego będziemy na bieżąco informować Cię o postępach – otrzymasz powiadomienie, gdy zamówienie trafi do produkcji oraz gdy zostanie ukończone i przekazane do wysyłki.</li>
-                            <li><strong style="color: #000;">Kontakt z przewoźnikiem:</strong> Gdy mebel wyruszy w drogę, firma transportowa prześle Ci informację o szacowanej dacie doręczenia. Będziesz mieć możliwość śledzenia statusu przesyłki oraz dogodnego ustalenia dokładnego terminu odbioru.</li>
-                        </ul>
-                        
-                        <div style="background: #f9f9f9; padding: 20px; border-left: 3px solid var(--accent-color);">
-                            <strong style="color: #000; display: block; margin-bottom: 5px;">Wniesienie i montaż gratis</strong>
-                            Nasz dwuosobowy zespół dostawców wniesie mebel do wskazanego pomieszczenia, rozpakuje go, poskręca (np. zamontuje nóżki) i zabierze ze sobą wszelkie zbędne opakowania oraz kartony.
+                        <div style="border: 1px solid #eee; padding: 20px; background: #fafafa;">
+                            <h5 style="margin: 0 0 8px 0; font-size: 13px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Dostawa standardowa (GRATIS):</h5>
+                            <p style="margin: 0;">Bezpieczny transport przesyłki pod adres docelowy – doręczenie do pierwszego progu domu lub budynku mieszkalnego.</p>
+                        </div>
+
+                        <div style="border: 1px solid #eee; padding: 20px; background: #fafafa;">
+                            <h5 style="margin: 0 0 8px 0; font-size: 13px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Opcja z wniesieniem (usługa płatna):</h5>
+                            <p style="margin: 0;">Dwuosobowy zespół wniesie mebel bezpośrednio do wskazanego pokoju w Twoim domu lub mieszkaniu, ustawi go na wybranym miejscu, rozpakuje oraz posprząta i zutylizuje zbędne opakowania w pojemniku wskazanym przez Ciebie.</p>
+                        </div>
+
+                        <div style="border: 1px solid #eee; padding: 20px; background: #fafafa;">
+                            <h5 style="margin: 0 0 8px 0; font-size: 13px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Opcja z wniesieniem i montażem (usługa płatna):</h5>
+                            <p style="margin: 0;">Obejmuje pełen pakiet wniesienia (do wybranego pokoju, rozpakowanie, ustawienie i utylizację kartonów) wraz z kompleksowym montażem mebla (np. przykręcenie nóżek, spięcie modułów).</p>
                         </div>
                     </div>
                 </div>

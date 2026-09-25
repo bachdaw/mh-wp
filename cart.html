@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koszyk - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-light static-nav-page">
+
+    <mio-navbar></mio-navbar>
+
+    <main class="cart-page-container animate-up">
+        <!-- Breadcrumbs -->
+        <div class="cart-breadcrumbs">
+            <a href="index.html">Strona główna</a> &gt; Koszyk
+        </div>
+
+        <div class="cart-header-section">
+            <h1 class="cart-page-title">Twój koszyk</h1>
+            <span class="cart-items-count" id="cart-item-count-label">5 produktów</span>
+        </div>
+
+        <!-- Stan pustego koszyka -->
+        <div class="cart-empty-state" id="cart-empty-state">
+            <div class="cart-empty-icon">
+                <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <h2 class="cart-empty-title">Twój koszyk jest pusty</h2>
+            <p class="cart-empty-desc">Nie masz jeszcze żadnych produktów w koszyku. Odkryj naszą kolekcję ręcznie tworzonych mebli tapicerowanych.</p>
+            <a href="listing.html" class="btn-primary" style="display: inline-block; text-decoration: none; padding: 15px 35px;">Przejdź do produktów</a>
+        </div>
+
+        <!-- Siatka koszyka -->
+        <div class="cart-layout-grid" id="cart-content-grid">
+            
+            <!-- Lewa kolumna: produkty i akcje -->
+            <div class="cart-main-column">
+                
+                <!-- Tabela / Karta produktów -->
+                <div class="cart-items-card">
+                    <div class="cart-table-header">
+                        <span>Produkt</span>
+                        <span>Cena</span>
+                        <span>Ilość</span>
+                        <span>Wartość</span>
+                        <span></span>
+                    </div>
+
+                    <div class="cart-items-list" id="cart-items-list">
+                        
+                        <!-- Element Próbki (warunkowy) -->
+                        <div class="cart-item-row" id="cart-item-samples" style="display: none;" data-price="0">
+                            <div class="cart-product-info">
+                                <img src="img/wzorniki.png" alt="Próbki tkanin" class="cart-product-thumb">
+                                <div class="cart-product-details">
+                                    <span class="cart-product-title">Zestaw bezpłatnych próbek materiałów</span>
+                                    <div class="cart-product-variants" id="cart-samples-names">Wybrane: Różne próbki</div>
+                                </div>
+                            </div>
+                            <div class="cart-col-price">0 zł</div>
+                            <div class="cart-col-qty">
+                                <div class="cart-qty-ctrl">
+                                    <button type="button" onclick="removeSamplesItem()">-</button>
+                                    <input type="text" value="1" readonly>
+                                    <button type="button" disabled style="opacity: 0.3; cursor: not-allowed;">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col-total">0 zł</div>
+                            <div>
+                                <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeSamplesItem()">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Produkt 1 -->
+                        <div class="cart-item-row" data-price="16850">
+                            <div class="cart-product-info">
+                                <img src="img/product-img/chesterclub_preview_v2.jpg" alt="Sofa Cezar" class="cart-product-thumb">
+                                <div class="cart-product-details">
+                                    <a href="product_page_promo.html" class="cart-product-title">Sofa Cezar 2-osobowa Patchwork Harris Tweed</a>
+                                    <div class="cart-product-variants">
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/materials/MTK0381.avif" alt="Skóra">
+                                            <span>Obicie: Skóra (Koniakowy Brąz)</span>
+                                        </div>
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/wood/black.jpg" alt="Dąb czarny">
+                                            <span>Nóżki: Dąb czarny</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col-price">16 850 zł</div>
+                            <div class="cart-col-qty">
+                                <div class="cart-qty-ctrl">
+                                    <button type="button" class="qty-minus">-</button>
+                                    <input type="text" value="1" readonly class="qty-input">
+                                    <button type="button" class="qty-plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col-total">16 850 zł</div>
+                            <div>
+                                <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Produkt 2 -->
+                        <div class="cart-item-row" data-price="4200">
+                            <div class="cart-product-info">
+                                <img src="img/product-img/cezar_preview_przod.png" alt="Sofa Lounge" class="cart-product-thumb">
+                                <div class="cart-product-details">
+                                    <a href="product_page.html" class="cart-product-title">Sofa Lounge 3-osobowa</a>
+                                    <div class="cart-product-variants">
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/materials/MTK0354.avif" alt="Welur">
+                                            <span>Obicie: Welur (Butelkowa zieleń)</span>
+                                        </div>
+                                        <div class="cart-product-variant-row">
+                                            <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #f3c36c, #a88235); flex-shrink: 0;"></div>
+                                            <span>Nóżki: Złoty metal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col-price">4 200 zł</div>
+                            <div class="cart-col-qty">
+                                <div class="cart-qty-ctrl">
+                                    <button type="button" class="qty-minus">-</button>
+                                    <input type="text" value="1" readonly class="qty-input">
+                                    <button type="button" class="qty-plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col-total">4 200 zł</div>
+                            <div>
+                                <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Produkt 3 -->
+                        <div class="cart-item-row" data-price="1890">
+                            <div class="cart-product-info">
+                                <img src="img/product-img/barry_preview.png" alt="Fotel Classic Uszak" class="cart-product-thumb">
+                                <div class="cart-product-details">
+                                    <a href="product_page.html" class="cart-product-title">Fotel Classic Uszak</a>
+                                    <div class="cart-product-variants">
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/materials/material.avif" alt="Tkanina">
+                                            <span>Obicie: Tkanina (Szary melanż)</span>
+                                        </div>
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/wood/natural.jpg" alt="Buk">
+                                            <span>Nóżki: Buk naturalny</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col-price">1 890 zł</div>
+                            <div class="cart-col-qty">
+                                <div class="cart-qty-ctrl">
+                                    <button type="button" class="qty-minus">-</button>
+                                    <input type="text" value="1" readonly class="qty-input">
+                                    <button type="button" class="qty-plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col-total">1 890 zł</div>
+                            <div>
+                                <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Produkt 4 -->
+                        <div class="cart-item-row" data-price="950">
+                            <div class="cart-product-info">
+                                <img src="img/product-img/biber_preview.png" alt="Pufa Chesterfield" class="cart-product-thumb">
+                                <div class="cart-product-details">
+                                    <a href="product_page.html" class="cart-product-title">Pufa Chesterfield</a>
+                                    <div class="cart-product-variants">
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/materials/MTK000ZF22.avif" alt="Skóra">
+                                            <span>Obicie: Skóra (Czarna)</span>
+                                        </div>
+                                        <div class="cart-product-variant-row">
+                                            <div style="width: 12px; height: 12px; background-color: #333; flex-shrink: 0;"></div>
+                                            <span>Nóżki: Brak (ślizgacze)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col-price">950 zł</div>
+                            <div class="cart-col-qty">
+                                <div class="cart-qty-ctrl">
+                                    <button type="button" class="qty-minus">-</button>
+                                    <input type="text" value="2" readonly class="qty-input">
+                                    <button type="button" class="qty-plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col-total">1 900 zł</div>
+                            <div>
+                                <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Produkt 5 -->
+                        <div class="cart-item-row" data-price="5400">
+                            <div class="cart-product-info">
+                                <img src="img/product-img/pufa_preview.png" alt="Sofa Modern 3-osobowa" class="cart-product-thumb">
+                                <div class="cart-product-details">
+                                    <a href="product_page.html" class="cart-product-title">Sofa Modern 3-osobowa</a>
+                                    <div class="cart-product-variants">
+                                        <div class="cart-product-variant-row">
+                                            <img src="img/materials/MTK0381.avif" alt="Skóra">
+                                            <span>Obicie: Skóra (Biała)</span>
+                                        </div>
+                                        <div class="cart-product-variant-row">
+                                            <div style="width: 12px; height: 12px; background-color: #eee; border: 1px solid #ccc; flex-shrink: 0;"></div>
+                                            <span>Nóżki: Srebrny metal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-col-price">5 400 zł</div>
+                            <div class="cart-col-qty">
+                                <div class="cart-qty-ctrl">
+                                    <button type="button" class="qty-minus">-</button>
+                                    <input type="text" value="1" readonly class="qty-input">
+                                    <button type="button" class="qty-plus">+</button>
+                                </div>
+                            </div>
+                            <div class="cart-col-total">5 400 zł</div>
+                            <div>
+                                <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Szacowany termin realizacji Banner (przeniesiony pod tabelkę) -->
+                <div class="cart-realization-banner">
+                    <div class="cr-info">
+                        <img src="img/icons/truck.svg" alt="Dostawa" class="cr-truck-icon">
+                        <div class="cr-text">
+                            <strong>Szacowany termin realizacji: 4 - 6 tyg.</strong>
+                            <div>Wszystkie meble tworzymy na indywidualne zamówienie w polskiej manufakturze.</div>
+                        </div>
+                    </div>
+                    <button type="button" class="cr-details-btn" id="open-delivery-modal-btn">Szczegóły dostawy i usług</button>
+                </div>
+
+                <!-- Kontynuuj zakupy -->
+                <div style="margin-top: 5px;">
+                    <a href="listing.html" class="cart-continue-link">
+                        <i class="fa-solid fa-arrow-left"></i> Kontynuuj zakupy
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Prawa kolumna: Podsumowanie (Sticky) -->
+            <div class="cart-sidebar-column">
+                <div class="cart-summary-box">
+                    <h3 class="cart-summary-title">Podsumowanie zamówienia</h3>
+                    
+                    <div class="cart-summary-rows">
+                        <div class="cart-summary-row">
+                            <span>Suma częściowa</span>
+                            <span id="cart-summary-subtotal">30 240 zł</span>
+                        </div>
+                        <div class="cart-summary-row">
+                            <span>Dostawa standardowa</span>
+                            <span style="color: #166534; font-weight: 500;">GRATIS</span>
+                        </div>
+
+                        <!-- Opcja wpisania kodu rabatowego -->
+                        <div class="cart-summary-coupon-section">
+                            <div class="cart-coupon-form" id="cart-coupon-form-box">
+                                <input type="text" id="cart-discount-input" class="cart-coupon-input" placeholder="Kod rabatowy">
+                                <button type="button" id="cart-discount-btn" class="cart-coupon-btn">Zastosuj</button>
+                            </div>
+                            <div class="cart-coupon-badge" id="cart-coupon-badge">
+                                <span><i class="fa-solid fa-check" style="margin-right: 5px;"></i> Kod <strong id="cart-coupon-badge-code">TEST</strong> (-10%)</span>
+                                <button type="button" id="cart-coupon-remove-btn">Usuń</button>
+                            </div>
+                            <div class="cart-coupon-msg" id="cart-discount-msg"></div>
+                        </div>
+
+                        <div class="cart-summary-row discount-row" id="cart-summary-discount-row" style="display: none;">
+                            <span>Rabat (<span id="cart-discount-name">TEST</span>)</span>
+                            <span id="cart-discount-value">-3 024 zł</span>
+                        </div>
+                        <div class="cart-summary-total-row">
+                            <span>Do zapłaty</span>
+                            <span id="cart-summary-total">30 240 zł</span>
+                        </div>
+                        <div class="cart-summary-vat-row" id="cart-summary-vat">
+                            W tym 5 654,63 zł VAT
+                        </div>
+                    </div>
+
+                    <a href="checkout.html" class="cart-checkout-cta">Przejdź do kasy</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Karuzelka produktów (na białym pasku) -->
+    <div class="cart-carousel-wrapper">
+        <section class="products-section">
+            <div class="section-header animate-up">
+                <h2 class="section-title">Wybrane produkty</h2>
+                <a href="listing.html" class="see-all">Zobacz wszystkie</a>
+            </div>
+            
+            <mio-product-carousel class="animate-up">
+                <mio-product-card title="Sofa 3-osobowa Cezar" desc="Luksusowa sofa Chesterfield, tapicerowana wysokiej jakości tkaniną lub skórą z głębokim pikowaniem i eleganckimi ćwiekami." price="4 999,00 zł" old-price="5 899,00 zł" omnibus-price="5 499,00 zł" price-prefix="od" badges='[{"text":"PROMOCJA", "class":"sale"}]' link="product_page_promo.html" images='["img/product-img/chesterclub_preview_v2.jpg", "img/product-img/cezar_preview_przod.png", "img/product-img/cezar_preview_tyl.png"]'></mio-product-card>
+                <mio-product-card title="Sofa 2-osobowa Barry" desc="Nowoczesna kanapa stanowi stylowe połączenie materiałów. Teksturowane, rdzawobrązowe obicie." price="4 990,00 zł" price-prefix="od" badges='[{"text":"Bestseller", "class":"bestseller"}]' link="product_page.html" images='["img/product-img/barry_preview.png", "img/product-img/barry_preview_przod.png", "img/product-img/barry_preview_tyl.png", "img/product-img/barry_closeup.png"]'></mio-product-card>
+                <mio-product-card title="Fotel Biber" desc="Elegancki fotel obrotowy o rzeźbiarskiej formie, w całości pokryty miękką tkaniną typu boucle w kolorze musztardowym." price="1 350,00 zł" old-price="1 590,00 zł" omnibus-price="1 450,00 zł" price-prefix="od" badges='[{"text":"SALE", "class":"sale"}]' images='["img/product-img/biber_preview.png"]'></mio-product-card>
+                <mio-product-card title="Pufa Midel" desc="Nowoczesna pufa o obłym kształcie, wykończona strukturalną tkaniną w odcieniach szarości." price="1 099,00 zł" price-prefix="od" images='["img/product-img/pufa_preview.png"]'></mio-product-card>
+                <mio-product-card title="Łóżko Onyx" desc="Stylowe łóżko o obłych kształtach, w całości obite teksturowaną tkaniną w głębokim, rdzawym kolorze." price="3 499,00 zł" price-prefix="od" images='["img/product-img/lozko_preview.png"]'></mio-product-card>
+                <mio-product-card title="Sofa Chesterclub Patchwork" desc="Welurowa sofa z funkcją spania, idealna do nowoczesnych wnętrz." price="4 990,00 zł" price-prefix="od" images='["img/product-img/chesterclub_tweed_preview.png"]'></mio-product-card>
+                <mio-product-card title="Sofa Cezar 3-osobowa" desc="Welurowa sofa z funkcją spania, idealna do nowoczesnych wnętrz." price="5 990,00 zł" price-prefix="od" images='["img/product-img/rubi_preview.png"]'></mio-product-card>
+            </mio-product-carousel>
+        </section>
+    </div>
+
+    <!-- Modal Szczegółów Dostawy -->
+    <div class="cart-modal-backdrop" id="cart-delivery-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h4 class="cart-modal-title">Dostawa i usługi dodatkowe</h4>
+                <button type="button" class="cart-modal-close" id="close-delivery-modal-btn">&times;</button>
+            </div>
+            <div class="cart-modal-body">
+                <div>
+                    <h5 style="margin: 0 0 10px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Jak estymujemy czas realizacji?</h5>
+                    <p style="margin: 0 0 20px 0;">Każdy z naszych mebli tworzony jest na indywidualne zamówienie w polskiej manufakturze. Standardowy czas realizacji zamówienia wynosi od 4 do 6 tygodni i obejmuje precyzyjny proces produkcji wybranego modelu w spersonalizowanej tkaninie oraz rygorystyczną kontrolę jakości (QC).</p>
+
+                    <h5 style="margin: 0 0 10px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Co dzieje się po złożeniu zamówienia?</h5>
+                    <ul style="padding-left: 20px; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+                        <li><strong style="color: #000;">Potwierdzenie:</strong> Zaraz po złożeniu i opłaceniu zamówienia otrzymasz e-mail z podsumowaniem wybranej konfiguracji.</li>
+                        <li><strong style="color: #000;">Status realizacji:</strong> Po podaniu numeru kontaktowego będziemy na bieżąco informować Cię o postępach – otrzymasz powiadomienie, gdy zamówienie trafi do produkcji oraz gdy zostanie ukończone i przekazane do wysyłki.</li>
+                        <li><strong style="color: #000;">Kontakt z przewoźnikiem:</strong> Gdy mebel wyruszy w drogę, firma transportowa prześle Ci informację o szacowanej dacie doręczenia. Będziesz mieć możliwość śledzenia statusu przesyłki oraz dogodnego ustalenia dokładnego terminu odbioru.</li>
+                    </ul>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid #eee; margin: 5px 0;">
+
+                <p style="margin: 0; color: #333;">Wszystkie zamówienia dostarczamy za pośrednictwem profesjonalnych, sprawdzonych przewoźników. Standardowa dostawa realizowana jest przez zaprzyjaźnioną firmę kurierską wyspecjalizowaną w bezpiecznym transporcie mebli.</p>
+                
+                <div style="border: 1px solid #eee; padding: 20px; background: #fafafa;">
+                    <h5 style="margin: 0 0 8px 0; font-size: 13px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Dostawa standardowa (GRATIS):</h5>
+                    <p style="margin: 0;">Bezpieczny transport przesyłki pod adres docelowy – doręczenie do pierwszego progu domu lub budynku mieszkalnego.</p>
+                </div>
+
+                <div style="border: 1px solid #eee; padding: 20px; background: #fafafa;">
+                    <h5 style="margin: 0 0 8px 0; font-size: 13px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Opcja z wniesieniem (usługa płatna):</h5>
+                    <p style="margin: 0;">Dwuosobowy zespół wniesie mebel bezpośrednio do wskazanego pokoju w Twoim domu lub mieszkaniu, ustawi go na wybranym miejscu, rozpakuje oraz posprząta i zutylizuje zbędne opakowania w pojemniku wskazanym przez Ciebie.</p>
+                </div>
+
+                <div style="border: 1px solid #eee; padding: 20px; background: #fafafa;">
+                    <h5 style="margin: 0 0 8px 0; font-size: 13px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Opcja z wniesieniem i montażem (usługa płatna):</h5>
+                    <p style="margin: 0;">Obejmuje pełen pakiet wniesienia (do wybranego pokoju, rozpakowanie, ustawienie i utylizację kartonów) wraz z kompleksowym montażem mebla (np. przykręcenie nóżek, spięcie modułów).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obsługa próbek z localStorage
+            const samplesRow = document.getElementById('cart-item-samples');
+            const samplesAdded = localStorage.getItem('mock_samples_added') === 'true';
+            const samplesNames = localStorage.getItem('mock_samples_names');
+            if (samplesAdded && samplesRow) {
+                samplesRow.style.display = 'grid';
+                if (samplesNames) {
+                    document.getElementById('cart-samples-names').textContent = 'Wybrane: ' + samplesNames;
+                }
+            }
+
+            // Inicjalizacja kalkulacji cen
+            initCartEvents();
+            recalculateCartTotals();
+
+            // Modal dostawy
+            const modal = document.getElementById('cart-delivery-modal');
+            const openModalBtn = document.getElementById('open-delivery-modal-btn');
+            const closeModalBtn = document.getElementById('close-delivery-modal-btn');
+
+            if (openModalBtn && modal) {
+                openModalBtn.addEventListener('click', () => {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            const closeModal = () => {
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
+
+            // Obsługa kuponu rabatowego
+            let appliedDiscountPercent = 0;
+            const discountBtn = document.getElementById('cart-discount-btn');
+            const discountInput = document.getElementById('cart-discount-input');
+            const discountMsg = document.getElementById('cart-discount-msg');
+            const couponFormBox = document.getElementById('cart-coupon-form-box');
+            const couponBadge = document.getElementById('cart-coupon-badge');
+            const couponBadgeCode = document.getElementById('cart-coupon-badge-code');
+            const couponRemoveBtn = document.getElementById('cart-coupon-remove-btn');
+
+            const applyCoupon = () => {
+                const code = discountInput.value.trim().toUpperCase();
+                
+                // Scenariusz 1: Poprawny kod
+                if (code === 'TEST') {
+                    appliedDiscountPercent = 0.10;
+                    discountInput.classList.remove('is-invalid');
+                    discountInput.classList.add('is-valid');
+                    discountInput.disabled = true;
+                    discountBtn.disabled = true;
+                    discountBtn.style.opacity = '0.5';
+
+                    if (couponBadge && couponBadgeCode) {
+                        couponBadgeCode.textContent = code;
+                        couponBadge.style.display = 'flex';
+                    }
+
+                    discountMsg.style.display = 'block';
+                    discountMsg.style.color = '#166534';
+                    discountMsg.innerHTML = '<i class="fa-solid fa-check" style="margin-right: 5px;"></i> Kod rabatowy <strong>TEST</strong> (-10%) został pomyślnie naliczony.';
+                    
+                    recalculateCartTotals();
+                } 
+                // Scenariusz 2: Niepoprawny kod
+                else if (code !== '') {
+                    discountInput.classList.remove('is-valid');
+                    discountInput.classList.add('is-invalid');
+                    
+                    // Efekt potrząśnięcia (shake)
+                    if (couponFormBox) {
+                        couponFormBox.classList.remove('cart-shake');
+                        void couponFormBox.offsetWidth; // reflow dla restartu animacji
+                        couponFormBox.classList.add('cart-shake');
+                    }
+
+                    discountMsg.style.display = 'block';
+                    discountMsg.style.color = '#dc2626';
+                    discountMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 5px;"></i> Kod rabatowy "' + escapeHtml(code) + '" jest nieprawidłowy lub wygasł.';
+                } 
+                // Scenariusz pustego pola
+                else {
+                    discountInput.classList.add('is-invalid');
+                    if (couponFormBox) {
+                        couponFormBox.classList.remove('cart-shake');
+                        void couponFormBox.offsetWidth;
+                        couponFormBox.classList.add('cart-shake');
+                    }
+                    discountMsg.style.display = 'block';
+                    discountMsg.style.color = '#dc2626';
+                    discountMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 5px;"></i> Proszę wprowadzić kod rabatowy.';
+                }
+            };
+
+            const removeCoupon = () => {
+                appliedDiscountPercent = 0;
+                discountInput.disabled = false;
+                discountBtn.disabled = false;
+                discountBtn.style.opacity = '1';
+                discountInput.value = '';
+                discountInput.classList.remove('is-valid', 'is-invalid');
+                if (couponBadge) couponBadge.style.display = 'none';
+                discountMsg.style.display = 'none';
+                recalculateCartTotals();
+            };
+
+            if (discountBtn) discountBtn.addEventListener('click', applyCoupon);
+            if (discountInput) {
+                discountInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        applyCoupon();
+                    }
+                });
+                discountInput.addEventListener('input', () => {
+                    discountInput.classList.remove('is-invalid');
+                    if (discountMsg && !discountInput.disabled) {
+                        discountMsg.style.display = 'none';
+                    }
+                });
+            }
+            if (couponRemoveBtn) couponRemoveBtn.addEventListener('click', removeCoupon);
+
+            function escapeHtml(text) {
+                const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+                return text.replace(/[&<>"']/g, m => map[m]);
+            }
+
+            // Funkcja kalkulacji sumy koszyka
+            function recalculateCartTotals() {
+                const rows = document.querySelectorAll('.cart-item-row');
+                let visibleRowsCount = 0;
+                let subtotal = 0;
+
+                rows.forEach(row => {
+                    if (row.style.display !== 'none') {
+                        visibleRowsCount++;
+                        const unitPrice = parseFloat(row.getAttribute('data-price')) || 0;
+                        const qtyInput = row.querySelector('.qty-input') || row.querySelector('input');
+                        const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+                        const rowTotal = unitPrice * qty;
+                        
+                        const totalCol = row.querySelector('.cart-col-total');
+                        if (totalCol) {
+                            totalCol.textContent = formatMoney(rowTotal) + ' zł';
+                        }
+                        subtotal += rowTotal;
+                    }
+                });
+
+                // Aktualizacja licznika produktów
+                const countLabel = document.getElementById('cart-item-count-label');
+                if (countLabel) {
+                    countLabel.textContent = `${visibleRowsCount} ${getDeclinedProducts(visibleRowsCount)}`;
+                }
+
+                // Sprawdzenie stanu pustego koszyka
+                const emptyState = document.getElementById('cart-empty-state');
+                const contentGrid = document.getElementById('cart-content-grid');
+                if (visibleRowsCount === 0) {
+                    if (emptyState) emptyState.style.display = 'block';
+                    if (contentGrid) contentGrid.style.display = 'none';
+                } else {
+                    if (emptyState) emptyState.style.display = 'none';
+                    if (contentGrid) contentGrid.style.display = 'grid';
+                }
+
+                // Podsumowanie
+                const subtotalEl = document.getElementById('cart-summary-subtotal');
+                const totalEl = document.getElementById('cart-summary-total');
+                const discountRow = document.getElementById('cart-summary-discount-row');
+                const discountValEl = document.getElementById('cart-discount-value');
+
+                if (subtotalEl) subtotalEl.textContent = formatMoney(subtotal) + ' zł';
+
+                let grandTotal = subtotal;
+                if (appliedDiscountPercent > 0 && discountRow && discountValEl) {
+                    const discountAmount = Math.round(subtotal * appliedDiscountPercent);
+                    grandTotal = subtotal - discountAmount;
+                    discountRow.style.display = 'flex';
+                    discountValEl.textContent = '-' + formatMoney(discountAmount) + ' zł';
+                } else if (discountRow) {
+                    discountRow.style.display = 'none';
+                }
+
+                if (totalEl) totalEl.textContent = formatMoney(grandTotal) + ' zł';
+
+                // Aktualizacja kwoty VAT pod "Do zapłaty"
+                const vatEl = document.getElementById('cart-summary-vat');
+                if (vatEl) {
+                    const vatAmount = grandTotal > 0 ? (grandTotal * 0.23 / 1.23) : 0;
+                    vatEl.textContent = 'W tym ' + vatAmount.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' zł VAT';
+                }
+            }
+
+            // Narzędzia
+            function formatMoney(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            }
+
+            function getDeclinedProducts(count) {
+                if (count === 1) return 'produkt';
+                if (count >= 2 && count <= 4) return 'produkty';
+                return 'produktów';
+            }
+
+            function initCartEvents() {
+                // Ilości + / -
+                document.querySelectorAll('.qty-plus').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const row = e.target.closest('.cart-item-row');
+                        const input = row.querySelector('.qty-input');
+                        if (input) {
+                            let val = parseInt(input.value) || 1;
+                            input.value = val + 1;
+                            recalculateCartTotals();
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.qty-minus').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const row = e.target.closest('.cart-item-row');
+                        const input = row.querySelector('.qty-input');
+                        if (input) {
+                            let val = parseInt(input.value) || 1;
+                            if (val > 1) {
+                                input.value = val - 1;
+                                recalculateCartTotals();
+                            }
+                        }
+                    });
+                });
+            }
+
+            window.removeCartRow = function(btn) {
+                const row = btn.closest('.cart-item-row');
+                if (row) {
+                    row.style.opacity = '0';
+                    row.style.transition = 'opacity 0.2s';
+                    setTimeout(() => {
+                        row.remove();
+                        recalculateCartTotals();
+                    }, 200);
+                }
+            };
+
+            window.removeSamplesItem = function() {
+                localStorage.removeItem('mock_samples_added');
+                localStorage.removeItem('mock_samples_names');
+                const samplesRow = document.getElementById('cart-item-samples');
+                if (samplesRow) {
+                    samplesRow.style.opacity = '0';
+                    setTimeout(() => {
+                        samplesRow.style.display = 'none';
+                        recalculateCartTotals();
+                    }, 200);
+                }
+                const drawer = document.querySelector('mio-cart-drawer');
+                if (drawer && typeof drawer.render === 'function') drawer.render();
+            };
+        });
+    </script>
+</body>
+</html>
