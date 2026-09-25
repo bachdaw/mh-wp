@@ -19,11 +19,19 @@
             padding: 0;
         }
 
+        html {
+            overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--background-color);
             color: var(--text-main);
             overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
         }
 
         img { max-width: 100%; display: block; }
@@ -175,13 +183,37 @@
         .section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; }
         .see-all { font-size: 12px; text-decoration: underline; text-transform: uppercase; letter-spacing: 1px; }
 
-        .products-carousel { position: relative; display: flex; align-items: center; }
+        mio-product-carousel {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .products-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+        }
         .carousel-arrow { background: transparent; border: none; font-size: 24px; color: #ccc; cursor: pointer; padding: 10px; position: absolute; z-index: 10; transition: color 0.2s ease, transform 0.2s ease; }
         .carousel-arrow:hover { color: var(--heading-text-color); transform: scale(1.1); }
         .carousel-arrow.prev-slide { left: 0; }
         .carousel-arrow.next-slide { right: 0; }
 
-        .carousel-track-wrapper { overflow-x: hidden; scroll-behavior: smooth; padding: 10px 0; margin: 0 40px; -ms-overflow-style: none; scrollbar-width: none; }
+        .carousel-track-wrapper {
+            flex: 1;
+            min-width: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding: 10px 0;
+            margin: 0 40px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
         .carousel-track-wrapper::-webkit-scrollbar { display: none; }
         .carousel-track { display: flex; gap: 20px; width: max-content; }
 
@@ -752,19 +784,28 @@
             .middle-banner { background-position: 40% center !important; }
             
             /* Produkty - "Zobacz wszystkie" przeniesione na dół */
-            .products-section { padding: 40px 20px; display: flex; flex-direction: column; }
+            .products-section { padding: 40px 20px; display: flex; flex-direction: column; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; }
             .section-header { display: contents; }
             .section-title { order: 1; margin-bottom: 15px; text-align: left; }
-            mio-product-carousel { order: 2; width: 100%; }
+            mio-product-carousel { order: 2; width: 100%; max-width: 100%; overflow: hidden; display: block; }
             .see-all { order: 3; text-align: center; margin-top: 25px; width: 100%; display: block; align-self: center; }
 
             /* Karuzela produktowa - wersja mobilna (scroll dotykowy) */
-            .carousel-track-wrapper { overflow-x: auto; margin: 0; padding: 10px 20px; scroll-snap-type: x mandatory; }
+            .carousel-track-wrapper {
+                overflow-x: auto;
+                margin: 0;
+                padding: 10px 0;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+            }
             .carousel-track { gap: 15px; }
             .carousel-arrow { display: none; } /* Ukrywamy strzałki przewijania głównej karuzeli na mobile */
             
             /* Kafel produktu - wersja mobilna */
-            .product-card { width: 280px; scroll-snap-align: center; }
+            .product-card { width: 280px; scroll-snap-align: start; flex-shrink: 0; }
             .slider-arrow { display: none; } /* Ukrywamy strzałki przewijania zdjęć na mobile, zostaje swipe */
 
 
@@ -4729,15 +4770,22 @@
     background: #ffffff;
     border-top: 1px solid #eee;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 .cart-carousel-wrapper .products-section {
     max-width: 1400px;
     margin: 0 auto;
     padding: 70px 40px 80px 40px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 @media (max-width: 850px) {
     .cart-carousel-wrapper .products-section {
-        padding: 40px 20px 60px 20px;
+        padding: 40px 16px 60px 16px;
     }
 }
 
@@ -4850,56 +4898,185 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .cart-page-container {
-        padding: 100px 20px 60px 20px;
+        padding: 95px 16px 50px 16px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    .cart-breadcrumbs {
+        margin-bottom: 18px;
+        font-size: 11px;
+    }
+    .cart-header-section {
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: baseline;
+    }
+    .cart-page-title {
+        font-size: 26px;
+    }
+    .cart-items-count {
+        font-size: 13px;
+    }
+    .cart-layout-grid {
+        gap: 25px;
+    }
+    .cart-items-card {
+        overflow: hidden;
+        border-radius: 0;
     }
     .cart-table-header {
         display: none;
     }
     .cart-item-row {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 12px;
         position: relative;
-        padding: 20px;
+        padding: 18px 16px;
+    }
+    .cart-item-row:hover {
+        background-color: transparent;
+    }
+    .cart-col-remove,
+    .cart-item-row > div:last-child {
+        display: contents;
+    }
+    .cart-remove-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        background: #fafafa;
+        border: 1px solid #eaeaea;
+        color: #888;
+        font-size: 14px;
+        z-index: 2;
+        transition: all 0.2s ease;
+    }
+    .cart-remove-btn:hover,
+    .cart-remove-btn:active {
+        background: #fee2e2;
+        border-color: #fca5a5;
+        color: #dc2626;
+        transform: scale(1.05);
     }
     .cart-product-info {
-        gap: 15px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        position: relative;
+        padding-right: 44px; /* Gwarantuje brak nachodzenia na przycisk usuwania */
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .cart-product-thumb {
+        width: 75px;
+        height: 75px;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+    .cart-product-details {
+        min-width: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .cart-product-title {
+        font-size: 13px;
+        line-height: 1.4;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    .cart-product-variants {
+        font-size: 11px;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+    .cart-product-variant-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
     }
     .cart-col-price, .cart-col-qty, .cart-col-total {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding-top: 10px;
+        border-top: 1px solid #f5f5f5;
+        font-size: 13px;
     }
     .cart-col-price::before {
         content: 'Cena:';
+        font-family: 'Poppins', sans-serif;
         font-weight: 500;
         font-size: 12px;
-        color: #777;
+        color: #888;
     }
     .cart-col-qty::before {
         content: 'Ilość:';
+        font-family: 'Poppins', sans-serif;
         font-weight: 500;
         font-size: 12px;
-        color: #777;
+        color: #888;
     }
     .cart-col-total::before {
         content: 'Wartość:';
+        font-family: 'Poppins', sans-serif;
         font-weight: 500;
         font-size: 12px;
-        color: #777;
+        color: #888;
     }
-    .cart-remove-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
+    .cart-qty-ctrl {
+        border: 1px solid #ddd;
+        background: #fff;
+    }
+    .cart-qty-ctrl button {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    .cart-qty-ctrl input {
+        width: 28px;
+        font-size: 12px;
     }
     .cart-realization-banner {
         flex-direction: column;
         align-items: flex-start;
+        padding: 16px;
+        gap: 12px;
     }
-    .cart-guarantees-grid {
-        grid-template-columns: 1fr;
+    .cr-info {
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .cr-text {
+        font-size: 12px;
+    }
+    .cr-details-btn {
+        font-size: 11px;
+        margin-top: 2px;
+        margin-left: 34px;
+    }
+    .cart-summary-box {
+        padding: 24px 18px;
+    }
+    .cart-summary-title {
+        font-size: 16px;
+        margin-bottom: 20px;
     }
     .cart-extra-actions {
         flex-direction: column;
@@ -4907,5 +5084,41 @@
     }
     .cart-coupon-form {
         max-width: 100%;
+    }
+    .cart-summary-coupon-section .cart-coupon-input {
+        min-width: 0;
+    }
+    .cart-modal-content {
+        max-width: 100%;
+        margin: 10px;
+    }
+    .cart-modal-header {
+        padding: 18px 20px;
+    }
+    .cart-modal-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-page-container {
+        padding: 90px 12px 40px 12px;
+    }
+    .cart-item-row {
+        padding: 16px 12px;
+    }
+    .cart-product-thumb {
+        width: 68px;
+        height: 68px;
+    }
+    .cart-product-info {
+        gap: 10px;
+        padding-right: 40px;
+    }
+    .cr-details-btn {
+        margin-left: 0;
+    }
+    .cart-summary-box {
+        padding: 20px 14px;
     }
 }

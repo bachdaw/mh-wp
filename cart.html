@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <div class="cart-col-total">0 zł</div>
-                            <div>
+                            <div class="cart-col-remove">
                                 <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeSamplesItem()">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="cart-col-total">16 850 zł</div>
-                            <div>
+                            <div class="cart-col-remove">
                                 <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
@@ -141,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="cart-col-total">4 200 zł</div>
-                            <div>
+                            <div class="cart-col-remove">
                                 <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="cart-col-total">1 890 zł</div>
-                            <div>
+                            <div class="cart-col-remove">
                                 <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                             <div class="cart-col-total">1 900 zł</div>
-                            <div>
+                            <div class="cart-col-remove">
                                 <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                             <div class="cart-col-total">5 400 zł</div>
-                            <div>
+                            <div class="cart-col-remove">
                                 <button type="button" class="cart-remove-btn" title="Usuń" onclick="removeCartRow(this)">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
@@ -292,7 +292,7 @@
                         <!-- Opcja wpisania kodu rabatowego -->
                         <div class="cart-summary-coupon-section">
                             <div class="cart-coupon-form" id="cart-coupon-form-box">
-                                <input type="text" id="cart-discount-input" class="cart-coupon-input" placeholder="Kod rabatowy">
+                                <input type="text" id="cart-discount-input" class="cart-coupon-input" placeholder="Kod rabatowy (np. TEST)">
                                 <button type="button" id="cart-discount-btn" class="cart-coupon-btn">Zastosuj</button>
                             </div>
                             <div class="cart-coupon-badge" id="cart-coupon-badge">
@@ -388,50 +388,23 @@
 
     <script src="js/components.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Obsługa próbek z localStorage
-            const samplesRow = document.getElementById('cart-item-samples');
-            const samplesAdded = localStorage.getItem('mock_samples_added') === 'true';
-            const samplesNames = localStorage.getItem('mock_samples_names');
-            if (samplesAdded && samplesRow) {
-                samplesRow.style.display = 'grid';
-                if (samplesNames) {
-                    document.getElementById('cart-samples-names').textContent = 'Wybrane: ' + samplesNames;
-                }
-            }
+        function initCartPage() {
+            // Zmienne stanu koszyka i rabatów
+            let appliedDiscountPercent = 0;
+            let appliedCouponCode = '';
 
-            // Inicjalizacja kalkulacji cen
-            initCartEvents();
-            recalculateCartTotals();
-
-            // Modal dostawy
-            const modal = document.getElementById('cart-delivery-modal');
-            const openModalBtn = document.getElementById('open-delivery-modal-btn');
-            const closeModalBtn = document.getElementById('close-delivery-modal-btn');
-
-            if (openModalBtn && modal) {
-                openModalBtn.addEventListener('click', () => {
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-
-            const closeModal = () => {
-                if (modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
+            const VALID_COUPONS = {
+                'TEST': 0.10,
+                'TEST10': 0.10,
+                'RABAT': 0.10,
+                'RABAT10': 0.10,
+                'MIO10': 0.10,
+                'MIOHOME': 0.10,
+                'PROMO': 0.10,
+                'PROMO10': 0.10
             };
 
-            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-            if (modal) {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) closeModal();
-                });
-            }
-
-            // Obsługa kuponu rabatowego
-            let appliedDiscountPercent = 0;
+            // Elementy formularza kuponu
             const discountBtn = document.getElementById('cart-discount-btn');
             const discountInput = document.getElementById('cart-discount-input');
             const discountMsg = document.getElementById('cart-discount-msg');
@@ -440,87 +413,16 @@
             const couponBadgeCode = document.getElementById('cart-coupon-badge-code');
             const couponRemoveBtn = document.getElementById('cart-coupon-remove-btn');
 
-            const applyCoupon = () => {
-                const code = discountInput.value.trim().toUpperCase();
-                
-                // Scenariusz 1: Poprawny kod
-                if (code === 'TEST') {
-                    appliedDiscountPercent = 0.10;
-                    discountInput.classList.remove('is-invalid');
-                    discountInput.classList.add('is-valid');
-                    discountInput.disabled = true;
-                    discountBtn.disabled = true;
-                    discountBtn.style.opacity = '0.5';
-
-                    if (couponBadge && couponBadgeCode) {
-                        couponBadgeCode.textContent = code;
-                        couponBadge.style.display = 'flex';
-                    }
-
-                    discountMsg.style.display = 'block';
-                    discountMsg.style.color = '#166534';
-                    discountMsg.innerHTML = '<i class="fa-solid fa-check" style="margin-right: 5px;"></i> Kod rabatowy <strong>TEST</strong> (-10%) został pomyślnie naliczony.';
-                    
-                    recalculateCartTotals();
-                } 
-                // Scenariusz 2: Niepoprawny kod
-                else if (code !== '') {
-                    discountInput.classList.remove('is-valid');
-                    discountInput.classList.add('is-invalid');
-                    
-                    // Efekt potrząśnięcia (shake)
-                    if (couponFormBox) {
-                        couponFormBox.classList.remove('cart-shake');
-                        void couponFormBox.offsetWidth; // reflow dla restartu animacji
-                        couponFormBox.classList.add('cart-shake');
-                    }
-
-                    discountMsg.style.display = 'block';
-                    discountMsg.style.color = '#dc2626';
-                    discountMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 5px;"></i> Kod rabatowy "' + escapeHtml(code) + '" jest nieprawidłowy lub wygasł.';
-                } 
-                // Scenariusz pustego pola
-                else {
-                    discountInput.classList.add('is-invalid');
-                    if (couponFormBox) {
-                        couponFormBox.classList.remove('cart-shake');
-                        void couponFormBox.offsetWidth;
-                        couponFormBox.classList.add('cart-shake');
-                    }
-                    discountMsg.style.display = 'block';
-                    discountMsg.style.color = '#dc2626';
-                    discountMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 5px;"></i> Proszę wprowadzić kod rabatowy.';
-                }
-            };
-
-            const removeCoupon = () => {
-                appliedDiscountPercent = 0;
-                discountInput.disabled = false;
-                discountBtn.disabled = false;
-                discountBtn.style.opacity = '1';
-                discountInput.value = '';
-                discountInput.classList.remove('is-valid', 'is-invalid');
-                if (couponBadge) couponBadge.style.display = 'none';
-                discountMsg.style.display = 'none';
-                recalculateCartTotals();
-            };
-
-            if (discountBtn) discountBtn.addEventListener('click', applyCoupon);
-            if (discountInput) {
-                discountInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        applyCoupon();
-                    }
-                });
-                discountInput.addEventListener('input', () => {
-                    discountInput.classList.remove('is-invalid');
-                    if (discountMsg && !discountInput.disabled) {
-                        discountMsg.style.display = 'none';
-                    }
-                });
+            // Narzędzia
+            function formatMoney(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
             }
-            if (couponRemoveBtn) couponRemoveBtn.addEventListener('click', removeCoupon);
+
+            function getDeclinedProducts(count) {
+                if (count === 1) return 'produkt';
+                if (count >= 2 && count <= 4) return 'produkty';
+                return 'produktów';
+            }
 
             function escapeHtml(text) {
                 const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
@@ -571,6 +473,7 @@
                 const totalEl = document.getElementById('cart-summary-total');
                 const discountRow = document.getElementById('cart-summary-discount-row');
                 const discountValEl = document.getElementById('cart-discount-value');
+                const discountNameEl = document.getElementById('cart-discount-name');
 
                 if (subtotalEl) subtotalEl.textContent = formatMoney(subtotal) + ' zł';
 
@@ -579,6 +482,7 @@
                     const discountAmount = Math.round(subtotal * appliedDiscountPercent);
                     grandTotal = subtotal - discountAmount;
                     discountRow.style.display = 'flex';
+                    if (discountNameEl) discountNameEl.textContent = appliedCouponCode || 'TEST';
                     discountValEl.textContent = '-' + formatMoney(discountAmount) + ' zł';
                 } else if (discountRow) {
                     discountRow.style.display = 'none';
@@ -594,46 +498,170 @@
                 }
             }
 
-            // Narzędzia
-            function formatMoney(num) {
-                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            // Aplikacja kuponu
+            function applyCoupon() {
+                if (!discountInput) return;
+                const code = discountInput.value.trim().toUpperCase();
+
+                if (VALID_COUPONS[code]) {
+                    appliedDiscountPercent = VALID_COUPONS[code];
+                    appliedCouponCode = code;
+                    discountInput.classList.remove('is-invalid');
+                    discountInput.classList.add('is-valid');
+                    discountInput.disabled = true;
+                    if (discountBtn) {
+                        discountBtn.disabled = true;
+                        discountBtn.style.opacity = '0.5';
+                    }
+
+                    if (couponBadge && couponBadgeCode) {
+                        couponBadgeCode.textContent = code;
+                        couponBadge.style.display = 'flex';
+                    }
+
+                    if (discountMsg) {
+                        discountMsg.style.display = 'block';
+                        discountMsg.style.color = '#166534';
+                        const percentNum = Math.round(appliedDiscountPercent * 100);
+                        discountMsg.innerHTML = '<i class="fa-solid fa-check" style="margin-right: 5px;"></i> Kod rabatowy <strong>' + escapeHtml(code) + '</strong> (-' + percentNum + '%) został pomyślnie naliczony.';
+                    }
+
+                    recalculateCartTotals();
+                } else if (code !== '') {
+                    discountInput.classList.remove('is-valid');
+                    discountInput.classList.add('is-invalid');
+
+                    if (couponFormBox) {
+                        couponFormBox.classList.remove('cart-shake');
+                        void couponFormBox.offsetWidth;
+                        couponFormBox.classList.add('cart-shake');
+                    }
+
+                    if (discountMsg) {
+                        discountMsg.style.display = 'block';
+                        discountMsg.style.color = '#dc2626';
+                        discountMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 5px;"></i> Kod rabatowy "' + escapeHtml(code) + '" jest nieprawidłowy lub wygasł.';
+                    }
+                } else {
+                    discountInput.classList.add('is-invalid');
+                    if (couponFormBox) {
+                        couponFormBox.classList.remove('cart-shake');
+                        void couponFormBox.offsetWidth;
+                        couponFormBox.classList.add('cart-shake');
+                    }
+                    if (discountMsg) {
+                        discountMsg.style.display = 'block';
+                        discountMsg.style.color = '#dc2626';
+                        discountMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="margin-right: 5px;"></i> Proszę wprowadzić kod rabatowy.';
+                    }
+                }
             }
 
-            function getDeclinedProducts(count) {
-                if (count === 1) return 'produkt';
-                if (count >= 2 && count <= 4) return 'produkty';
-                return 'produktów';
+            // Usunięcie kuponu
+            function removeCoupon() {
+                appliedDiscountPercent = 0;
+                appliedCouponCode = '';
+                if (discountInput) {
+                    discountInput.disabled = false;
+                    discountInput.value = '';
+                    discountInput.classList.remove('is-valid', 'is-invalid');
+                }
+                if (discountBtn) {
+                    discountBtn.disabled = false;
+                    discountBtn.style.opacity = '1';
+                }
+                if (couponBadge) couponBadge.style.display = 'none';
+                if (discountMsg) discountMsg.style.display = 'none';
+                recalculateCartTotals();
             }
 
-            function initCartEvents() {
-                // Ilości + / -
-                document.querySelectorAll('.qty-plus').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const row = e.target.closest('.cart-item-row');
-                        const input = row.querySelector('.qty-input');
-                        if (input) {
-                            let val = parseInt(input.value) || 1;
-                            input.value = val + 1;
+            // Event Listeners dla kuponu
+            if (discountBtn) discountBtn.addEventListener('click', applyCoupon);
+            if (discountInput) {
+                discountInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        applyCoupon();
+                    }
+                });
+                discountInput.addEventListener('input', () => {
+                    discountInput.classList.remove('is-invalid');
+                    if (discountMsg && !discountInput.disabled) {
+                        discountMsg.style.display = 'none';
+                    }
+                });
+            }
+            if (couponRemoveBtn) couponRemoveBtn.addEventListener('click', removeCoupon);
+
+            // Obsługa próbek z localStorage
+            const samplesRow = document.getElementById('cart-item-samples');
+            const samplesAdded = localStorage.getItem('mock_samples_added') === 'true';
+            const samplesNames = localStorage.getItem('mock_samples_names');
+            if (samplesAdded && samplesRow) {
+                samplesRow.style.display = 'grid';
+                if (samplesNames) {
+                    const samplesNamesEl = document.getElementById('cart-samples-names');
+                    if (samplesNamesEl) samplesNamesEl.textContent = 'Wybrane: ' + samplesNames;
+                }
+            }
+
+            // Inicjalizacja ilości +/-
+            document.querySelectorAll('.qty-plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const row = e.target.closest('.cart-item-row');
+                    const input = row ? row.querySelector('.qty-input') : null;
+                    if (input) {
+                        let val = parseInt(input.value) || 1;
+                        input.value = val + 1;
+                        recalculateCartTotals();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.qty-minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const row = e.target.closest('.cart-item-row');
+                    const input = row ? row.querySelector('.qty-input') : null;
+                    if (input) {
+                        let val = parseInt(input.value) || 1;
+                        if (val > 1) {
+                            input.value = val - 1;
                             recalculateCartTotals();
                         }
-                    });
+                    }
                 });
+            });
 
-                document.querySelectorAll('.qty-minus').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const row = e.target.closest('.cart-item-row');
-                        const input = row.querySelector('.qty-input');
-                        if (input) {
-                            let val = parseInt(input.value) || 1;
-                            if (val > 1) {
-                                input.value = val - 1;
-                                recalculateCartTotals();
-                            }
-                        }
-                    });
+            // Modal dostawy
+            const modal = document.getElementById('cart-delivery-modal');
+            const openModalBtn = document.getElementById('open-delivery-modal-btn');
+            const closeModalBtn = document.getElementById('close-delivery-modal-btn');
+
+            if (openModalBtn && modal) {
+                openModalBtn.addEventListener('click', () => {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
             }
 
+            const closeModal = () => {
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
+
+            // Inicjalizacja początkowych kwot
+            recalculateCartTotals();
+
+            // Globalne funkcje usuwania wierszy
             window.removeCartRow = function(btn) {
                 const row = btn.closest('.cart-item-row');
                 if (row) {
@@ -660,7 +688,13 @@
                 const drawer = document.querySelector('mio-cart-drawer');
                 if (drawer && typeof drawer.render === 'function') drawer.render();
             };
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCartPage);
+        } else {
+            initCartPage();
+        }
     </script>
 </body>
 </html>
