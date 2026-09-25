@@ -576,11 +576,11 @@ class MioCartDrawer extends HTMLElement {
                                 <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
                                     <div style="display: flex; align-items: center; gap: 6px;">
                                         <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Obicie: Skóra (Koniakowy Brąz)</span>
+                                        <span>Materiał: FINN 04</span>
                                     </div>
                                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
-                                        <img src="img/wood/black.jpg" alt="Dąb czarny" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Nóżki: Dąb czarny</span>
+                                        <img src="img/wheels/7E2A9789.jpg" alt="Dąb czarny" style="width: 12px; height: 12px; object-fit: cover;">
+                                        <span>Kolor kółek: Gold</span>
                                     </div>
                                 </div>
                             </div>
@@ -606,11 +606,11 @@ class MioCartDrawer extends HTMLElement {
                                 <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
                                     <div style="display: flex; align-items: center; gap: 6px;">
                                         <img src="img/materials/MTK0354.avif" alt="Welur" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Obicie: Welur (Butelkowa zieleń)</span>
+                                        <span>Materiał: Welur (Butelkowa zieleń)</span>
                                     </div>
                                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                         <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #f3c36c, #a88235);"></div>
-                                        <span>Nóżki: Złoty metal</span>
+                                        <span>Kolor kółek: Złoty metal</span>
                                     </div>
                                 </div>
                             </div>
@@ -636,11 +636,11 @@ class MioCartDrawer extends HTMLElement {
                                 <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
                                     <div style="display: flex; align-items: center; gap: 6px;">
                                         <img src="img/materials/material.avif" alt="Tkanina" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Obicie: Tkanina (Szary melanż)</span>
+                                        <span>Materiał: Tkanina (Szary melanż)</span>
                                     </div>
                                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                         <img src="img/wood/natural.jpg" alt="Buk" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Nóżki: Buk naturalny</span>
+                                        <span>Wybarwienie drewna: Buk naturalny</span>
                                     </div>
                                 </div>
                             </div>
@@ -666,11 +666,11 @@ class MioCartDrawer extends HTMLElement {
                                 <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
                                     <div style="display: flex; align-items: center; gap: 6px;">
                                         <img src="img/materials/MTK000ZF22.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Obicie: Skóra (Czarna)</span>
+                                        <span>Materiał: Skóra (Czarna)</span>
                                     </div>
                                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                         <div style="width: 12px; height: 12px; background-color: #333;"></div>
-                                        <span>Nóżki: Brak (ślizgacze)</span>
+                                        <span>Kolor kółek: Brak (ślizgacze)</span>
                                     </div>
                                 </div>
                             </div>
@@ -696,11 +696,11 @@ class MioCartDrawer extends HTMLElement {
                                 <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
                                     <div style="display: flex; align-items: center; gap: 6px;">
                                         <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                        <span>Obicie: Skóra (Biała)</span>
+                                        <span>Materiał: Skóra (Biała)</span>
                                     </div>
                                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                         <div style="width: 12px; height: 12px; background-color: #eee;"></div>
-                                        <span>Nóżki: Srebrny metal</span>
+                                        <span>Kolor kółek: Srebrny metal</span>
                                     </div>
                                 </div>
                             </div>
@@ -1049,7 +1049,7 @@ document.addEventListener('click', (e) => {
                             <div style="font-size: 11px; color: var(--secondary-text-color); line-height: 1.5;">
                                 <div style="display: flex; align-items: center; gap: 6px;">
                                     <img src="img/materials/MTK0381.avif" alt="Welur" style="width: 12px; height: 12px; object-fit: cover;">
-                                    <span>Obicie: Welur (Niebieski)</span>
+                                    <span>Materiał: Welur (Niebieski)</span>
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                     <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #f3c36c, #a88235);"></div>
