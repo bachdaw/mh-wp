@@ -832,13 +832,13 @@ class MioCartDrawer extends HTMLElement {
                     </div>
                     <div style="padding: 30px 40px; overflow-y: auto; font-size: 13px; line-height: 1.8; color: var(--secondary-text-color);">
                         <h5 style="margin: 0 0 15px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 1px;">Jak estymujemy datę?</h5>
-                        <p style="margin-bottom: 25px;">Każdy z naszych mebli tworzony jest na indywidualne zamówienie w polskiej manufakturze. Czas dostawy od 14 do 26 czerwca uwzględnia proces produkcji wybranego modelu w spersonalizowanej tkaninie, dokładną kontrolę jakości (QC) oraz czas potrzebny na bezpieczny transport naszą dedykowaną flotą pojazdów.</p>
+                        <p style="margin-bottom: 25px;">Każdy z naszych mebli tworzony jest na indywidualne zamówienie w polskiej manufakturze. Standardowy czas realizacji zamówienia wynosi od 4 do 6 tygodni i obejmuje precyzyjny proces produkcji wybranego modelu w spersonalizowanej tkaninie oraz rygorystyczną kontrolę jakości (QC).</p>
                         
                         <h5 style="margin: 0 0 15px 0; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 1px;">Co po zamówieniu?</h5>
                         <ul style="padding-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 10px;">
                             <li><strong style="color: #000;">Potwierdzenie:</strong> Natychmiast po złożeniu i opłaceniu zamówienia, otrzymasz e-mail z podsumowaniem konfiguracji.</li>
-                            <li><strong style="color: #000;">Status produkcji:</strong> Będziemy Cię informować o kluczowych etapach (np. rozpoczęcie szycia pokrowca, montaż na stelażu).</li>
-                            <li><strong style="color: #000;">Kontakt przed dostawą:</strong> Na kilka dni przed planowanym transportem, nasz Dział Logistyki skontaktuje się z Tobą telefonicznie, aby umówić dogodny termin oraz dwugodzinne okno czasowe doręczenia.</li>
+                            <li><strong style="color: #000;">Status realizacji:</strong> Po podaniu numeru kontaktowego będziemy na bieżąco informować Cię o postępach – otrzymasz powiadomienie, gdy zamówienie trafi do produkcji oraz gdy zostanie ukończone i przekazane do wysyłki.</li>
+                            <li><strong style="color: #000;">Kontakt z przewoźnikiem:</strong> Gdy mebel wyruszy w drogę, firma transportowa prześle Ci informację o szacowanej dacie doręczenia. Będziesz mieć możliwość śledzenia statusu przesyłki oraz dogodnego ustalenia dokładnego terminu odbioru.</li>
                         </ul>
                         
                         <div style="background: #f9f9f9; padding: 20px; border-left: 3px solid var(--accent-color);">
