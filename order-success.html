@@ -26,31 +26,83 @@
         <div class="order-details-box">
             <div class="order-details-row">
                 <span class="order-details-label">Numer zamówienia:</span>
-                <span class="order-details-value">#MH-2026-90812</span>
+                <span class="order-details-value" id="order-number-val">#MH-2026-90812</span>
             </div>
             <div class="order-details-row">
                 <span class="order-details-label">Data złożenia:</span>
-                <span class="order-details-value">7 czerwca 2026</span>
+                <span class="order-details-value" id="order-date-val">28 września 2026</span>
             </div>
             <div class="order-details-row">
-                <span class="order-details-label">Przewidywana dostawa:</span>
-                <span class="order-details-value">14 - 26 czerwca</span>
+                <span class="order-details-label">Szacowany termin realizacji:</span>
+                <span class="order-details-value">4 - 6 tyg. (produkcja na zamówienie)</span>
             </div>
             <div class="order-details-row">
                 <span class="order-details-label">Metoda dostawy:</span>
-                <span class="order-details-value">Dostawa kurierem</span>
+                <span class="order-details-value" id="order-delivery-val">Dostawa Standard</span>
             </div>
             <div class="order-details-row">
                 <span class="order-details-label">Suma całkowita:</span>
-                <span class="order-details-value">18 750,00 zł</span>
+                <span class="order-details-value" id="order-total-val">30 240,00 zł</span>
+            </div>
+            <div class="order-details-row" id="order-notes-row" style="display: none;">
+                <span class="order-details-label">Uwagi do zamówienia:</span>
+                <span class="order-details-value" id="order-notes-val" style="white-space: pre-wrap;"></span>
             </div>
         </div>
 
-        <a href="index.html" class="btn-primary" style="text-decoration: none; display: inline-block;">Wróć na stronę główną</a>
+        <div id="account-created-box" style="display: none; margin-bottom: 25px; padding: 18px 22px; background: #f0fdf4; border: 1px solid #bbf7d0; text-align: left;">
+            <div style="font-weight: 600; font-size: 14px; color: #166534; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-circle-check"></i> Twoje konto miohome zostało pomyślnie utworzone!
+            </div>
+            <p style="font-size: 13px; color: #15803d; line-height: 1.5; margin: 0;">
+                Zostałeś automatycznie zalogowany. W panelu klienta możesz w każdej chwili śledzić status produkcji mebli, historię zamówień oraz pobrać faktury.
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="account.html" id="account-btn" class="btn-primary" style="text-decoration: none; display: none;">Przejdź do swojego konta</a>
+            <a href="index.html" id="home-btn" class="btn-primary" style="text-decoration: none; display: inline-block;">Wróć na stronę główną</a>
+        </div>
     </main>
 
     <mio-footer></mio-footer>
 
     <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const raw = localStorage.getItem('mh_last_order');
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    if (data.orderNumber) document.getElementById('order-number-val').textContent = data.orderNumber;
+                    if (data.date) document.getElementById('order-date-val').textContent = data.date;
+                    if (data.deliveryMethod) document.getElementById('order-delivery-val').textContent = data.deliveryMethod;
+                    if (data.grandTotal) document.getElementById('order-total-val').textContent = data.grandTotal;
+                    if (data.notes && data.notes.trim()) {
+                        const notesRow = document.getElementById('order-notes-row');
+                        const notesVal = document.getElementById('order-notes-val');
+                        if (notesRow && notesVal) {
+                            notesVal.textContent = data.notes.trim();
+                            notesRow.style.display = 'flex';
+                        }
+                    }
+                    if (data.accountCreated) {
+                        const accBox = document.getElementById('account-created-box');
+                        const accBtn = document.getElementById('account-btn');
+                        const homeBtn = document.getElementById('home-btn');
+                        if (accBox) accBox.style.display = 'block';
+                        if (accBtn) accBtn.style.display = 'inline-block';
+                        if (homeBtn) {
+                            homeBtn.style.background = '#fff';
+                            homeBtn.style.color = '#000';
+                            homeBtn.style.border = '1px solid #000';
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Error loading order data', e);
+            }
+        });
+    </script>
 </body>
 </html>

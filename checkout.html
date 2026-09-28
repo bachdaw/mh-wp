@@ -30,9 +30,27 @@
                         <span id="login-prompt">Masz już konto? <a href="login.html">Zaloguj się</a></span>
                     </div>
                     <div id="guest-contact">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-bottom: 12px;">
                             <input type="email" id="email" class="form-input" placeholder=" " required>
                             <label for="email" class="form-label">Adres e-mail</label>
+                        </div>
+                        <div class="checkbox-group" style="margin-top: 0; margin-bottom: 14px;">
+                            <input type="checkbox" id="create-account-check">
+                            <label for="create-account-check" style="font-weight: 500; color: #111; cursor: pointer;">
+                                Stworzyć konto?
+                            </label>
+                        </div>
+                        <div id="create-account-fields" style="display: none; margin-bottom: 18px; padding: 18px; background: #fafafa; border: 1px solid #e5e5e5;">
+                            <div class="form-group" style="margin-bottom: 8px; position: relative;">
+                                <input type="password" id="account-password" class="form-input" placeholder=" " autocomplete="new-password" style="padding-right: 42px !important;">
+                                <label for="account-password" class="form-label">Utwórz hasło do konta</label>
+                                <button type="button" id="toggle-account-password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #767676; padding: 6px; font-size: 14px;" title="Pokaż / ukryj hasło" aria-label="Pokaż lub ukryj hasło">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="form-hint" style="margin-top: 0; font-size: 11px; color: #767676; display: block; line-height: 1.4;">
+                                Min. 6 znaków. Posiadanie konta umożliwia wygodne śledzenie postępów produkcji, historię zamówień i szybsze zakupy w przyszłości.
+                            </span>
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="newsletter">
@@ -68,6 +86,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <select id="country" class="form-input" required>
+                            <option value="Polska" selected>Polska</option>
+                            <option value="Niemcy">Niemcy</option>
+                            <option value="Czechy">Czechy</option>
+                            <option value="Słowacja">Słowacja</option>
+                            <option value="Austria">Austria</option>
+                        </select>
+                        <label for="country" class="form-label">Kraj</label>
+                    </div>
+                    <div class="form-group">
                         <input type="text" id="address" class="form-input" placeholder=" " required>
                         <label for="address" class="form-label">Ulica i numer domu/lokalu</label>
                     </div>
@@ -82,7 +110,7 @@
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <select class="form-input" style="width: 90px; padding: 20px 10px 10px 10px !important;">
+                        <select id="phone-prefix" class="form-input" style="width: 90px; padding: 20px 10px 10px 10px !important;">
                             <option value="+48">+48</option>
                             <option value="+44">+44</option>
                             <option value="+49">+49</option>
@@ -126,6 +154,16 @@
                         </div>
                         <div id="invoice-addr-fields" style="display: none;">
                             <div class="form-group">
+                                <select id="inv-country" class="form-input">
+                                    <option value="Polska" selected>Polska</option>
+                                    <option value="Niemcy">Niemcy</option>
+                                    <option value="Czechy">Czechy</option>
+                                    <option value="Słowacja">Słowacja</option>
+                                    <option value="Austria">Austria</option>
+                                </select>
+                                <label for="inv-country" class="form-label">Kraj</label>
+                            </div>
+                            <div class="form-group">
                                 <input type="text" id="inv-address" class="form-input" placeholder=" ">
                                 <label for="inv-address" class="form-label">Ulica i numer domu/lokalu</label>
                             </div>
@@ -141,6 +179,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Uwagi do zamówienia -->
+                    <div class="form-group" style="margin-top: 25px; margin-bottom: 8px;">
+                        <textarea id="order-notes" class="form-input" rows="3" placeholder=" "></textarea>
+                        <label for="order-notes" class="form-label">Uwagi do zamówienia (opcjonalnie)</label>
+                    </div>
+                    <span class="form-hint" style="margin-bottom: 5px;">Wskazówki dla kuriera (np. kod do domofonu, piętro, wskazówki dojazdu) lub dodatkowe wytyczne dotyczące zamówienia.</span>
                 </section>
 
                 <!-- Sekcja 3: Metoda dostawy -->
@@ -149,22 +194,63 @@
                         <h2>3. Metoda dostawy</h2>
                     </div>
                     <div class="options-grid">
+                        <!-- 3.1. Odbiór osobisty -->
                         <label class="option-card">
-                            <input type="radio" name="delivery" value="standard" checked>
+                            <input type="radio" name="delivery" value="pickup" data-price="0">
                             <div class="option-content">
-                                <div class="option-title">Dostawa kurierem (pod drzwi budynku)</div>
-                                <div class="option-desc">Przewidywana dostawa: 14 - 26 czerwca</div>
-                                <div class="option-price">0,00 zł</div>
+                                <div class="option-title">Odbiór osobisty</div>
+                                <div class="option-desc">Showroom Miohome: ul. Przykładowa 12, 00-000 Warszawa (Pon. – Pt.: 10:00 – 18:00, Sob.: 10:00 – 14:00)</div>
+                                <div class="option-price is-free">0,00 zł</div>
                             </div>
                         </label>
+                        <!-- 3.2. Przesyłka kurierska -->
                         <label class="option-card">
-                            <input type="radio" name="delivery" value="premium">
+                            <input type="radio" name="delivery" value="courier" data-price="0">
                             <div class="option-content">
-                                <div class="option-title">Dostawa z wniesieniem i montażem</div>
-                                <div class="option-desc">Nasi specjaliści wniosą i zmontują meble.</div>
+                                <div class="option-title">Przesyłka kurierska</div>
+                                <div class="option-desc">Szybka przesyłka standardową firmą kurierską pod wskazany adres.</div>
+                                <div class="option-price is-free">0,00 zł</div>
+                            </div>
+                        </label>
+                        <!-- 3.3. Dostawa Standard -->
+                        <label class="option-card">
+                            <input type="radio" name="delivery" value="standard" data-price="0" checked>
+                            <div class="option-content">
+                                <div class="option-title">Dostawa Standard</div>
+                                <div class="option-desc">Bezpieczny transport gabarytowy pod adres – doręczenie do pierwszego progu budynku (bez wniesienia).</div>
+                                <div class="option-price is-free">0,00 zł</div>
+                            </div>
+                        </label>
+                        <!-- 3.4. Dostawa Komfort -->
+                        <label class="option-card">
+                            <input type="radio" name="delivery" value="comfort" data-price="149">
+                            <div class="option-content">
+                                <div class="option-title">Dostawa Komfort</div>
+                                <div class="option-desc">Dwuosobowy zespół wnosi mebel do wskazanego pokoju, ustawia w docelowym miejscu, rozpakowuje i zabiera ze sobą odpady.</div>
+                                <div class="option-price">149,00 zł</div>
+                            </div>
+                        </label>
+                        <!-- 3.5. Dostawa Komfort z montażem -->
+                        <label class="option-card">
+                            <input type="radio" name="delivery" value="comfort_assembly" data-price="299">
+                            <div class="option-content">
+                                <div class="option-title">Dostawa Komfort z montażem</div>
+                                <div class="option-desc">Pełen pakiet Komfort (wniesienie, ustawienie, rozpakowanie, utylizacja opakowań) rozszerzony o kompletny montaż mebla.</div>
                                 <div class="option-price">299,00 zł</div>
                             </div>
                         </label>
+                    </div>
+
+                    <!-- Ważne informacje o realizacji i transporcie -->
+                    <div class="checkout-delivery-notice">
+                        <div class="checkout-delivery-notice-title">
+                            <i class="fa-solid fa-circle-info"></i> Ważne informacje o realizacji i transporcie:
+                        </div>
+                        <p class="checkout-delivery-notice-text">
+                            Upewnij się, że wymiary paczki pozwolą na jej przejście przez klatkę schodową, windę oraz drzwi wejściowe (pamiętaj o zapasie min. 5–10 cm na manewry).
+
+                            Meble produkujemy na indywidualne zamówienie w Polsce – standardowy czas realizacji wynosi od 4 do 6 tygodni. Po przekazaniu przesyłki do wysyłki otrzymasz powiadomienie ze statusem oraz linkiem do śledzenia. Przewoźnik skontaktuje się z Tobą telefonicznie przed doręczeniem w celu ustalenia dogodnego terminu dostawy.
+                        </p>
                     </div>
                 </section>
 
@@ -221,18 +307,53 @@
                     </div>
                 </section>
 
-                <div class="terms-checkbox" style="margin-bottom: 20px; padding: 20px; background: #fff; box-shadow: 0 2px 15px rgba(0,0,0,0.03);">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="terms-check" required>
-                        <label for="terms-check" style="font-size: 12px; color: #666; line-height: 1.5;">
-                            Przeczytałem/łam i akceptuję <a href="#" style="text-decoration: underline; color: #000;">regulamin</a> oraz <a href="#" style="text-decoration: underline; color: #000;">politykę prywatności</a>.
+                <div class="terms-checkbox" style="margin-bottom: 20px; padding: 22px 25px; background: #fff; box-shadow: 0 2px 15px rgba(0,0,0,0.03);">
+                    <!-- Pouczenie o wyłączeniu prawa do odstąpienia od umowy -->
+                    <div class="custom-goods-notice">
+                        <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
+                            <i class="fa-solid fa-circle-info" style="color: #666; margin-top: 2px;"></i>
+                            <strong>Pouczenie o wyłączeniu prawa do odstąpienia od umowy:</strong>
+                        </div>
+                        Zgodnie z art. 38 pkt 3 Ustawy z dnia 30 maja 2014 r. o prawach konsumenta, prawo do odstąpienia od umowy zawartej na odległość w terminie 14 dni bez podania przyczyny nie przysługuje w odniesieniu do umów, w których przedmiotem świadczenia jest towar nieprefabrykowany, wyprodukowany według specyfikacji konsumenta lub służący zaspokojeniu jego zindywidualizowanych potrzeb (meble personalizowane na zamówienie w wybranym wariancie i obiciu). Zamówione produkty są w pełni objęte 2-letnią rękojmią, pełną gwarancją producenta oraz prawem do bezpłatnej reklamacji wad.
+                    </div>
+
+                    <div class="checkbox-group" style="margin-bottom: 12px;">
+                        <input type="checkbox" id="custom-goods-check" required>
+                        <label for="custom-goods-check" style="font-size: 12px; color: #333; line-height: 1.5;">
+                            Przyjmuję do wiadomości, że zamawiane meble są realizowane na moje indywidualne zamówienie (produkt nieprefabrykowany) i zgodnie z art. 38 pkt 3 Ustawy o prawach konsumenta nie podlegają 14-dniowemu zwrotowi bez podania przyczyny. <span style="color: #dc2626;">*</span>
                         </label>
+                    </div>
+
+                    <div class="checkbox-group" style="margin-bottom: 16px;">
+                        <input type="checkbox" id="terms-check" required>
+                        <label for="terms-check" style="font-size: 12px; color: #333; line-height: 1.5;">
+                            Przeczytałem/łam i akceptuję <a href="#" style="text-decoration: underline; color: #000; font-weight: 500;">regulamin sklepu</a> oraz <a href="#" style="text-decoration: underline; color: #000; font-weight: 500;">politykę prywatności</a>. <span style="color: #dc2626;">*</span>
+                        </label>
+                    </div>
+
+                    <!-- Warstwowa klauzula informacyjna RODO -->
+                    <div class="rodo-notice">
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <i class="fa-solid fa-shield-halved" style="color: #666; margin-top: 2px;"></i>
+                            <div>
+                                <strong>Klauzula informacyjna (RODO):</strong> Administratorem Twoich danych osobowych jest <strong>Stoltap Sp. z o.o.</strong> z siedzibą w Chwaszczynie (ul. Boczna 2, 80-209 Chwaszczyno, NIP: 586-218-12-87). Twoje dane przetwarzamy w celu zawarcia i realizacji umowy sprzedaży, wysyłki zamówienia oraz wypełnienia ciążących na nas obowiązków prawnych, w tym rachunkowo-podatkowych (art. 6 ust. 1 lit. b i c RODO). Masz prawo dostępu do swoich danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania. Pełne informacje znajdziesz w naszej <a href="#">Polityce prywatności</a>.
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Powiadomienie o błędach walidacji -->
+                <div class="checkout-validation-alert" id="checkout-validation-alert">
+                    <div class="checkout-validation-title">
+                        <i class="fa-solid fa-circle-exclamation"></i> Uzupełnij wymagane pola, aby sfinalizować zamówienie:
+                    </div>
+                    <ul class="checkout-validation-list" id="checkout-validation-list">
+                    </ul>
+                </div>
+
                 <div class="checkout-actions">
-                    <a href="listing.html" class="back-link"><i class="fa-solid fa-chevron-left"></i> Wróć do sklepu</a>
-                    <button class="btn-primary" onclick="window.location.href='order-success.html'">Kupuję i płacę</button>
+                    <a href="cart.html" class="back-link"><i class="fa-solid fa-chevron-left"></i> Wróć do koszyka</a>
+                    <button type="button" class="btn-primary" id="checkout-submit-btn">Kupuję i płacę</button>
                 </div>
             </div>
 
@@ -252,7 +373,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Skóra (Koniakowy Brąz)</span>
+                                            <span>Tkanina: Skóra (Koniakowy Brąz)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <img src="img/wood/black.jpg" alt="Dąb czarny" style="width: 12px; height: 12px; object-fit: cover;">
@@ -272,7 +393,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/MTK000ZF22.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Skóra (Czarna)</span>
+                                            <span>Tkanina: Skóra (Czarna)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <div style="width: 12px; height: 12px; background-color: #333;"></div>
@@ -298,13 +419,16 @@
                                 <span>Suma częściowa</span>
                                 <span>18 750,00 zł</span>
                             </div>
-                            <div class="total-row">
+                            <div class="total-row delivery-row">
                                 <span>Dostawa</span>
-                                <span>0,00 zł</span>
+                                <span class="is-free">0,00 zł</span>
                             </div>
                             <div class="total-row grand-total">
                                 <span>Suma całkowita</span>
                                 <span>18 750,00 zł</span>
+                            </div>
+                            <div class="checkout-vat-row vat-row">
+                                W tym 3 506,10 zł VAT
                             </div>
                         </div>
                     </div>
@@ -320,7 +444,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Skóra (Koniakowy Brąz)</span>
+                                            <span>Tkanina: Skóra (Koniakowy Brąz)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <img src="img/wood/black.jpg" alt="Dąb czarny" style="width: 12px; height: 12px; object-fit: cover;">
@@ -340,7 +464,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/MTK0354.avif" alt="Welur" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Welur (Butelkowa zieleń)</span>
+                                            <span>Tkanina: Welur (Butelkowa zieleń)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #f3c36c, #a88235);"></div>
@@ -360,7 +484,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/material.avif" alt="Tkanina" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Tkanina (Szary melanż)</span>
+                                            <span>Tkanina: Tkanina (Szary melanż)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <img src="img/wood/natural.jpg" alt="Buk" style="width: 12px; height: 12px; object-fit: cover;">
@@ -380,7 +504,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/MTK000ZF22.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Skóra (Czarna)</span>
+                                            <span>Tkanina: Skóra (Czarna)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <div style="width: 12px; height: 12px; background-color: #333;"></div>
@@ -400,7 +524,7 @@
                                     <div class="item-variant" style="font-size: 10px; color: #666; margin-top: 6px;">
                                         <div style="display: flex; align-items: center; gap: 6px;">
                                             <img src="img/materials/MTK0381.avif" alt="Skóra" style="width: 12px; height: 12px; object-fit: cover;">
-                                            <span>Obicie: Skóra (Biała)</span>
+                                            <span>Tkanina: Skóra (Biała)</span>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
                                             <div style="width: 12px; height: 12px; background-color: #eee;"></div>
@@ -426,15 +550,46 @@
                                 <span>Suma częściowa</span>
                                 <span>30 240,00 zł</span>
                             </div>
-                            <div class="total-row">
+                            <div class="total-row delivery-row">
                                 <span>Dostawa</span>
-                                <span>0,00 zł</span>
+                                <span class="is-free">0,00 zł</span>
                             </div>
                             <div class="total-row grand-total">
                                 <span>Suma całkowita</span>
                                 <span>30 240,00 zł</span>
                             </div>
+                            <div class="checkout-vat-row vat-row">
+                                W tym 5 654,63 zł VAT
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Dedykowany boks pomocy pod podsumowaniem -->
+                <div class="checkout-help-box">
+                    <div class="checkout-help-header">
+                        <i class="fa-solid fa-headset checkout-help-icon"></i>
+                        <div>
+                            <h4 class="checkout-help-title">Potrzebujesz pomocy?</h4>
+                            <span class="checkout-help-subtitle">Masz pytania dotyczące zamówienia, konfiguracji lub dostawy?</span>
+                        </div>
+                    </div>
+                    <div class="checkout-help-items">
+                        <a href="tel:+48123456789" class="checkout-help-item">
+                            <div class="checkout-help-item-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="checkout-help-item-text">
+                                <span class="checkout-help-label">Zadzwoń do doradcy</span>
+                                <span class="checkout-help-val">+48 123 456 789</span>
+                                <span class="checkout-help-note">Pon – Pt: 10:00 – 18:00, Sob: 10:00 – 14:00</span>
+                            </div>
+                        </a>
+                        <a href="mailto:kontakt@miohome.pl" class="checkout-help-item">
+                            <div class="checkout-help-item-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="checkout-help-item-text">
+                                <span class="checkout-help-label">Napisz e-mail</span>
+                                <span class="checkout-help-val">kontakt@miohome.pl</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -463,6 +618,15 @@
                     guestCartView.style.display = 'none';
                     loggedCartView.style.display = 'block';
                     if(loginPrompt) loginPrompt.style.display = 'none';
+                    const createCheck = document.getElementById('create-account-check');
+                    if (createCheck) createCheck.checked = false;
+                    const createFlds = document.getElementById('create-account-fields');
+                    if (createFlds) createFlds.style.display = 'none';
+                    const pwd = document.getElementById('account-password');
+                    if (pwd) {
+                        pwd.value = '';
+                        clearFieldError(pwd);
+                    }
                 } else {
                     guestContact.style.display = 'block';
                     loggedContact.style.display = 'none';
@@ -475,6 +639,7 @@
             updateAuthView();
             window.addEventListener('auth-mock-changed', updateAuthView);
             
+            // Obsługa metod płatności
             const paymentRadios = document.querySelectorAll('input[name="payment"]');
             const paymentInfoBox = document.getElementById('payment-info-box');
 
@@ -483,10 +648,52 @@
                 if(!selected) return;
                 if (selected.value === 'transfer') {
                     paymentInfoBox.style.display = 'block';
-                    paymentInfoBox.textContent = 'Zamówienie zostanie przekazane do realizacji po zaksięgowaniu wpłaty na nasze konto (w tytule przelewu prosimy podać numer zamówienia).';
+                    paymentInfoBox.style.background = 'transparent';
+                    paymentInfoBox.style.padding = '0';
+                    paymentInfoBox.style.border = 'none';
+                    paymentInfoBox.innerHTML = `
+                        <div class="bank-transfer-details">
+                            <div class="bank-transfer-details-title">
+                                <i class="fa-solid fa-building-columns"></i> Dane do przelewu tradycyjnego
+                            </div>
+                            <div class="bank-transfer-grid">
+                                <div class="bank-transfer-item">
+                                    <span class="bank-transfer-label">Odbiorca</span>
+                                    <span class="bank-transfer-val">Stoltap Sp. z o.o</span>
+                                </div>
+                                <div class="bank-transfer-item">
+                                    <span class="bank-transfer-label">Adres</span>
+                                    <span class="bank-transfer-val">ul. Boczna 2, 80-209 Chwaszczyno</span>
+                                </div>
+                                <div class="bank-transfer-item">
+                                    <span class="bank-transfer-label">Bank i oddział</span>
+                                    <span class="bank-transfer-val">PKO BP S.A. </span>
+                                </div>
+                                <div class="bank-transfer-item">
+                                    <span class="bank-transfer-label">Numer rachunku (PLN)</span>
+                                    <span class="bank-transfer-val highlight">38 1020 4900 0000 8302 3045 7952</span>
+                                </div>
+                                <div class="bank-transfer-item">
+                                    <span class="bank-transfer-label">Kod SWIFT / BIC</span>
+                                    <span class="bank-transfer-val">BREXPLPWMBK</span>
+                                </div>
+                                <div class="bank-transfer-item">
+                                    <span class="bank-transfer-label">Tytuł przelewu</span>
+                                    <span class="bank-transfer-val">Zamówienie #MH-2026-8942 - Imię i Nazwisko</span>
+                                </div>
+                            </div>
+                            <div class="bank-transfer-note">
+                                <i class="fa-solid fa-shield-halved" style="margin-right: 5px; color: #000;"></i>
+                                Zamówienie zostanie skierowane do realizacji natychmiast po zaksięgowaniu wpłaty. Szczegółowe dane do przelewu wyślemy również na Twój adres e-mail w potwierdzeniu zamówienia.
+                            </div>
+                        </div>
+                    `;
                 } else if (selected.value === 'klarna') {
                     paymentInfoBox.style.display = 'block';
-                    paymentInfoBox.textContent = 'Zostaniesz przekierowany na stronę Klarna, aby dokończyć płatność.';
+                    paymentInfoBox.style.background = '#fafafa';
+                    paymentInfoBox.style.padding = '15px';
+                    paymentInfoBox.style.borderLeft = '3px solid #000';
+                    paymentInfoBox.innerHTML = '<i class="fa-solid fa-circle-info" style="margin-right: 6px;"></i> Zostaniesz przekierowany na stronę Klarna, aby dokończyć bezpieczną płatność.';
                 } else {
                     paymentInfoBox.style.display = 'none';
                 }
@@ -495,40 +702,105 @@
             paymentRadios.forEach(r => r.addEventListener('change', updatePaymentInfo));
             updatePaymentInfo();
             
+            // Dynamiczne przeliczanie kwot zamówienia (Dostawa + Kod rabatowy)
+            let appliedDiscountPercent = 0;
+            let appliedDiscountCode = '';
+
+            const formatMoney = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+            const recalculateTotals = () => {
+                const selectedDelivery = document.querySelector('input[name="delivery"]:checked');
+                const deliveryCost = selectedDelivery ? (parseInt(selectedDelivery.getAttribute('data-price')) || 0) : 0;
+
+                ['guest-cart-view', 'logged-cart-view'].forEach(viewId => {
+                    const cartView = document.getElementById(viewId);
+                    if (!cartView) return;
+
+                    const totals = cartView.querySelector('.summary-totals');
+                    if (!totals) return;
+
+                    // Kwota częściowa produktów (subtotal)
+                    const subtotalRow = totals.children[0];
+                    const subtotalText = subtotalRow.children[1].textContent;
+                    const subtotal = parseInt(subtotalText.split(',')[0].replace(/[^0-9]/g, '')) || 0;
+
+                    // Aktualizacja wiersza kosztu dostawy
+                    const deliveryRow = totals.querySelector('.delivery-row');
+                    if (deliveryRow) {
+                        const deliveryPriceEl = deliveryRow.children[1];
+                        deliveryPriceEl.textContent = `${formatMoney(deliveryCost)},00 zł`;
+                        if (deliveryCost === 0) {
+                            deliveryPriceEl.classList.add('is-free');
+                        } else {
+                            deliveryPriceEl.classList.remove('is-free');
+                        }
+                    }
+
+                    // Naliczanie rabatu
+                    let discountAmount = 0;
+                    let discountRow = totals.querySelector('.discount-row');
+                    if (appliedDiscountPercent > 0) {
+                        discountAmount = Math.round(subtotal * appliedDiscountPercent);
+                        if (!discountRow) {
+                            discountRow = document.createElement('div');
+                            discountRow.className = 'total-row discount-row';
+                            discountRow.style.color = '#166534';
+                            totals.insertBefore(discountRow, totals.querySelector('.grand-total'));
+                        }
+                        discountRow.style.display = 'flex';
+                        discountRow.innerHTML = `<span>Rabat (${appliedDiscountCode})</span><span>-${formatMoney(discountAmount)},00 zł</span>`;
+                    } else if (discountRow) {
+                        discountRow.style.display = 'none';
+                    }
+
+                    // Wyliczenie kwoty końcowej
+                    const grandTotal = Math.max(0, subtotal + deliveryCost - discountAmount);
+                    const grandTotalEl = totals.querySelector('.grand-total').children[1];
+                    if (grandTotalEl) {
+                        grandTotalEl.textContent = `${formatMoney(grandTotal)},00 zł`;
+                    }
+
+                    // Aktualizacja kwoty VAT pod Sumą całkowitą
+                    const vatRow = totals.querySelector('.vat-row');
+                    if (vatRow) {
+                        const vatAmount = grandTotal > 0 ? (grandTotal * 0.23 / 1.23) : 0;
+                        const vatFormatted = vatAmount.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        vatRow.textContent = `W tym ${vatFormatted} zł VAT`;
+                    }
+                });
+            };
+
+            const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+            deliveryRadios.forEach(r => r.addEventListener('change', recalculateTotals));
+
+            // Obsługa kodów rabatowych
+            const validCoupons = {
+                'TEST': 0.10,
+                'TEST10': 0.10,
+                'RABAT': 0.10,
+                'RABAT10': 0.10,
+                'MIO10': 0.10,
+                'MIOHOME': 0.10,
+                'PROMO': 0.10,
+                'PROMO10': 0.10
+            };
+
             const discountBtns = document.querySelectorAll('.discount-btn');
             discountBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const wrapper = e.target.closest('.discount-section');
                     const input = wrapper.querySelector('.discount-input');
                     const msg = wrapper.querySelector('.discount-msg');
-                    const cartView = wrapper.closest('#guest-cart-view') || wrapper.closest('#logged-cart-view');
                     
                     const val = input.value.trim().toUpperCase();
-                    if(val === 'TEST') {
+                    if (validCoupons[val]) {
+                        appliedDiscountPercent = validCoupons[val];
+                        appliedDiscountCode = val;
                         msg.style.display = 'block';
                         msg.style.color = '#166534';
-                        msg.innerHTML = '<i class="fa-solid fa-check" style="margin-right: 5px;"></i> Kod rabatowy "TEST" (-10%) został zastosowany.';
-                        
-                        const totals = cartView.querySelector('.summary-totals');
-                        if (!totals.querySelector('.discount-row')) {
-                            const subtotalText = totals.children[0].children[1].textContent;
-                            const subtotalStr = subtotalText.split(',')[0].replace(/[^0-9]/g, '');
-                            const subtotal = parseInt(subtotalStr);
-                            const discount = Math.round(subtotal * 0.1);
-                            const grandTotal = subtotal - discount;
-                            
-                            const discountRow = document.createElement('div');
-                            discountRow.className = 'total-row discount-row';
-                            discountRow.style.color = '#166534';
-                            // format like 18 750
-                            const formatMoney = (val) => val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-                            discountRow.innerHTML = `<span>Rabat (TEST)</span><span>-${formatMoney(discount)},00 zł</span>`;
-                            
-                            totals.insertBefore(discountRow, totals.querySelector('.grand-total'));
-                            
-                            const grandTotalEl = totals.querySelector('.grand-total').children[1];
-                            grandTotalEl.textContent = `${formatMoney(grandTotal)},00 zł`;
-                        }
+                        const percentNum = Math.round(appliedDiscountPercent * 100);
+                        msg.innerHTML = `<i class="fa-solid fa-check" style="margin-right: 5px;"></i> Kod rabatowy "${val}" (-${percentNum}%) został zastosowany.`;
+                        recalculateTotals();
                     } else if (val !== '') {
                         msg.style.display = 'block';
                         msg.style.color = '#dc2626';
@@ -538,6 +810,339 @@
                     }
                 });
             });
+
+            // Początkowe wyliczenie kwot
+            recalculateTotals();
+
+            // --- Walidacja formularza i finalizacja zamówienia ---
+            const validationAlert = document.getElementById('checkout-validation-alert');
+            const validationList = document.getElementById('checkout-validation-list');
+            const submitBtn = document.getElementById('checkout-submit-btn');
+
+            let errorsList = [];
+            let firstInvalidElement = null;
+
+            function markError(el, message, labelName) {
+                if (!el) return;
+                el.classList.add('is-invalid');
+                const parentGroup = el.closest('.form-group') || el.closest('.terms-checkbox') || el.closest('.options-grid') || el.closest('.payment-options-grid') || el.parentElement;
+                if (parentGroup && !parentGroup.querySelector('.field-error-msg')) {
+                    const err = document.createElement('span');
+                    err.className = 'field-error-msg';
+                    err.innerHTML = `<i class="fa-solid fa-circle-exclamation" style="margin-right: 4px;"></i> ${message}`;
+                    parentGroup.appendChild(err);
+                }
+                errorsList.push(labelName || message);
+                if (!firstInvalidElement) {
+                    firstInvalidElement = el;
+                }
+            }
+
+            function clearFieldError(el) {
+                if (!el) return;
+                el.classList.remove('is-invalid');
+                const parentGroup = el.closest('.form-group') || el.closest('.terms-checkbox') || el.closest('.options-grid') || el.closest('.payment-options-grid') || el.parentElement;
+                if (parentGroup) {
+                    const err = parentGroup.querySelector('.field-error-msg');
+                    if (err) err.remove();
+                }
+            }
+
+            function clearAllErrors() {
+                errorsList = [];
+                firstInvalidElement = null;
+                document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+                document.querySelectorAll('.field-error-msg').forEach(el => el.remove());
+                if (validationAlert) validationAlert.style.display = 'none';
+            }
+
+            function checkHideGlobalAlert() {
+                const invalidCount = document.querySelectorAll('.is-invalid').length;
+                if (invalidCount === 0 && validationAlert) {
+                    validationAlert.style.display = 'none';
+                }
+            }
+
+            // Automatyczne formatowanie kodów pocztowych (XX-XXX)
+            const zipInputs = [document.getElementById('zipcode'), document.getElementById('inv-zipcode')];
+            zipInputs.forEach(zipInput => {
+                if (!zipInput) return;
+                zipInput.addEventListener('input', (e) => {
+                    let val = e.target.value.replace(/[^0-9]/g, '');
+                    if (val.length > 5) val = val.substring(0, 5);
+                    if (val.length > 2) {
+                        e.target.value = val.substring(0, 2) + '-' + val.substring(2);
+                    } else {
+                        e.target.value = val;
+                    }
+                });
+            });
+
+            // Automatyczne formatowanie telefonu (XXX XXX XXX dla numerów polskich)
+            const phoneInput = document.getElementById('phone');
+            const phonePrefixSelect = document.getElementById('phone-prefix');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', (e) => {
+                    const prefix = phonePrefixSelect ? phonePrefixSelect.value : '+48';
+                    if (prefix === '+48') {
+                        let digits = e.target.value.replace(/\D/g, '');
+                        if (digits.length > 9) digits = digits.substring(0, 9);
+                        let formatted = '';
+                        for (let i = 0; i < digits.length; i++) {
+                            if (i > 0 && i % 3 === 0) formatted += ' ';
+                            formatted += digits[i];
+                        }
+                        e.target.value = formatted;
+                    }
+                });
+            }
+
+            // Podpięcie czyszczenia błędów przy edycji pól
+            document.querySelectorAll('.form-input, #terms-check, #custom-goods-check, input[name="delivery"], input[name="payment"]').forEach(input => {
+                const handler = () => {
+                    clearFieldError(input);
+                    if (input.id === 'custom-goods-check' || input.id === 'terms-check') {
+                        const grp = input.closest('.checkbox-group');
+                        if (grp) clearFieldError(grp);
+                    }
+                    if (input.name === 'delivery') {
+                        const optGrid = document.querySelector('.options-grid');
+                        if (optGrid) clearFieldError(optGrid);
+                    }
+                    if (input.name === 'payment') {
+                        const payGrid = document.querySelector('.payment-options-grid');
+                        if (payGrid) clearFieldError(payGrid);
+                    }
+                    checkHideGlobalAlert();
+                };
+                input.addEventListener('input', handler);
+                input.addEventListener('change', handler);
+            });
+
+            // Obsługa tworzenia konta przy okazji zamówienia dla gościa
+            const createAccountCheck = document.getElementById('create-account-check');
+            const createAccountFields = document.getElementById('create-account-fields');
+            const accountPasswordInput = document.getElementById('account-password');
+            const toggleAccountPasswordBtn = document.getElementById('toggle-account-password');
+
+            if (createAccountCheck && createAccountFields) {
+                createAccountCheck.addEventListener('change', () => {
+                    if (createAccountCheck.checked) {
+                        createAccountFields.style.display = 'block';
+                        if (accountPasswordInput) accountPasswordInput.focus();
+                    } else {
+                        createAccountFields.style.display = 'none';
+                        if (accountPasswordInput) {
+                            accountPasswordInput.value = '';
+                            clearFieldError(accountPasswordInput);
+                            checkHideGlobalAlert();
+                        }
+                    }
+                });
+            }
+
+            if (toggleAccountPasswordBtn && accountPasswordInput) {
+                toggleAccountPasswordBtn.addEventListener('click', () => {
+                    const isPwd = accountPasswordInput.type === 'password';
+                    accountPasswordInput.type = isPwd ? 'text' : 'password';
+                    toggleAccountPasswordBtn.innerHTML = isPwd ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+                });
+            }
+
+            function validateAndSubmitOrder() {
+                clearAllErrors();
+
+                const isLoggedNow = localStorage.getItem('mock_is_logged_in') === 'true';
+
+                // 1. Dane kontaktowe (dla gościa)
+                if (!isLoggedNow) {
+                    const emailInput = document.getElementById('email');
+                    const emailVal = emailInput ? emailInput.value.trim() : '';
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailVal) {
+                        markError(emailInput, 'Podaj swój adres e-mail', 'Adres e-mail');
+                    } else if (!emailRegex.test(emailVal) || emailVal.includes('..') || emailVal.startsWith('.') || emailVal.endsWith('.')) {
+                        markError(emailInput, 'Wprowadź poprawny adres e-mail (np. imie.nazwisko@domena.pl)', 'Adres e-mail (niepoprawny format)');
+                    }
+
+                    if (createAccountCheck && createAccountCheck.checked) {
+                        const pwdVal = accountPasswordInput ? accountPasswordInput.value : '';
+                        if (!pwdVal) {
+                            markError(accountPasswordInput, 'Wprowadź hasło do tworzonego konta', 'Hasło do nowego konta');
+                        } else if (pwdVal.length < 6) {
+                            markError(accountPasswordInput, 'Hasło do konta musi mieć co najmniej 6 znaków', 'Hasło do konta (minimum 6 znaków)');
+                        }
+                    }
+                }
+
+                // 2. Adres dostawy
+                const firstname = document.getElementById('firstname');
+                if (!firstname || !firstname.value.trim()) {
+                    markError(firstname, 'Podaj imię odbiorcy', 'Imię');
+                }
+
+                const lastname = document.getElementById('lastname');
+                if (!lastname || !lastname.value.trim()) {
+                    markError(lastname, 'Podaj nazwisko odbiorcy', 'Nazwisko');
+                }
+
+                const country = document.getElementById('country');
+                if (!country || !country.value.trim()) {
+                    markError(country, 'Wybierz kraj dostawy', 'Kraj dostawy');
+                }
+
+                const address = document.getElementById('address');
+                if (!address || !address.value.trim()) {
+                    markError(address, 'Podaj ulicę i numer domu/lokalu', 'Ulica i numer domu/lokalu');
+                }
+
+                const zipcode = document.getElementById('zipcode');
+                if (!zipcode || !zipcode.value.trim()) {
+                    markError(zipcode, 'Podaj kod pocztowy', 'Kod pocztowy');
+                } else if (country && country.value === 'Polska' && !/^\d{2}-\d{3}$/.test(zipcode.value.trim())) {
+                    markError(zipcode, 'Wprowadź kod pocztowy w formacie 00-000', 'Kod pocztowy (format 00-000)');
+                }
+
+                const city = document.getElementById('city');
+                if (!city || !city.value.trim()) {
+                    markError(city, 'Podaj miasto', 'Miasto');
+                }
+
+                const phone = document.getElementById('phone');
+                const phonePrefix = document.getElementById('phone-prefix') ? document.getElementById('phone-prefix').value : '+48';
+                const phoneVal = phone ? phone.value.trim() : '';
+                const phoneDigits = phoneVal.replace(/\D/g, '');
+
+                if (!phoneVal) {
+                    markError(phone, 'Podaj numer telefonu kontaktowego', 'Telefon');
+                } else if (phonePrefix === '+48') {
+                    if (phoneDigits.length !== 9) {
+                        markError(phone, 'Numer telefonu w Polsce musi zawierać dokładnie 9 cyfr (np. 500 123 456)', 'Telefon (wymagane 9 cyfr)');
+                    } else if (phoneDigits.startsWith('0')) {
+                        markError(phone, 'Numer telefonu nie może zaczynać się od cyfry 0', 'Telefon (błędna cyfra początkowa)');
+                    } else if (/^(\d)\1{8}$/.test(phoneDigits)) {
+                        markError(phone, 'Wprowadź prawidłowy numer telefonu kontaktowego', 'Telefon (niepoprawny numer)');
+                    }
+                } else {
+                    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+                        markError(phone, 'Wprowadź poprawny międzynarodowy numer telefonu (od 7 do 15 cyfr)', 'Telefon (niepoprawna liczba cyfr)');
+                    }
+                }
+
+                // Faktura (opcjonalna)
+                const invoiceCheck = document.getElementById('invoice-check');
+                if (invoiceCheck && invoiceCheck.checked) {
+                    const invoiceTypeCompany = document.querySelector('input[name="invoice_type"]:checked')?.value === 'company';
+                    if (invoiceTypeCompany) {
+                        const nip = document.getElementById('nip');
+                        if (!nip || !nip.value.trim()) {
+                            markError(nip, 'Podaj numer NIP firmy', 'NIP firmy');
+                        }
+                        const company = document.getElementById('company');
+                        if (!company || !company.value.trim()) {
+                            markError(company, 'Podaj pełną nazwę firmy', 'Nazwa firmy');
+                        }
+                    }
+
+                    const diffInvoiceAddr = document.getElementById('diff-invoice-addr');
+                    if (diffInvoiceAddr && diffInvoiceAddr.checked) {
+                        const invCountry = document.getElementById('inv-country');
+                        if (!invCountry || !invCountry.value.trim()) markError(invCountry, 'Wybierz kraj do faktury', 'Kraj do faktury');
+
+                        const invAddress = document.getElementById('inv-address');
+                        if (!invAddress || !invAddress.value.trim()) markError(invAddress, 'Podaj adres do faktury', 'Ulica i numer do faktury');
+
+                        const invZipcode = document.getElementById('inv-zipcode');
+                        if (!invZipcode || !invZipcode.value.trim()) markError(invZipcode, 'Podaj kod pocztowy do faktury', 'Kod pocztowy do faktury');
+
+                        const invCity = document.getElementById('inv-city');
+                        if (!invCity || !invCity.value.trim()) markError(invCity, 'Podaj miasto do faktury', 'Miasto do faktury');
+                    }
+                }
+
+                // 3. Metoda dostawy
+                const selectedDelivery = document.querySelector('input[name="delivery"]:checked');
+                if (!selectedDelivery) {
+                    const optGrid = document.querySelector('.options-grid');
+                    markError(optGrid, 'Wybierz jedną z dostępnych metod dostawy', 'Metoda dostawy');
+                }
+
+                // 4. Metoda płatności
+                const selectedPayment = document.querySelector('input[name="payment"]:checked');
+                if (!selectedPayment) {
+                    const payGrid = document.querySelector('.payment-options-grid');
+                    markError(payGrid, 'Wybierz preferowaną metodę płatności', 'Metoda płatności');
+                }
+
+                // 5. Zgody i oświadczenia prawne
+                const customGoodsCheck = document.getElementById('custom-goods-check');
+                if (customGoodsCheck && !customGoodsCheck.checked) {
+                    const customGoodsGrp = customGoodsCheck.closest('.checkbox-group') || customGoodsCheck;
+                    markError(customGoodsGrp, 'Wymagane jest potwierdzenie pouczenia o braku prawa do odstąpienia od umowy dla mebli na zamówienie', 'Potwierdzenie mebli na zamówienie (wyłączenie zwrotu)');
+                }
+
+                const termsCheck = document.getElementById('terms-check');
+                if (!termsCheck || !termsCheck.checked) {
+                    const termsGrp = termsCheck.closest('.checkbox-group') || termsCheck;
+                    markError(termsGrp, 'Wymagana jest akceptacja regulaminu sklepu i polityki prywatności', 'Akceptacja regulaminu i polityki prywatności');
+                }
+
+                // Obsługa wyniku walidacji
+                if (errorsList.length > 0) {
+                    if (validationAlert && validationList) {
+                        validationList.innerHTML = errorsList.map(err => `<li>${err}</li>`).join('');
+                        validationAlert.style.display = 'block';
+                        validationAlert.classList.remove('cart-shake');
+                        void validationAlert.offsetWidth;
+                        validationAlert.classList.add('cart-shake');
+                    }
+
+                    if (firstInvalidElement) {
+                        firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        if (typeof firstInvalidElement.focus === 'function') {
+                            firstInvalidElement.focus();
+                        }
+                    }
+                    return false;
+                }
+
+                // Wszystkie pola poprawne -> zapisanie podsumowania i przejście do potwierdzenia
+                try {
+                    const deliveryTitle = selectedDelivery ? (selectedDelivery.closest('.option-card')?.querySelector('.option-title')?.textContent || 'Dostawa Standard') : 'Dostawa Standard';
+                    const activeCartView = document.getElementById('logged-cart-view')?.style.display !== 'none' ? document.getElementById('logged-cart-view') : document.getElementById('guest-cart-view');
+                    const grandTotalVal = activeCartView?.querySelector('.grand-total span:last-child')?.textContent || '30 240,00 zł';
+                    const notesVal = document.getElementById('order-notes')?.value.trim() || '';
+
+                    const wantsAccount = !isLoggedNow && createAccountCheck && createAccountCheck.checked;
+                    if (wantsAccount) {
+                        localStorage.setItem('mock_is_logged_in', 'true');
+                    }
+
+                    const orderData = {
+                        orderNumber: '#MH-2026-' + Math.floor(10000 + Math.random() * 90000),
+                        deliveryMethod: deliveryTitle,
+                        grandTotal: grandTotalVal,
+                        notes: notesVal,
+                        accountCreated: wantsAccount,
+                        email: !isLoggedNow ? (document.getElementById('email')?.value.trim() || '') : 'jan.kowalski@example.com',
+                        customerName: (document.getElementById('firstname')?.value.trim() || '') + ' ' + (document.getElementById('lastname')?.value.trim() || ''),
+                        date: new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+                    };
+                    localStorage.setItem('mh_last_order', JSON.stringify(orderData));
+                } catch (e) {
+                    console.error('Błąd zapisu zamówienia', e);
+                }
+
+                window.location.href = 'order-success.html';
+                return true;
+            }
+
+            if (submitBtn) {
+                submitBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    validateAndSubmitOrder();
+                });
+            }
         });
     </script>
 </body>
