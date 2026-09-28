@@ -4793,26 +4793,67 @@
 .cart-empty-state {
     background: #fff;
     border: 1px solid #eee;
-    padding: 80px 40px;
+    padding: 70px 40px;
     text-align: center;
     display: none;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.02);
 }
 .cart-empty-icon {
-    font-size: 54px;
-    color: #ddd;
+    font-size: 52px;
+    color: #ccc;
     margin-bottom: 20px;
 }
 .cart-empty-title {
     font-family: 'Playfair Display', serif;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 500;
-    margin-bottom: 10px;
+    color: #000;
+    margin-bottom: 12px;
 }
 .cart-empty-desc {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #666;
-    margin-bottom: 30px;
+    max-width: 480px;
+    margin: 0 auto 30px auto;
+    line-height: 1.6;
+}
+.cart-empty-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid #000;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.cart-empty-btn:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.cart-empty-login-hint {
+    margin-top: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #888;
+}
+.cart-empty-login-hint a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+}
+.cart-empty-login-hint a:hover {
+    color: var(--accent-color);
 }
 
 /* Cart Delivery Modal */
@@ -5098,6 +5139,16 @@
     .cart-modal-body {
         padding: 20px;
     }
+    .cart-empty-state {
+        padding: 50px 20px;
+    }
+    .cart-empty-title {
+        font-size: 24px;
+    }
+    .cart-empty-desc {
+        font-size: 13px;
+        margin-bottom: 25px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -5120,5 +5171,12 @@
     }
     .cart-summary-box {
         padding: 20px 14px;
+    }
+    .cart-empty-state {
+        padding: 40px 15px;
+    }
+    .cart-empty-btn {
+        width: 100%;
+        box-sizing: border-box;
     }
 }

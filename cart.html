@@ -24,17 +24,20 @@
 
         <div class="cart-header-section">
             <h1 class="cart-page-title">Twój koszyk</h1>
-            <span class="cart-items-count" id="cart-item-count-label">5 produktów</span>
+            <span class="cart-items-count" id="cart-item-count-label"></span>
         </div>
 
-        <!-- Stan pustego koszyka -->
+        <!-- Stan pustego koszyka (dla niezalogowanego użytkownika lub po usunięciu pozycji) -->
         <div class="cart-empty-state" id="cart-empty-state">
             <div class="cart-empty-icon">
                 <i class="fa-solid fa-basket-shopping"></i>
             </div>
             <h2 class="cart-empty-title">Twój koszyk jest pusty</h2>
-            <p class="cart-empty-desc">Nie masz jeszcze żadnych produktów w koszyku. Odkryj naszą kolekcję ręcznie tworzonych mebli tapicerowanych.</p>
-            <a href="listing.html" class="btn-primary" style="display: inline-block; text-decoration: none; padding: 15px 35px;">Przejdź do produktów</a>
+            <p class="cart-empty-desc">Nie masz jeszcze żadnych produktów w koszyku. Odkryj naszą kolekcję ręcznie tworzonych mebli tapicerowanych w polskiej manufakturze.</p>
+            <a href="listing.html" class="cart-empty-btn">Zobacz produkty</a>
+            <div class="cart-empty-login-hint" id="cart-empty-login-hint">
+                Masz już konto? <a href="login.html">Zaloguj się</a>, aby sprawdzić wcześniej dodane meble.
+            </div>
         </div>
 
         <!-- Siatka koszyka -->
@@ -431,6 +434,20 @@
 
             // Funkcja kalkulacji sumy koszyka
             function recalculateCartTotals() {
+                const isLogged = localStorage.getItem('mock_is_logged_in') === 'true';
+                const emptyState = document.getElementById('cart-empty-state');
+                const contentGrid = document.getElementById('cart-content-grid');
+                const countLabel = document.getElementById('cart-item-count-label');
+                const loginHint = document.getElementById('cart-empty-login-hint');
+
+                if (!isLogged) {
+                    if (emptyState) emptyState.style.display = 'block';
+                    if (contentGrid) contentGrid.style.display = 'none';
+                    if (countLabel) countLabel.textContent = '0 produktów';
+                    if (loginHint) loginHint.style.display = 'block';
+                    return;
+                }
+
                 const rows = document.querySelectorAll('.cart-item-row');
                 let visibleRowsCount = 0;
                 let subtotal = 0;
@@ -451,21 +468,21 @@
                     }
                 });
 
-                // Aktualizacja licznika produktów
-                const countLabel = document.getElementById('cart-item-count-label');
-                if (countLabel) {
-                    countLabel.textContent = `${visibleRowsCount} ${getDeclinedProducts(visibleRowsCount)}`;
-                }
-
-                // Sprawdzenie stanu pustego koszyka
-                const emptyState = document.getElementById('cart-empty-state');
-                const contentGrid = document.getElementById('cart-content-grid');
+                // Sprawdzenie stanu pustego koszyka (np. po usunięciu wszystkich pozycji przez zalogowanego)
                 if (visibleRowsCount === 0) {
                     if (emptyState) emptyState.style.display = 'block';
                     if (contentGrid) contentGrid.style.display = 'none';
+                    if (countLabel) countLabel.textContent = '0 produktów';
+                    if (loginHint) loginHint.style.display = 'none';
+                    return;
                 } else {
                     if (emptyState) emptyState.style.display = 'none';
-                    if (contentGrid) contentGrid.style.display = 'grid';
+                    if (contentGrid) contentGrid.style.display = '';
+                }
+
+                // Aktualizacja licznika produktów
+                if (countLabel) {
+                    countLabel.textContent = `${visibleRowsCount} ${getDeclinedProducts(visibleRowsCount)}`;
                 }
 
                 // Podsumowanie
@@ -658,8 +675,9 @@
                 });
             }
 
-            // Inicjalizacja początkowych kwot
+            // Inicjalizacja początkowych kwot i widoku (zalogowany vs niezalogowany)
             recalculateCartTotals();
+            window.addEventListener('auth-mock-changed', recalculateCartTotals);
 
             // Globalne funkcje usuwania wierszy
             window.removeCartRow = function(btn) {
