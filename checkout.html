@@ -675,7 +675,7 @@
                                 </div>
                                 <div class="bank-transfer-item">
                                     <span class="bank-transfer-label">Kod SWIFT / BIC</span>
-                                    <span class="bank-transfer-val">BREXPLPWMBK</span>
+                                    <span class="bank-transfer-val">BPKOPLPW</span>
                                 </div>
                                 <div class="bank-transfer-item">
                                     <span class="bank-transfer-label">Tytuł przelewu</span>
@@ -1109,6 +1109,10 @@
                 // Wszystkie pola poprawne -> zapisanie podsumowania i przejście do potwierdzenia
                 try {
                     const deliveryTitle = selectedDelivery ? (selectedDelivery.closest('.option-card')?.querySelector('.option-title')?.textContent || 'Dostawa Standard') : 'Dostawa Standard';
+                    const paymentCard = selectedPayment ? selectedPayment.closest('.payment-card') : null;
+                    const paymentVal = selectedPayment ? selectedPayment.value : 'transfer';
+                    const paymentTitle = paymentCard?.querySelector('span')?.textContent || (paymentVal === 'transfer' ? 'Przelew tradycyjny' : 'BLIK');
+
                     const activeCartView = document.getElementById('logged-cart-view')?.style.display !== 'none' ? document.getElementById('logged-cart-view') : document.getElementById('guest-cart-view');
                     const grandTotalVal = activeCartView?.querySelector('.grand-total span:last-child')?.textContent || '30 240,00 zł';
                     const notesVal = document.getElementById('order-notes')?.value.trim() || '';
@@ -1118,14 +1122,40 @@
                         localStorage.setItem('mock_is_logged_in', 'true');
                     }
 
+                    // Pobieranie zamówionych produktów
+                    const items = [];
+                    const itemEls = activeCartView?.querySelectorAll('.summary-item') || [];
+                    itemEls.forEach(el => {
+                        const imgEl = el.querySelector('.item-img-wrapper img');
+                        const titleEl = el.querySelector('.item-title');
+                        const variantEl = el.querySelector('.item-variant');
+                        const qtyEl = el.querySelector('.item-details > div:last-child');
+                        const priceEl = el.querySelector('.item-price');
+
+                        items.push({
+                            img: imgEl ? imgEl.getAttribute('src') : '',
+                            alt: imgEl ? imgEl.getAttribute('alt') : '',
+                            title: titleEl ? titleEl.textContent.trim() : '',
+                            variantHtml: variantEl ? variantEl.innerHTML.trim() : '',
+                            qty: qtyEl ? qtyEl.textContent.trim() : 'Ilość: 1',
+                            price: priceEl ? priceEl.textContent.trim() : ''
+                        });
+                    });
+
+                    const customerNameVal = ((document.getElementById('firstname')?.value.trim() || '') + ' ' + (document.getElementById('lastname')?.value.trim() || '')).trim() || 'Jan Kowalski';
+                    const emailVal = !isLoggedNow ? (document.getElementById('email')?.value.trim() || '') : 'jan.kowalski@example.com';
+
                     const orderData = {
                         orderNumber: '#MH-2026-' + Math.floor(10000 + Math.random() * 90000),
                         deliveryMethod: deliveryTitle,
+                        paymentMethod: paymentVal,
+                        paymentTitle: paymentTitle,
                         grandTotal: grandTotalVal,
+                        items: items,
                         notes: notesVal,
                         accountCreated: wantsAccount,
-                        email: !isLoggedNow ? (document.getElementById('email')?.value.trim() || '') : 'jan.kowalski@example.com',
-                        customerName: (document.getElementById('firstname')?.value.trim() || '') + ' ' + (document.getElementById('lastname')?.value.trim() || ''),
+                        email: emailVal,
+                        customerName: customerNameVal,
                         date: new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
                     };
                     localStorage.setItem('mh_last_order', JSON.stringify(orderData));
