@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwroty i reklamacje - miohome</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-light static-nav-page">
+
+    <mio-navbar></mio-navbar>
+
+    <main class="complaints-container animate-up">
+        <!-- Breadcrumbs & Tytuł strony -->
+        <div class="cart-breadcrumbs">
+            <a href="index.html">Strona główna</a> &gt; Zwroty i reklamacje
+        </div>
+        <h1 class="complaints-page-title">Zwroty i reklamacje</h1>
+
+        <!-- Formularz zgłoszeniowy -->
+        <form id="complaintForm" novalidate>
+            <!-- KROK 1: Typ zgłoszenia -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">1</div>
+                    <h2 class="complaint-section-title">Wybierz rodzaj zgłoszenia</h2>
+                </div>
+
+                <div class="complaint-type-grid">
+                    <label class="complaint-type-tile selected" id="tile-complaint">
+                        <input type="radio" name="request_type" value="complaint" checked>
+                        <div class="complaint-type-name">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Reklamacja towaru
+                        </div>
+                        <p class="complaint-type-desc">Wada fabryczna, uszkodzenie w transporcie, problem ze stelażem, tapicerką lub mechanizmami mebla (rękojmia ustawowa).</p>
+                    </label>
+
+                    <label class="complaint-type-tile" id="tile-return">
+                        <input type="radio" name="request_type" value="return">
+                        <div class="complaint-type-name">
+                            <i class="fa-solid fa-box-open"></i> Zwrot towaru (14 dni)
+                        </div>
+                        <p class="complaint-type-desc">Odstąpienie od umowy zawartej na odległość w terminie 14 dni od doręczenia (dla produktów standardowych).</p>
+                    </label>
+                </div>
+
+                <!-- Dynamiczny banner informacyjny w zależności od wybranego trybu -->
+                <div id="notice-complaint" class="complaint-legal-banner">
+                    <strong style="color: #000;"><i class="fa-solid fa-circle-info" style="margin-right: 6px;"></i> Podstawa prawna reklamacji:</strong> 
+                    Zgłoszenie z tytułu braku zgodności towaru z umową (art. 43a i nast. Ustawy o prawach konsumenta). Przysługuje Ci prawo do bezpłatnej naprawy mebla lub jego wymiany, a w przypadkach przewidzianych prawem – obniżenia ceny lub odstąpienia od umowy.
+                </div>
+
+                <div id="notice-return" class="complaint-legal-banner" style="display: none;">
+                    <strong style="color: #000;"><i class="fa-solid fa-circle-info" style="margin-right: 6px;"></i> Zasady zwrotu produktów (art. 38 pkt 3):</strong> 
+                    Zgodnie z ustawą o prawach konsumenta, 14-dniowe prawo do odstąpienia od umowy dotyczy artykułów gotowych i standardowych (np. akcesoria, pielęgnacja tkanin, gotowe poduszki dekoracyjne). W przypadku mebli tworzonych na indywidualne zamówienie w wybranej konfiguracji i tkaninie, ewentualne wady lub uwagi rozpatrywane są w ramach procedury reklamacyjnej.
+                </div>
+            </div>
+
+            <!-- KROK 2: Dane zamówienia i produktu -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">2</div>
+                    <h2 class="complaint-section-title">Dane zamówienia i produktu</h2>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="order-number" class="form-label">Numer zamówienia lub faktury *</label>
+                        <input type="text" id="order-number" class="form-input" placeholder="np. #MH-2026-8942 lub FV/2026/05/12" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="purchase-date" class="form-label">Data doręczenia mebla / zakupu *</label>
+                        <input type="date" id="purchase-date" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="product-name" class="form-label">Nazwa mebla / reklamowanego artykułu *</label>
+                    <input type="text" id="product-name" class="form-input" placeholder="np. Sofa Cezar 2-osobowa Patchwork Harris Tweed (Skóra Koniakowa)" required>
+                </div>
+            </div>
+
+            <!-- KROK 3: Dane kontaktowe i adresowe -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">3</div>
+                    <h2 class="complaint-section-title">Dane kontaktowe i adres odbioru</h2>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-status" class="form-label">Status kupującego *</label>
+                    <select id="customer-status" class="form-select">
+                        <option value="consumer">Konsument (osoba prywatna)</option>
+                        <option value="consumer_business">Osoba fizyczna prowadząca działalność (na prawach konsumenta - bez charakteru zawodowego)</option>
+                        <option value="b2b">Przedsiębiorca / Firma (B2B)</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="customer-name" class="form-label">Imię i nazwisko *</label>
+                        <input type="text" id="customer-name" class="form-input" placeholder="Jan Kowalski" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="customer-phone" class="form-label">Numer telefonu *</label>
+                        <input type="tel" id="customer-phone" class="form-input" placeholder="500 123 456" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-email" class="form-label">Adres e-mail do kontaktu i decyzji *</label>
+                    <input type="email" id="customer-email" class="form-input" placeholder="twoj.email@domena.pl" required>
+                </div>
+
+                <div style="margin-top: 15px; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #000;">
+                    Adres, pod którym znajduje się mebel (do ewentualnych oględzin lub odbioru):
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-address" class="form-label">Ulica i numer domu / lokalu *</label>
+                    <input type="text" id="pickup-address" class="form-input" placeholder="ul. Przykładowa 15/4" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="pickup-zipcode" class="form-label">Kod pocztowy *</label>
+                        <input type="text" id="pickup-zipcode" class="form-input" placeholder="00-000" maxlength="6" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="pickup-city" class="form-label">Miejscowość *</label>
+                        <input type="text" id="pickup-city" class="form-input" placeholder="Warszawa" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KROK 4: Opis problemu / wady -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">4</div>
+                    <h2 class="complaint-section-title" id="section-desc-title">Opis wady lub niezgodności</h2>
+                </div>
+
+                <div class="form-row" id="defect-meta-row">
+                    <div class="form-group half">
+                        <label for="defect-date" class="form-label">Data zauważenia wady *</label>
+                        <input type="date" id="defect-date" class="form-input">
+                    </div>
+                    <div class="form-group half">
+                        <label for="defect-category" class="form-label">Obszar wady *</label>
+                        <select id="defect-category" class="form-select">
+                            <option value="fabric">Tkanina / skóra / szwy tapicerskie</option>
+                            <option value="frame">Konstrukcja / stelaż / wypełnienie piankowe</option>
+                            <option value="mechanism">Mechanizm funkcji spania / okucia</option>
+                            <option value="legs">Nóżki / wybarwienie drewna / podstawa</option>
+                            <option value="transport">Uszkodzenie powstałe podczas transportu</option>
+                            <option value="other">Inna niezgodność</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="defect-desc" class="form-label">Szczegółowy opis okoliczności powstania i objawów wady *</label>
+                    <textarea id="defect-desc" class="form-input form-textarea" rows="4" placeholder="Opisz dokładnie, w czym przejawia się wada, kiedy i w jakich okolicznościach została zauważona..." required style="min-height: 100px; resize: vertical;"></textarea>
+                    <span style="font-size: 11px; color: #767676; display: block; margin-top: 4px;">Im dokładniejszy opis, tym szybciej nasi technicy będą mogli zweryfikować problem i zaproponować rozwiązanie.</span>
+                </div>
+            </div>
+
+            <!-- KROK 5: Załączniki – zdjęcia i filmy -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">5</div>
+                    <h2 class="complaint-section-title">Dokumentacja zdjęciowa i wideo</h2>
+                </div>
+
+                <div class="complaint-upload-zone" id="upload-dropzone">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <div class="complaint-upload-title">Przeciągnij i upuść zdjęcia lub filmy tutaj</div>
+                    <div class="complaint-upload-hint">lub <span style="text-decoration: underline; font-weight: 500; color: #000;">kliknij, aby wybrać z urządzenia</span></div>
+                    <div style="font-size: 11px; color: #888; margin-top: 8px;">
+                        Obsługiwane formaty: <strong>JPG, PNG, WEBP, HEIC</strong> (zdjęcia) oraz <strong>MP4, MOV</strong> (filmy). Maksymalnie 5 plików, do 25 MB/plik.
+                    </div>
+                    <input type="file" id="file-input" multiple accept="image/*,video/mp4,video/quicktime" style="display: none;">
+                </div>
+
+                <div style="background: #fafafa; border: 1px solid #eee; padding: 14px 18px; font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 10px;">
+                    <strong style="color: #000;"><i class="fa-solid fa-camera" style="margin-right: 5px;"></i> Rekomendowane ujęcia dla sprawnego rozpatrzenia:</strong>
+                    <ul style="margin: 6px 0 0 18px; padding: 0;">
+                        <li>Zdjęcie ogólne całej bryły mebla w pomieszczeniu,</li>
+                        <li>Wyraźne zdjęcia z bliska przedstawiające zgłaszany defekt,</li>
+                        <li>Krótki film (5–15 sek.) w przypadku skrzypienia, dźwięków lub nieprawidłowej pracy mechanizmów.</li>
+                    </ul>
+                </div>
+
+                <!-- Lista załadowanych plików -->
+                <div class="complaint-files-list" id="files-list"></div>
+                <div id="file-limit-msg" style="color: #b91c1c; font-size: 11.5px; margin-top: 8px; display: none;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Możesz dodać maksymalnie 5 plików o rozmiarze do 25 MB każdy.
+                </div>
+            </div>
+
+            <!-- KROK 6: Żądanie reklamacyjne / Dane do zwrotu -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">6</div>
+                    <h2 class="complaint-section-title" id="section-demand-title">Oczekiwane rozwiązanie</h2>
+                </div>
+
+                <div id="demand-block">
+                    <div style="font-size: 13px; color: #444; margin-bottom: 14px;">
+                        Zgodnie z ustawą o prawach konsumenta w pierwszej kolejności możesz żądać naprawy lub wymiany mebla:
+                    </div>
+
+                    <div class="demand-options-grid">
+                        <label class="demand-option-card selected">
+                            <input type="radio" name="demand_choice" value="repair" checked>
+                            <div>
+                                <div class="demand-option-title">Nieodpłatna naprawa mebla</div>
+                                <div class="demand-option-desc">Usunięcie usterki przez technika serwisowego lub w naszej manufakturze.</div>
+                            </div>
+                        </label>
+
+                        <label class="demand-option-card">
+                            <input type="radio" name="demand_choice" value="replacement">
+                            <div>
+                                <div class="demand-option-title">Wymiana na nowy egzemplarz</div>
+                                <div class="demand-option-desc">Wyprodukowanie nowego mebla wolnego od wad.</div>
+                            </div>
+                        </label>
+
+                        <label class="demand-option-card">
+                            <input type="radio" name="demand_choice" value="price_reduction">
+                            <div>
+                                <div class="demand-option-title">Stosowne obniżenie ceny</div>
+                                <div class="demand-option-desc">Zwrot ustalonej części kwoty przy zachowaniu mebla.</div>
+                            </div>
+                        </label>
+
+                        <label class="demand-option-card">
+                            <input type="radio" name="demand_choice" value="refund">
+                            <div>
+                                <div class="demand-option-title">Odstąpienie i zwrot środków</div>
+                                <div class="demand-option-desc">W przypadku wady istotnej lub niemożności naprawy/wymiany.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="reduction-amount-group" class="form-group" style="display: none; margin-top: 15px;">
+                        <label for="reduction-amount" class="form-label">Proponowana kwota obniżenia ceny (PLN)</label>
+                        <input type="text" id="reduction-amount" class="form-input" placeholder="np. 500 zł">
+                    </div>
+                </div>
+
+                <!-- Dane rachunku bankowego do zwrotu -->
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="bank-account" class="form-label">Numer rachunku bankowego do ewentualnego zwrotu środków (PLN)</label>
+                    <input type="text" id="bank-account" class="form-input" placeholder="np. 00 0000 0000 0000 0000 0000 0000">
+                    <span style="font-size: 11px; color: #767676; display: block; margin-top: 4px;">Wymagany w przypadku wyboru obniżenia ceny, zwrotu środków lub zwrotu 14-dniowego.</span>
+                </div>
+            </div>
+
+            <!-- KROK 7: Oświadczenia prawne i wysyłka -->
+            <div class="complaint-section-card">
+                <div class="complaint-section-header">
+                    <div class="complaint-section-step">7</div>
+                    <h2 class="complaint-section-title">Oświadczenia i wysłanie zgłoszenia</h2>
+                </div>
+
+                <div class="checkbox-group" style="margin-bottom: 14px;">
+                    <input type="checkbox" id="consent-accuracy" required>
+                    <label for="consent-accuracy" style="font-size: 12.5px; color: #333; cursor: pointer;">
+                        Oświadczam, że podane w zgłoszeniu informacje są zgodne ze stanem faktycznym oraz że zapoznałem(-am) się z zasadami rozpatrywania reklamacji. *
+                    </label>
+                </div>
+
+                <div class="checkbox-group" style="margin-bottom: 20px;">
+                    <input type="checkbox" id="consent-rodo" required>
+                    <label for="consent-rodo" style="font-size: 12.5px; color: #333; cursor: pointer;">
+                        Wyrażam zgodę na przetwarzanie moich danych osobowych w celu obsługi i rozpatrzenia zgłoszenia reklamacyjnego / zwrotu zgodnie z RODO. *
+                    </label>
+                </div>
+
+                <!-- Klauzula RODO -->
+                <div style="font-size: 11px; color: #767676; line-height: 1.5; background: #fafafa; border: 1px solid #eee; padding: 14px 18px; margin-bottom: 25px;">
+                    <strong>Klauzula informacyjna (RODO):</strong> Administratorem danych osobowych jest <strong>Stoltap Sp. z o.o.</strong> z siedzibą w Chwaszczynie (ul. Boczna 2, 80-209 Chwaszczyno, NIP: 586-218-12-87). Dane przetwarzane są na podstawie art. 6 ust. 1 lit. c RODO w celu realizacji ustawowych obowiązków związanych z obsługą reklamacji i rękojmi oraz w celu dochodzenia i obrony przed ewentualnymi roszczeniami. Masz prawo dostępu do treści swoich danych, ich sprostowania, usunięcia oraz ograniczenia przetwarzania.
+                </div>
+
+                <!-- Błąd walidacji zbiorczy -->
+                <div id="form-error-alert" style="display: none; background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; padding: 14px 18px; color: #991b1b; font-size: 13px; margin-bottom: 20px;">
+                    <i class="fa-solid fa-circle-exclamation" style="margin-right: 6px;"></i> Prosimy o uzupełnienie wszystkich wymaganych pól oznaczonych gwiazdką (*) oraz akceptację oświadczeń.
+                </div>
+
+                <button type="submit" id="submit-complaint-btn" class="btn-primary" style="width: 100%; padding: 18px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+                    <i class="fa-regular fa-paper-plane" style="margin-right: 8px;"></i> Wyślij zgłoszenie
+                </button>
+            </div>
+        </form>
+
+        <!-- Ekran potwierdzenia sukcesu (domyślnie ukryty) -->
+        <div id="complaint-success-box" class="complaint-section-card" style="display: none; text-align: center; padding: 60px 40px;">
+            <div style="width: 76px; height: 76px; background: #f0fdf4; color: #166534; border-radius: 50%; font-size: 32px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 12px; color: #000;">Zgłoszenie zostało przyjęte</h2>
+            <p style="font-size: 14px; color: #666; max-width: 600px; margin: 0 auto 30px auto; line-height: 1.6;">
+                Dziękujemy. Twoje zgłoszenie zostało zarejestrowane w naszym systemie opieki posprzedażowej. Potwierdzenie przyjęcia sprawy wysłaliśmy również na Twój adres e-mail.
+            </p>
+
+            <div style="background: #fafafa; border: 1px solid #eee; padding: 25px; max-width: 520px; margin: 0 auto 35px auto; text-align: left;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eaeaea; padding-bottom: 10px; margin-bottom: 10px; font-size: 13px;">
+                    <span style="color: #666;">Numer sprawy:</span>
+                    <strong style="color: #000; font-family: monospace; font-size: 14px;" id="success-case-number">#REK-2026-8941</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eaeaea; padding-bottom: 10px; margin-bottom: 10px; font-size: 13px;">
+                    <span style="color: #666;">Status:</span>
+                    <span style="color: #b45309; font-weight: 600;">W trakcie analizy przez rzeczoznawcę</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eaeaea; padding-bottom: 10px; margin-bottom: 10px; font-size: 13px;">
+                    <span style="color: #666;">Ustawowy czas rozpatrzenia:</span>
+                    <strong style="color: #000;">do 14 dni kalendarzowych</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                    <span style="color: #666;">Opiekun zgłoszenia:</span>
+                    <span style="color: #000;">Dział Jakości i Serwisu miohome</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn-primary" style="text-decoration: none; padding: 14px 28px;">Wróć na stronę główną</a>
+                <button type="button" id="new-complaint-btn" class="btn-primary" style="background: #fff; color: #000; border: 1px solid #000; padding: 14px 28px;">Zgłoś kolejną sprawę</button>
+            </div>
+        </div>
+    </main>
+
+    <mio-footer></mio-footer>
+
+    <script src="js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('complaintForm');
+            const tileComplaint = document.getElementById('tile-complaint');
+            const tileReturn = document.getElementById('tile-return');
+            const noticeComplaint = document.getElementById('notice-complaint');
+            const noticeReturn = document.getElementById('notice-return');
+            const defectMetaRow = document.getElementById('defect-meta-row');
+            const sectionDescTitle = document.getElementById('section-desc-title');
+            const sectionDemandTitle = document.getElementById('section-demand-title');
+            const demandBlock = document.getElementById('demand-block');
+            const reductionAmountGroup = document.getElementById('reduction-amount-group');
+            const phoneInput = document.getElementById('customer-phone');
+            const zipInput = document.getElementById('pickup-zipcode');
+            const fileInput = document.getElementById('file-input');
+            const dropzone = document.getElementById('upload-dropzone');
+            const filesList = document.getElementById('files-list');
+            const fileLimitMsg = document.getElementById('file-limit-msg');
+            const errorAlert = document.getElementById('form-error-alert');
+            const successBox = document.getElementById('complaint-success-box');
+            const newComplaintBtn = document.getElementById('new-complaint-btn');
+
+            let attachedFiles = [];
+
+            // 1. Przełączanie trybu zgłoszenia (Reklamacja ⇄ Zwrot)
+            const typeRadios = document.querySelectorAll('input[name="request_type"]');
+            typeRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    const isComplaint = radio.value === 'complaint';
+                    if (isComplaint) {
+                        tileComplaint.classList.add('selected');
+                        tileReturn.classList.remove('selected');
+                        noticeComplaint.style.display = 'block';
+                        noticeReturn.style.display = 'none';
+                        defectMetaRow.style.display = 'flex';
+                        sectionDescTitle.textContent = 'Opis wady lub niezgodności';
+                        sectionDemandTitle.textContent = 'Oczekiwane rozwiązanie';
+                        demandBlock.style.display = 'block';
+                    } else {
+                        tileReturn.classList.add('selected');
+                        tileComplaint.classList.remove('selected');
+                        noticeComplaint.style.display = 'none';
+                        noticeReturn.style.display = 'block';
+                        defectMetaRow.style.display = 'none';
+                        sectionDescTitle.textContent = 'Przyczyna zwrotu i uwagi (opcjonalnie)';
+                        sectionDemandTitle.textContent = 'Rachunek bankowy do zwrotu wpłaty';
+                        demandBlock.style.display = 'none';
+                    }
+                });
+            });
+
+            // 2. Obsługa żądania obniżenia ceny (pole na kwotę)
+            const demandRadios = document.querySelectorAll('input[name="demand_choice"]');
+            demandRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    document.querySelectorAll('.demand-option-card').forEach(card => card.classList.remove('selected'));
+                    radio.closest('.demand-option-card')?.classList.add('selected');
+                    if (radio.value === 'price_reduction') {
+                        reductionAmountGroup.style.display = 'block';
+                    } else {
+                        reductionAmountGroup.style.display = 'none';
+                    }
+                });
+            });
+
+            // 3. Formatowanie telefonu (XXX XXX XXX)
+            if (phoneInput) {
+                phoneInput.addEventListener('input', (e) => {
+                    let digits = e.target.value.replace(/\D/g, '');
+                    if (digits.length > 9) digits = digits.substring(0, 9);
+                    let formatted = '';
+                    for (let i = 0; i < digits.length; i++) {
+                        if (i > 0 && i % 3 === 0) formatted += ' ';
+                        formatted += digits[i];
+                    }
+                    e.target.value = formatted;
+                });
+            }
+
+            // 4. Formatowanie kodu pocztowego (XX-XXX)
+            if (zipInput) {
+                zipInput.addEventListener('input', (e) => {
+                    let val = e.target.value.replace(/[^0-9]/g, '');
+                    if (val.length > 5) val = val.substring(0, 5);
+                    if (val.length > 2) {
+                        e.target.value = val.substring(0, 2) + '-' + val.substring(2);
+                    } else {
+                        e.target.value = val;
+                    }
+                });
+            }
+
+            // 5. Obsługa dodawania załączników (Zdjęcia i Filmy)
+            dropzone.addEventListener('click', () => fileInput.click());
+
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('dragover');
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                if (e.dataTransfer && e.dataTransfer.files) {
+                    handleFiles(Array.from(e.dataTransfer.files));
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files) {
+                    handleFiles(Array.from(e.target.files));
+                }
+            });
+
+            function formatSize(bytes) {
+                if (bytes < 1024) return bytes + ' B';
+                if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+                return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+            }
+
+            function handleFiles(files) {
+                fileLimitMsg.style.display = 'none';
+                const MAX_FILES = 5;
+                const MAX_SIZE = 25 * 1024 * 1024; // 25 MB
+
+                for (let file of files) {
+                    if (attachedFiles.length >= MAX_FILES) {
+                        fileLimitMsg.textContent = 'Osiągnięto limit maksymalnie 5 plików.';
+                        fileLimitMsg.style.display = 'block';
+                        break;
+                    }
+
+                    if (file.size > MAX_SIZE) {
+                        fileLimitMsg.textContent = `Plik "${file.name}" przekracza maksymalny dopuszczalny rozmiar 25 MB.`;
+                        fileLimitMsg.style.display = 'block';
+                        continue;
+                    }
+
+                    const isImage = file.type.startsWith('image/');
+                    const isVideo = file.type.startsWith('video/');
+
+                    if (!isImage && !isVideo) {
+                        fileLimitMsg.textContent = `Plik "${file.name}" ma nieobsługiwany format. Dozwolone są tylko zdjęcia i filmy.`;
+                        fileLimitMsg.style.display = 'block';
+                        continue;
+                    }
+
+                    const fileObj = {
+                        id: 'file_' + Math.random().toString(36).substr(2, 9),
+                        file: file,
+                        name: file.name,
+                        sizeStr: formatSize(file.size),
+                        isImage: isImage,
+                        isVideo: isVideo,
+                        previewUrl: null
+                    };
+
+                    if (isImage) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            fileObj.previewUrl = e.target.result;
+                            renderFiles();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+
+                    attachedFiles.push(fileObj);
+                }
+                renderFiles();
+                fileInput.value = '';
+            }
+
+            function removeFile(fileId) {
+                attachedFiles = attachedFiles.filter(f => f.id !== fileId);
+                renderFiles();
+            }
+
+            function renderFiles() {
+                filesList.innerHTML = '';
+                attachedFiles.forEach(fileObj => {
+                    const card = document.createElement('div');
+                    card.className = 'complaint-file-card';
+                    card.innerHTML = `
+                        <div class="complaint-file-thumb">
+                            ${fileObj.isImage && fileObj.previewUrl ? `<img src="${fileObj.previewUrl}" alt="${fileObj.name}">` : `<i class="${fileObj.isVideo ? 'fa-solid fa-film' : 'fa-regular fa-image'}"></i>`}
+                        </div>
+                        <div class="complaint-file-info">
+                            <span class="complaint-file-name" title="${fileObj.name}">${fileObj.name}</span>
+                            <span class="complaint-file-size">${fileObj.sizeStr}</span>
+                        </div>
+                        <button type="button" class="complaint-file-remove" title="Usuń plik">&times;</button>
+                    `;
+                    card.querySelector('.complaint-file-remove').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        removeFile(fileObj.id);
+                    });
+                    filesList.appendChild(card);
+                });
+            }
+
+            // 6. Walidacja i wysyłka formularza
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                errorAlert.style.display = 'none';
+
+                let isValid = true;
+                const requiredInputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+                
+                requiredInputs.forEach(input => {
+                    if (input.type === 'checkbox') {
+                        if (!input.checked) {
+                            isValid = false;
+                            input.classList.add('is-invalid');
+                        } else {
+                            input.classList.remove('is-invalid');
+                        }
+                    } else {
+                        if (!input.value.trim()) {
+                            isValid = false;
+                            input.classList.add('is-invalid');
+                        } else {
+                            input.classList.remove('is-invalid');
+                        }
+                    }
+                });
+
+                // Walidacja e-mail
+                const emailInput = document.getElementById('customer-email');
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (emailInput && !emailRegex.test(emailInput.value.trim())) {
+                    isValid = false;
+                    emailInput.classList.add('is-invalid');
+                }
+
+                if (!isValid) {
+                    errorAlert.style.display = 'block';
+                    errorAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+
+                // Sukces – generowanie numeru zgłoszenia
+                const reqType = document.querySelector('input[name="request_type"]:checked')?.value;
+                const prefix = reqType === 'return' ? '#ZWR-2026-' : '#REK-2026-';
+                const caseNumber = prefix + Math.floor(1000 + Math.random() * 9000);
+
+                const successCaseNumEl = document.getElementById('success-case-number');
+                if (successCaseNumEl) successCaseNumEl.textContent = caseNumber;
+
+                // Zapis w localStorage dla symulacji
+                try {
+                    const complaintData = {
+                        caseNumber: caseNumber,
+                        type: reqType,
+                        orderNumber: document.getElementById('order-number').value.trim(),
+                        productName: document.getElementById('product-name').value.trim(),
+                        customerName: document.getElementById('customer-name').value.trim(),
+                        email: emailInput.value.trim(),
+                        date: new Date().toLocaleDateString('pl-PL')
+                    };
+                    localStorage.setItem('mh_last_complaint', JSON.stringify(complaintData));
+                } catch (err) {
+                    console.error('Storage error', err);
+                }
+
+                form.style.display = 'none';
+                successBox.style.display = 'block';
+                successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            // Przycisk "Zgłoś kolejną sprawę"
+            if (newComplaintBtn) {
+                newComplaintBtn.addEventListener('click', () => {
+                    form.reset();
+                    attachedFiles = [];
+                    renderFiles();
+                    form.style.display = 'block';
+                    successBox.style.display = 'none';
+                    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

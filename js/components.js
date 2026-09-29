@@ -186,7 +186,7 @@ class MioFooter extends HTMLElement {
                     <li><a href="#">Katalog</a></li>
                     <li><a href="#">Znajdź Sklep</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Zasady i reklamacje</a></li>
+                    <li><a href="reklamacje.html">Zasady i reklamacje</a></li>
                     <li><a href="#">Dostawa i płatność</a></li>
                 </ul>
             </div>
@@ -216,7 +216,7 @@ class MioFooter extends HTMLElement {
             <div class="footer-policies">
                 <a href="#">Polityka prywatności</a>
                 <a href="#">Regulamin sklepu</a>
-                <a href="#">Polityka zwrotu kosztów</a>
+                <a href="reklamacje.html">Zwroty i reklamacje</a>
             </div>
             <div class="footer-payments">
                 <div class="payment-box"><i class="fa-brands fa-apple"></i>&nbsp;Pay</div>
