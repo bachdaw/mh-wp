@@ -183,11 +183,11 @@ class MioFooter extends HTMLElement {
             <div class="footer-col">
                 <h4>Dla klienta</h4>
                 <ul>
-                    <li><a href="#">Katalog</a></li>
-                    <li><a href="#">Znajdź Sklep</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="regulamin.html">Regulamin sklepu</a></li>
                     <li><a href="reklamacje.html">Zasady i reklamacje</a></li>
-                    <li><a href="#">Dostawa i płatność</a></li>
+                    <li><a href="kontakt.html#faq">FAQ</a></li>
+                    <li><a href="samples.html">Darmowe próbki</a></li>
+                    <li><a href="kontakt.html">Pomoc i kontakt</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -207,15 +207,17 @@ class MioFooter extends HTMLElement {
                 </div>
                 <label class="newsletter-checkbox">
                     <input type="checkbox">
-                    <span>Akceptuję regulamin i politykę prywatności. Wyrażam zgodę na otrzymywanie informacji handlowych.</span>
+                    <span>Akceptuję <a href="regulamin.html" style="text-decoration: underline; color: inherit;">regulamin</a> i <a href="polityka-prywatnosci.html" style="text-decoration: underline; color: inherit;">politykę prywatności</a>. Wyrażam zgodę na otrzymywanie informacji handlowych.</span>
                 </label>
             </div>
         </div>
 
         <div class="footer-policies-payments">
             <div class="footer-policies">
-                <a href="#">Polityka prywatności</a>
-                <a href="#">Regulamin sklepu</a>
+                <a href="regulamin.html">Regulamin sklepu</a>
+                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+                <a href="polityka-cookies.html">Polityka cookies</a>
+                <a href="polityka-opinii.html">Polityka opinii</a>
                 <a href="reklamacje.html">Zwroty i reklamacje</a>
             </div>
             <div class="footer-payments">
@@ -448,7 +450,7 @@ function initObserver() {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15
+        threshold: 0.01
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
