@@ -144,8 +144,284 @@
         </section>
     </main>
 
-        <!-- Free Samples Section -->
-        <section class="free-samples-section animate-up">
+    <!-- TrustMate Ferret Widget: Opinie naszych klientów -->
+    <section class="trustmate-ferret-section animate-up" id="opinie-klientow">
+        <div class="trustmate-ferret-wrapper">
+            <!-- Header & Rating Summary -->
+            <div class="tm-ferret-header">
+                <div class="tm-header-info">
+                    <div class="tm-brand-tag">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Zweryfikowane przez <span class="tm-brand-logo-text">TrustMate</span></span>
+                    </div>
+                    <h2 class="tm-title">Opinie naszych klientów</h2>
+                    <div class="tm-rating-summary">
+                        <div class="tm-score-number">4.96</div>
+                        <div>
+                            <div class="tm-stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="tm-score-meta">
+                                Średnia z <strong>482 zweryfikowanych opinii</strong> • 99% poleca
+                            </div>
+                        </div>
+                        <a href="polityka-opinii.html" class="tm-omnibus-badge" title="Dowiedz się, jak weryfikujemy opinie zgodnie z dyrektywą Omnibus">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Opinie potwierdzone zakupem (Omnibus)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Controls & Filters -->
+                <div class="tm-header-controls">
+                    <div class="tm-filter-tabs">
+                        <button type="button" class="tm-filter-tab active" data-filter="all">Wszystkie (482)</button>
+                        <button type="button" class="tm-filter-tab" data-filter="photo"><i class="fa-solid fa-camera"></i> Ze zdjęciem (148)</button>
+                        <button type="button" class="tm-filter-tab" data-filter="5star">5 gwiazdek (468)</button>
+                    </div>
+                    <div class="tm-nav-arrows">
+                        <button type="button" class="tm-nav-arrow tm-prev" aria-label="Poprzednia opinia"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button type="button" class="tm-nav-arrow tm-next" aria-label="Następna opinia"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Track with Ferret Review Cards -->
+            <div class="tm-carousel-container">
+                <div class="tm-cards-track" id="tmCardsTrack">
+                    <!-- Card 1 -->
+                    <div class="tm-review-card has-photo" data-rating="5">
+                        <div>
+                            <div class="tm-card-top">
+                                <div class="tm-user-info">
+                                    <div class="tm-user-avatar">KW</div>
+                                    <div>
+                                        <div class="tm-user-name">Katarzyna W.</div>
+                                        <span class="tm-verified-badge"><i class="fa-solid fa-check"></i> Opinia potwierdzona zakupem</span>
+                                    </div>
+                                </div>
+                                <span class="tm-review-date">3 dni temu</span>
+                            </div>
+                            <div class="tm-card-rating">
+                                <div class="tm-card-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="tm-product-tag">Model: Sofa modułowa Cezar (Boucle Krem)</div>
+                            <div class="tm-review-title">Majstersztyk w każdym calu!</div>
+                            <p class="tm-review-text">Sofa Cezar przerosła moje oczekiwania. Wykonanie jest na absolutnie najwyższym poziomie, a tkanina boucle to majstersztyk. Wygoda siedzenia to zupełnie nowy wymiar. Dostawa punktualna z wniesieniem.</p>
+                            <div class="tm-customer-photo-wrapper" onclick="openTmLightbox('img/prod_1.jpg', 'Sofa modułowa Cezar w salonie klientki', 'Katarzyna W. • Boucle Krem')">
+                                <img src="img/prod_1.jpg" alt="Sofa Cezar w salonie" class="tm-customer-photo" loading="lazy">
+                                <span class="tm-photo-badge"><i class="fa-solid fa-camera"></i> Zdjęcie klienta</span>
+                            </div>
+                        </div>
+                        <div class="tm-card-footer">
+                            <span><i class="fa-solid fa-shield-halved"></i> Transakcja zweryfikowana</span>
+                            <span>TrustMate Ferret</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="tm-review-card has-photo" data-rating="5">
+                        <div>
+                            <div class="tm-card-top">
+                                <div class="tm-user-info">
+                                    <div class="tm-user-avatar" style="background: #2a2a2a;">TK</div>
+                                    <div>
+                                        <div class="tm-user-name">Tomasz K.</div>
+                                        <span class="tm-verified-badge"><i class="fa-solid fa-check"></i> Architekt wnętrz</span>
+                                    </div>
+                                </div>
+                                <span class="tm-review-date">1 tydzień temu</span>
+                            </div>
+                            <div class="tm-card-rating">
+                                <div class="tm-card-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="tm-product-tag">Model: Sofa Lounge 3-osobowa (Welur zieleń)</div>
+                            <div class="tm-review-title">Świetna współpraca i precyzja wymiarów</div>
+                            <p class="tm-review-text">Współpraca z Miohome przy moim projekcie wnętrz była czystą przyjemnością. Świetny kontakt, możliwość pełnej personalizacji pod wymiar i bardzo wysoka jakość tapicerki. Klient zachwycony!</p>
+                            <div class="tm-customer-photo-wrapper" onclick="openTmLightbox('img/sofy_preview.jpg', 'Sofa Lounge w aranżacji apartamentu', 'Tomasz K. • Welur Butelkowa zieleń')">
+                                <img src="img/sofy_preview.jpg" alt="Sofa Lounge u klienta" class="tm-customer-photo" loading="lazy">
+                                <span class="tm-photo-badge"><i class="fa-solid fa-camera"></i> Zdjęcie klienta</span>
+                            </div>
+                        </div>
+                        <div class="tm-card-footer">
+                            <span><i class="fa-solid fa-shield-halved"></i> Transakcja zweryfikowana</span>
+                            <span>TrustMate Ferret</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="tm-review-card has-photo" data-rating="5">
+                        <div>
+                            <div class="tm-card-top">
+                                <div class="tm-user-info">
+                                    <div class="tm-user-avatar" style="background: #3d342d;">AM</div>
+                                    <div>
+                                        <div class="tm-user-name">Anna M.</div>
+                                        <span class="tm-verified-badge"><i class="fa-solid fa-check"></i> Opinia potwierdzona zakupem</span>
+                                    </div>
+                                </div>
+                                <span class="tm-review-date">2 tygodnie temu</span>
+                            </div>
+                            <div class="tm-card-rating">
+                                <div class="tm-card-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="tm-product-tag">Model: Fotel wypoczynkowy Biber</div>
+                            <div class="tm-review-title">Elegancja i niesamowity komfort</div>
+                            <p class="tm-review-text">Fotel Biber zamówiony do mojego gabinetu robi wrażenie na każdym gościu. Jest bardzo elegancki, a przy tym niesamowicie wygodny na długie godziny czytania i pracy.</p>
+                            <div class="tm-customer-photo-wrapper" onclick="openTmLightbox('img/fotele_preview.jpg', 'Fotel Biber w gabinecie', 'Anna M. • Tkanina strukturalna')">
+                                <img src="img/fotele_preview.jpg" alt="Fotel Biber w gabinecie" class="tm-customer-photo" loading="lazy">
+                                <span class="tm-photo-badge"><i class="fa-solid fa-camera"></i> Zdjęcie klienta</span>
+                            </div>
+                        </div>
+                        <div class="tm-card-footer">
+                            <span><i class="fa-solid fa-shield-halved"></i> Transakcja zweryfikowana</span>
+                            <span>TrustMate Ferret</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="tm-review-card has-photo" data-rating="5">
+                        <div>
+                            <div class="tm-card-top">
+                                <div class="tm-user-info">
+                                    <div class="tm-user-avatar" style="background: #1e293b;">PG</div>
+                                    <div>
+                                        <div class="tm-user-name">Piotr G.</div>
+                                        <span class="tm-verified-badge"><i class="fa-solid fa-check"></i> Opinia potwierdzona zakupem</span>
+                                    </div>
+                                </div>
+                                <span class="tm-review-date">3 tygodnie temu</span>
+                            </div>
+                            <div class="tm-card-rating">
+                                <div class="tm-card-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="tm-product-tag">Model: Sofa Chester Club (Skóra Vintage)</div>
+                            <div class="tm-review-title">Cudowny kontakt i wzorowa realizacja</div>
+                            <p class="tm-review-text">Przed zakupem zamówiliśmy darmowe próbki tkanin, co ułatwiło wybór koloru. Mebel jest solidny, ciężki, sprężystość idealna. Z czystym sumieniem polecam!</p>
+                            <div class="tm-customer-photo-wrapper" onclick="openTmLightbox('img/chesterclub.jpg', 'Sofa Chester Club w salonie', 'Piotr G. • Skóra Vintage')">
+                                <img src="img/chesterclub.jpg" alt="Sofa Chester Club" class="tm-customer-photo" loading="lazy">
+                                <span class="tm-photo-badge"><i class="fa-solid fa-camera"></i> Zdjęcie klienta</span>
+                            </div>
+                        </div>
+                        <div class="tm-card-footer">
+                            <span><i class="fa-solid fa-shield-halved"></i> Transakcja zweryfikowana</span>
+                            <span>TrustMate Ferret</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="tm-review-card" data-rating="5">
+                        <div>
+                            <div class="tm-card-top">
+                                <div class="tm-user-info">
+                                    <div class="tm-user-avatar" style="background: #475569;">MS</div>
+                                    <div>
+                                        <div class="tm-user-name">Monika S.</div>
+                                        <span class="tm-verified-badge"><i class="fa-solid fa-check"></i> Opinia potwierdzona zakupem</span>
+                                    </div>
+                                </div>
+                                <span class="tm-review-date">1 miesiąc temu</span>
+                            </div>
+                            <div class="tm-card-rating">
+                                <div class="tm-card-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="tm-product-tag">Model: Pufa modułowa Cezar</div>
+                            <div class="tm-review-title">Perfekcyjne dopełnienie salonu</div>
+                            <p class="tm-review-text">Pufa służy nam zarówno jako podnóżek, jak i stolik pomocniczy z tacą. Wykonanie bez zarzutu, szwy równe, materiał rewelacyjny w codziennym użytkowaniu przy dzieciach i kocie. Szybka realizacja!</p>
+                        </div>
+                        <div class="tm-card-footer">
+                            <span><i class="fa-solid fa-shield-halved"></i> Transakcja zweryfikowana</span>
+                            <span>TrustMate Ferret</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="tm-review-card has-photo" data-rating="5">
+                        <div>
+                            <div class="tm-card-top">
+                                <div class="tm-user-info">
+                                    <div class="tm-user-avatar" style="background: #0f172a;">MD</div>
+                                    <div>
+                                        <div class="tm-user-name">Michał D.</div>
+                                        <span class="tm-verified-badge"><i class="fa-solid fa-check"></i> Opinia potwierdzona zakupem</span>
+                                    </div>
+                                </div>
+                                <span class="tm-review-date">1 miesiąc temu</span>
+                            </div>
+                            <div class="tm-card-rating">
+                                <div class="tm-card-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="tm-product-tag">Model: Narożnik modułowy Vesta (Tkanina Hydrofobowa)</div>
+                            <div class="tm-review-title">Prawdziwe polskie rzemiosło</div>
+                            <p class="tm-review-text">W czasach masowej produkcji z sieciówek meble od Miohome to inna liga. Czuć pasję stolarską i tapicerską. Materiał hydrofobowy już dwukrotnie uratował sofę przed plamą po kawie — ciecz po prostu spływa w kroplach.</p>
+                            <div class="tm-customer-photo-wrapper" onclick="openTmLightbox('img/prod_3.jpg', 'Narożnik Vesta w salonie', 'Michał D. • Szary melanż')">
+                                <img src="img/prod_3.jpg" alt="Narożnik Vesta" class="tm-customer-photo" loading="lazy">
+                                <span class="tm-photo-badge"><i class="fa-solid fa-camera"></i> Zdjęcie klienta</span>
+                            </div>
+                        </div>
+                        <div class="tm-card-footer">
+                            <span><i class="fa-solid fa-shield-halved"></i> Transakcja zweryfikowana</span>
+                            <span>TrustMate Ferret</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom bar with TrustMate certification & links -->
+            <div class="tm-ferret-bottom-bar">
+                <div class="tm-bottom-left">
+                    <span class="tm-verified-seal"><i class="fa-solid fa-certificate"></i> Zweryfikowany profil sklepu w systemie TrustMate</span>
+                    <a href="polityka-opinii.html" class="tm-policy-link">Zasady publikacji i weryfikacji opinii (Dyrektywa Omnibus)</a>
+                </div>
+                <div class="tm-bottom-right">
+                    <span class="tm-powered-by">Widget <strong>TrustMate Ferret</strong> • System opinii konsumenckich</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Samples Section -->
+    <section class="free-samples-section animate-up">
             <div class="samples-content">
                 <h2 class="section-heading">Zamów bezpłatne próbki tkanin</h2>
                 <p>Nie jesteś pewien koloru lub faktury? Chcesz zobaczyć, jak materiał zachowa się w świetle Twojego wnętrza? Zamów darmowe próbki naszych tkanin i przekonaj się o ich najwyższej jakości.</p>

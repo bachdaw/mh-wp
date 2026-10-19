@@ -197,8 +197,52 @@ class MioFooter extends HTMLElement {
                     <li><a href="wspolpraca.html#b2b">Partnerzy biznesowi</a></li>
                 </ul>
             </div>
-            <!-- Pusta kolumna zamiast 'Blog', aby Newsletter nie zmienił pozycji -->
-            <div></div>
+            <!-- TrustMate Store Rating Badge Widget -->
+            <div class="footer-col footer-trust-col">
+                <h4>Opinie</h4>
+                <div class="trustmate-badge-widget" data-widget-type="store-badge" data-company-slug="miohome">
+                    <a href="polityka-opinii.html" class="trustmate-badge-card" title="TrustMate - Zweryfikowane opinie o sklepie Miohome (Ocena 4.96/5)">
+                        <div class="tm-badge-top">
+                            <div class="tm-badge-brand">
+                                <svg class="tm-badge-shield" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L3 6V11.5C3 16.5 6.8 21.1 12 22C17.2 21.1 21 16.5 21 11.5V6L12 2Z" fill="#10B981"/>
+                                    <path d="M9.5 12L11 13.5L15 9.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="tm-brand-names">
+                                    <span class="tm-brand-title">TrustMate<span class="tm-brand-dot">.io</span></span>
+                                    <span class="tm-brand-subtitle">Zweryfikowany sklep</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tm-badge-center">
+                            <div class="tm-badge-score-wrap">
+                                <span class="tm-badge-score">4.96</span>
+                                <span class="tm-badge-max">/5</span>
+                            </div>
+                            <div class="tm-badge-stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="tm-badge-count">
+                                <strong>482</strong> opinie klientów
+                            </div>
+                        </div>
+
+                        <div class="tm-badge-bottom">
+                            <span class="tm-badge-omnibus">
+                                <i class="fa-solid fa-check"></i> Opinie z transakcji
+                            </span>
+                            <span class="tm-badge-view">
+                                Sprawdź <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <div class="footer-col newsletter-col">
                 <h4>Newsletter</h4>
                 <form class="newsletter-form" onsubmit="event.preventDefault(); const cb = this.querySelector('input[type=checkbox]'); if(!cb.checked){ alert('Prosimy o zaznaczenie zgody na otrzymywanie newslettera.'); return; } alert('Dziękujemy za zapis do newslettera!'); this.reset();">
@@ -1443,8 +1487,92 @@ customElements.define('mio-search-drawer', MioSearchDrawer);
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(document.createElement('mio-search-drawer'));
+        initTrustmateFerret();
     });
 } else {
     document.body.appendChild(document.createElement('mio-search-drawer'));
+    initTrustmateFerret();
 }
+
+/* ==========================================================================
+   TrustMate Ferret Widget Interactive Controller
+   ========================================================================== */
+function initTrustmateFerret() {
+    const track = document.getElementById('tmCardsTrack');
+    const prevBtn = document.querySelector('.tm-nav-arrow.tm-prev');
+    const nextBtn = document.querySelector('.tm-nav-arrow.tm-next');
+    const filterTabs = document.querySelectorAll('.tm-filter-tab');
+
+    if (track && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -360, behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: 360, behavior: 'smooth' });
+        });
+    }
+
+    if (filterTabs.length > 0 && track) {
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const filter = tab.getAttribute('data-filter');
+                const cards = track.querySelectorAll('.tm-review-card');
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'flex';
+                    } else if (filter === 'photo') {
+                        card.style.display = card.classList.contains('has-photo') ? 'flex' : 'none';
+                    } else if (filter === '5star') {
+                        card.style.display = card.getAttribute('data-rating') === '5' ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    }
+}
+
+window.openTmLightbox = function(src, title, sub) {
+    let modal = document.getElementById('tmLightboxModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'tmLightboxModal';
+        modal.className = 'tm-lightbox-modal';
+        modal.innerHTML = `
+            <div class="tm-lightbox-content" onclick="event.stopPropagation()">
+                <button type="button" class="tm-lightbox-close" onclick="closeTmLightbox()"><i class="fa-solid fa-xmark"></i></button>
+                <img src="" alt="Powiększone zdjęcie klienta" id="tmLightboxImg" class="tm-lightbox-img">
+                <div class="tm-lightbox-desc">
+                    <h4 id="tmLightboxTitle">Zdjęcie klienta</h4>
+                    <p id="tmLightboxSub">Miohome</p>
+                </div>
+            </div>
+        `;
+        modal.addEventListener('click', () => closeTmLightbox());
+        document.body.appendChild(modal);
+    }
+    const img = document.getElementById('tmLightboxImg');
+    const titleEl = document.getElementById('tmLightboxTitle');
+    const subEl = document.getElementById('tmLightboxSub');
+    if (img) img.src = src;
+    if (titleEl) titleEl.textContent = title || 'Zdjęcie klienta';
+    if (subEl) subEl.textContent = sub || '';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeTmLightbox = function() {
+    const modal = document.getElementById('tmLightboxModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        window.closeTmLightbox();
+    }
+});
 

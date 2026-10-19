@@ -843,10 +843,16 @@
             .slider-arrow { display: none; } /* Ukrywamy strzałki przewijania zdjęć na mobile, zostaje swipe */
 
 
-            /* Footer na mweb - podział i newsletter na całą szerokość */
+            /* Footer na mweb - podział, widget opinii i newsletter na całą szerokość */
             .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .footer-grid > div:nth-child(5) { display: none; } /* Ukrywamy puste pole */
-            .newsletter-col { grid-column: span 2; margin-top: 20px; }
+            .footer-trust-col {
+                display: flex !important;
+                grid-column: span 2;
+                margin-top: 15px;
+                margin-bottom: 5px;
+                width: 100%;
+            }
+            .newsletter-col { grid-column: span 2; margin-top: 15px; }
         }
 
         @media (max-width: 500px) {
@@ -6156,4 +6162,777 @@ a.checkout-help-item:hover .checkout-help-val {
         font-size: 13px;
     }
 }
+
+/* ==========================================================================
+   TrustMate Ferret Widget Prototype (Opinie naszych klientów)
+   ========================================================================== */
+.trustmate-ferret-section {
+    padding: 80px 40px;
+    background-color: #faf9f7;
+    position: relative;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.trustmate-ferret-wrapper {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+/* Header & Summary */
+.tm-ferret-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.tm-brand-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.tm-brand-tag i {
+    color: #10b981;
+    font-size: 13px;
+}
+
+.tm-brand-logo-text {
+    color: #111;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.tm-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--heading-text-color, #111);
+    margin: 0 0 12px 0;
+}
+
+.tm-rating-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tm-score-number {
+    font-size: 28px;
+    font-weight: 600;
+    color: #000;
+    line-height: 1;
+}
+
+.tm-stars,
+.tm-card-stars {
+    display: inline-flex;
+    gap: 3px;
+}
+
+/* Kolor czarny dla gwiazdek w widgetcie Trustmate */
+.tm-stars i,
+.tm-card-stars i,
+.trustmate-ferret-section i.fa-star {
+    color: #000 !important;
+    font-size: 13px;
+}
+
+.tm-score-meta {
+    font-size: 13px;
+    color: #666;
+    font-weight: 300;
+}
+
+.tm-score-meta strong {
+    color: #111;
+    font-weight: 500;
+}
+
+.tm-omnibus-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: #555;
+    background: #fff;
+    padding: 4px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.tm-omnibus-badge:hover {
+    color: #000;
+    border-color: #000;
+}
+
+.tm-omnibus-badge i {
+    color: #10b981;
+    font-size: 12px;
+}
+
+/* Header Controls & Filters */
+.tm-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tm-filter-tabs {
+    display: flex;
+    gap: 8px;
+    background: #fff;
+    padding: 4px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+
+.tm-filter-tab {
+    background: transparent;
+    border: none;
+    padding: 8px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: #666;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tm-filter-tab i {
+    font-size: 11px;
+}
+
+.tm-filter-tab:hover {
+    color: #000;
+}
+
+.tm-filter-tab.active {
+    background: #000;
+    color: #fff;
+    font-weight: 500;
+}
+
+.tm-nav-arrows {
+    display: flex;
+    gap: 6px;
+}
+
+.tm-nav-arrow {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    color: #222;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.tm-nav-arrow:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Ferret Cards Carousel Track */
+.tm-carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.tm-cards-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 10px 2px 25px 2px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.tm-cards-track::-webkit-scrollbar {
+    height: 6px;
+}
+
+.tm-cards-track::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 3px;
+}
+
+.tm-cards-track::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 3px;
+}
+
+/* Ferret Review Card */
+.tm-review-card {
+    flex: 0 0 340px;
+    max-width: 340px;
+    scroll-snap-align: start;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tm-review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-color: #dcdcdc;
+}
+
+.tm-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.tm-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tm-user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+}
+
+.tm-user-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111;
+    line-height: 1.2;
+}
+
+.tm-verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    color: #166534;
+    background: #f0fdf4;
+    padding: 2px 7px;
+    border-radius: 12px;
+    border: 1px solid #dcfce7;
+    margin-top: 3px;
+}
+
+.tm-verified-badge i {
+    font-size: 9px;
+}
+
+.tm-review-date {
+    font-size: 11px;
+    color: #888;
+    font-weight: 300;
+}
+
+.tm-card-rating {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tm-product-tag {
+    font-size: 11px;
+    color: #666;
+    background: #f5f5f5;
+    padding: 3px 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.tm-review-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.tm-review-text {
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #444;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+
+/* Customer Photos (Ferret Widget Hallmark) */
+.tm-customer-photo-wrapper {
+    margin-top: 10px;
+    margin-bottom: 14px;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    max-height: 180px;
+}
+
+.tm-customer-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.tm-customer-photo-wrapper:hover .tm-customer-photo {
+    transform: scale(1.03);
+}
+
+.tm-photo-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(4px);
+}
+
+.tm-card-footer {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: #888;
+}
+
+.tm-card-footer i.fa-shield-halved {
+    color: #10b981;
+}
+
+/* Trustmate Widget Bottom Bar */
+.tm-ferret-bottom-bar {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 11.5px;
+    color: #777;
+}
+
+.tm-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.tm-verified-seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #111;
+    font-weight: 500;
+}
+
+.tm-verified-seal i {
+    color: #10b981;
+    font-size: 14px;
+}
+
+.tm-policy-link {
+    color: #555;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.tm-policy-link:hover {
+    color: #000;
+}
+
+.tm-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tm-powered-by {
+    font-size: 11px;
+    color: #999;
+}
+
+.tm-powered-by strong {
+    color: #222;
+    font-weight: 600;
+}
+
+/* Lightbox Modal for Customer Photo Preview */
+.tm-lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.tm-lightbox-modal.active {
+    display: flex;
+}
+
+.tm-lightbox-content {
+    background: #fff;
+    max-width: 650px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    animation: tmFadeIn 0.25s ease-out;
+}
+
+@keyframes tmFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.tm-lightbox-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.tm-lightbox-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.tm-lightbox-desc {
+    padding: 20px 24px;
+}
+
+.tm-lightbox-desc h4 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tm-lightbox-desc p {
+    margin: 0;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .trustmate-ferret-section {
+        padding: 60px 20px;
+    }
+    .tm-ferret-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .tm-header-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .tm-review-card {
+        flex: 0 0 290px;
+        max-width: 290px;
+    }
+}
+
+@media (max-width: 600px) {
+    .trustmate-ferret-section {
+        padding: 40px 15px;
+    }
+    .tm-header-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .tm-filter-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+    }
+    .tm-nav-arrows {
+        align-self: flex-end;
+    }
+    .tm-review-card {
+        flex: 0 0 min(280px, 85vw);
+        max-width: min(280px, 85vw);
+        padding: 18px;
+    }
+}
+
+/* ==========================================================================
+   TrustMate Store Rating Badge Widget in Footer
+   ========================================================================== */
+.footer-trust-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.trustmate-badge-widget {
+    margin-top: 2px;
+}
+
+.trustmate-badge-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    max-width: 210px;
+    position: relative;
+    user-select: none;
+}
+
+.trustmate-badge-card:hover {
+    border-color: #111;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+
+.tm-badge-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.tm-badge-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tm-badge-shield {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.tm-brand-names {
+    display: flex;
+    flex-direction: column;
+}
+
+.tm-brand-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.tm-brand-dot {
+    color: #10b981;
+}
+
+.tm-brand-subtitle {
+    font-size: 9px;
+    color: #888;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.tm-badge-center {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.tm-badge-score-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.tm-badge-score {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+    font-family: 'Poppins', sans-serif;
+}
+
+.tm-badge-max {
+    font-size: 11px;
+    color: #999;
+    font-weight: 400;
+}
+
+.tm-badge-stars {
+    display: flex;
+    gap: 2px;
+    margin: 5px 0 4px 0;
+}
+
+/* Czarne gwiazdki w badge Trustmate w stopce */
+.tm-badge-stars i,
+.trustmate-badge-card i.fa-star {
+    color: #000 !important;
+    font-size: 11px;
+}
+
+.tm-badge-count {
+    font-size: 10.5px;
+    color: #666;
+    font-weight: 300;
+}
+
+.tm-badge-count strong {
+    color: #111;
+    font-weight: 500;
+}
+
+.tm-badge-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+    font-size: 9.5px;
+    color: #777;
+}
+
+.tm-badge-omnibus {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #166534;
+    font-weight: 500;
+}
+
+.tm-badge-omnibus i {
+    color: #10b981;
+    font-size: 9px;
+}
+
+.tm-badge-view {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #222;
+    font-weight: 500;
+}
+
+.tm-badge-view i {
+    font-size: 8px;
+    transition: transform 0.2s ease;
+}
+
+.trustmate-badge-card:hover .tm-badge-view i {
+    transform: translateX(2px);
+}
+
+@media (max-width: 850px) {
+    .footer-trust-col {
+        display: flex !important;
+        grid-column: span 2;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    .footer-trust-col .trustmate-badge-widget {
+        width: 100%;
+    }
+    .footer-trust-col .trustmate-badge-card {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 14px 18px;
+    }
+    .footer-trust-col .tm-badge-center {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+        margin-bottom: 12px;
+        padding: 4px 0;
+    }
+    .footer-trust-col .tm-badge-stars {
+        margin: 0;
+    }
+}
+
+
 
