@@ -184,6 +184,7 @@ class MioFooter extends HTMLElement {
                 <h4>Dla klienta</h4>
                 <ul>
                     <li><a href="regulamin.html">Regulamin sklepu</a></li>
+                    <li><a href="regulamin-newslettera.html">Regulamin newslettera</a></li>
                     <li><a href="reklamacje.html">Zasady i reklamacje</a></li>
                     <li><a href="kontakt.html#faq">FAQ</a></li>
                     <li><a href="samples.html">Darmowe próbki</a></li>
@@ -251,7 +252,7 @@ class MioFooter extends HTMLElement {
                     </div>
                     <label class="newsletter-checkbox">
                         <input type="checkbox" required>
-                        <span>Wyrażam zgodę na otrzymywanie wiadomości e-mail zgodnie z <a href="regulamin.html" target="_blank" style="text-decoration: underline; color: inherit;">Regulaminem newslettera</a> oraz <a href="polityka-prywatnosci.html" target="_blank" style="text-decoration: underline; color: inherit;">Polityką prywatności</a> prowadzonego przez STOLTAP SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, Boczna 2, 80-209 Chwaszczyno, NIP: 5892027895.</span>
+                        <span>Wyrażam zgodę na otrzymywanie wiadomości e-mail zgodnie z <a href="regulamin-newslettera.html" target="_blank" style="text-decoration: underline; color: inherit;">Regulaminem newslettera</a> oraz <a href="polityka-prywatnosci.html" target="_blank" style="text-decoration: underline; color: inherit;">Polityką prywatności</a> prowadzonego przez STOLTAP SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, Boczna 2, 80-209 Chwaszczyno, NIP: 5892027895.</span>
                     </label>
                     <button type="submit" class="newsletter-submit">Zapisz mnie</button>
                 </form>
@@ -261,6 +262,7 @@ class MioFooter extends HTMLElement {
         <div class="footer-policies-payments">
             <div class="footer-policies">
                 <a href="regulamin.html">Regulamin sklepu</a>
+                <a href="regulamin-newslettera.html">Regulamin newslettera</a>
                 <a href="polityka-prywatnosci.html">Polityka prywatności</a>
                 <a href="polityka-cookies.html">Polityka cookies</a>
                 <a href="polityka-opinii.html">Polityka opinii</a>
