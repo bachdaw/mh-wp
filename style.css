@@ -2769,7 +2769,7 @@
     padding: 0 60px 0 0;
 }
 .about-image-primary {
-    flex: 1; background: url('img/puf.jpg') center/cover; min-height: 500px;
+    flex: 1; background: url('img/logo_back.jpeg') center/cover; min-height: 500px;
 }
 
 .values-section {
