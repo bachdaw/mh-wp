@@ -308,26 +308,18 @@
                 </section>
 
                 <div class="terms-checkbox" style="margin-bottom: 20px; padding: 22px 25px; background: #fff; box-shadow: 0 2px 15px rgba(0,0,0,0.03);">
-                    <!-- Pouczenie o wyłączeniu prawa do odstąpienia od umowy -->
-                    <div class="custom-goods-notice">
-                        <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
-                            <i class="fa-solid fa-circle-info" style="color: #666; margin-top: 2px;"></i>
-                            <strong>Pouczenie o wyłączeniu prawa do odstąpienia od umowy:</strong>
-                        </div>
-                        Zgodnie z art. 38 pkt 3 Ustawy z dnia 30 maja 2014 r. o prawach konsumenta, prawo do odstąpienia od umowy zawartej na odległość w terminie 14 dni bez podania przyczyny nie przysługuje w odniesieniu do umów, w których przedmiotem świadczenia jest towar nieprefabrykowany, wyprodukowany według specyfikacji konsumenta lub służący zaspokojeniu jego zindywidualizowanych potrzeb (meble personalizowane na zamówienie w wybranym wariancie i obiciu). Zamówione produkty są w pełni objęte 2-letnią rękojmią, pełną gwarancją producenta oraz prawem do bezpłatnej reklamacji wad.
-                    </div>
-
                     <div class="checkbox-group" style="margin-bottom: 12px;">
                         <input type="checkbox" id="custom-goods-check" required>
-                        <label for="custom-goods-check" style="font-size: 12px; color: #333; line-height: 1.5;">
-                            Przyjmuję do wiadomości, że zamawiane meble są realizowane na moje indywidualne zamówienie (produkt nieprefabrykowany) i zgodnie z art. 38 pkt 3 Ustawy o prawach konsumenta nie podlegają 14-dniowemu zwrotowi bez podania przyczyny. <span style="color: #dc2626;">*</span>
+                        <label for="custom-goods-check" style="font-size: 12px; font-weight: 300; color: #444; line-height: 1.5;">
+                            Przyjmuję do wiadomości, że zamawiane meble są konfigurowane na indywidualne zamówienie i nie przysługuje mi prawo do 14-dniowego odstąpienia od umowy. <span style="color: #dc2626;">*</span>
+                            <span style="display: block; font-size: 11px; color: #2e5937; margin-top: 3px; font-weight: 300;">(Zwrot na zasadach reklamacji, jeśli produkt ma wadę lub nie jest zgodny z umową, nadal w pełni Ci przysługuje).</span>
                         </label>
                     </div>
 
                     <div class="checkbox-group" style="margin-bottom: 16px;">
                         <input type="checkbox" id="terms-check" required>
-                        <label for="terms-check" style="font-size: 12px; color: #333; line-height: 1.5;">
-                            Przeczytałem/łam i akceptuję <a href="regulamin.html" target="_blank" style="text-decoration: underline; color: #000; font-weight: 500;">regulamin sklepu</a> oraz <a href="polityka-prywatnosci.html" target="_blank" style="text-decoration: underline; color: #000; font-weight: 500;">politykę prywatności</a>. <span style="color: #dc2626;">*</span>
+                        <label for="terms-check" style="font-size: 12px; font-weight: 300; color: #444; line-height: 1.5;">
+                            Przeczytałem/łam i akceptuję <a href="regulamin.html" target="_blank" style="text-decoration: underline; color: #111; font-weight: 400;">regulamin sklepu</a> oraz <a href="polityka-prywatnosci.html" target="_blank" style="text-decoration: underline; color: #111; font-weight: 400;">politykę prywatności</a> STOLTAP SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, Boczna 2, 80-209 Chwaszczyno, NIP: 5892027895. <span style="color: #dc2626;">*</span>
                         </label>
                     </div>
 
@@ -919,6 +911,21 @@
                 input.addEventListener('change', handler);
             });
 
+            // Synchronizacja oświadczenia o meblach na zamówienie z koszyka
+            const customGoodsCheckEl = document.getElementById('custom-goods-check');
+            if (customGoodsCheckEl) {
+                if (sessionStorage.getItem('custom_goods_acknowledged') === 'true') {
+                    customGoodsCheckEl.checked = true;
+                }
+                customGoodsCheckEl.addEventListener('change', () => {
+                    if (customGoodsCheckEl.checked) {
+                        sessionStorage.setItem('custom_goods_acknowledged', 'true');
+                    } else {
+                        sessionStorage.removeItem('custom_goods_acknowledged');
+                    }
+                });
+            }
+
             // Obsługa tworzenia konta przy okazji zamówienia dla gościa
             const createAccountCheck = document.getElementById('create-account-check');
             const createAccountFields = document.getElementById('create-account-fields');
@@ -1078,7 +1085,7 @@
                 const customGoodsCheck = document.getElementById('custom-goods-check');
                 if (customGoodsCheck && !customGoodsCheck.checked) {
                     const customGoodsGrp = customGoodsCheck.closest('.checkbox-group') || customGoodsCheck;
-                    markError(customGoodsGrp, 'Wymagane jest potwierdzenie pouczenia o braku prawa do odstąpienia od umowy dla mebli na zamówienie', 'Potwierdzenie mebli na zamówienie (wyłączenie zwrotu)');
+                    markError(customGoodsGrp, 'Wymagane jest potwierdzenie, że zamawiane meble są konfigurowane na indywidualne zamówienie (brak 14-dniowego odstąpienia od umowy)', 'Potwierdzenie mebli na zamówienie (brak zwrotu 14-dniowego)');
                 }
 
                 const termsCheck = document.getElementById('terms-check');

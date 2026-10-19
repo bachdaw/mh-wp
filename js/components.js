@@ -201,14 +201,16 @@ class MioFooter extends HTMLElement {
             <div></div>
             <div class="footer-col newsletter-col">
                 <h4>Newsletter</h4>
-                <div class="newsletter-input-group">
-                    <input type="email" placeholder="Twój adres e-mail">
-                    <button class="newsletter-submit">Zapisz mnie</button>
-                </div>
-                <label class="newsletter-checkbox">
-                    <input type="checkbox">
-                    <span>Akceptuję <a href="regulamin.html" style="text-decoration: underline; color: inherit;">regulamin</a> i <a href="polityka-prywatnosci.html" style="text-decoration: underline; color: inherit;">politykę prywatności</a>. Wyrażam zgodę na otrzymywanie informacji handlowych.</span>
-                </label>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); const cb = this.querySelector('input[type=checkbox]'); if(!cb.checked){ alert('Prosimy o zaznaczenie zgody na otrzymywanie newslettera.'); return; } alert('Dziękujemy za zapis do newslettera!'); this.reset();">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Twój adres e-mail" required>
+                    </div>
+                    <label class="newsletter-checkbox">
+                        <input type="checkbox" required>
+                        <span>Wyrażam zgodę na otrzymywanie wiadomości e-mail zgodnie z <a href="regulamin.html" target="_blank" style="text-decoration: underline; color: inherit;">Regulaminem newslettera</a> oraz <a href="polityka-prywatnosci.html" target="_blank" style="text-decoration: underline; color: inherit;">Polityką prywatności</a> prowadzonego przez STOLTAP SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, Boczna 2, 80-209 Chwaszczyno, NIP: 5892027895.</span>
+                    </label>
+                    <button type="submit" class="newsletter-submit">Zapisz mnie</button>
+                </form>
             </div>
         </div>
 

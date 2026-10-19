@@ -599,25 +599,69 @@
             }
         }
 
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+        }
+
         .newsletter-input-group {
             display: flex;
             margin-bottom: 10px;
         }
 
         .newsletter-input-group input[type="email"] {
-            flex-grow: 1;
-            padding: 10px;
+            width: 100%;
+            padding: 11px 14px;
             border: 1px solid #ddd;
-            border-right: none;
             outline: none;
             font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            box-sizing: border-box;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        .newsletter-input-group input[type="email"]:focus {
+            border-color: #000;
+        }
+
+        .newsletter-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--text-light, #777);
+            font-size: 11px;
+            font-weight: 300;
+            line-height: 1.5;
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .newsletter-checkbox input {
+            margin-top: 3px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: var(--accent-color, #a88d75);
+        }
+
+        .newsletter-checkbox a {
+            text-decoration: underline;
+            color: inherit;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .newsletter-checkbox a:hover {
+            color: var(--accent-color);
         }
 
         .newsletter-submit {
             background-color: #000;
             color: #fff;
             border: none;
-            padding: 0 15px;
+            padding: 12px 18px;
             font-family: 'Montserrat', sans-serif;
             font-size: 10px;
             font-weight: 500;
@@ -625,24 +669,12 @@
             letter-spacing: 1px;
             cursor: pointer;
             transition: 0.3s;
+            width: 100%;
+            text-align: center;
         }
         
         .newsletter-submit:hover {
             background-color: var(--accent-color);
-        }
-
-        .newsletter-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-top: 10px;
-            color: var(--text-light);
-            font-size: 11px;
-            line-height: 1.4;
-        }
-
-        .newsletter-checkbox input {
-            margin-top: 5px;
         }
 
         .footer-policies-payments {
@@ -1530,7 +1562,47 @@
 .klarna-info {
     font-size: 10px;
     color: var(--secondary-text-color);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+/* Akordeon informacyjny: Produkt personalizowany – z subtelnym akcentem informacyjnym */
+.product-custom-accordion {
+    margin-bottom: 25px;
+    border-left: 2px solid var(--accent-color);
+    background: rgba(201, 166, 122, 0.04);
+    padding: 0 14px;
+}
+.product-custom-accordion .accordion-header {
+    font-weight: 400;
+}
+.product-custom-accordion .accordion-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+.product-custom-accordion .accordion-title-wrap i {
+    color: var(--accent-color);
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.product-custom-accordion .accordion-content p {
+    margin: 0 0 10px 0;
+}
+.product-custom-accordion .accordion-content p:last-child {
+    margin-bottom: 0;
+}
+.product-custom-accordion .accordion-warranty-title {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.product-custom-accordion .accordion-warranty-title i {
+    color: #2e7d32;
+    font-size: 12px;
 }
 
 .delivery-info {
@@ -1588,10 +1660,10 @@
     font-size: 13px;
     font-weight: 500;
 }
-.accordion-header i {
+.accordion-header i.fa-chevron-down {
     transition: transform 0.3s;
 }
-.accordion-item.active .accordion-header i {
+.accordion-item.active .accordion-header i.fa-chevron-down {
     transform: rotate(180deg);
 }
 .accordion-content {
@@ -3394,21 +3466,54 @@
     background-size: 16px;
 }
 
-.form-checkbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+.form-checkbox,
+.form-group.form-checkbox {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-.form-checkbox input {
-    margin-top: 4px;
-}
-
-.form-checkbox label {
-    font-size: 11px;
-    color: var(--secondary-text-color);
-    line-height: 1.5;
+.form-checkbox input,
+.form-group.form-checkbox input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
+    accent-color: var(--accent-color, #a88d75);
+}
+
+.form-checkbox label,
+.form-group.form-checkbox label,
+.form-checkbox .consent-label,
+.form-group.form-checkbox .consent-label {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    text-transform: none !important;
+    letter-spacing: 0.1px !important;
+    color: #666 !important;
+    line-height: 1.65 !important;
+    cursor: pointer;
+}
+
+.form-checkbox label a,
+.form-group.form-checkbox label a,
+.form-checkbox .consent-label a,
+.form-group.form-checkbox .consent-label a {
+    text-decoration: underline;
+    color: #333 !important;
+    font-weight: 400 !important;
+    transition: color 0.2s;
+}
+
+.form-checkbox label a:hover,
+.form-group.form-checkbox label a:hover,
+.form-checkbox .consent-label a:hover,
+.form-group.form-checkbox .consent-label a:hover {
+    color: var(--accent-color, #a88d75) !important;
 }
 
 .form-submit {
@@ -3672,21 +3777,35 @@
     flex-direction: column;
     gap: 20px;
 }
-.form-group {
+.auth-form .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.form-group label {
+.auth-form .form-group label:not(.newsletter-checkbox) {
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #333;
 }
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"] {
+.auth-form .form-group label.newsletter-checkbox {
+    font-size: 11.5px;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: normal;
+    color: #666;
+    line-height: 1.5;
+    cursor: pointer;
+}
+.auth-form .form-group label.newsletter-checkbox a {
+    text-decoration: underline;
+    color: #333;
+    font-weight: 400;
+}
+.auth-form .form-group input[type="text"],
+.auth-form .form-group input[type="email"],
+.auth-form .form-group input[type="password"] {
     padding: 12px 15px;
     border: 1px solid #ddd;
     font-family: 'Poppins', sans-serif;
@@ -3694,7 +3813,7 @@
     outline: none;
     transition: 0.3s;
 }
-.form-group input:focus {
+.auth-form .form-group input:focus {
     border-color: #000;
 }
 .form-actions {
@@ -4209,20 +4328,7 @@
     background: #fff8f8;
 }
 
-/* Custom Goods & RODO Legal Notices */
-.custom-goods-notice {
-    background: #fafafa;
-    border: 1px solid #eaeaea;
-    border-left: 3px solid #666;
-    padding: 14px 16px;
-    font-size: 11px;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 16px;
-}
-.custom-goods-notice strong {
-    color: #111;
-}
+/* RODO Legal Notice */
 .rodo-notice {
     border-top: 1px solid #f0f0f0;
     padding-top: 14px;
@@ -5130,6 +5236,77 @@ a.checkout-help-item:hover .checkout-help-val {
     margin-left: 8px;
 }
 
+/* Checkbox mebli na zamówienie w podsumowaniu koszyka */
+.cart-custom-ack-box {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: #faf8f5;
+    border: 1px solid #ebd9c0;
+    border-radius: 2px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+.cart-custom-ack-box.has-error {
+    border-color: #dc2626;
+    background: #fef2f2;
+}
+.cart-custom-ack-box.cart-shake {
+    animation: cartShake 0.4s ease-in-out;
+}
+.cart-custom-ack-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.cart-custom-ack-input {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    accent-color: #000;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.cart-custom-ack-text {
+    font-size: 11.5px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #444;
+}
+.cart-custom-ack-text .required-star {
+    color: #dc2626;
+    font-weight: bold;
+}
+.cart-custom-ack-reassurance {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin-top: 8px;
+    padding-left: 26px;
+    font-size: 10.5px;
+    color: #2e5937;
+    line-height: 1.4;
+}
+.cart-custom-ack-reassurance i {
+    color: #2e7d32;
+    font-size: 11px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+.cart-custom-ack-error {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding-left: 26px;
+    font-size: 11px;
+    color: #dc2626;
+    font-weight: 500;
+}
+.cart-custom-ack-error i {
+    font-size: 12px;
+}
+
 .cart-checkout-cta {
     width: 100%;
     background: #000;
@@ -5146,7 +5323,7 @@ a.checkout-help-item:hover .checkout-help-val {
     display: block;
     text-align: center;
     text-decoration: none;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 .cart-checkout-cta:hover {
     background: var(--accent-color);

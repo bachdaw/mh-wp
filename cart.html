@@ -318,7 +318,24 @@
                         </div>
                     </div>
 
-                    <a href="checkout.html" class="cart-checkout-cta">Przejdź do kasy</a>
+                    <div class="cart-custom-ack-box" id="cart-custom-ack-box">
+                        <label class="cart-custom-ack-label" for="cart-custom-goods-check">
+                            <input type="checkbox" id="cart-custom-goods-check" class="cart-custom-ack-input" required>
+                            <span class="cart-custom-ack-text">
+                                Przyjmuję do wiadomości, że zamawiane meble są konfigurowane na indywidualne zamówienie i nie przysługuje mi prawo do 14-dniowego odstąpienia od umowy. <span class="required-star">*</span>
+                            </span>
+                        </label>
+                        <div class="cart-custom-ack-reassurance">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Zwrot na zasadach reklamacji (jeśli produkt ma wadę lub nie jest zgodny z umową) nadal w pełni Ci przysługuje.</span>
+                        </div>
+                        <div class="cart-custom-ack-error" id="cart-custom-ack-error" style="display: none;">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span>Zaznacz powyższe pole, aby móc przejść do realizacji zamówienia.</span>
+                        </div>
+                    </div>
+
+                    <a href="checkout.html" class="cart-checkout-cta" id="cart-checkout-cta-btn">Przejdź do kasy</a>
                 </div>
 
                 <!-- Dedykowany boks pomocy pod podsumowaniem -->
@@ -712,6 +729,46 @@
             if (modal) {
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) closeModal();
+                });
+            }
+
+            // Obsługa wymaganego potwierdzenia mebli na zamówienie (brak 14-dniowego zwrotu)
+            const cartCustomCheck = document.getElementById('cart-custom-goods-check');
+            const cartCustomAckBox = document.getElementById('cart-custom-ack-box');
+            const cartCustomAckError = document.getElementById('cart-custom-ack-error');
+            const checkoutCtaBtn = document.getElementById('cart-checkout-cta-btn') || document.querySelector('.cart-checkout-cta');
+
+            if (cartCustomCheck && sessionStorage.getItem('custom_goods_acknowledged') === 'true') {
+                cartCustomCheck.checked = true;
+            }
+
+            if (cartCustomCheck) {
+                cartCustomCheck.addEventListener('change', () => {
+                    if (cartCustomCheck.checked) {
+                        if (cartCustomAckBox) cartCustomAckBox.classList.remove('has-error');
+                        if (cartCustomAckError) cartCustomAckError.style.display = 'none';
+                        sessionStorage.setItem('custom_goods_acknowledged', 'true');
+                    } else {
+                        sessionStorage.removeItem('custom_goods_acknowledged');
+                    }
+                });
+            }
+
+            if (checkoutCtaBtn) {
+                checkoutCtaBtn.addEventListener('click', (e) => {
+                    if (cartCustomCheck && !cartCustomCheck.checked) {
+                        e.preventDefault();
+                        if (cartCustomAckBox) {
+                            cartCustomAckBox.classList.add('has-error');
+                            cartCustomAckBox.classList.remove('cart-shake');
+                            void cartCustomAckBox.offsetWidth;
+                            cartCustomAckBox.classList.add('cart-shake');
+                        }
+                        if (cartCustomAckError) {
+                            cartCustomAckError.style.display = 'flex';
+                        }
+                        cartCustomCheck.focus();
+                    }
                 });
             }
 
