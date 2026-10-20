@@ -1308,6 +1308,7 @@
 }
 
 .config-option {
+    position: relative;
     border: 1px solid #eee;
     cursor: pointer;
     display: flex;
@@ -1339,6 +1340,71 @@
     object-fit: cover;
     display: block;
     margin-bottom: 5px;
+}
+
+.config-option span {
+    line-height: 1.25;
+}
+
+/* Warunkowe sekcje konfiguratora */
+.config-section {
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.config-section.is-disabled {
+    opacity: 0.38;
+    position: relative;
+    cursor: not-allowed;
+}
+
+.config-section.is-disabled .config-title {
+    color: #999;
+}
+
+.config-section.is-disabled .config-options {
+    pointer-events: none;
+    user-select: none;
+}
+
+.config-section.is-disabled .config-option {
+    filter: grayscale(85%);
+    cursor: not-allowed;
+    background-color: #fcfcfc;
+    border-color: #eee;
+}
+
+.config-section.is-disabled .config-option.active {
+    border-color: #ccc;
+}
+
+.conditional-status-badge {
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    color: #666;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f4f4f4;
+    border: 1px solid #e2e2e2;
+    padding: 2px 7px;
+    border-radius: 2px;
+    transition: opacity 0.25s ease;
+}
+
+.conditional-status-badge i {
+    font-size: 8.5px;
+    color: #888;
+}
+
+@keyframes highlightAttention {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 2px #1a1a1a; }
+}
+
+.highlight-attention {
+    animation: highlightAttention 0.35s ease 2;
 }
 
 .config-option.add-more-btn { 
@@ -2882,15 +2948,23 @@
 }
 
 .icon-wrapper {
-    display: block;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 52px;
     margin: 0 0 25px 0;
     background-color: transparent;
 }
 .value-icon {
-    font-size: 40px;
+    font-size: 46px;
     color: #1a1a1a;
     margin-bottom: 0;
+}
+img.value-icon {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
 }
 .value-title {
     font-family: 'Montserrat', sans-serif;
@@ -5372,9 +5446,16 @@ a.checkout-help-item:hover .checkout-help-val {
     box-shadow: 0 2px 15px rgba(0,0,0,0.02);
 }
 .cart-empty-icon {
-    font-size: 52px;
-    color: #ccc;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.cart-empty-icon img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
 }
 .cart-empty-title {
     font-family: 'Playfair Display', serif;
@@ -5746,6 +5827,10 @@ a.checkout-help-item:hover .checkout-help-val {
     }
     .cart-empty-state {
         padding: 40px 15px;
+    }
+    .cart-empty-icon img {
+        width: 64px;
+        height: 64px;
     }
     .cart-empty-btn {
         width: 100%;
@@ -6931,6 +7016,509 @@ a.checkout-help-item:hover .checkout-help-val {
     }
     .footer-trust-col .tm-badge-stars {
         margin: 0;
+    }
+}
+
+/* ==========================================================================
+   Swatch Zoom & Material Specs Modal (Podgląd tkanin i drewna)
+   ========================================================================== */
+
+/* Przycisk szczegółów i powiększenia w nagłówku sekcji konfiguratora */
+.btn-swatch-details {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    color: #666;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.btn-swatch-details:hover {
+    color: #000;
+}
+
+.btn-swatch-details i {
+    font-size: 9px;
+}
+
+/* Lupka powiększenia na kafelkach próbek */
+.fc-option, .sd-option {
+    position: relative;
+}
+
+.swatch-zoom-trigger {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 10px;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    z-index: 4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    padding: 0;
+}
+
+.config-option:hover .swatch-zoom-trigger,
+.fc-option:hover .swatch-zoom-trigger,
+.sd-option:hover .swatch-zoom-trigger {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.swatch-zoom-trigger:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+}
+
+@media (hover: none) {
+    .swatch-zoom-trigger {
+        opacity: 0.85;
+        transform: scale(1);
+    }
+}
+
+/* Modal Overlay */
+.swatch-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 20000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.swatch-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Swatch Modal Container */
+.swatch-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: 90%;
+    max-width: 960px;
+    max-height: 88vh;
+    background: #ffffff;
+    z-index: 20001;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+}
+
+.swatch-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.swatch-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    z-index: 10;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.swatch-modal-close:hover {
+    color: #000;
+    transform: rotate(90deg);
+}
+
+/* Layout wewnętrzny modala */
+.swatch-modal-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    height: 100%;
+    max-height: 88vh;
+    overflow: hidden;
+}
+
+/* Lewa kolumna: Duży podgląd tekstury materiału */
+.swatch-modal-preview {
+    background: #ffffff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-right: 1px solid #ebebeb;
+    overflow: hidden;
+}
+
+.swatch-modal-image-wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    max-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+    box-shadow: none;
+    cursor: crosshair;
+}
+
+.swatch-modal-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.swatch-modal-color-box {
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    display: none;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Okno powiększenia detalu materiału na desktopie (kwadratowe) */
+.swatch-zoom-lens {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border: 2px solid #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.9);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+    z-index: 10;
+    background: #ffffff;
+}
+
+.swatch-zoom-lens.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.swatch-zoom-lens img {
+    position: absolute;
+    object-fit: cover;
+    pointer-events: none;
+    max-width: none !important;
+    max-height: none !important;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.swatch-zoom-lens-color-box {
+    position: absolute;
+    pointer-events: none;
+    display: none;
+}
+
+.swatch-zoom-hint {
+    margin-top: 14px;
+    font-size: 10px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.swatch-zoom-hint .hint-mobile {
+    display: none;
+}
+
+/* Prawa kolumna: Informacje, właściwości i specyfikacja */
+.swatch-modal-info {
+    padding: 35px 40px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.swatch-modal-category {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    display: block;
+    margin-bottom: 6px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.swatch-modal-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.3px;
+}
+
+.swatch-modal-subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 18px;
+    display: block;
+}
+
+/* Tagi właściwości (Badges) */
+.swatch-modal-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.swatch-badge {
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 9px;
+    background: #ffffff;
+    color: #222222;
+    border: 1px solid #dcdcdc;
+    border-radius: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Opis materiału */
+.swatch-modal-desc {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 22px;
+}
+
+/* Specyfikacja techniczna */
+.swatch-modal-specs {
+    margin-bottom: 25px;
+    border-top: 1px solid #eee;
+    padding-top: 18px;
+}
+
+.swatch-specs-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #222;
+    margin: 0 0 12px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.swatch-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+}
+
+.swatch-spec-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.swatch-spec-label {
+    font-size: 9.5px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.swatch-spec-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+    margin-top: 2px;
+}
+
+/* Przyciski akcji modala */
+.swatch-modal-actions {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-swatch-select {
+    flex: 1;
+    min-height: 46px;
+    padding: 12px 18px;
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn-swatch-select:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+}
+
+.btn-swatch-select.is-selected {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+    cursor: default;
+}
+
+.btn-swatch-select.is-selected:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+}
+
+.btn-swatch-sample {
+    min-height: 46px;
+    padding: 12px 18px;
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.btn-swatch-sample:hover {
+    border-color: #000000;
+    color: #000000;
+    background: #fafafa;
+}
+
+/* Responsywność modala */
+@media (max-width: 860px) {
+    .swatch-modal {
+        width: 95%;
+        max-height: 92vh;
+    }
+    .swatch-modal-inner {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+        max-height: 92vh;
+    }
+    .swatch-modal-preview {
+        padding: 20px;
+        border-right: none;
+        border-bottom: 1px solid #ebebeb;
+    }
+    .swatch-modal-image-wrap {
+        min-height: 260px;
+        max-height: 320px;
+        cursor: default;
+    }
+    .swatch-zoom-lens {
+        display: none !important;
+    }
+    .swatch-zoom-hint .hint-desktop {
+        display: none;
+    }
+    .swatch-zoom-hint .hint-mobile {
+        display: inline;
+    }
+    .swatch-modal-info {
+        padding: 25px 20px;
+    }
+    .swatch-modal-actions {
+        flex-direction: column;
+    }
+    .btn-swatch-select, .btn-swatch-sample {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+}
+
+@media (hover: none) {
+    .swatch-zoom-lens {
+        display: none !important;
+    }
+    .swatch-modal-image-wrap {
+        cursor: default;
+    }
+    .swatch-zoom-hint .hint-desktop {
+        display: none;
+    }
+    .swatch-zoom-hint .hint-mobile {
+        display: inline;
     }
 }
 

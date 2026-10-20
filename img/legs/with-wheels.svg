@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdfdfd"/>
+      <stop offset="100%" stop-color="#f2efe9"/>
+    </linearGradient>
+
+    <!-- Wood Gradient -->
+    <linearGradient id="woodGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a3525"/>
+      <stop offset="25%" stop-color="#7c5c43"/>
+      <stop offset="55%" stop-color="#a88363"/>
+      <stop offset="75%" stop-color="#6e4f37"/>
+      <stop offset="100%" stop-color="#3b281a"/>
+    </linearGradient>
+
+    <!-- Wood Highlight Overlay -->
+    <linearGradient id="woodHighlight2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25"/>
+    </linearGradient>
+
+    <!-- Brass / Gold Metallic Gradient -->
+    <linearGradient id="brassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7a5518"/>
+      <stop offset="20%" stop-color="#c99f4a"/>
+      <stop offset="45%" stop-color="#fef0a5"/>
+      <stop offset="65%" stop-color="#d4aa50"/>
+      <stop offset="85%" stop-color="#996e23"/>
+      <stop offset="100%" stop-color="#54370a"/>
+    </linearGradient>
+
+    <!-- Brass Wheel Gradient (Vertical) -->
+    <radialGradient id="brassWheel" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#fff5c0"/>
+      <stop offset="40%" stop-color="#d8ae53"/>
+      <stop offset="85%" stop-color="#93681d"/>
+      <stop offset="100%" stop-color="#52380d"/>
+    </radialGradient>
+
+    <!-- Shadow filter -->
+    <radialGradient id="shadowGrad2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.26)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="120" height="120" rx="4" fill="url(#bgGrad2)"/>
+
+  <!-- Floor Shadow under Wheel -->
+  <ellipse cx="60" cy="112" rx="16" ry="4" fill="url(#shadowGrad2)"/>
+
+  <!-- Turned Wooden Leg Group -->
+  <g id="woodenLegWithWheel">
+    <!-- Top Mounting Block -->
+    <path d="M 45,10 L 75,10 L 73,17 L 47,17 Z" fill="url(#woodGrad2)"/>
+    <path d="M 45,10 L 75,10 L 73,17 L 47,17 Z" fill="url(#woodHighlight2)"/>
+
+    <!-- Upper Collar Ring -->
+    <path d="M 43,17 Q 60,21 77,17 Q 79,21 75,24 Q 60,27 45,24 Q 41,21 43,17 Z" fill="url(#woodGrad2)"/>
+    <path d="M 43,17 Q 60,21 77,17 Q 79,21 75,24 Q 60,27 45,24 Q 41,21 43,17 Z" fill="url(#woodHighlight2)"/>
+
+    <!-- Main Turned Bulb / Urn Shape -->
+    <path d="M 45,24 Q 35,40 48,54 Q 60,57 72,54 Q 85,40 75,24 Q 60,27 45,24 Z" fill="url(#woodGrad2)"/>
+    <path d="M 45,24 Q 35,40 48,54 Q 60,57 72,54 Q 85,40 75,24 Q 60,27 45,24 Z" fill="url(#woodHighlight2)"/>
+
+    <!-- Center Ring Bead -->
+    <path d="M 48,54 Q 60,57 72,54 Q 74,58 70,61 Q 60,63 50,61 Q 46,58 48,54 Z" fill="url(#woodGrad2)"/>
+    <path d="M 48,54 Q 60,57 72,54 Q 74,58 70,61 Q 60,63 50,61 Q 46,58 48,54 Z" fill="url(#woodHighlight2)"/>
+
+    <!-- Lower Tapered Shaft -->
+    <path d="M 51,61 L 69,61 L 66,79 Q 60,82 54,79 Z" fill="url(#woodGrad2)"/>
+    <path d="M 51,61 L 69,61 L 66,79 Q 60,82 54,79 Z" fill="url(#woodHighlight2)"/>
+
+    <!-- Brass Cup Caster Fitting (Kielich mosiężny) -->
+    <path d="M 53,78 Q 60,81 67,78 L 68,89 Q 60,93 52,89 Z" fill="url(#brassGrad)"/>
+    <!-- Brass Cup Rim/Lip -->
+    <ellipse cx="60" cy="78" rx="7" ry="1.8" fill="#e8c772" stroke="#875e1b" stroke-width="0.5"/>
+    <!-- Screws/Details on Cup -->
+    <circle cx="56" cy="84" r="0.8" fill="#4d3209"/>
+    <circle cx="64" cy="84" r="0.8" fill="#4d3209"/>
+
+    <!-- Wheel Fork / Caster Neck -->
+    <rect x="57" y="89" width="6" height="5" fill="url(#brassGrad)"/>
+
+    <!-- Wheel Rim & Disc (Kółko z kółkami) -->
+    <ellipse cx="60" cy="102" rx="10" ry="10" fill="url(#brassWheel)" stroke="#66440c" stroke-width="0.8"/>
+    <!-- Wheel inner rim / tire line -->
+    <ellipse cx="60" cy="102" rx="7.5" ry="7.5" fill="none" stroke="#ffe58f" stroke-width="0.7" opacity="0.7"/>
+    <!-- Wheel Hub / Center pin -->
+    <circle cx="60" cy="102" r="2.5" fill="#422906"/>
+    <circle cx="59.4" cy="101.4" r="1" fill="#fff" opacity="0.6"/>
+  </g>
+</svg>

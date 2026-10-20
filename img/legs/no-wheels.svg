@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdfdfd"/>
+      <stop offset="100%" stop-color="#f2efe9"/>
+    </linearGradient>
+
+    <!-- Wood Gradient -->
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a3525"/>
+      <stop offset="25%" stop-color="#7c5c43"/>
+      <stop offset="55%" stop-color="#a88363"/>
+      <stop offset="75%" stop-color="#6e4f37"/>
+      <stop offset="100%" stop-color="#3b281a"/>
+    </linearGradient>
+
+    <!-- Wood Highlight Overlay -->
+    <linearGradient id="woodHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25"/>
+    </linearGradient>
+
+    <!-- Base / Glider Gradient -->
+    <linearGradient id="gliderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="50%" stop-color="#555555"/>
+      <stop offset="100%" stop-color="#1f1f1f"/>
+    </linearGradient>
+
+    <!-- Shadow filter -->
+    <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.22)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="120" height="120" rx="4" fill="url(#bgGrad)"/>
+
+  <!-- Floor Shadow -->
+  <ellipse cx="60" cy="110" rx="22" ry="5" fill="url(#shadowGrad)"/>
+
+  <!-- Turned Wooden Leg Group -->
+  <g id="woodenLeg">
+    <!-- Top Mounting Block -->
+    <path d="M 44,14 L 76,14 L 74,22 L 46,22 Z" fill="url(#woodGrad)"/>
+    <path d="M 44,14 L 76,14 L 74,22 L 46,22 Z" fill="url(#woodHighlight)"/>
+
+    <!-- Upper Collar Ring -->
+    <path d="M 42,22 Q 60,26 78,22 Q 80,27 76,30 Q 60,33 44,30 Q 40,27 42,22 Z" fill="url(#woodGrad)"/>
+    <path d="M 42,22 Q 60,26 78,22 Q 80,27 76,30 Q 60,33 44,30 Q 40,27 42,22 Z" fill="url(#woodHighlight)"/>
+
+    <!-- Main Turned Bulb / Urn Shape -->
+    <path d="M 45,30 Q 34,48 48,64 Q 60,67 72,64 Q 86,48 75,30 Q 60,33 45,30 Z" fill="url(#woodGrad)"/>
+    <path d="M 45,30 Q 34,48 48,64 Q 60,67 72,64 Q 86,48 75,30 Q 60,33 45,30 Z" fill="url(#woodHighlight)"/>
+
+    <!-- Center Ring Bead -->
+    <path d="M 47,64 Q 60,67 73,64 Q 75,69 71,72 Q 60,74 49,72 Q 45,69 47,64 Z" fill="url(#woodGrad)"/>
+    <path d="M 47,64 Q 60,67 73,64 Q 75,69 71,72 Q 60,74 49,72 Q 45,69 47,64 Z" fill="url(#woodHighlight)"/>
+
+    <!-- Lower Tapered Shaft -->
+    <path d="M 50,72 L 70,72 L 67,98 Q 60,101 53,98 Z" fill="url(#woodGrad)"/>
+    <path d="M 50,72 L 70,72 L 67,98 Q 60,101 53,98 Z" fill="url(#woodHighlight)"/>
+
+    <!-- Bottom Foot / Glider -->
+    <path d="M 52,98 Q 60,101 68,98 L 66,106 Q 60,108 54,106 Z" fill="url(#gliderGrad)"/>
+  </g>
+</svg>

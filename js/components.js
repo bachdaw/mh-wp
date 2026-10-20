@@ -575,7 +575,7 @@ class MioCartDrawer extends HTMLElement {
         if (!isLogged) {
             bodyHtml = `
                 <div style="padding: 60px 40px; text-align: center; color: #666; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-                    <i class="fa-solid fa-basket-shopping" style="font-size: 48px; margin-bottom: 20px; color: #ddd;"></i>
+                    <img src="img/icons/shopping-basket.svg" alt="Twój koszyk jest pusty" style="width: 56px; height: 56px; margin-bottom: 20px; object-fit: contain;">
                     <p style="font-size: 14px; margin-bottom: 30px;">Twój koszyk jest pusty.</p>
                     <button onclick="document.querySelector('mio-cart-drawer').close(); window.location.href='listing.html'" style="padding: 12px 25px; background: #000; color: #fff; border: none; text-transform: uppercase; font-size: 11px; font-weight: 500; letter-spacing: 1px; cursor: pointer; transition: 0.3s;">Przejdź do produktów</button>
                 </div>

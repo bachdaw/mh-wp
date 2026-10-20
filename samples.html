@@ -262,6 +262,50 @@
 
     </main>
 
+    <!-- Swatch Zoom & Material Specs Modal -->
+    <div class="swatch-modal-overlay" id="swatchModalOverlay"></div>
+    <div class="swatch-modal" id="swatchModal" role="dialog" aria-modal="true" aria-labelledby="swatchModalTitle">
+        <button class="swatch-modal-close" id="swatchModalClose" aria-label="Zamknij podgląd">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="swatch-modal-inner">
+            <div class="swatch-modal-preview">
+                <div class="swatch-modal-image-wrap" id="swatchModalImageWrap">
+                    <img id="swatchModalImage" src="" alt="Powiększenie próbki">
+                    <div class="swatch-modal-color-box" id="swatchModalColorBox"></div>
+                    <div class="swatch-zoom-lens" id="swatchZoomLens">
+                        <img id="swatchZoomLensImg" src="" alt="Powiększony detal">
+                        <div class="swatch-zoom-lens-color-box" id="swatchZoomLensColorBox"></div>
+                    </div>
+                </div>
+                <div class="swatch-zoom-hint">
+                    <i class="fa-solid fa-magnifying-glass-plus"></i> 
+                    <span class="hint-desktop">Najedź myszką, aby powiększyć detal</span>
+                    <span class="hint-mobile">Podgląd faktury w wysokiej rozdzielczości</span>
+                </div>
+            </div>
+            <div class="swatch-modal-info">
+                <div>
+                    <span class="swatch-modal-category" id="swatchModalCategory">TKANINA</span>
+                    <h3 class="swatch-modal-title" id="swatchModalTitle">Arizona Green</h3>
+                    <span class="swatch-modal-subtitle" id="swatchModalSubtitle">Kolekcja Arizona • Wytrzymały splot strukturalny</span>
+                    <div class="swatch-modal-badges" id="swatchModalBadges"></div>
+                    <div class="swatch-modal-desc" id="swatchModalDesc"></div>
+                    <div class="swatch-modal-specs">
+                        <h4 class="swatch-specs-title">Właściwości i parametry techniczne</h4>
+                        <div class="swatch-specs-grid" id="swatchModalSpecsGrid"></div>
+                    </div>
+                </div>
+                <div class="swatch-modal-actions">
+                    <button type="button" class="btn-swatch-select" id="swatchModalSelectBtn">Dodaj do bezpłatnych próbek</button>
+                    <button type="button" class="btn-swatch-sample" id="swatchModalCloseBtn">
+                        <i class="fa-solid fa-arrow-left"></i> Wróć do listy próbek
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <mio-footer></mio-footer>
 
     <script src="js/components.js"></script>
@@ -275,6 +319,406 @@
             const visualsEl = document.getElementById('samplesVisuals');
             const btnAdd = document.getElementById('btnAddSamplesToCart');
             const warningEl = document.getElementById('samplesWarning');
+
+            // Baza danych właściwości i specyfikacji próbek tkanin
+            const SWATCH_DATA = {
+                // Kolekcja Arizona
+                'Arizona Green': {
+                    category: 'TKANINA',
+                    title: 'Arizona Green',
+                    subtitle: 'Kolekcja Arizona • Wytrzymały splot strukturalny',
+                    desc: 'Arizona oferuje wyjątkową wytrzymałość dzięki wyrazistemu, strukturalnemu splotowi. Jej miękkie w dotyku włókna zapewniają unikalną fakturę, a szlachetny odcień butelkowej zieleni nadaje meblowi wyjątkową klasę.',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Wysoka odporność', 'Przyjazna zwierzętom'],
+                    img: 'img/materials/MTK000ZF22.avif',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '60 000 cykli',
+                        'Odporność na pilling': 'Kategoria A (4-5)',
+                        'Czyszczenie': 'Woda i mydło / Easy Clean'
+                    }
+                },
+                'Arizona Black': {
+                    category: 'TKANINA',
+                    title: 'Arizona Black',
+                    subtitle: 'Kolekcja Arizona • Głęboka elegancka czerń',
+                    desc: 'Arizona Black to elegancki, głęboki czarny splot o subtelnej grze światła na włóknach. Wyjątkowo trwała tkanina, która nie blaknie z upływem czasu.',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Wysoka trwałość', 'Odporna na UV'],
+                    img: 'img/materials/MTK0232.avif',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '60 000 cykli',
+                        'Odporność na pilling': 'Kategoria A (4-5)',
+                        'Czyszczenie': 'Łatwe czyszczenie wodą'
+                    }
+                },
+                'Arizona Gray': {
+                    category: 'TKANINA',
+                    title: 'Arizona Gray',
+                    subtitle: 'Kolekcja Arizona • Klasyczny szary melanż',
+                    desc: 'Uniwersalna, stonowana szarość o wielotonowym splocie, doskonale maskująca codzienne zabrudzenia. Pasuje do każdego nowoczesnego wnętrza.',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Odporna na ścieranie'],
+                    img: 'img/materials/MTK0354.avif',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '60 000 cykli',
+                        'Odporność na pilling': 'Kategoria A (4-5)',
+                        'Czyszczenie': 'Woda i mydło'
+                    }
+                },
+                'Arizona Mustard': {
+                    category: 'TKANINA',
+                    title: 'Arizona Mustard',
+                    subtitle: 'Kolekcja Arizona • Miodowa musztarda',
+                    desc: 'Ciepły, musztardowy akcent ożywiający każde pomieszczenie. Tkanina o podwyższonej odporności na ścieranie i łatwym usuwaniu plam.',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Wyrazisty kolor', 'Trwałe barwienie'],
+                    img: 'img/materials/MTK0355.avif',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '60 000 cykli',
+                        'Odporność na pilling': 'Kategoria A (4-5)',
+                        'Czyszczenie': 'Easy Clean'
+                    }
+                },
+                'Arizona Dark Blue': {
+                    category: 'TKANINA',
+                    title: 'Arizona Dark Blue',
+                    subtitle: 'Kolekcja Arizona • Klasyczny głęboki granat',
+                    desc: 'Nasycony granat o szlachetnym wykończeniu. Bardzo wysoka odporność na tarcie i mechacenie, idealna dla rodzin i miłośników zwierząt.',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Odporna na mechacenie', 'Hydrofobowa'],
+                    img: 'img/materials/MTK0357.avif',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '60 000 cykli',
+                        'Odporność na pilling': 'Kategoria A (4-5)',
+                        'Czyszczenie': 'Woda i mydło'
+                    }
+                },
+
+                // Kolekcja Artico (Boucle)
+                'Artico Light': {
+                    category: 'TKANINA BOUCLE',
+                    title: 'Artico Light',
+                    subtitle: 'Kolekcja Artico • Pętelkowe Boucle (Baranek)',
+                    desc: 'Puszysta tkanina boucle w odcieniu jasnego ecru. Niezwykle miękka w dotyku, tworzy przytulną, luksusową atmosferę charakterystyczną dla stylu Japandi i Scandi.',
+                    badges: ['Tkanina boucle', 'Niezwykle miękka', 'Wysoka trwałość', 'Łatwa pielęgnacja'],
+                    img: 'img/materials/MTK0381.avif',
+                    specs: {
+                        'Skład': '95% PES, 5% Akryl',
+                        'Gramatura': '540 g/m²',
+                        'Test Martindale': '50 000 cykli',
+                        'Odporność na ścieranie': 'Bardzo wysoka',
+                        'Pielęgnacja': 'Czyszczenie pianowe'
+                    }
+                },
+                'Artico Beige': {
+                    category: 'TKANINA BOUCLE',
+                    title: 'Artico Beige',
+                    subtitle: 'Kolekcja Artico • Przytulne Boucle w odcieniu beżu',
+                    desc: 'Ciepły beż o wyrazistych pętelkach. Optycznie ociepla formę mebla i nadaje mu wyjątkową objętość i miękkość.',
+                    badges: ['Tkanina boucle', 'Przytulna faktura', 'Odporna na zaciąganie'],
+                    img: 'img/materials/MTKA000VO10.avif',
+                    specs: {
+                        'Skład': '95% PES, 5% Akryl',
+                        'Gramatura': '540 g/m²',
+                        'Test Martindale': '50 000 cykli',
+                        'Odporność na ścieranie': 'Bardzo wysoka',
+                        'Pielęgnacja': 'Czyszczenie pianowe'
+                    }
+                },
+                'Artico Material': {
+                    category: 'TKANINA BOUCLE',
+                    title: 'Artico Material',
+                    subtitle: 'Kolekcja Artico • Naturalne Boucle melanż',
+                    desc: 'Wielotonowy melanż o organicznym charakterze. Wyjątkowo odporny na codzienne użytkowanie i zagniecenia.',
+                    badges: ['Tkanina boucle', 'Organiczna faktura', 'Niewidoczne zabrudzenia'],
+                    img: 'img/materials/material.avif',
+                    specs: {
+                        'Skład': '95% PES, 5% Akryl',
+                        'Gramatura': '540 g/m²',
+                        'Test Martindale': '50 000 cykli',
+                        'Odporność na ścieranie': 'Bardzo wysoka',
+                        'Pielęgnacja': 'Czyszczenie pianowe'
+                    }
+                },
+
+                // Kolekcja Leo (Skóra naturalna)
+                'Leo Cognac': {
+                    category: 'SKÓRA NATURALNA',
+                    title: 'Leo Cognac',
+                    subtitle: 'Kolekcja Leo • Prawdziwa skóra licowa',
+                    desc: 'Włoska skóra naturalna najwyższej próby w odcieniu szlachetnego koniaku. Naturalny rysunek lica, aksamitny chwyt i wyjątkowa trwałość. Z wiekiem nabiera unikalnej patyny.',
+                    badges: ['100% skóra naturalna', 'Plamoodporność', 'Oddychająca', 'Klasa Premium'],
+                    img: 'img/materials/MTK0381.avif',
+                    specs: {
+                        'Gatunek': 'Skóra bydlęca licowa',
+                        'Grubość': '1.2 - 1.4 mm',
+                        'Pochodzenie surowca': 'Garbarnie włoskie (Veneto)',
+                        'Wykończenie': 'Półanilinowe, matowe',
+                        'Pielęgnacja': 'Dedykowane woski do skór'
+                    }
+                },
+                'Leo Black': {
+                    category: 'SKÓRA NATURALNA',
+                    title: 'Leo Black',
+                    subtitle: 'Kolekcja Leo • Głęboka skórzana czerń',
+                    desc: 'Ponadczasowa głęboka czerń naturalnej skóry bydlęcej. Odporna na zabrudzenia, wilgoć i ścieranie, zapewnia bezkompromisowy luksus i trwałość na dekady.',
+                    badges: ['100% skóra naturalna', 'Plamoodporność', 'Oddychająca', 'Łatwa pielęgnacja'],
+                    img: 'img/materials/MTK0232.avif',
+                    specs: {
+                        'Gatunek': 'Skóra bydlęca licowa',
+                        'Grubość': '1.2 - 1.4 mm',
+                        'Pochodzenie surowca': 'Garbarnie włoskie (Veneto)',
+                        'Wykończenie': 'Półanilinowe, matowe',
+                        'Pielęgnacja': 'Dedykowane woski do skór'
+                    }
+                }
+            };
+
+            // Elementy modala powiększenia próbki
+            const swatchModalOverlay = document.getElementById('swatchModalOverlay');
+            const swatchModal = document.getElementById('swatchModal');
+            const swatchModalClose = document.getElementById('swatchModalClose');
+            const swatchModalCloseBtn = document.getElementById('swatchModalCloseBtn');
+            const swatchModalImageWrap = document.getElementById('swatchModalImageWrap');
+            const swatchModalImage = document.getElementById('swatchModalImage');
+            const swatchModalColorBox = document.getElementById('swatchModalColorBox');
+            const swatchZoomLens = document.getElementById('swatchZoomLens');
+            const swatchZoomLensImg = document.getElementById('swatchZoomLensImg');
+            const swatchZoomLensColorBox = document.getElementById('swatchZoomLensColorBox');
+            const swatchModalCategory = document.getElementById('swatchModalCategory');
+            const swatchModalTitle = document.getElementById('swatchModalTitle');
+            const swatchModalSubtitle = document.getElementById('swatchModalSubtitle');
+            const swatchModalBadges = document.getElementById('swatchModalBadges');
+            const swatchModalDesc = document.getElementById('swatchModalDesc');
+            const swatchModalSpecsGrid = document.getElementById('swatchModalSpecsGrid');
+            const swatchModalSelectBtn = document.getElementById('swatchModalSelectBtn');
+
+            // Obsługa lupy / kwadratowego powiększenia detalu materiału (desktop hover)
+            const ZOOM_LEVEL = 2.8;
+            const LENS_RADIUS = 110; // Połowa boku kwadratu 220px
+            let lensRaf = null;
+            let lastMouseX = 0;
+            let lastMouseY = 0;
+
+            function updateLensPosition() {
+                if (!swatchModalImageWrap || !swatchZoomLens) return;
+                const rect = swatchModalImageWrap.getBoundingClientRect();
+                const x = lastMouseX - rect.left;
+                const y = lastMouseY - rect.top;
+
+                if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+                    swatchZoomLens.classList.remove('is-active');
+                    return;
+                }
+
+                swatchZoomLens.classList.add('is-active');
+                swatchZoomLens.style.left = `${x}px`;
+                swatchZoomLens.style.top = `${y}px`;
+
+                const zoomedWidth = rect.width * ZOOM_LEVEL;
+                const zoomedHeight = rect.height * ZOOM_LEVEL;
+
+                if (swatchZoomLensImg && swatchZoomLensImg.style.display !== 'none') {
+                    swatchZoomLensImg.style.width = `${zoomedWidth}px`;
+                    swatchZoomLensImg.style.height = `${zoomedHeight}px`;
+                    swatchZoomLensImg.style.left = `${LENS_RADIUS - (x * ZOOM_LEVEL)}px`;
+                    swatchZoomLensImg.style.top = `${LENS_RADIUS - (y * ZOOM_LEVEL)}px`;
+                }
+
+                if (swatchZoomLensColorBox && swatchZoomLensColorBox.style.display !== 'none') {
+                    swatchZoomLensColorBox.style.width = `${zoomedWidth}px`;
+                    swatchZoomLensColorBox.style.height = `${zoomedHeight}px`;
+                    swatchZoomLensColorBox.style.left = `${LENS_RADIUS - (x * ZOOM_LEVEL)}px`;
+                    swatchZoomLensColorBox.style.top = `${LENS_RADIUS - (y * ZOOM_LEVEL)}px`;
+                }
+            }
+
+            function handleLensMouseMove(e) {
+                if (window.innerWidth <= 860 || window.matchMedia('(hover: none)').matches) return;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                if (!lensRaf) {
+                    lensRaf = requestAnimationFrame(() => {
+                        updateLensPosition();
+                        lensRaf = null;
+                    });
+                }
+            }
+
+            if (swatchModalImageWrap) {
+                swatchModalImageWrap.addEventListener('mouseenter', (e) => {
+                    if (window.innerWidth <= 860 || window.matchMedia('(hover: none)').matches) return;
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                    updateLensPosition();
+                });
+                swatchModalImageWrap.addEventListener('mousemove', handleLensMouseMove);
+                swatchModalImageWrap.addEventListener('mouseleave', () => {
+                    if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+                });
+            }
+
+            let currentModalSwatchSource = null;
+
+            function openSwatchModal(name, sectionType, triggerEl) {
+                if (!swatchModal || !swatchModalOverlay) return;
+
+                currentModalSwatchSource = triggerEl;
+
+                const cleanName = (name || '').trim();
+                let data = SWATCH_DATA[cleanName];
+
+                if (!data) {
+                    const foundKey = Object.keys(SWATCH_DATA).find(k => k.toLowerCase() === cleanName.toLowerCase());
+                    if (foundKey) data = SWATCH_DATA[foundKey];
+                }
+
+                if (!data) {
+                    data = {
+                        category: 'TKANINA',
+                        title: cleanName,
+                        subtitle: 'Tkanina obiciowa wysokiej jakości',
+                        desc: 'Wysokiej jakości tkanina tapicerska o podwyższonej odporności na ścieranie, łatwa w codziennej pielęgnacji.',
+                        badges: ['Łatwe czyszczenie', 'Oddychająca', 'Wysoka trwałość'],
+                        specs: {
+                            'Skład': '100% PES',
+                            'Gramatura': '420 g/m²',
+                            'Test Martindale': '60 000 cykli'
+                        }
+                    };
+                }
+
+                let imgUrl = data.img;
+                let bgColor = data.color;
+
+                if (triggerEl) {
+                    const elImg = triggerEl.getAttribute('data-img') || (triggerEl.querySelector('img') ? triggerEl.querySelector('img').getAttribute('src') : null);
+                    if (elImg) imgUrl = elImg;
+                }
+
+                if (imgUrl) {
+                    swatchModalImage.src = imgUrl;
+                    swatchModalImage.style.display = 'block';
+                    swatchModalColorBox.style.display = 'none';
+                    if (swatchZoomLensImg) {
+                        swatchZoomLensImg.src = imgUrl;
+                        swatchZoomLensImg.style.display = 'block';
+                    }
+                    if (swatchZoomLensColorBox) {
+                        swatchZoomLensColorBox.style.display = 'none';
+                    }
+                } else if (bgColor) {
+                    swatchModalColorBox.style.backgroundColor = bgColor;
+                    swatchModalColorBox.style.display = 'block';
+                    swatchModalImage.style.display = 'none';
+                    if (swatchZoomLensColorBox) {
+                        swatchZoomLensColorBox.style.backgroundColor = bgColor;
+                        swatchZoomLensColorBox.style.display = 'block';
+                    }
+                    if (swatchZoomLensImg) {
+                        swatchZoomLensImg.style.display = 'none';
+                    }
+                }
+
+                if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+
+                swatchModalCategory.textContent = data.category || 'TKANINA';
+                swatchModalTitle.textContent = data.title || cleanName;
+                swatchModalSubtitle.textContent = data.subtitle || '';
+                swatchModalDesc.textContent = data.desc || '';
+
+                swatchModalBadges.innerHTML = '';
+                if (data.badges && Array.isArray(data.badges)) {
+                    data.badges.forEach(b => {
+                        const span = document.createElement('span');
+                        span.className = 'swatch-badge';
+                        span.textContent = b;
+                        swatchModalBadges.appendChild(span);
+                    });
+                }
+
+                swatchModalSpecsGrid.innerHTML = '';
+                if (data.specs) {
+                    Object.entries(data.specs).forEach(([k, v]) => {
+                        const item = document.createElement('div');
+                        item.className = 'swatch-spec-item';
+                        item.innerHTML = `<span class="swatch-spec-label">${k}</span><span class="swatch-spec-value">${v}</span>`;
+                        swatchModalSpecsGrid.appendChild(item);
+                    });
+                }
+
+                const isAlreadySelected = selectedSamples.some(s => s.name === cleanName);
+                if (isAlreadySelected) {
+                    swatchModalSelectBtn.textContent = 'Aktualnie wybrane (usuń)';
+                    swatchModalSelectBtn.classList.add('is-selected');
+                } else {
+                    swatchModalSelectBtn.textContent = 'Dodaj do bezpłatnych próbek';
+                    swatchModalSelectBtn.classList.remove('is-selected');
+                }
+
+                swatchModalOverlay.classList.add('active');
+                swatchModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSwatchModal() {
+                if (swatchModalOverlay) swatchModalOverlay.classList.remove('active');
+                if (swatchModal) swatchModal.classList.remove('active');
+                if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+                document.body.style.overflow = '';
+            }
+
+            if (swatchModalClose) swatchModalClose.addEventListener('click', closeSwatchModal);
+            if (swatchModalCloseBtn) swatchModalCloseBtn.addEventListener('click', closeSwatchModal);
+            if (swatchModalOverlay) swatchModalOverlay.addEventListener('click', closeSwatchModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && swatchModal && swatchModal.classList.contains('active')) {
+                    closeSwatchModal();
+                }
+            });
+
+            // Wstrzykiwanie lupek do kafelków próbek
+            function injectSwatchZoomButtons() {
+                const sampleOptions = document.querySelectorAll('.sample-option');
+                sampleOptions.forEach(opt => {
+                    if (!opt.querySelector('.swatch-zoom-trigger')) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'swatch-zoom-trigger';
+                        btn.title = 'Powiększ i zobacz właściwości';
+                        btn.setAttribute('aria-label', 'Powiększ i zobacz właściwości');
+                        btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const name = opt.getAttribute('data-name') || (opt.querySelector('span') ? opt.querySelector('span').textContent.trim() : '');
+                            openSwatchModal(name, 'fabric', opt);
+                        });
+                        opt.appendChild(btn);
+                    }
+                });
+            }
+
+            // Obsługa kliknięcia banerów kolekcji - otwiera podgląd pierwszej tkaniny
+            document.querySelectorAll('.fabric-collection').forEach(col => {
+                const banner = col.querySelector('.fc-banner img');
+                if (banner) {
+                    banner.style.cursor = 'zoom-in';
+                    banner.title = 'Kliknij, aby powiększyć i zobaczyć właściwości tkaniny';
+                    banner.addEventListener('click', () => {
+                        const firstOpt = col.querySelector('.sample-option');
+                        if (firstOpt) {
+                            const name = firstOpt.getAttribute('data-name');
+                            openSwatchModal(name, 'fabric', firstOpt);
+                        }
+                    });
+                }
+            });
 
             // Toggle logic for collections
             const collectionHeaders = document.querySelectorAll('.fc-header');
@@ -355,35 +799,75 @@
                 }
             }
 
+            function toggleSample(name, img, optElement) {
+                const existingIndex = selectedSamples.findIndex(s => s.name === name);
+                
+                if (existingIndex > -1) {
+                    // Remove
+                    selectedSamples.splice(existingIndex, 1);
+                    if (optElement) optElement.classList.remove('active');
+                    updateUI();
+                    return false;
+                } else {
+                    // Add if under max
+                    if (selectedSamples.length < MAX_SAMPLES) {
+                        selectedSamples.push({ name, img });
+                        if (optElement) optElement.classList.add('active');
+                        updateUI();
+                        return true;
+                    } else {
+                        // Flash warning
+                        warningEl.style.color = 'red';
+                        warningEl.style.display = 'inline';
+                        setTimeout(() => {
+                            warningEl.style.color = '#d9534f';
+                        }, 300);
+                        return false;
+                    }
+                }
+            }
+
             sampleOptions.forEach(opt => {
-                opt.addEventListener('click', function() {
+                opt.addEventListener('click', function(e) {
+                    if (e.target.closest('.swatch-zoom-trigger')) return;
                     const name = this.getAttribute('data-name');
                     const img = this.getAttribute('data-img');
                     
-                    const existingIndex = selectedSamples.findIndex(s => s.name === name);
-                    
-                    if (existingIndex > -1) {
-                        // Remove
-                        selectedSamples.splice(existingIndex, 1);
-                        this.classList.remove('active');
-                    } else {
-                        // Add if under max
-                        if (selectedSamples.length < MAX_SAMPLES) {
-                            selectedSamples.push({ name, img });
-                            this.classList.add('active');
-                        } else {
-                            // Flash warning
-                            warningEl.style.color = 'red';
-                            setTimeout(() => {
-                                warningEl.style.color = '#d9534f';
-                            }, 300);
-                        }
-                    }
-                    updateUI();
+                    toggleSample(name, img, this);
                 });
             });
 
-            // Initial UI update
+            // Obsługa przycisku akcji w modalu
+            if (swatchModalSelectBtn) {
+                swatchModalSelectBtn.addEventListener('click', () => {
+                    if (currentModalSwatchSource) {
+                        const name = currentModalSwatchSource.getAttribute('data-name');
+                        const img = currentModalSwatchSource.getAttribute('data-img');
+                        const wasSelected = selectedSamples.some(s => s.name === name);
+                        
+                        if (wasSelected) {
+                            toggleSample(name, img, currentModalSwatchSource);
+                            swatchModalSelectBtn.textContent = 'Dodaj do bezpłatnych próbek';
+                            swatchModalSelectBtn.classList.remove('is-selected');
+                        } else {
+                            if (selectedSamples.length < MAX_SAMPLES) {
+                                toggleSample(name, img, currentModalSwatchSource);
+                                swatchModalSelectBtn.textContent = 'Aktualnie wybrane (usuń)';
+                                swatchModalSelectBtn.classList.add('is-selected');
+                            } else {
+                                warningEl.style.color = 'red';
+                                warningEl.style.display = 'inline';
+                                setTimeout(() => {
+                                    warningEl.style.color = '#d9534f';
+                                }, 300);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Inicjalizacja lupek i stanu początkowego
+            injectSwatchZoomButtons();
             updateUI();
 
             // Add to cart interaction

@@ -79,8 +79,13 @@
                     </div>
                 </div>
 
-                <div class="config-section">
-                    <div class="config-title">TKANINA</div>
+                <div class="config-section" id="fabricSection">
+                    <div class="config-title">
+                        <span>TKANINA</span>
+                        <button type="button" class="btn-swatch-details" data-section="fabric">
+                            <i class="fa-solid fa-magnifying-glass"></i> Właściwości i powiększenie
+                        </button>
+                    </div>
                     <div class="config-options">
                         <div class="config-option color-box-wrap active">
                             <div class="color-box" style="background-color: #a39580;"></div>
@@ -109,8 +114,13 @@
                     </div>
                 </div>
 
-                <div class="config-section">
-                    <div class="config-title">WYBARWIENIA DREWNA</div>
+                <div class="config-section" id="woodSection">
+                    <div class="config-title">
+                        <span>WYBARWIENIA DREWNA</span>
+                        <button type="button" class="btn-swatch-details" data-section="wood">
+                            <i class="fa-solid fa-magnifying-glass"></i> Właściwości i powiększenie
+                        </button>
+                    </div>
                     <div class="config-options">
                         <div class="config-option color-box-wrap active">
                              <div class="color-box" style="background-image: url('img/wood/whitewashed.jpg'); background-color: #d8c2aa;"></div>
@@ -139,8 +149,27 @@
                     </div>
                 </div>
 
-                <div class="config-section">
-                    <div class="config-title">KOLOR KÓŁEK</div>
+                <div class="config-section" id="legTypeSection">
+                    <div class="config-title">TYP NÓŻEK</div>
+                    <div class="config-options">
+                        <div class="config-option active" data-leg-type="no-wheels">
+                            <img src="img/legs/no-wheels.svg" alt="Bez kółek">
+                            <span>Bez kółek</span>
+                        </div>
+                        <div class="config-option" data-leg-type="with-wheels">
+                            <img src="img/legs/with-wheels.svg" alt="Z kółkami (front)">
+                            <span>Z kółkami (front)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section is-disabled" id="wheelsColorSection">
+                    <div class="config-title">
+                        <span>KOLOR KÓŁEK</span>
+                        <span class="conditional-status-badge" id="wheelsColorBadge">
+                            <i class="fa-solid fa-lock"></i> Wymaga: Z kółkami (front)
+                        </span>
+                    </div>
                     <div class="config-options">
                         <div class="config-option active">
                             <img src="img/wheels/7E2A9789.jpg" alt="Złote">
@@ -230,12 +259,8 @@
                         <div>Produkty wysyłamy za <strong>darmo</strong>. Termin dostawy: <strong><span style="color:#318037;">15 maja - 7 czerwca</span></strong></div>
                     </div>
                     <div class="delivery-info-item">
-                        <i class="fa-solid fa-ruler-combined" style="font-size: 13px; color: var(--secondary-text-color); margin-top: 2px;"></i>
-                        <div>Mebel tworzony na zamówienie według wybranej konfiguracji i specyfikacji.</div>
-                    </div>
-                    <div class="delivery-info-item">
-                        <img src="img/icons/shield.svg" alt="Bezpieczne zakupy">
-                        <div>Bezpieczne zakupy. Pełna 2-letnia ochrona i <strong>prawo do bezpłatnej reklamacji</strong>.</div>
+                        <img src="img/icons/poland.svg" alt="Meble wyprodukowane w Polsce">
+                        <div>Meble wyprodukowane w <strong>Polsce</strong>.</div>
                     </div>
                     <div class="delivery-info-item">
                         <img src="img/icons/payment.svg" alt="Wiele metod płatności">
@@ -247,7 +272,7 @@
                     <i class="fa-regular fa-comments"></i>
                     <div class="contact-box-text">
                         <h4>Masz pytania? Skontaktuj się z nami!</h4>
-                        <p>+48 123 456 789 | kontakt@miohome.pl<br>Nasza infolinia jest czynna w dni robocze 08:00 - 16:00</p>
+                        <p>+48 660 083 725 | kontakt@miohome.pl<br>Nasza infolinia jest czynna w dni robocze 08:00 - 16:00</p>
                     </div>
                 </div>
 
@@ -261,16 +286,41 @@
 
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">Wszystkie koszty <i class="fa-solid fa-chevron-down"></i></div>
-                        <div class="accordion-content">Koszt dostawy wynosi 0 zł na terenie całej Polski przy płatności z góry. Przesyłka pobraniowa wiąże się z dodatkową opłatą.</div>
+                        <div class="accordion-header">Informacje o dostawie <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <p style="margin: 0 0 10px 0;">Dostawa standardowa na terenie całej Polski jest w <strong>100% darmowa (0 zł)</strong>.</p>
+                            <ul style="margin: 0 0 10px 0; padding-left: 18px; line-height: 1.6;">
+                                <li><strong>Dostawa Standard (0 zł)</strong> – bezpieczny transport gabarytowy pod wskazany adres (doręczenie do pierwszego progu budynku).</li>
+                                <li><strong>Dostawa Komfort (z wniesieniem)</strong> – dwuosobowy zespół wnosi mebel do wskazanego pomieszczenia, rozpakowuje, ustawia i zabiera zbędne opakowania. Koszt usługi wyliczany jest w koszyku na podstawie gabarytu oraz wagi mebla.</li>
+                                <li><strong>Dostawa Komfort z montażem</strong> – pełen pakiet wniesienia i ustawienia rozszerzony o kompletny montaż mebla przez fachowców. Koszt wyliczany jest w koszyku w zależności od specyfikacji, wagi i gabarytu produktu.</li>
+                                <li><strong>Odbiór osobisty (0 zł)</strong> – bezpłatny odbiór w Showroomie Miohome w Warszawie.</li>
+                            </ul>
+                            <p style="margin: 0; font-size: 11.5px; color: #777;">Przewoźnik kontaktuje się telefonicznie przed doręczeniem w celu ustalenia dogodnego przedziału godzinowego.</p>
+                        </div>
                     </div>
                     <div class="accordion-item">
-                        <div class="accordion-header">Realizacja na zamówienie i personalizacja <i class="fa-solid fa-chevron-down"></i></div>
-                        <div class="accordion-content">Każdy mebel produkowany jest w Polsce na indywidualne zamówienie klienta, zgodnie z wybraną konfiguracją tapicerki, wybarwienia drewna i detali wykończenia.</div>
+                        <div class="accordion-header">Przygotowanie do wniesienia <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <p style="margin: 0 0 10px 0;">Przed dostawą upewnij się, że gabaryty mebla pozwolą na swobodne przejście przez ciągi komunikacyjne w Twoim budynku:</p>
+                            <ul style="margin: 0 0 10px 0; padding-left: 18px; line-height: 1.6;">
+                                <li><strong>Wymiary i zapas</strong> – sprawdź wymiary mebla oraz opakowania w sekcji szczegółów produktu. Pamiętaj o zachowaniu min. <strong>5–10 cm zapasu</strong> z każdej strony na swobodne manewrowanie.</li>
+                                <li><strong>Drzwi i korytarze</strong> – zmierz szerokość i wysokość światła drzwi wejściowych, korytarzy oraz ewentualnych ostrych zakrętów na klatce schodowej.</li>
+                                <li><strong>Winda i schody</strong> – w budynkach wielopiętrowych sprawdź wymiary kabiny windy lub upewnij się, że klatka schodowa umożliwia bezpieczne wniesienie mebla po schodach.</li>
+                            </ul>
+                            <p style="margin: 0; font-size: 11.5px; color: #777;">Masz wątpliwości, czy mebel przejdzie przez Twoje wejście? Skontaktuj się z nami – pomożemy zweryfikować drogę wniesienia.</p>
+                        </div>
                     </div>
                     <div class="accordion-item">
-                        <div class="accordion-header">Warunki gwarancji <i class="fa-solid fa-chevron-down"></i></div>
-                        <div class="accordion-content">Oferujemy 2 lata gwarancji na wady fabryczne i konstrukcyjne.</div>
+                        <div class="accordion-header">Bezpłatne doradztwo i pomoc w doborze <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <p style="margin: 0 0 10px 0;">Skorzystaj z pomocy doradców Miohome – chętnie pomożemy Ci dobrać idealny mebel oraz tkaninę do Twojego wnętrza:</p>
+                            <ul style="margin: 0 0 10px 0; padding-left: 18px; line-height: 1.6;">
+                                <li><strong>Dobór mebla do wnętrza</strong> – pomożemy dobrać odpowiedni model, układ i wymiary mebla, aby harmonijnie wpisał się w przestrzeń Twojego pokoju.</li>
+                                <li><strong>Dobór tkaniny i wybarwienia</strong> – doradzimy materiał dopasowany do Twoich potrzeb i stylu życia (tkaniny łatwoczyszczące, przyjazne zwierzętom, hydrofobowe, boucle czy skóry naturalne).</li>
+                                <li><strong>Próbki materiałów do domu</strong> – zamów do 5 bezpłatnych próbek tkanin, by sprawdzić ich odcień i strukturę w domowym oświetleniu.</li>
+                            </ul>
+                            <p style="margin: 0; font-size: 11.5px; color: #777;">Skontaktuj się z nami mailowo: <strong>kontakt@miohome.pl</strong> lub zadzwoń: <strong>+48 660 083 725</strong> (pn.–pt. 08:00–16:00).</p>
+                        </div>
                     </div>
                 </div>
 
@@ -691,6 +741,50 @@
         </div>
     </div>
 
+    <!-- Swatch Zoom & Material Specs Modal -->
+    <div class="swatch-modal-overlay" id="swatchModalOverlay"></div>
+    <div class="swatch-modal" id="swatchModal" role="dialog" aria-modal="true" aria-labelledby="swatchModalTitle">
+        <button class="swatch-modal-close" id="swatchModalClose" aria-label="Zamknij podgląd">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="swatch-modal-inner">
+            <div class="swatch-modal-preview">
+                <div class="swatch-modal-image-wrap" id="swatchModalImageWrap">
+                    <img id="swatchModalImage" src="" alt="Powiększenie próbki">
+                    <div class="swatch-modal-color-box" id="swatchModalColorBox"></div>
+                    <div class="swatch-zoom-lens" id="swatchZoomLens">
+                        <img id="swatchZoomLensImg" src="" alt="Powiększony detal">
+                        <div class="swatch-zoom-lens-color-box" id="swatchZoomLensColorBox"></div>
+                    </div>
+                </div>
+                <div class="swatch-zoom-hint">
+                    <i class="fa-solid fa-magnifying-glass-plus"></i> 
+                    <span class="hint-desktop">Najedź myszką, aby powiększyć detal</span>
+                    <span class="hint-mobile">Podgląd faktury w wysokiej rozdzielczości</span>
+                </div>
+            </div>
+            <div class="swatch-modal-info">
+                <div>
+                    <span class="swatch-modal-category" id="swatchModalCategory">TKANINA</span>
+                    <h3 class="swatch-modal-title" id="swatchModalTitle">Fino 24</h3>
+                    <span class="swatch-modal-subtitle" id="swatchModalSubtitle">Tkanina strukturalna</span>
+                    <div class="swatch-modal-badges" id="swatchModalBadges"></div>
+                    <div class="swatch-modal-desc" id="swatchModalDesc"></div>
+                    <div class="swatch-modal-specs">
+                        <h4 class="swatch-specs-title">Właściwości i parametry techniczne</h4>
+                        <div class="swatch-specs-grid" id="swatchModalSpecsGrid"></div>
+                    </div>
+                </div>
+                <div class="swatch-modal-actions">
+                    <button type="button" class="btn-swatch-select" id="swatchModalSelectBtn">Wybierz ten wariant</button>
+                    <a href="samples.html" class="btn-swatch-sample" id="swatchModalSampleBtn">
+                        <i class="fa-solid fa-swatchbook"></i> Zamów próbkę do domu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/components.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -789,7 +883,8 @@
             // Obsluga klikniec opcji w szufladach
             const woodOptions = document.querySelectorAll('#woodDrawer .sd-option');
             woodOptions.forEach(opt => {
-                opt.addEventListener('click', function() {
+                opt.addEventListener('click', function(e) {
+                    if (e.target.closest('.swatch-zoom-trigger')) return;
                     woodOptions.forEach(s => s.classList.remove('active'));
                     this.classList.add('active');
                     
@@ -845,7 +940,7 @@
                 
                 visualsContainer.innerHTML = '';
                 
-                const activeOptions = document.querySelectorAll('.config-section .config-option.active');
+                const activeOptions = document.querySelectorAll('.config-section:not(.is-disabled) .config-option.active');
                 activeOptions.forEach(opt => {
                     let visualEl = opt.querySelector('.color-box') || opt.querySelector('img') || opt.querySelector('.variant-text');
                     if (visualEl) {
@@ -864,7 +959,7 @@
                         
                         itemContainer.appendChild(wrapper);
 
-                        let nameSpan = opt.querySelector('span:not(.variant-text)');
+                        let nameSpan = opt.querySelector('span:not(.variant-text):not(.config-price-mod)');
                         if (nameSpan) {
                             let label = document.createElement('span');
                             label.className = 'sticky-cart-visual-label';
@@ -889,7 +984,7 @@
                 const baseOmnibusPrice = 5499.00;
                 let totalModifier = 0;
                 
-                const activeOptions = document.querySelectorAll('.config-section .config-option.active');
+                const activeOptions = document.querySelectorAll('.config-section:not(.is-disabled) .config-option.active');
                 activeOptions.forEach(opt => {
                     const mod = parseInt(opt.getAttribute('data-price-modifier'));
                     if (!isNaN(mod)) {
@@ -928,16 +1023,788 @@
                 if (stickyOldEl) stickyOldEl.textContent = formatPrice(finalOldPrice) + ' zł';
             }
 
+            // Logika warunkowa: Typ nóżek -> Kolor kółek
+            const legTypeSection = document.getElementById('legTypeSection');
+            const wheelsColorSection = document.getElementById('wheelsColorSection');
+            const wheelsColorBadge = document.getElementById('wheelsColorBadge');
+
+            function updateWheelsConditionalState() {
+                if (!legTypeSection || !wheelsColorSection) return;
+                
+                const activeLegOption = legTypeSection.querySelector('.config-option.active');
+                const isWithWheels = activeLegOption && activeLegOption.getAttribute('data-leg-type') === 'with-wheels';
+
+                if (isWithWheels) {
+                    wheelsColorSection.classList.remove('is-disabled');
+                    if (wheelsColorBadge) {
+                        wheelsColorBadge.style.display = 'none';
+                    }
+                } else {
+                    wheelsColorSection.classList.add('is-disabled');
+                    if (wheelsColorBadge) {
+                        wheelsColorBadge.style.display = 'inline-flex';
+                        wheelsColorBadge.innerHTML = '<i class="fa-solid fa-lock"></i> Wymaga: Z kółkami (front)';
+                    }
+                }
+            }
+
+            if (wheelsColorSection) {
+                wheelsColorSection.addEventListener('click', function(e) {
+                    if (this.classList.contains('is-disabled')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const withWheelsOption = legTypeSection ? legTypeSection.querySelector('[data-leg-type="with-wheels"]') : null;
+                        if (withWheelsOption) {
+                            withWheelsOption.classList.add('highlight-attention');
+                            setTimeout(() => {
+                                withWheelsOption.classList.remove('highlight-attention');
+                            }, 700);
+                        }
+                    }
+                });
+            }
+
+            // ==========================================
+            // BAZA DANYCH WŁAŚCIWOŚCI MATERIAŁÓW I DREWNA
+            // ==========================================
+            const SWATCH_DATA = {
+                // Tkaniny kolekcji podstawowej (Fino)
+                'Fino 24': {
+                    category: 'TKANINA',
+                    title: 'Fino 24',
+                    subtitle: 'Tkanina strukturalna premium • Ciepły piaskowy beż',
+                    img: 'img/materials/MTK0381.avif',
+                    color: '#a39580',
+                    badges: ['Plamoodporna', 'Łatwe czyszczenie', 'Oddychająca', 'Przyjazna zwierzętom'],
+                    desc: 'Fino 24 to wysokiej jakości tkanina obiciowa o delikatnym, strukturalnym splocie. Zastosowana powłoka hydrofobowa sprawia, że rozlane płyny formują się w krople na powierzchni materiału, co pozwala na ich błyskawiczne usunięcie bez powstawania plam.',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m² ± 5%',
+                        'Test Martindale': '65 000 cykli (Kategoria A)',
+                        'Odporność na pilling': '4-5 (bardzo wysoka)',
+                        'Odporność na światło': '5 (wysoka)',
+                        'Certyfikaty': 'OEKO-TEX® Standard 100, REACH'
+                    }
+                },
+                'Fino 30': {
+                    category: 'TKANINA',
+                    title: 'Fino 30',
+                    subtitle: 'Tkanina strukturalna premium • Głęboki grafit',
+                    img: 'img/materials/MTK0232.avif',
+                    color: '#635f5d',
+                    badges: ['Wysoka odporność', 'Łatwe czyszczenie', 'Oddychająca', 'Pet Friendly'],
+                    desc: 'Fino 30 to wyrafinowany, nowoczesny odcień ciemnego grafitu. Cechuje się wyjątkowo gęstym splotem i wzmocnioną odpornością na ścieranie, dzięki czemu świetnie sprawdza się w intensywnie użytkowanych salonach.',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '65 000 cykli (Kategoria A)',
+                        'Odporność na pilling': '4-5',
+                        'Pielęgnacja': 'Czyszczenie wodą i pianą z łagodnego mydła'
+                    }
+                },
+                'Fino 26': {
+                    category: 'TKANINA',
+                    title: 'Fino 26',
+                    subtitle: 'Tkanina strukturalna premium • Naturalny taupe',
+                    img: 'img/materials/MTKA000VO10.avif',
+                    color: '#9c8e7e',
+                    badges: ['Odporna na zagniecenia', 'Łatwe czyszczenie', 'Oddychająca', 'Miękka w dotyku'],
+                    desc: 'Fino 26 łączy subtelną szarość z ciepłym odcieniem beżu. Niewielki melanż w strukturze splotu nadaje powierzchni mebla głębię i naturalnie maskuje drobne ślady codziennego użytkowania.',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '65 000 cykli',
+                        'Odporność na pilling': '4-5',
+                        'Certyfikaty': 'OEKO-TEX® Standard 100'
+                    }
+                },
+                'Fino 28': {
+                    category: 'TKANINA',
+                    title: 'Fino 28',
+                    subtitle: 'Tkanina strukturalna premium • Ciemny antracyt',
+                    img: 'img/materials/MTK0354.avif',
+                    color: '#4a4746',
+                    badges: ['Plamoodporna', 'Wyrazisty splot', 'Trwały kolor', 'Łatwe czyszczenie'],
+                    desc: 'Fino 28 to wyrazisty, elegancki antracyt o matowym wykończeniu. Bardzo przyjemny w dotyku, zachowuje pierwotną formę przez wiele lat.',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '65 000 cykli',
+                        'Odporność na pilling': '4-5',
+                        'Certyfikaty': 'REACH'
+                    }
+                },
+                'Fino 34': {
+                    category: 'TKANINA',
+                    title: 'Fino 34',
+                    subtitle: 'Tkanina strukturalna premium • Szlachetna butelkowa zieleń',
+                    img: 'img/materials/MTK000ZF22.avif',
+                    color: '#485440',
+                    badges: ['Plamoodporna', 'Łatwe czyszczenie', 'Oddychająca', 'Modny odcień'],
+                    desc: 'Fino 34 to głęboki, uspokajający odcień butelkowej zieleni inspirowany naturą. Znakomicie komponuje się z elementami z naturalnego drewna i mosiężnymi detalami.',
+                    specs: {
+                        'Skład': '100% PES (Poliester)',
+                        'Gramatura': '420 g/m²',
+                        'Test Martindale': '65 000 cykli',
+                        'Odporność na pilling': '4-5',
+                        'Certyfikaty': 'OEKO-TEX® Standard 100'
+                    }
+                },
+
+                // Kolekcja Arizona
+                'Arizona Green': {
+                    category: 'TKANINA',
+                    title: 'Arizona Green',
+                    subtitle: 'Kolekcja Arizona • Wytrzymały splot strukturalny',
+                    img: 'img/materials/MTK000ZF22.avif',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Wysoka gramatura', 'Certyfikat FSC'],
+                    desc: 'Arizona oferuje wyjątkową wytrzymałość dzięki wyrazistemu, strukturalnemu splotowi. Jej miękkie w dotyku włókna zapewniają unikalną fakturę, a szlachetny odcień butelkowej zieleni nadaje meblowi wyjątkową klasę.',
+                    specs: {
+                        'Skład': '100% Poliester o podwyższonej gęstości',
+                        'Gramatura': '440 g/m²',
+                        'Test Martindale': '80 000 cykli (bardzo wysoka odporność)',
+                        'Odporność na pilling': '5 (maksymalna)',
+                        'Pielęgnacja': 'Czyszczenie wodą z neutralnym mydłem'
+                    }
+                },
+                'Arizona Black': {
+                    category: 'TKANINA',
+                    title: 'Arizona Black',
+                    subtitle: 'Kolekcja Arizona • Głęboka elegancka czerń',
+                    img: 'img/materials/MTK0232.avif',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Wysoka gramatura'],
+                    desc: 'Arizona Black to elegancki, głęboki czarny splot o subtelnej grze światła na włóknach. Wyjątkowo trwała tkanina, która nie blaknie z upływem czasu.',
+                    specs: {
+                        'Skład': '100% Poliester o podwyższonej gęstości',
+                        'Gramatura': '440 g/m²',
+                        'Test Martindale': '80 000 cykli',
+                        'Odporność na pilling': '5'
+                    }
+                },
+                'Arizona Gray': {
+                    category: 'TKANINA',
+                    title: 'Arizona Gray',
+                    subtitle: 'Kolekcja Arizona • Klasyczny szary melanż',
+                    img: 'img/materials/MTK0354.avif',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Odporna na zagniecenia'],
+                    desc: 'Uniwersalna szarość o surowym, naturalnym wyglądzie i aksamitnym dotyku. Wysoce odporna na codzienne użytkowanie.',
+                    specs: {
+                        'Skład': '100% Poliester o podwyższonej gęstości',
+                        'Gramatura': '440 g/m²',
+                        'Test Martindale': '80 000 cykli',
+                        'Odporność na pilling': '5'
+                    }
+                },
+                'Arizona Mustard': {
+                    category: 'TKANINA',
+                    title: 'Arizona Mustard',
+                    subtitle: 'Kolekcja Arizona • Miodowa musztarda',
+                    img: 'img/materials/MTK0355.avif',
+                    badges: ['Plamoodporność', 'Ciepły odcień', 'Oddychająca'],
+                    desc: 'Ciepły, miodowo-musztardowy odcień rozświetlający wnętrze. Pięknie komponuje się ze wszystkimi wybarwieniami drewna.',
+                    specs: {
+                        'Skład': '100% Poliester o podwyższonej gęstości',
+                        'Gramatura': '440 g/m²',
+                        'Test Martindale': '80 000 cykli',
+                        'Odporność na pilling': '5'
+                    }
+                },
+                'Arizona Dark Blue': {
+                    category: 'TKANINA',
+                    title: 'Arizona Dark Blue',
+                    subtitle: 'Kolekcja Arizona • Klasyczny głęboki granat',
+                    img: 'img/materials/MTK0357.avif',
+                    badges: ['Plamoodporność', 'Oddychająca', 'Wysoka gramatura'],
+                    desc: 'Głęboki granat w stylu klasycznym. Strukturalny splot dodaje meblowi trójwymiarowości i szlachetnego wyglądu.',
+                    specs: {
+                        'Skład': '100% Poliester o podwyższonej gęstości',
+                        'Gramatura': '440 g/m²',
+                        'Test Martindale': '80 000 cykli',
+                        'Odporność na pilling': '5'
+                    }
+                },
+
+                // Kolekcja Artico (Boucle)
+                'Artico Light': {
+                    category: 'TKANINA',
+                    title: 'Artico Light',
+                    subtitle: 'Kolekcja Artico • Pętelkowe Boucle (Baranek)',
+                    img: 'img/materials/MTK0381.avif',
+                    badges: ['Modna faktura Boucle', 'Niezwykła miękkość', 'Ciepły dotyk', 'Certyfikat OEKO-TEX'],
+                    desc: 'Luksusowa tkanina pętelkowa typu boucle o miękkiej, barankowej fakturze. Zapewnia niezrównany komfort i przytulny, organiczny charakter mebla.',
+                    specs: {
+                        'Skład': '95% PES, 5% Akryl',
+                        'Gramatura': '520 g/m²',
+                        'Test Martindale': '50 000 cykli',
+                        'Odporność na pilling': '4 (bardzo dobra)',
+                        'Certyfikaty': 'OEKO-TEX® Standard 100'
+                    }
+                },
+                'Artico Beige': {
+                    category: 'TKANINA',
+                    title: 'Artico Beige',
+                    subtitle: 'Kolekcja Artico • Przytulne Boucle w odcieniu beżu',
+                    img: 'img/materials/MTKA000VO10.avif',
+                    badges: ['Modna faktura Boucle', 'Niezwykła miękkość', 'Ciepły dotyk'],
+                    desc: 'Ciepły, naturalny odcień beżu w kultowej pętelkowej fakturze boucle. Wyjątkowo miękka i przyjemna w dotyku.',
+                    specs: {
+                        'Skład': '95% PES, 5% Akryl',
+                        'Gramatura': '520 g/m²',
+                        'Test Martindale': '50 000 cykli',
+                        'Odporność na pilling': '4',
+                        'Certyfikaty': 'OEKO-TEX® Standard 100'
+                    }
+                },
+                'Artico Material': {
+                    category: 'TKANINA',
+                    title: 'Artico Material',
+                    subtitle: 'Kolekcja Artico • Naturalne Boucle melanż',
+                    img: 'img/materials/material.avif',
+                    badges: ['Modna faktura Boucle', 'Strukturalny melanż', 'Wysoka gramatura'],
+                    desc: 'Klasyczny melanż boucle o zróżnicowanej wysokości pętelek, dający efekt ręcznie tkanej szlachetnej wełny.',
+                    specs: {
+                        'Skład': '95% PES, 5% Akryl',
+                        'Gramatura': '520 g/m²',
+                        'Test Martindale': '50 000 cykli',
+                        'Odporność na pilling': '4'
+                    }
+                },
+
+                // Wybarwienia drewna
+                'White': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'White (Whitewashed)',
+                    subtitle: 'Lite drewno • Dąb / Buk bielony mat',
+                    img: 'img/wood/whitewashed.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%', 'Hydrofobowa ochrona'],
+                    desc: 'Wykończenie bielone w stylu skandynawskim. Delikatnie rozjaśnia naturalną barwę drewna, uwypuklając rysunek słojów i nadając konstrukcji mebla wizualną lekkość.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste (buk / jesion)',
+                        'Wykończenie': 'Ekologiczny olejowosk Rubio Monocoat mat',
+                        'Ochrona': 'Odporność na wilgoć, zabrudzenia i mikrozarysowania',
+                        'Pochodzenie surowca': 'Lasy zarządzane w sposób zrównoważony (FSC)',
+                        'Pielęgnacja': 'Czyszczenie suchą lub lekko wilgotną ściereczką'
+                    }
+                },
+                'WHITEWASHED': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Whitewashed',
+                    subtitle: 'Lite drewno • Dąb / Buk bielony mat',
+                    img: 'img/wood/whitewashed.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%'],
+                    desc: 'Bielone wykończenie litego drewna. Eksponuje naturalny rysunek słojów i rozświetla formę mebla.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Ekologiczny olejowosk matowy',
+                        'Certyfikaty': 'FSC 100%'
+                    }
+                },
+                'Natural': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Natural',
+                    subtitle: 'Lite drewno • Buk / Dąb naturalny mat',
+                    img: 'img/wood/natural.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%', 'Naturalne słoje'],
+                    desc: 'Czyste, naturalne drewno zabezpieczone matowym olejem bezbarwnym. Eksponuje autentyczną strukturę słojów, ciepłą tonację i szlachetność surowca.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste (buk / jesion)',
+                        'Wykończenie': 'Naturalny olej twardy bezbarwny, głęboki mat',
+                        'Ochrona': 'Hydrofobowa powłoka chroniąca przed plamami',
+                        'Pochodzenie surowca': 'Certyfikowane lasy europejskie (FSC 100%)',
+                        'Pielęgnacja': 'Zalecana okresowa konserwacja naturalnym olejem do drewna'
+                    }
+                },
+                'NATURAL': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Natural',
+                    subtitle: 'Lite drewno • Buk / Dąb naturalny mat',
+                    img: 'img/wood/natural.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%'],
+                    desc: 'Czyste, naturalne drewno zabezpieczone matowym olejem bezbarwnym.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Naturalny olej twardy, matowy'
+                    }
+                },
+                'Latte': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Latte',
+                    subtitle: 'Lite drewno • Ciepły beżowo-kawowy odcień',
+                    img: 'img/wood/latte.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%', 'Ciepła tonacja'],
+                    desc: 'Ciepły, kawowy odcień z delikatnymi beżowo-karmelowymi tonami. Dodaje meblowi przytulności i harmonijnie współgra z jasnymi tkaninami oraz welurami.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste (buk / jesion)',
+                        'Wykończenie': 'Pigmentowany olejowosk matowy',
+                        'Ochrona': 'Wysoka odporność na ścieranie i płyny',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%',
+                        'Pielęgnacja': 'Czyszczenie miękką szmatką z mikrofibry'
+                    }
+                },
+                'LATTE': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Latte',
+                    subtitle: 'Lite drewno • Ciepły beżowo-kawowy odcień',
+                    img: 'img/wood/latte.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%'],
+                    desc: 'Ciepły, kawowy odcień z delikatnymi beżowo-karmelowymi tonami.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Pigmentowany olejowosk matowy'
+                    }
+                },
+                'Smoke': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Smoke (Wędzone)',
+                    subtitle: 'Lite drewno • Chłodny przydymiony brąz',
+                    img: 'img/wood/smoke.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%', 'Modern Classic'],
+                    desc: 'Wyraziste, przydymione wybarwienie o chłodniejszej tonacji szaro-brązowej. Podkreśla kontrast słojów i doskonale pasuje do wnętrz w stylu modern classic oraz loft.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste (buk / jesion)',
+                        'Wykończenie': 'Olejowosk wędzony głęboki mat',
+                        'Ochrona': 'Trwała powłoka przeciw zarysowaniom i wilgoci',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%',
+                        'Pielęgnacja': 'Unikać agresywnych detergentów chemicznych'
+                    }
+                },
+                'SMOKE': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Smoke',
+                    subtitle: 'Lite drewno • Przydymione wykończenie matowe',
+                    img: 'img/wood/smoke.jpg',
+                    badges: ['Lite drewno', 'Ekologiczny olejowosk', 'Certyfikat FSC 100%'],
+                    desc: 'Wyraziste, przydymione wybarwienie o chłodniejszej tonacji szaro-brązowej.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Olejowosk wędzony matowy'
+                    }
+                },
+                'Walnut': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Walnut (Orzech)',
+                    subtitle: 'Lite drewno • Szlachetny ciemny orzech',
+                    img: 'img/wood/walnut.jpg',
+                    badges: ['Lite drewno', 'Luksusowe wykończenie', 'Certyfikat FSC 100%', 'Głębokie słoje'],
+                    desc: 'Głęboki, szlachetny odcień ciemnego orzecha z wyczuwalną głębią słojów. Nawiązuje do tradycyjnego, luksusowego rzemiosła meblarskiego.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste (buk / jesion)',
+                        'Wykończenie': 'Głęboko penetrująca bejca orzechowa + lakier mat',
+                        'Ochrona': 'Podwyższona odporność na uderzenia i płyny',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%',
+                        'Pielęgnacja': 'Przecierać suchą lub lekko wilgotną ściereczką'
+                    }
+                },
+                'WALNUT': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Walnut',
+                    subtitle: 'Lite drewno • Szlachetny ciemny orzech',
+                    img: 'img/wood/walnut.jpg',
+                    badges: ['Lite drewno', 'Luksusowe wykończenie', 'Certyfikat FSC 100%'],
+                    desc: 'Głęboki, szlachetny odcień ciemnego orzecha z wyczuwalną głębią słojów.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Bejca orzechowa + lakier mat'
+                    }
+                },
+                'Grey Oil': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Grey Oil',
+                    subtitle: 'Lite drewno • Nowoczesny szary olej mat',
+                    img: 'img/wood/greyoil.jpg',
+                    badges: ['Lite drewno', 'Nowoczesny odcień', 'Certyfikat FSC 100%'],
+                    desc: 'Chłodny, wyrafinowany szary odcień drewna. Nowoczesna interpretacja tradycyjnego materiału meblarskiego.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Pigmentowany olej szary mat',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%'
+                    }
+                },
+                'Antic Rubio Oil': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Antic Rubio Oil',
+                    subtitle: 'Lite drewno • Antyczny postarzany dąb',
+                    img: 'img/wood/anticrubiooil.jpg',
+                    badges: ['Lite drewno', 'Styl Vintage', 'Certyfikat FSC 100%'],
+                    desc: 'Niezwykle klimatyczne, postarzane wykończenie z widoczną patyną czasu.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Olejowosk postarzający Rubio Monocoat',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%'
+                    }
+                },
+                'Chocolate': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Chocolate',
+                    subtitle: 'Lite drewno • Czekoladowy brąz głęboki mat',
+                    img: 'img/wood/chocolate.jpg',
+                    badges: ['Lite drewno', 'Głęboka barwa', 'Certyfikat FSC 100%'],
+                    desc: 'Bardzo ciemny, aksamitny brąz o nasyconej barwie gorzkiej czekolady.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Olejowosk barwiony czekolada mat',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%'
+                    }
+                },
+                'Black': {
+                    category: 'WYBARWIENIE DREWNA',
+                    title: 'Black',
+                    subtitle: 'Lite drewno • Głęboka matowa czerń',
+                    img: 'img/wood/black.jpg',
+                    badges: ['Lite drewno', 'Nowoczesny styl', 'Certyfikat FSC 100%'],
+                    desc: 'Elegancka, głęboka czerń z delikatnie widocznym naturalnym usłojeniem pod światło.',
+                    specs: {
+                        'Gatunek drewna': 'Lite drewno liściaste',
+                        'Wykończenie': 'Czarna bejca ekologiczna + lakier mat',
+                        'Pochodzenie surowca': 'Certyfikat FSC 100%'
+                    }
+                }
+            };
+
+            // Elementy modala powiększenia próbki
+            const swatchModalOverlay = document.getElementById('swatchModalOverlay');
+            const swatchModal = document.getElementById('swatchModal');
+            const swatchModalClose = document.getElementById('swatchModalClose');
+            const swatchModalImageWrap = document.getElementById('swatchModalImageWrap');
+            const swatchModalImage = document.getElementById('swatchModalImage');
+            const swatchModalColorBox = document.getElementById('swatchModalColorBox');
+            const swatchZoomLens = document.getElementById('swatchZoomLens');
+            const swatchZoomLensImg = document.getElementById('swatchZoomLensImg');
+            const swatchZoomLensColorBox = document.getElementById('swatchZoomLensColorBox');
+            const swatchModalCategory = document.getElementById('swatchModalCategory');
+            const swatchModalTitle = document.getElementById('swatchModalTitle');
+            const swatchModalSubtitle = document.getElementById('swatchModalSubtitle');
+            const swatchModalBadges = document.getElementById('swatchModalBadges');
+            const swatchModalDesc = document.getElementById('swatchModalDesc');
+            const swatchModalSpecsGrid = document.getElementById('swatchModalSpecsGrid');
+            const swatchModalSelectBtn = document.getElementById('swatchModalSelectBtn');
+
+            // Obsługa lupy / powiększenia detalu materiału (desktop hover)
+            const ZOOM_LEVEL = 2.8;
+            const LENS_RADIUS = 110; // Promień soczewki 220px
+            let lensRaf = null;
+            let lastMouseX = 0;
+            let lastMouseY = 0;
+
+            function updateLensPosition() {
+                if (!swatchModalImageWrap || !swatchZoomLens) return;
+                const rect = swatchModalImageWrap.getBoundingClientRect();
+                const x = lastMouseX - rect.left;
+                const y = lastMouseY - rect.top;
+
+                if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+                    swatchZoomLens.classList.remove('is-active');
+                    return;
+                }
+
+                swatchZoomLens.classList.add('is-active');
+                swatchZoomLens.style.left = `${x}px`;
+                swatchZoomLens.style.top = `${y}px`;
+
+                const zoomedWidth = rect.width * ZOOM_LEVEL;
+                const zoomedHeight = rect.height * ZOOM_LEVEL;
+
+                if (swatchZoomLensImg && swatchZoomLensImg.style.display !== 'none') {
+                    swatchZoomLensImg.style.width = `${zoomedWidth}px`;
+                    swatchZoomLensImg.style.height = `${zoomedHeight}px`;
+                    swatchZoomLensImg.style.left = `${LENS_RADIUS - (x * ZOOM_LEVEL)}px`;
+                    swatchZoomLensImg.style.top = `${LENS_RADIUS - (y * ZOOM_LEVEL)}px`;
+                }
+
+                if (swatchZoomLensColorBox && swatchZoomLensColorBox.style.display !== 'none') {
+                    swatchZoomLensColorBox.style.width = `${zoomedWidth}px`;
+                    swatchZoomLensColorBox.style.height = `${zoomedHeight}px`;
+                    swatchZoomLensColorBox.style.left = `${LENS_RADIUS - (x * ZOOM_LEVEL)}px`;
+                    swatchZoomLensColorBox.style.top = `${LENS_RADIUS - (y * ZOOM_LEVEL)}px`;
+                }
+            }
+
+            function handleLensMouseMove(e) {
+                if (window.innerWidth <= 860 || window.matchMedia('(hover: none)').matches) return;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                if (!lensRaf) {
+                    lensRaf = requestAnimationFrame(() => {
+                        updateLensPosition();
+                        lensRaf = null;
+                    });
+                }
+            }
+
+            if (swatchModalImageWrap) {
+                swatchModalImageWrap.addEventListener('mouseenter', (e) => {
+                    if (window.innerWidth <= 860 || window.matchMedia('(hover: none)').matches) return;
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                    updateLensPosition();
+                });
+                swatchModalImageWrap.addEventListener('mousemove', handleLensMouseMove);
+                swatchModalImageWrap.addEventListener('mouseleave', () => {
+                    if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+                });
+            }
+
+            let currentModalSwatchSource = null;
+
+            function openSwatchModal(name, sectionType, triggerEl) {
+                if (!swatchModal || !swatchModalOverlay) return;
+
+                currentModalSwatchSource = triggerEl;
+
+                const cleanName = (name || '').trim();
+                let data = SWATCH_DATA[cleanName];
+
+                if (!data) {
+                    const foundKey = Object.keys(SWATCH_DATA).find(k => k.toLowerCase() === cleanName.toLowerCase());
+                    if (foundKey) data = SWATCH_DATA[foundKey];
+                }
+
+                const isFabric = sectionType === 'fabric' || (data && data.category === 'TKANINA');
+                const categoryLabel = isFabric ? 'TKANINA' : 'WYBARWIENIE DREWNA';
+
+                if (!data) {
+                    data = {
+                        category: categoryLabel,
+                        title: cleanName,
+                        subtitle: isFabric ? 'Tkanina obiciowa wysokiej jakości' : 'Lite drewno liściaste',
+                        desc: isFabric 
+                            ? 'Wysokiej jakości tkanina tapicerska o podwyższonej odporności na ścieranie, łatwa w codziennej pielęgnacji.' 
+                            : 'Lite drewno poddane starannej obróbce i zabezpieczone ekologicznymi preparatami ochronnymi.',
+                        badges: isFabric 
+                            ? ['Łatwe czyszczenie', 'Oddychająca', 'Wysoka trwałość'] 
+                            : ['Lite drewno', 'Ekologiczne wykończenie', 'FSC 100%'],
+                        specs: isFabric ? {
+                            'Skład': '100% PES',
+                            'Gramatura': '420 g/m²',
+                            'Test Martindale': '60 000 cykli'
+                        } : {
+                            'Gatunek': 'Lite drewno liściaste',
+                            'Wykończenie': 'Ekologiczny olejowosk mat'
+                        }
+                    };
+                }
+
+                let imgUrl = data.img;
+                let bgColor = data.color;
+
+                if (triggerEl) {
+                    const elImg = triggerEl.getAttribute('data-img') || (triggerEl.querySelector('img') ? triggerEl.querySelector('img').getAttribute('src') : null);
+                    if (elImg) imgUrl = elImg;
+                    const colorBox = triggerEl.querySelector('.color-box');
+                    if (colorBox && colorBox.style.backgroundColor) {
+                        bgColor = colorBox.style.backgroundColor;
+                    }
+                }
+
+                if (imgUrl) {
+                    swatchModalImage.src = imgUrl;
+                    swatchModalImage.style.display = 'block';
+                    swatchModalColorBox.style.display = 'none';
+                    if (swatchZoomLensImg) {
+                        swatchZoomLensImg.src = imgUrl;
+                        swatchZoomLensImg.style.display = 'block';
+                    }
+                    if (swatchZoomLensColorBox) {
+                        swatchZoomLensColorBox.style.display = 'none';
+                    }
+                } else if (bgColor) {
+                    swatchModalColorBox.style.backgroundColor = bgColor;
+                    swatchModalColorBox.style.display = 'block';
+                    swatchModalImage.style.display = 'none';
+                    if (swatchZoomLensColorBox) {
+                        swatchZoomLensColorBox.style.backgroundColor = bgColor;
+                        swatchZoomLensColorBox.style.display = 'block';
+                    }
+                    if (swatchZoomLensImg) {
+                        swatchZoomLensImg.style.display = 'none';
+                    }
+                }
+
+                if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+
+                swatchModalCategory.textContent = data.category || categoryLabel;
+                swatchModalTitle.textContent = data.title || cleanName;
+                swatchModalSubtitle.textContent = data.subtitle || '';
+                swatchModalDesc.textContent = data.desc || '';
+
+                swatchModalBadges.innerHTML = '';
+                if (data.badges && Array.isArray(data.badges)) {
+                    data.badges.forEach(b => {
+                        const span = document.createElement('span');
+                        span.className = 'swatch-badge';
+                        span.textContent = b;
+                        swatchModalBadges.appendChild(span);
+                    });
+                }
+
+                swatchModalSpecsGrid.innerHTML = '';
+                if (data.specs) {
+                    Object.entries(data.specs).forEach(([k, v]) => {
+                        const item = document.createElement('div');
+                        item.className = 'swatch-spec-item';
+                        item.innerHTML = `<span class="swatch-spec-label">${k}</span><span class="swatch-spec-value">${v}</span>`;
+                        swatchModalSpecsGrid.appendChild(item);
+                    });
+                }
+
+                let isAlreadyActive = false;
+                if (triggerEl && triggerEl.classList.contains('active')) {
+                    isAlreadyActive = true;
+                } else {
+                    const activeInConfig = document.querySelector(`#${isFabric ? 'fabricSection' : 'woodSection'} .config-option.active`);
+                    if (activeInConfig) {
+                        const activeName = (activeInConfig.querySelector('span') ? activeInConfig.querySelector('span').textContent : '').trim();
+                        if (activeName.toLowerCase() === cleanName.toLowerCase()) {
+                            isAlreadyActive = true;
+                        }
+                    }
+                }
+
+                if (isAlreadyActive) {
+                    swatchModalSelectBtn.textContent = 'Aktualnie wybrane';
+                    swatchModalSelectBtn.classList.add('is-selected');
+                } else {
+                    swatchModalSelectBtn.textContent = 'Wybierz ten wariant';
+                    swatchModalSelectBtn.classList.remove('is-selected');
+                }
+
+                swatchModalOverlay.classList.add('active');
+                swatchModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSwatchModal() {
+                if (swatchModalOverlay) swatchModalOverlay.classList.remove('active');
+                if (swatchModal) swatchModal.classList.remove('active');
+                if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+                
+                const isAnyDrawerActive = document.querySelector('.fabric-drawer.active');
+                if (!isAnyDrawerActive) {
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (swatchModalClose) swatchModalClose.addEventListener('click', closeSwatchModal);
+            if (swatchModalOverlay) swatchModalOverlay.addEventListener('click', closeSwatchModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && swatchModal && swatchModal.classList.contains('active')) {
+                    closeSwatchModal();
+                }
+            });
+
+            if (swatchModalSelectBtn) {
+                swatchModalSelectBtn.addEventListener('click', () => {
+                    if (currentModalSwatchSource) {
+                        currentModalSwatchSource.click();
+                    }
+                    closeSwatchModal();
+                });
+            }
+
+            // Obsługa przycisków w nagłówkach sekcji
+            const swatchDetailsBtns = document.querySelectorAll('.btn-swatch-details');
+            swatchDetailsBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const sectionType = this.getAttribute('data-section');
+                    const sectionEl = document.getElementById(sectionType === 'fabric' ? 'fabricSection' : 'woodSection');
+                    if (sectionEl) {
+                        const activeOpt = sectionEl.querySelector('.config-option.active');
+                        if (activeOpt) {
+                            const nameSpan = activeOpt.querySelector('span:not(.variant-text):not(.config-price-mod)');
+                            const name = nameSpan ? nameSpan.textContent.trim() : '';
+                            openSwatchModal(name, sectionType, activeOpt);
+                        }
+                    }
+                });
+            });
+
+            // Wstrzykiwanie lupek do kafelków tkanin i drewna
+            function injectSwatchZoomButtons() {
+                const mainSwatchOptions = document.querySelectorAll('#fabricSection .config-option:not(.add-more-btn), #woodSection .config-option:not(.add-more-btn)');
+                mainSwatchOptions.forEach(opt => {
+                    if (!opt.querySelector('.swatch-zoom-trigger')) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'swatch-zoom-trigger';
+                        btn.title = 'Powiększ i zobacz właściwości';
+                        btn.setAttribute('aria-label', 'Powiększ i zobacz właściwości');
+                        btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const nameSpan = opt.querySelector('span:not(.variant-text):not(.config-price-mod)');
+                            const name = nameSpan ? nameSpan.textContent.trim() : '';
+                            const isFabric = !!opt.closest('#fabricSection');
+                            openSwatchModal(name, isFabric ? 'fabric' : 'wood', opt);
+                        });
+                        opt.appendChild(btn);
+                    }
+                });
+
+                const woodDrawerOptions = document.querySelectorAll('#woodDrawer .sd-option');
+                woodDrawerOptions.forEach(opt => {
+                    if (!opt.querySelector('.swatch-zoom-trigger')) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'swatch-zoom-trigger';
+                        btn.title = 'Powiększ i zobacz właściwości';
+                        btn.setAttribute('aria-label', 'Powiększ i zobacz właściwości');
+                        btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const name = opt.getAttribute('data-name') || (opt.querySelector('span') ? opt.querySelector('span').textContent.trim() : '');
+                            openSwatchModal(name, 'wood', opt);
+                        });
+                        opt.appendChild(btn);
+                    }
+                });
+
+                const fabricDrawerOptions = document.querySelectorAll('#fabricDrawer .fc-option');
+                fabricDrawerOptions.forEach(opt => {
+                    if (!opt.querySelector('.swatch-zoom-trigger')) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'swatch-zoom-trigger';
+                        btn.title = 'Powiększ i zobacz właściwości';
+                        btn.setAttribute('aria-label', 'Powiększ i zobacz właściwości');
+                        btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const name = opt.getAttribute('data-name') || (opt.querySelector('span') ? opt.querySelector('span').textContent.trim() : '');
+                            openSwatchModal(name, 'fabric', opt);
+                        });
+                        opt.appendChild(btn);
+                    }
+                });
+            }
+
             // Konfigurator: Opcje standardowe
             const configOptions = document.querySelectorAll('.config-option:not(.add-more-btn)');
             configOptions.forEach(option => {
-                option.addEventListener('click', function() {
+                option.addEventListener('click', function(e) {
+                    if (e.target.closest('.swatch-zoom-trigger')) return;
+
+                    const section = this.closest('.config-section');
+                    if (section && section.classList.contains('is-disabled')) {
+                        return;
+                    }
+
                     const parent = this.closest('.config-options');
+                    if (!parent) return;
+
                     if (this.classList.contains('active')) return;
                     
                     const siblings = parent.querySelectorAll('.config-option');
                     siblings.forEach(sib => sib.classList.remove('active'));
                     this.classList.add('active');
+
+                    if (section && section.id === 'legTypeSection') {
+                        updateWheelsConditionalState();
+                    }
 
                     updateStickyConfig();
                     updatePrice();
@@ -1015,7 +1882,8 @@
             const drawerFabricOptions = document.querySelectorAll('.fc-option');
             
             drawerFabricOptions.forEach(opt => {
-                opt.addEventListener('click', function() {
+                opt.addEventListener('click', function(e) {
+                    if (e.target.closest('.swatch-zoom-trigger')) return;
                     const name = this.getAttribute('data-name');
                     const imgUrl = this.getAttribute('data-img');
                     const priceStr = this.getAttribute('data-price');
@@ -1026,9 +1894,9 @@
                         if (cleaned) priceMod = parseInt(cleaned, 10);
                     }
                     
-                    const fabricSectionTitle = Array.from(document.querySelectorAll('.config-title')).find(el => el.textContent === 'TKANINA');
-                    if (fabricSectionTitle) {
-                        const fabricConfigContainer = fabricSectionTitle.nextElementSibling;
+                    const fabricSection = document.getElementById('fabricSection');
+                    if (fabricSection) {
+                        const fabricConfigContainer = fabricSection.querySelector('.config-options');
                         
                         let targetOption = fabricConfigContainer.querySelector('.config-option.active');
                         if (!targetOption) {
@@ -1041,12 +1909,14 @@
                         if (targetOption) {
                             targetOption.classList.add('active');
                             targetOption.setAttribute('data-price-modifier', priceMod);
+                            targetOption.setAttribute('data-img', imgUrl);
                             let modText = priceMod > 0 ? `+ ${priceMod} zł` : `+ 0 zł`;
                             targetOption.innerHTML = `
                                 <div class="color-box" style="background-image: url('${imgUrl}'); background-size: cover; background-position: center; border: 1px solid #ddd;"></div>
                                 <span>${name}</span>
                                 <span class="config-price-mod">${modText}</span>
                             `;
+                            injectSwatchZoomButtons();
                         }
                     }
                     
@@ -1072,7 +1942,9 @@
             }
 
             // Inicjalizacja na starcie
+            updateWheelsConditionalState();
             injectPriceModifiers();
+            injectSwatchZoomButtons();
             updateStickyConfig();
             updatePrice();
 
