@@ -846,13 +846,22 @@
             function closeVariantDrawer() {
                 if(variantDrawerOverlay) variantDrawerOverlay.classList.remove('active');
                 if(variantDrawer) variantDrawer.classList.remove('active');
-                document.body.style.overflow = '';
+                const isModalActive = document.querySelector('.swatch-modal.active');
+                if (!isModalActive) {
+                    document.documentElement.classList.remove('modal-open');
+                    document.body.classList.remove('modal-open');
+                    document.documentElement.style.overflow = '';
+                    document.body.style.overflow = '';
+                }
             }
 
             if (variantHeader && variantDrawer) {
                 variantHeader.addEventListener('click', () => {
                     variantDrawerOverlay.classList.add('active');
                     variantDrawer.classList.add('active');
+                    document.documentElement.classList.add('modal-open');
+                    document.body.classList.add('modal-open');
+                    document.documentElement.style.overflow = 'hidden';
                     document.body.style.overflow = 'hidden';
                 });
                 if (variantDrawerClose) variantDrawerClose.addEventListener('click', closeVariantDrawer);
@@ -867,13 +876,22 @@
             function closeWoodDrawer() {
                 if(woodDrawerOverlay) woodDrawerOverlay.classList.remove('active');
                 if(woodDrawer) woodDrawer.classList.remove('active');
-                document.body.style.overflow = '';
+                const isModalActive = document.querySelector('.swatch-modal.active');
+                if (!isModalActive) {
+                    document.documentElement.classList.remove('modal-open');
+                    document.body.classList.remove('modal-open');
+                    document.documentElement.style.overflow = '';
+                    document.body.style.overflow = '';
+                }
             }
 
             if (openWoodDrawerBtn && woodDrawer) {
                 openWoodDrawerBtn.addEventListener('click', () => {
                     woodDrawerOverlay.classList.add('active');
                     woodDrawer.classList.add('active');
+                    document.documentElement.classList.add('modal-open');
+                    document.body.classList.add('modal-open');
+                    document.documentElement.style.overflow = 'hidden';
                     document.body.style.overflow = 'hidden';
                 });
                 if (woodDrawerClose) woodDrawerClose.addEventListener('click', closeWoodDrawer);
@@ -1670,6 +1688,9 @@
 
                 swatchModalOverlay.classList.add('active');
                 swatchModal.classList.add('active');
+                document.documentElement.classList.add('modal-open');
+                document.body.classList.add('modal-open');
+                document.documentElement.style.overflow = 'hidden';
                 document.body.style.overflow = 'hidden';
             }
 
@@ -1678,10 +1699,34 @@
                 if (swatchModal) swatchModal.classList.remove('active');
                 if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
                 
-                const isAnyDrawerActive = document.querySelector('.fabric-drawer.active');
+                const isAnyDrawerActive = document.querySelector('.fabric-drawer.active') || document.querySelector('.side-drawer.active') || document.querySelector('.variant-drawer.active');
                 if (!isAnyDrawerActive) {
+                    document.documentElement.classList.remove('modal-open');
+                    document.body.classList.remove('modal-open');
+                    document.documentElement.style.overflow = '';
                     document.body.style.overflow = '';
                 }
+            }
+
+            if (swatchModalOverlay) {
+                swatchModalOverlay.addEventListener('wheel', (e) => {
+                    if (e.target === swatchModalOverlay) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+                swatchModalOverlay.addEventListener('touchmove', (e) => {
+                    if (e.target === swatchModalOverlay) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
+            const swatchModalPreview = swatchModal ? swatchModal.querySelector('.swatch-modal-preview') : null;
+            if (swatchModalPreview) {
+                swatchModalPreview.addEventListener('wheel', (e) => {
+                    if (window.innerWidth > 860) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
             }
 
             if (swatchModalClose) swatchModalClose.addEventListener('click', closeSwatchModal);
@@ -1820,13 +1865,22 @@
             function openDrawer() {
                 drawerOverlay.classList.add('active');
                 fabricDrawer.classList.add('active');
+                document.documentElement.classList.add('modal-open');
+                document.body.classList.add('modal-open');
+                document.documentElement.style.overflow = 'hidden';
                 document.body.style.overflow = 'hidden';
             }
 
             function closeDrawer() {
                 drawerOverlay.classList.remove('active');
                 fabricDrawer.classList.remove('active');
-                document.body.style.overflow = '';
+                const isModalActive = document.querySelector('.swatch-modal.active');
+                if (!isModalActive) {
+                    document.documentElement.classList.remove('modal-open');
+                    document.body.classList.remove('modal-open');
+                    document.documentElement.style.overflow = '';
+                    document.body.style.overflow = '';
+                }
                 
                 const fabricFilterView = document.getElementById('fabricFilterView');
                 if (fabricFilterView) fabricFilterView.classList.remove('active');

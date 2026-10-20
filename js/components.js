@@ -993,13 +993,22 @@ class MioCartDrawer extends HTMLElement {
     open() {
         this.querySelector('.cart-drawer-overlay').classList.add('active');
         this.querySelector('.cart-drawer').classList.add('active');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
     }
 
     close() {
         this.querySelector('.cart-drawer-overlay').classList.remove('active');
         this.querySelector('.cart-drawer').classList.remove('active');
-        document.body.style.overflow = '';
+        const isOtherActive = document.querySelector('.menu-drawer.active, .search-drawer.active, .fabric-drawer.active, .swatch-modal.active, .side-drawer.active, .variant-drawer.active');
+        if (!isOtherActive) {
+            document.documentElement.classList.remove('modal-open');
+            document.body.classList.remove('modal-open');
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+        }
     }
 }
 customElements.define('mio-cart-drawer', MioCartDrawer);
@@ -1363,7 +1372,24 @@ class MioMenuDrawer extends HTMLElement {
         const closeBtn = this.querySelector('.md-close');
         if(closeBtn) closeBtn.addEventListener('click', () => this.close());
         const overlay = this.querySelector('.menu-drawer-overlay');
-        if(overlay) overlay.addEventListener('click', () => this.close());
+        if(overlay) {
+            overlay.addEventListener('click', () => this.close());
+            overlay.addEventListener('wheel', (e) => {
+                if (e.target === overlay) e.preventDefault();
+            }, { passive: false });
+            overlay.addEventListener('touchmove', (e) => {
+                if (e.target === overlay) e.preventDefault();
+            }, { passive: false });
+        }
+        const drawerHeader = this.querySelector('.menu-drawer-header');
+        if (drawerHeader) {
+            drawerHeader.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.querySelector('.menu-drawer.active')) {
+                this.close();
+            }
+        });
         
         const searchInput = this.querySelector('.menu-search-input');
         const searchSuggestions = this.querySelector('.search-suggestions');
@@ -1387,13 +1413,22 @@ class MioMenuDrawer extends HTMLElement {
     open() {
         this.querySelector('.menu-drawer-overlay').classList.add('active');
         this.querySelector('.menu-drawer').classList.add('active');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
     }
 
     close() {
         this.querySelector('.menu-drawer-overlay').classList.remove('active');
         this.querySelector('.menu-drawer').classList.remove('active');
-        document.body.style.overflow = '';
+        const isOtherActive = document.querySelector('.cart-drawer.active, .search-drawer.active, .fabric-drawer.active, .swatch-modal.active, .side-drawer.active, .variant-drawer.active');
+        if (!isOtherActive) {
+            document.documentElement.classList.remove('modal-open');
+            document.body.classList.remove('modal-open');
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+        }
     }
 }
 customElements.define('mio-menu-drawer', MioMenuDrawer);
@@ -1469,6 +1504,9 @@ class MioSearchDrawer extends HTMLElement {
     open() {
         this.querySelector('.search-drawer-overlay').classList.add('active');
         this.querySelector('.search-drawer').classList.add('active');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
         const input = this.querySelector('.drawer-search-input');
         if (input) {
@@ -1481,7 +1519,13 @@ class MioSearchDrawer extends HTMLElement {
     close() {
         this.querySelector('.search-drawer-overlay').classList.remove('active');
         this.querySelector('.search-drawer').classList.remove('active');
-        document.body.style.overflow = '';
+        const isOtherActive = document.querySelector('.menu-drawer.active, .cart-drawer.active, .fabric-drawer.active, .swatch-modal.active, .side-drawer.active, .variant-drawer.active');
+        if (!isOtherActive) {
+            document.documentElement.classList.remove('modal-open');
+            document.body.classList.remove('modal-open');
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+        }
     }
 }
 customElements.define('mio-search-drawer', MioSearchDrawer);

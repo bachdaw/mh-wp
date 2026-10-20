@@ -663,6 +663,9 @@
 
                 swatchModalOverlay.classList.add('active');
                 swatchModal.classList.add('active');
+                document.documentElement.classList.add('modal-open');
+                document.body.classList.add('modal-open');
+                document.documentElement.style.overflow = 'hidden';
                 document.body.style.overflow = 'hidden';
             }
 
@@ -670,7 +673,31 @@
                 if (swatchModalOverlay) swatchModalOverlay.classList.remove('active');
                 if (swatchModal) swatchModal.classList.remove('active');
                 if (swatchZoomLens) swatchZoomLens.classList.remove('is-active');
+                document.documentElement.classList.remove('modal-open');
+                document.body.classList.remove('modal-open');
+                document.documentElement.style.overflow = '';
                 document.body.style.overflow = '';
+            }
+
+            if (swatchModalOverlay) {
+                swatchModalOverlay.addEventListener('wheel', (e) => {
+                    if (e.target === swatchModalOverlay) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+                swatchModalOverlay.addEventListener('touchmove', (e) => {
+                    if (e.target === swatchModalOverlay) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
+            const swatchModalPreview = swatchModal ? swatchModal.querySelector('.swatch-modal-preview') : null;
+            if (swatchModalPreview) {
+                swatchModalPreview.addEventListener('wheel', (e) => {
+                    if (window.innerWidth > 860) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
             }
 
             if (swatchModalClose) swatchModalClose.addEventListener('click', closeSwatchModal);
