@@ -265,6 +265,7 @@ class MioFooter extends HTMLElement {
                 <a href="regulamin-newslettera.html">Regulamin newslettera</a>
                 <a href="polityka-prywatnosci.html">Polityka prywatności</a>
                 <a href="polityka-cookies.html">Polityka cookies</a>
+                <a href="#cookies" class="cookie-settings-link" onclick="event.preventDefault(); if(window.openCookieSettings) { window.openCookieSettings(); }">Ustawienia plików cookies</a>
                 <a href="polityka-opinii.html">Polityka opinii</a>
                 <a href="reklamacje.html">Zwroty i reklamacje</a>
             </div>
